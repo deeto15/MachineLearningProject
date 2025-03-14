@@ -1,10 +1,9 @@
 import json
+from pathlib import Path
 import re
-import os
 import spacy
-from file_read_backwards import FileReadBackwards
 from stock_cap_processor import filter_stocks
-file_path = r"C:\Users\Kendall Eberly\Downloads\wallstreetbets_submissions\wallstreetbets_submissions"
+file_path = Path.home() / "Downloads" / "wallstreetbets_submissions.txt"
 
 def extract_dates(comment):
     nlp = spacy.load('en_core_web_sm')

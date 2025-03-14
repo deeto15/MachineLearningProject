@@ -1,11 +1,9 @@
 #i had to find a way to get all stock ticker symbols and i didnt want to do it manually so i just bought them
 import pandas as pd
-etf_path = r"C:\Users\Kendall Eberly\Downloads\etfs.csv"
-stock_path = r"C:\Users\Kendall Eberly\Downloads\stocks.csv"
 #we are also adding a '$' in front of one or two letter stocks, so that some one starting a sentance with an all caps wont get flagged
 
 def filter_stocks():
-    df = pd.read_csv(stock_path)
+    df = pd.read_csv("stocks.csv")
     df['Symbol'] = df['Symbol'].astype(str)
     df.loc[df['Symbol'].str.len() <= 2, 'Symbol'] = '$' + df.loc[df['Symbol'].str.len() <= 2, 'Symbol']
     df_etfs = filter_etfs()
@@ -14,5 +12,5 @@ def filter_stocks():
     return combined.values
     
 def filter_etfs():
-    df = pd.read_csv(etf_path)
+    df = pd.read_csv("etfs.csv")
     return df['Symbol']
