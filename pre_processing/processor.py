@@ -3,6 +3,7 @@ from pathlib import Path
 import re
 import spacy
 from stock_cap_processor import filter_stocks
+import pandas as pd
 file_path = Path.home() / "Downloads" / "wallstreetbets_submissions.txt"
 
 def extract_dates(comment):
@@ -27,7 +28,13 @@ def extract_stocks(comment):
     for stock_ticker in stock_tickers:
         if stock_ticker in comment:
             return stock_ticker
+        
+def save_to_excel(comment, stock, price, date, file):
+    df = pd.DataFrame([[comment, stock, price, date]], columns=["Comment", "Stock", "Price", "Date"])
+    df.to_csv(file, mode='a', header=not pd.io.common.file_exists(file), index=False)
 
+accepted_comments = {}
+i = 0
 with open(file_path, "r", encoding="utf-8") as f:
     for line in f:
         comment = json.loads(line)
@@ -35,6 +42,12 @@ with open(file_path, "r", encoding="utf-8") as f:
         price = extract_prices(comment['title'])
         date = extract_dates(comment['title'])
         if stock != None and price != None and date != None:
-            print(comment['title'])
-            print(stock, price, date)
+            save_to_excel(comment, stock, price, date, "prepped_stocks.csv")
+        else:
+            if i < 5000:
+                save_to_excel(comment, stock, price, date, "unprepped_stocks.csv")
+                i+=1
+
+
+        
                  
