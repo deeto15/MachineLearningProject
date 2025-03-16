@@ -29,24 +29,29 @@ def extract_stocks(comment):
         if stock_ticker in comment:
             return stock_ticker
         
-def save_to_excel(comment, stock, price, date, file):
-    df = pd.DataFrame([[comment, stock, price, date]], columns=["Comment", "Stock", "Price", "Date"])
+def save_to_excel(comment, stock, price, date, label):
+    file = "prepped_stocks.csv"
+    df = pd.DataFrame([[comment, stock, price, date, label]], columns=["Comment", "Stock", "Price", "Date", "Label"])
     df.to_csv(file, mode='a', header=not pd.io.common.file_exists(file), index=False)
 
-accepted_comments = {}
-i = 0
+data = []
+count = 0
+limit = 1000
+
 with open(file_path, "r", encoding="utf-8") as f:
     for line in f:
+        if count >= limit:
+            break
         comment = json.loads(line)
         stock = extract_stocks(comment['title'])
         price = extract_prices(comment['title'])
         date = extract_dates(comment['title'])
-        if stock != None and price != None and date != None:
-            save_to_excel(comment, stock, price, date, "prepped_stocks.csv")
-        else:
-            if i < 5000:
-                save_to_excel(comment, stock, price, date, "unprepped_stocks.csv")
-                i+=1
+        if stock is not None and price is not None and date is not None:
+            data.append([comment['title'], stock, price, date, 1])
+            count += 1
+
+df = pd.DataFrame(data, columns=["Comment", "Stock", "Price", "Date", "Label"])
+df.to_csv("prepped_stocks.csv", index=False)
 
 
         
