@@ -1,3 +1,4 @@
+import csv
 import json
 from pathlib import Path
 import re
@@ -34,24 +35,38 @@ def save_to_excel(comment, stock, price, date, label):
     df = pd.DataFrame([[comment, stock, price, date, label]], columns=["Comment", "Stock", "Price", "Date", "Label"])
     df.to_csv(file, mode='a', header=not pd.io.common.file_exists(file), index=False)
 
-data = []
-count = 0
-limit = 1000
+def main():
+    data = []
+    count = 0
+    limit = 2000
+    batch_size = 500
 
-with open(file_path, "r", encoding="utf-8") as f:
-    for line in f:
-        if count >= limit:
-            break
-        comment = json.loads(line)
-        stock = extract_stocks(comment['title'])
-        price = extract_prices(comment['title'])
-        date = extract_dates(comment['title'])
-        if stock is not None and price is not None and date is not None:
-            data.append([comment['title'], stock, price, date, 1])
-            count += 1
+    with open(file_path, "r", encoding="utf-8") as f:
+        for line in f:
+            if count >= limit:
+                break
+            comment = json.loads(line)
+            stock = extract_stocks(comment['title'])
+            price = extract_prices(comment['title'])
+            date = extract_dates(comment['title'])
+            if stock is not None and price is not None and date is not None:
+                data.append([comment['title'], stock, price, date, 1])
+                count += 1
+                print(count)
+                print(comment['title'], stock, price, date)
+                if count % batch_size == 0:
+                    df = pd.DataFrame(data, columns=["Comment", "Stock", "Price", "Date", "Label"])
+                    df.to_csv(f"prepped_stocks_{count}.csv", index=False)
+                    data = []
 
-df = pd.DataFrame(data, columns=["Comment", "Stock", "Price", "Date", "Label"])
-df.to_csv("prepped_stocks.csv", index=False)
+def count_positives():
+    with open('prepped_stocks.csv', "r", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        count = 0
+        for row in reader:
+            if row["Label"].strip() == "1":
+                count += 1
+        print(count)
 
 
         

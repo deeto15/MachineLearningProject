@@ -1,6 +1,6 @@
 #i had to find a way to get all stock ticker symbols and i didnt want to do it manually so i just bought them
 import pandas as pd
-#we are also adding a '$' in front of one or two letter stocks, so that some one starting a sentance with an all caps wont get flagged
+#we are also adding a '$' in front of one or two letter stocks, so that some one starting a sentence with an all caps wont get flagged
 
 def filter_stocks():
     df = pd.read_csv("stocks.csv")
