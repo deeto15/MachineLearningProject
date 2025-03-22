@@ -7,8 +7,6 @@ RadioShack Trade: RSH Oct 1.00 Puts @ .30,RSH,1.00,[Oct 1.00],1
 "Options strategies for my BP position. Paid $1.2 for OCT $50 Call (20 contracts). It is $2+ now and BP is trading at 52-week highs. Today 250,000 Calls traded in BP. Over 100k in '15 &amp; '16 Calls DIM.",BP,$50,"[OCT]",1
 ARTX - share offering now through July 16th @ $3.50,ARTX,$3.50,[July 16th],1
 "MNKD Jan 2016 $10 calls, currently 1.48/contract",MNKD,$10,[Jan 2016],1
-"Demise of GPRO has finally begun! The stock down 6.5% today. Will be $60 by the end of the week. $50 by the time IPO lockup expires (Dec. 23rd). Then down to $35 from there! Congrats, wallstreetbets, for finally seeing the realization of your forecasts!",GPRO,$50,"[Dec. 23rd]",1
-GPRO is finally getting crushed. Down 7.5% today with Nasdaq down only 1.5%. Short interest at all-time high. Stock going to $35-40 after lockup expires on Dec. 23rd. Another bubble bursting!,GPRO,$35,"[Dec. 23rd]",1
 FEYE 2000 MAR $36 Calls Traded @ ~1.70,FEYE,$36,[MAR],1
 "RL 150 Jan for 7.20, HAL July 42.50 for 3.50, and BABA stock.",RL,150,[Jan],1
 Bought some HLF Apr 17 32.5 puts. Thoughts on the company's earnings tomorrow?,HLF,32.5,[Apr 17],1
@@ -18,13 +16,12 @@ Just bought 120 AAPL March 20 $125 Calls at 1.17,AAPL,$125,[March 20],1
 [YOLO] + 300 $59.00 calls on LVS for 0.23 cents a pop that expire this Friday.,LVS,$59.00,[this Friday],1
 Somebody bought 6600/6600 June 15 167.5/160 put spread on $HUM,HUM,167.5,[June 15],1
 Going Mariana Trench deep into BAX January 70/72.5 call spread for free #YOLOgains #hospitalized,BAX,70,[January],1
-Watch ESI up to $5.25 in premarket today,ESI,$5.25,[today],1
-Sold to Open $SPX 6/12 2130/2135 Call Spread for $1.21 Avg,$SPX,$1.21,[6/12],1
-I shorted VLTC today at 6.68,VLTC,6.68,[today],1
-"UGAZ is around 2 again, is it still a good play to buy just under $2.00? It hasn't moved much in 2 days.",UGAZ,$2.00,[2 days],1
-$LOCK - In 7.75 Earnings tomorrow AH. YOLO,LOCK,7.75,[tomorrow],1
+Watch ESI up to $5.25 in premarket today,ESI,$5.25,[today],0
+Sold to Open $SPX 6/12 2130/2135 Call Spread for $1.21 Avg,$SPX,2130,[6/12],1
+I shorted VLTC today at 6.68,VLTC,6.68,[today],0
+"UGAZ is around 2 again, is it still a good play to buy just under $2.00? It hasn't moved much in 2 days.",UGAZ,$2.00,[2 days],0
 "I told y'all to buy BAX calls, or at least the November 70/72.5 spread.",BAX,70,"[November]",1
-$SGNL DD (1-3 month play) $1.38 NASDAQ.,SGNL,$1.38,[1-3 month],1
+$SGNL DD (1-3 month play) $1.38 NASDAQ.,SGNL,,[1-3 month],0
 Just yolo'd a shit load of Sept 18 QQQ 110.5 calls,QQQ,110.5,[Sept 18],1
 "GPRO Jan 2017 $50 call at $7.5, yacht or bust? Who else is with me?!",GPRO,$50,[Jan 2017],1
 "$OMER DD — NASDAQ — $11.65 (4 month hold, 50%-100%, high risk)",OMER,$11.65,[4 month],1
@@ -44,35 +41,35 @@ Just went YOLO on some PTCT MAR 18 2016 17.5 CALLS,PTCT,17.5,[MAR 18 2016],1
 YOLO 2.5K on CMG - $490 June call.,CMG,$490,[June],1
 MTFC- Milk The F Cow.. All clear to trade higher 16.50 VXX Puts 2 days until expiration on unusual options activity,VXX,16.50,[2 days],1
 200 $FIT 15.00 calls expiring 4/15/2016,$FIT,15.00,[4/15/2016],1
-$ROVI to 18.43 by Thursday,$ROVI,18.43,[Thursday],1
-BAC have a chance to get to 13.5+ today?,BAC,13.5,[today],1
+$ROVI to 18.43 by Thursday,$ROVI,18.43,[Thursday],0
+BAC have a chance to get to 13.5+ today?,BAC,13.5,[today],0
 Long term option play: Bullish Long Term TSLA Call - $4.6K on $350/January 2018 Call,TSLA,$350,[January 2018],1
-WiseTech Global to go from opening IPO of $4.12 (on Monday) to $5 by the end of April,IPO,$5,"[April]",1
+WiseTech Global to go from opening IPO of $4.12 (on Monday) to $5 by the end of April,IPO,$5,"[April]",0
 YOLO!! 1000 VXX contracts $19.00 call due April 16th. Up 7K in one day. Lets ride this trade! Courtesy of Kings Of Wall Street,VXX,$19.00,"[April 16th]",1
 Buy $AA April 9.5 calls for earnings,$AA,9.5,[April],1
 BAC Put Options Strike 14.00 for 14 cents expiring on the 22nd. Bought 6,BAC,14.00,[22nd],1
 The IBM 149/145 weekly vertical put spread for earnings (cost: 1.04) looks like it might've been allriighhtt allriigghhhtt,IBM,149,[weekly],1
-"Predicting a $HRTX open at 3.00 tomorrow, good time to sell. Thoughts?",HRTX,3.00,[tomorrow],1
-[POLL] Is SPY going to break ATH's in April? ($213.78),SPY,$213.78,[April],1
+"Predicting a $HRTX open at 3.00 tomorrow, good time to sell. Thoughts?",HRTX,3.00,[tomorrow],0
+[POLL] Is SPY going to break ATH's in April? ($213.78),SPY,$213.78,[April],0
 Dam Daniel!!! April 22 14.5 Call BAC,BAC,14.5,[April 22],1
 "AMD $2 weekly puts. Earnings tonight. They're $0.01, what could go wrong.",AMD,$2,[weekly],1
-"Just bought the SKX 32/35 vertical call spread, weekly apr 22, at a cost of 0.80. For earnings after the bell, target is 36.50 tomorrow. Trade is slightly conservative of target.",SKX,36.50,"[apr 22]",1
+"Just bought the SKX 32/35 vertical call spread, weekly apr 22, at a cost of 0.80. For earnings after the bell, target is 36.50 tomorrow. Trade is slightly conservative of target.",SKX,32,"[apr 22]",1
 Start buying USO slowly - $16.00 in the next 6 to 8 months,USO,$16.00,[6 to 8 months],1
 Just bought the front week USO 10.5 puts @ .06. Target: $10.00 by friday. Ride or die with me..,USO,$10.00,"[friday]",1
 $TWTR 15.00 C (13 May 2016),$TWTR,15.00,[13 May 2016],1
 Money pouring into $CHK may 13 calls @ 6.50 and 7. Thoughts on tomorrow's earnings?,$CHK,6.50,[may 13],1
 AAPL calls 92.5/94.5 for July,AAPL,92.5,"[92.5, July]",1
 Are people really this bullish on AMD? the OI on May 20 4.00 calls....,AMD,4.00,[May 20],1
-$COYN $1.48 now.. $16.75 1 year target? WTF? Going up with Orlando shootings.,$COYN,$16.75,[1 year],1
-Bunch of POSERS. Sold rest of portfolio. All in on $SPHS at 2.20 will go to 5.00 by end of year. Bank on it.,SPHS,5.00,[end of year],1
-You only have under 8000 seconds to load up on 28.5 weekly calls on $EBAY,EBAY,28.5,[weekly],1
-$CVX OCT 21 97.5P,CVX,97.5,[OCT 21],1
+$COYN $1.48 now.. $16.75 1 year target? WTF? Going up with Orlando shootings.,$COYN,$16.75,[1 year],0
+Bunch of POSERS. Sold rest of portfolio. All in on $SPHS at 2.20 will go to 5.00 by end of year. Bank on it.,SPHS,5.00,[end of year],0
+You only have under 8000 seconds to load up on 28.5 weekly calls on $EBAY,$EBAY,28.5,[weekly],1
+$CVX OCT 21 97.5P,$CVX,97.5,[OCT 21],1
 VRX August 16 22.5 puts look YOLO worthy right now DD,VRX,22.5,[August 16],1
-125 shares of SFM at $22.28 looking to test $23 today or tomorrow!,SFM,$23,"[tomorrow]",1
-"As an expert stock analyst, AMD shares will be worth $263.69 by the end of August.",AMD,$263.69,[August],1
-Back on the NUGT @22.19 see u next week @30,NUGT,30,[next week],1
+125 shares of SFM at $22.28 looking to test $23 today or tomorrow!,SFM,$23,"[tomorrow]",0
+"As an expert stock analyst, AMD shares will be worth $263.69 by the end of August.",AMD,$263.69,[August],0
+Back on the NUGT @22.19 see u next week @30,NUGT,30,[next week],0
 INTRADAY - 216.50 SPY weekly calls,SPY,216.50,[weekly],1
-$LAKE play (reporting Q2 (q ending july 31 16) earnings AH 9.14),LAKE,9.14,[july 31 16],1
+$LAKE play (reporting Q2 (q ending july 31 16) earnings AH 9.14),LAKE,9.14,[july 31 16],0
 SPY sept 16 call 215.50 @0.18 . Anyone else think this is an error in pricing?,SPY,215.50,[sept 16],1
 More than 1M$ on AMD options strangle for January.. 7$/5.50$ shits about to get real,AMD,7,[January],1
 Purchased some LMT Nov-18 245.00 Calls on Friday for 1.25,LMT,245.00,[Nov-18],1
@@ -89,12 +86,12 @@ Playing the MSFT dip today with a Feb 17 62.5/57 credit put spread,MSFT,62.5,[Fe
 "YOLO on 90 JNUG puts, strike $10.50 expiring this Friday.",JNUG,$10.50,[this Friday],1
 "VOO Mar 17, 2017 220.00 CALL It's already in-the-money and the cost of the contract is around $200.",VOO,220.00,"[Mar 17, 2017]",1
 "Today's credit put spreads: 36.5/35 on GM, 24.5/23 on BAC, 69.5/66 on GILD, 30/27.5 on KR",GM,36.5,[Today],1
-1000 Shares of AKTX at 9.96 Betting On Monday 12-14+,AKTX,9.96,[Monday 12],1
-"Bought $PLUG at 2.00, currently at 2.45. Should i take my sweet profit or hold on for a potential ride to 3.00 this week?",PLUG,3.00,[this week],1
+1000 Shares of AKTX at 9.96 Betting On Monday 12-14+,AKTX,9.96,[Monday 12],0
+"Bought $PLUG at 2.00, currently at 2.45. Should i take my sweet profit or hold on for a potential ride to 3.00 this week?",PLUG,3.00,[this week],0
 AMD weekly calls? $14? $14.50?,AMD,$14,[weekly],1
 [Play] Buy SPY 05 May 2017 C 239.5 for 0.33,SPY,239.5,[05 May 2017],1
 [Play] 05 May 17 SPY P 238 for 0.45,SPY,238,[05 May 17],1
-"Futures up 0.5%, not much but SPY should hold above 240 tomorrow",SPY,240,[tomorrow],1
+"Futures up 0.5%, not much but SPY should hold above 240 tomorrow",SPY,240,[tomorrow],0
 Sally Yates Testimony @ 2:30PM Today - $SPY - 239.5 Puts?,SPY,239.5,[Today],1
 "LULU May 26 50 Call Weekly, anyone? Stock at 50.04",LULU,50,[May 26],1
 AMD closes at 10.99 tomorrow,AMD,10.99,[tomorrow],1
@@ -135,12 +132,12 @@ July 2017 Stock Market Contest Results: The Winner is JohnTKelly with $DVAX pick
 Need Help with long term an APPL Options I have. (2 Nov 17 135 Calls - Up $2.5K) and (3 Jan 18 170 Calls - Up $1k). Should i hold these or sell them?,APPL,$2.5,[2 Nov 17],0
 Why did SVXY move 4.34% on Friday when VIXY only moved 2.96%?,VIXY,4.34%,[Friday],0
 Home Depot $HD Beats Earnings: Reported $2.25 EPS vs estimates $2.21 EPS. Upped annual guidance from $7.15 to $7.29,$HD,$2.25,[annual],0
-"So at 3:59pm (no Joke) I thought to myself, ""ah f@#% it, I'm going all in."" with a secondary $10,000 account, since I lost $200 from AAPL in the morning. Come Monday it better rise to it's $12.50-12.70/share.",AAPL,$12.50,[Monday],1
+"So at 3:59pm (no Joke) I thought to myself, ""ah f@#% it, I'm going all in."" with a secondary $10,000 account, since I lost $200 from AAPL in the morning. Come Monday it better rise to it's $12.50-12.70/share.",AAPL,$12.50,[Monday],0
 "$SGMO up 7.5% today with room to run imo, Shkreli called this shit",SGMO,7.5%,[today],0
 $FWP is paying $22.95 in dividend on sept 7th. Current price is $27.73,$FWP,$22.95,[sept 7th],0
 August 2017 Stock Market Contest Results: The Winner is NicaPinta with $WB pick and 31.37% return in 1 month!,$WB,31.37%,"[August 2017, 1 month]",0
 "Ok, all you $10,000-$200,000 Yolo idiots- You all could have made bank today and you knew it was coming!! don't even lie you faggots.. instead you bet on $MU and even more lame stocks... $BW was at $2.05 when I watched it go to $3.30 today",$BW,$2.05,"[today]",0
-OPXAW ONLY 8 CENTS biotech HEADED to $1.00 by next week upon merger and buyout and FDA.APPROVALS definitely worth buying$$ RATED A STRONG BUY AND HOLD$$$OPXAW ARE GONNA FLY HIGH OVER $1.00,OPXAW,$1.00,[next week],1
+OPXAW ONLY 8 CENTS biotech HEADED to $1.00 by next week upon merger and buyout and FDA.APPROVALS definitely worth buying$$ RATED A STRONG BUY AND HOLD$$$OPXAW ARE GONNA FLY HIGH OVER $1.00,OPXAW,$1.00,[next week],0
 Transunion TRU down 8.50% today,TRU,8.50%,[today],0
 Buying $RAD 3.00 calls January. Am I retarded,$RAD,3.00,[January],1
 I'm the guy that took a put position on SPY yesterday at 250.20 and am only up 4% this morning because IV was cut in half AMA,SPY,250.20,[yesterday],0
@@ -172,7 +169,7 @@ $JNUG is up 0.13% on the week. Uptrend confirmed?,JNUG,0.13%,[the week],0
 "BTC is up 5.5% over the last 30 days, $MU is up 7.75%. How many Upvotes for our boy in blue.",$MU,5.5%,[the last 30 days],0
 $SNAP @ $12.39 almost seems like a good deal... Am I going crazy? Down 20% in the last 2 weeks...,SNAP,$12.39,[the last 2 weeks],0
 I bought $MARA at $8.17 today AMA,MARA,$8.17,[today],0
-"EXEL up $3 PTN up $0.22 since the last time I posted them here. You think EXEL to $40, PTN to $2.00 by Christmas?",EXEL,$40,[Christmas],1
+"EXEL up $3 PTN up $0.22 since the last time I posted them here. You think EXEL to $40, PTN to $2.00 by Christmas?",EXEL,$40,[Christmas],0
 "My 5742 shares of AMD $9.95 didn’t go through the other day, I got some TQQQ on Thursday instead.",TQQQ,,"[Thursday]",0
 Where's the guy with WEED 10.00 April calls?,WEED,10.00,[April],1
 "This is the analyst who gave WATT a $45.80 price target. He finished the year with a -10.1% return, and a 31% success rate on his picks.",WATT,$45.80,,0
@@ -187,15 +184,15 @@ $KODK closed today at exactly $10.00,KODK,$10.00,[today],0
 Time to jump back into crypto stocks? I bought GBTC back today at 11.19,GBTC,11.19,[today],0
 252.92 in SPY will be low of the year. Mark it.,SPY,252.92,[year],0
 $BUD closed at $104.20 today. Sign from the gods. All in.,BUD,$104.20,[today],0
-What’s wrong with you GPRO? I command you to fall below $5.00 today!,GPRO,$5.00,[today],1
+What’s wrong with you GPRO? I command you to fall below $5.00 today!,GPRO,$5.00,[today],0
 Remember when $AMD was supposed to hit 20.00 by October of last year?,$AMD,20.00,[October of last year],0
 "WTF WHY? - ""Energous Corp (WATT) Receives $38.90 Consensus Price Target from Analysts"" ... Up +13% today",WATT,$38.90,[today],0
-"If $PLM does not hit $2.00 by the end of 2018, I’ll do whatever the top comment tells me to do.",$PLM,$2.00,[end of 2018],1
+"If $PLM does not hit $2.00 by the end of 2018, I’ll do whatever the top comment tells me to do.",$PLM,$2.00,[end of 2018],0
 Which one of you chode yodelers bought $MU at $54.60 today?,$MU,$54.60,[today],0
 $FIT calls for March 9 @5.50 seems underpriced. Anyone thinking it can reach it?,$FIT,5.50,[March 9],1
 I bought AMD FD's yesterday AMA (429% /9.6K gain),AMD,,[yesterday],0
 "Call idea: AMD, 5/18, $10 calls (priced at $2.00 as of this post)",AMD,$10,[5/18],1
-"ABIO ON FIRE we will we will surpass $5.00 by only. 60 cents GET IN ON THE STRAIGHT RIDE UP $$$ Earnings in a few days BIG MONEY HERE, im not kidding http://stockanalyst24.com/arca-biopharma-inc-nasdaqabio-announces-completion-of-genetic-af-phase-2b-clinical-trial/",ABIO,$5.00,[a few days],1
+"ABIO ON FIRE we will we will surpass $5.00 by only. 60 cents GET IN ON THE STRAIGHT RIDE UP $$$ Earnings in a few days BIG MONEY HERE, im not kidding http://stockanalyst24.com/arca-biopharma-inc-nasdaqabio-announces-completion-of-genetic-af-phase-2b-clinical-trial/",ABIO,$5.00,[a few days],0
 And I thought my shitty $BKS 5.00 calls were dead in the water. They expire this Friday.,$BKS,5.00,[this Friday],1
 Lost 93% of my portfolio going all in on March 23 173.5 calls on QQQ AMA,QQQ,173.5,[March 23],1
 "In complete shock my MSFT Calls (March 29th, 93.50) arent shitt8ng the bed the past few days.",MSFT,93.50,"[March 29th]",1
@@ -203,18 +200,17 @@ GOOG almost cost me $1.5 million today with its spam filter,GOOG,$1.5,[today],0
 I panic sold my 3/26 SPY 170.5 puts yesterday for 1.75 a piece. AMA,SPY,170.5,[3/26],1
 "IAmA investor who bought 300 shares of XOM at $73.99 a share in September 2015, I could have sold at $94 six months later but decided to keep it longer in hopes of greater return AMA",XOM,$73.99,"[September 2015]",0
 Am I retarded for buying AMD at $9.50 last week?,AMD,$9.50,[last week],0
-"[Official] [Formal Post] [M4F] [BBW] If AMD is above $4.20 by the end of the day, I'll rip off my testicles and donate them to an Olive Garden.",AMD,$4.20,[end of the day],1
-"You $AMD bag holders, are finally learning, get this to 20,000+ and you'll see AMD sky rocket back to $10.50 today haha. Good job guys. (I got 20 puts at $9) see my comment also",$AMD,$10.50,[today],1
+"[Official] [Formal Post] [M4F] [BBW] If AMD is above $4.20 by the end of the day, I'll rip off my testicles and donate them to an Olive Garden.",AMD,$4.20,[end of the day],0
+"You $AMD bag holders, are finally learning, get this to 20,000+ and you'll see AMD sky rocket back to $10.50 today haha. Good job guys. (I got 20 puts at $9) see my comment also",$AMD,$9,,0
 AAPL May 04 '18 $157.50 Call @ $10.6,AAPL,$157.50,[May 04 '18],1
 is $MU June 15 52.50 Call w/ free money? especially $amzn ER will be next week. thoughts? XD,$MU,52.50,"[June 15]",1
 Have some deep ITM MSFT 91.5 calls that I picked up yesterday,MSFT,91.5,[yesterday],0
 I just gambled 2.5 months of rent on a big AMZN beat. I think I've made a terrible mistake.,AMZN,,,0
 Bought $14 GE Puts @ 0.14 Expiring next Friday. Should I diversify with $ROPE?,GE,14,[next Friday],1
 "BABA May 4 177.5 180 Bull Put Spread a clean double or nothing right now, thoughts?",BABA,177.5,[May 4],1
-That feeling when you left NVDA 230 and BABA 182.5 yesterday when you had 5/4 calls,BABA,182.5,[5/4],1
+That feeling when you left NVDA 230 and BABA 182.5 yesterday when you had 5/4 calls,BABA,,[5/4],0
 Holding 5/11 UVXY. $14.5 over the weekend,UVXY,$14.5,[5/11],1
-on Monday I need SPY @ 259.5,TSLA,259.5,[Monday],1
-on Monday I need SPY @ 259.5 and TSLA @ 275,SPY,259.5,[Monday],1
+on Monday I need SPY @ 259.5,TSLA,259.5,[Monday],0
 How autistic is it buying 1 11.5 AMD put option to expire this week,AMD,11.5,[this week],1
 Remember the trader that shorted $SHOP with 4.5m worth of put options expiring in july?,SHOP,,[july],0
 Up 100% in less than a month. Someone talk me out of going all in UVXY 5/11 13.50 puts.,UVXY,13.50,[5/11],1
@@ -223,7 +219,6 @@ Bought a 260 put and a 242.5 call on NVDA exp 5/18. Feeling the profits!,NVDA,24
 Bought a 260 put and a 242.5 call on NVDA exp 5/18. Feeling the profits!,NVDA,260,[5/18],1
 83.50 put $WMT expiring today!,WMT,83.50,[today],1
 
-Comment,Stock,Price,Date,Label
 Up 160% on 268.5 SPY call that expires 5/18 should I sell?,SPY,268.5,[5/18],1
 May OPX next week: Max Pain SPY 267 QQQ 163.5,SPY,267,[next week],1
 "21 months ago /u/brap_ YOLO'd on 1,750 shares of $AMD at $7.45, funded mostly by 21 month 0% interest credit card offer. Let's see how it turned out.",AMD,$7.45,"[21 months ago]",0
@@ -373,3 +368,132 @@ I don’t have much but I threw my entire account at FSLR 04/17 57.5 calls. Earn
 [Yolo] PINS over 25.2 by Friday 2/21,PINS,25.2,[Friday 2/21],1
 "SGAMY gained 30% in 1 year. With the additional success of the Sega Mini console, coupled with the apparent success of the new “Sonic the Hedgehog” movie, my bet is to see the stock go from $3.50 to at least $4.50.",SGA,$4.50,,0
 Friend Yolo'd 3k puts + Margin in ACB Calls 1.50 Exp 2/21,ACB,1.50,[2/21],1
+
+I bought 3 GRPN puts @2.50 last week am i rich now? Help plz.,GRPN,2.50,,0
+ABBV 3/20 0.16c underrecognized KALETRA,ABBV,0.16,[3/20],1
+"I bought $GRPN shares at $2.92 yesterday, AMA",GRPN,$2.92,[yesterday],0
+3744 shares of AMD sold @ $2.01 in 2016,AMD,$2.01,[2016],0
+Started with 2.5k 3 days later I was down to $340. YOLO my account on SPCE calls 3 days later 5.3k. I love playing with the autistic kids!,SPCE,,,0
+What's this going to look like tomorrow with all the after hours trading? Got in on the $DBX action with 19.5c 3/6 (small timer bets) roast me all you want.,DBX,19.5,[3/6],1
+"Yap, I bought 3600 SPCE at 41.7 each",SPCE,41.7,,0
+$GILD is really fucking with my 69.5 2/28c this week,GILD,69.5,[2/28],1
+"Hopefully tomorrow pans out for CZR. I was almost there. SNE 3/19 77.50, Ford 6/19 $9, ......CZR 1/21 $15 calls.",SNE,77.50,"[3/19]",1
+"Hopefully tomorrow pans out for CZR. I was almost there. SNE 3/19 77.50, Ford 6/19 $9, ......CZR 1/21 $15 calls.",FORD,$9,"[6/19]",1
+"Hopefully tomorrow pans out for CZR. I was almost there. SNE 3/19 77.50, Ford 6/19 $9, ......CZR 1/21 $15 calls.",CZR,$15,"[1/21]",1
+Can DIS go above 134.54 by March 27?,DIS,134.54,[March 27],0
+Last 1.2k yolo on DAL Puts,DAL,,,0
+DD -- $APT — $20.00 — 1.5 month play - Combining financials + reports with recent price movement and macro trends - Medium-term puts will print once Coronavirus hype dissipates and over-valued pump crashes. Position included.,$AP,$20.00,[1.5 month],1
+I bought a 46.50 2/28 AMD put yesterday evening. Can I sell it right now?,AMD,46.50,[2/28],1
+180 to 500 challenge done one day off AAL puts 21.5 2.28,AAL,21.5,[2.28],1
+"If $CCL drops below $25.00 a share tomorrow, i’ll tattoo Degenerate on my collar bone.",$CC,$25.00,[tomorrow],0
+"New, bought 1 call on ACB expiration 1 week strike $1.50",ACB,$1.50,[1 week],1
+"Not a bad week for my first week on the street... Best trade was an APT $20 call, made $10.7k off of it.",APT,$20,,0
+"I'm a poor and after trading options, starting with an AMD put I bought last friday, I'm up 93.97%. I still have a DIS 3/20 110 put I'm holding, everything else is in cash. I plan to take out my initial investment of 2k and put it in savings so I am only playing with profits. It's been a good week.",DIS,310,"[1/10]",1
+Bought 70 lots CALL for Mar20 @ 320 with Avg 3.5 premium,,320,[Mar20],1
+Made gain even after RH had system down AGAIN today. Bought 10 NUGT call $25.5 3/13 @$3.10 sold for $6.10,NUGT,$25.5,[3/13],1
+Reminder that nomoneyball must tell their therapist they jerk off thinking about them if AMD trades above $54.82 by next Friday.,AMD,$54.82,[next Friday],0
+VIPS 3/13 14.5 Puts,VIPS,14.5,[3/13],1
+My SPY $278p 3/20 went from being worth $13.70 to $0.01 as soon as the market opened today? How???,SPY,$278,[3/20],1
+(TQQQ) MAR 13 2020 CONDOR PUT 65/64.5/63.5/63,TQQQ,65,[MAR 13 2020],1
+$JNUG hit $3.5 today. How retarded is $JNUG 4c 1/2022 tomorrow?,$JNUG,4,"[1/2022]",1
+The Faggiest of FDs. I have Boron hands and I think it will close above $3.10 today but I'm afraid RH is gonna screw me @3pm would have bought more but RH wouldn't let me. 161 ABEV Contracts 3/20 2.50C,ABEV,2.50,"[3/20]",1
+Options virgin. My body is ready. SPCE 12.5p 3/27,SPCE,12.5,[3/27],1
+Help! Did theta fk me today? SPY was down 4.5%!! What’s gives 🥴,SPY,4.5,[today],0
+NEED LIQUIDITY BARGAIN: SRP Nov 2020 65.0 calls @ .50,SRP,65.0,[Nov 2020],1
+Babie's first YOLO. 40x VXX 60c 3/27 $15.6k,YOLO,60,[3/27],1
+$15.6k VXX 60c 3/27,VXX,60,[3/27],1
+Etrade is broken! Buy SPY puts at a $235 strike for Jul '17 and the price instantly jumps to over $2.5k!!!!,SPY,$235,[Jul '17],1
+666.66 and $696.9 gain NICE. Big pump tomorrow I bought spy $252 3/25,SPY,$252,[3/25],1
+Buy CheeseCake Factory (CAKE) Puts Won’t be able to pay rent next month and possibly will miss May and June and .... you get the picture. Pretty straightforward here . JUL 20.00 Puts,CAKE,20.00,"[JUL]",1
+$DHR owns CEPHEID who just last weekend got FDA approval for a 45 minute test and Rutgers just gave it the green light in 3.5 days. $110c 4/17,EPHE,3.5,"[last weekend, 3.5 days]",1
+"Trading 3X ETFs options and stock. All while abiding by my firms 15 day holding period. Stuck shorting $IMAX, $CCL, $Z, and $GRUB until april 1st. Holding May 1st 11.50 $NUGT.",$NUGT,11.50,"[May 1st]",1
+Someone bought 2500 contracts of SPY $200 Puts expiring tomorrow for 0.01 each at close. $2500 down the drain!,SPY,$200,[tomorrow],1
+$MGY April 17 $7.5 calls. Why? DD in side,$MGY,$7.5,[April 17],1
+LADR up 124.3% with stupid FED pump anyone up from some puts? 7.5p 5/15,LADR,7.5,[5/15],1
+The first option I bought after years away from the Game - SPY 150P 7/17 @1.5,SPY,150,[7/17],1
+"To all my fellow put holders I feel for you. Sold all calls yesterday and am currently stuck with LYFT 17.5p 4/17, Twitter 17p 4/17, and GoPro 2.5 4/17. IV crush is killing us autists but I believe in the gay bear dream.",LYFT,17.5,[4/17],1
+"Can someone explain? I’ve had (35) GME 4/3 $3.50 P for a week or two now, and price dropped 15% today and is now 3 cents from strike, yet I’m still down 70% and lost $100 today...what?",GME,$3.50,"[4/3]",1
+"Loaded USO May 15, 6c ($0.37) - How retarded am I today?",USO,6,"[May 15]",1
+"Loaded USO May 15, 6c ($0.39) - How retarded am I today?",USO,6,"[May 15]",1
+"LMT $345 and $347.5 puts expiring tomorrow , how retarded am I",LMT,$345,[tomorrow],1
+Update: NIO 2.50p 2/9 from yesterday,NIO,2.50,[2/9],1
+"Loaded $USO May 15, 6c ($0.39) - Am I sporting too many chromosomes today? Oil did not react to fake news. That should be a sign its gonna moon.",USO,6,"[May 15]",1
+"RIP 8.5k, gonna be 10k down soon. SPY 195p 4/17 am I rite doe",SPY,195,[4/17],1
+Got banged by the mouse. $Dis 4/09 100p &amp; 4/09 93p. Riding out $CSCO 4/17 41c &amp; $CMCSA 37.5c,CSCO,41,[4/17],1
+How dumb am I? MSFT $190 C expiring May 1 for $1.95 strike price,MSFT,$190,[May 1],1
+MSFT $190 C expiring May 1 for $1.95,MSFT,$190,[May 1],1
+What happend to my AMD 57.50 options that expire on the 17th?,AMD,57.50,[17th],1
+Sold my first put today. $10 on AAL and $18.5 on NVAX. 4/24,AAL,$10,[4/24],1
+"Reposting because I forgot positions like a retard. USO 6/19 2.5p and 2p, STNG 5/15 30c. This is the real oil money.",USO,2.5,[6/19],1
+3 Calls $UCO $1.50 that expire 5/15 the stock does a reverse split 1:25 and I got in at .38 and ended at .48 the volume of the stock has gone up $32 million dollars in one day because everyone thought oil crashed to -37.00 but it was just the last day of the crude contracts for March to expire,UCO,$1.50,"[5/15]",1
+MSFT 177.5 May 8 - if gain comes flip it to AMZN calls,MSFT,177.5,[May 8],1
+MSFT May 01 177.5C,MSFT,177.5,[May 01],1
+1750 $UAVS avg $2.17 YOLO,UAVS,$2.17,,0
+"Money Printer go Brrrrr. $MSFT 5/15 175C, $SDC 6/5 6.5C",MSFT,175,[5/15],1
+$1k in a day. 4 x SPY $280p 5/8. Started at $2.25 and closed at $4.75,SPY,$280,[5/8],1
+BYND pushed the ticker today! Been holding on to this 5/8 99c for a week now. Went full idiot and sold my 5/8 91.50c last Friday. But still a good day folks,BYND,99,"[5/8]",1
+"DKNG +4.20 for the week. You know what that means, bois, +69.69 for the month! 5/15 30c, 6/19 35c All In!",DKNG,30,"[5/15]",1
+Started trading last Friday any tips on how to keep the trend going?... Wait wrong sub how do I blow this shit in a day? MVIS/CCL long and PTON call 40 5/8 at $1.36 are trades so far,PTON,40,"[5/8]",1
+My final week has come. Dis 5/15 101p CHGG 6/19 50p LORL 6/19 17.5p,CHGG,50,"[6/19]",1
+PCG 14.5c 5/29 and 19c for September,PCG,14.5,"[5/29]",1
+So... $77 CALL for $0.16 for this Friday?,,$77,[Friday],1
+Wondering is one can exercise USO1 calls? I am sitting on some $3.00 17 July 2020 C. Please advise. Thank you.,USO,$3.00,[17 July 2020],1
+Stock with 1.3 mil daily volume trading at 3$ with 0 Option volume. No idea why so I got some calls for strike price of $2.50 for NOV 2020 at .60. YOLO,,$2.50,"[NOV 2020]",0
+PCG $2.3M Dark pool print yesterday. Position: 9/18 20C 1kV 24K OI. Vote tomorrow,PCG,20,"[9/18]",1
+Sony?? $SNE July 17th $67.50 C,$SNE,$67.50,[July 17th],1
+SILVER TO THE MF MOON $SLV 6/19 20.00C WILL RETURN $100K FOR LESS THAN $1000 INVESTED IF SILVER CLOSES $21,$SLV,20.00,[6/19],1
+"I bought 6/19 RCL 70 calls a few weeks ago at 0.23 each. 3,400 of them. I sold them yesterday for 0.48... today they are trading 6.45 each.",RCL,70,"[6/19]",1
+"Started at 1.3k last month, Bought 15 AZUL calls this morning to hit 17.5 by 6/19 at .70, currently at 2.18",AZUL,17.5,[6/19],1
+9 contracts COTY 6c July 17 up $1000 dollaass bought at .30 each now worth 1.30,COTY,6,[July 17],1
+Do I dump my UNFI 6/19 22.5c,UNFI,22.5,[6/19],1
+YOLO on my first option trade ever. I literately had no idea what I was doing. I just saw my contracts worth a penny and then they were worth something so I sold out real fast. Bought $3 and $2.5 HTZ Puts expiring Friday. What happened?,YOLO,$3,[Friday],1
+How should I spend my tendies tomorrow? 6.5k 6/12 23c MGM,MGM,23,[6/12],1
+"So, I forgot I had an order to sell until close from last week, for SPY 290p at 0.5$ ... 🤬",SPY,290,,0
+"Small time trader, big time autist. Sold my 34.5c PFE 6/12 puts at the arrow... I do not have those 💎👐🏼. That’s about $250 missed tendies so far in the last half hour with more to come by EOD.",PFE,34.5,[6/12],1
+8.1K SPY YOLO 6/26 306C,SPY,6/26,[6/26],1
+HEAR CALLS. 01/15 17.5 and 10/16 20$,HEAR,17.5,[01/15],1
+What happened to the fellow retard that Yoloed 30.8k to TSLA 1100 6/19 calls?,TSLA,1100,[6/19],1
+HTZ- sold the Jan 2022 $1.5 put at $1.2,HTZ,$1.5,[Jan 2022],1
+SPY 420 calls for April 20th 2021 were selling for $0.69 this morning. Couldn't resist.,SPY,$420,[April 20th 2021],1
+I'M 14 YEARS OLD HISPANIC AND HAVE ALMOST 2K. DADDY MUSK PROPELLED ME TO MARS TODAY AFTER I BOUGHT 1 CONTRACT OF TSLA 7/17 1680c AT $5.45 I'M I CONSIDERED A DEGENERATE AT MY AGE? P.S DON'T TELL MY DAD,TSLA,$1680,"[7/17]",1
+“Transferred” 5k into Rh for the instant deposit. Yolod 3.5k in TSLA 7/10 1800 calls. Fuck I wish I would’ve held overnight.,TSLA,1800,[7/10],1
+Yolod 3.5k in TSLA 7/10 1800 calls,TSLA,1800,[7/10],1
+"Lot of $TSLA flooding this sub rn, but there are currently ~3.5k+ contracts of 2500c 7/17 in open interest",TSLA,2500,[7/17],1
+Sold PTON 7/17 38c in April for $2.55,PTON,$38,"[7/17]",1
+"$1500 to $87K, about to be $200K after next week...$MGM calls $1500-$12K, $IDEX shares $12K-$36K, penny trading flop $36K-$18K, and $SOLO/$NIO/$MSFT/$WMT calls $18K-$87K this past week alone...holding 196 $WMT 125c 7/24 3.25 premium...over $100K FRI until some prick sold a truckload $WMT at close.",WMT,125,"[7/24]",1
+"First time trading options - PFE JUL 31, 2020 38.00 CALL",PFE,38.00,"[JUL 31, 2020]",1
+VXRT august 21 15 calls yolo 25 at 4.05,VXRT,25,[august 21],1
+"-$800-&gt;$5000 in 2 days (BA $172.5C 7/24, ESNT $30C 7/17, RTX $58C 7/24, yolo AMD $56P 7/24)",BA,$172.5,[7/24],1
+AAL the DD you need ;) 7/17 14.5c will print,AAL,14.5,[7/17],1
+AAL 14.5c 7/17 will print!,AAL,14.5,[7/17],1
+"It’s not honest work, but it’s much. $CCL 15.5p 7/17, $AZN 75c 1/21, $AZN *shares*",$CCL,15.5,[7/17],1
+"I make pipes for a living and felt compelled to commemorate my loss porn as a bowl. (Lost most on BAC $19.5p 5/22 , SPY $2.76p 5/18)",BAC,$19.5,[5/22],1
+Asia markets to fall on China vow to retaliate against U.S. Big tech may take another hit tomorrow. MSFT Put 202.50 7/24,MSFT,202.50,[7/24],1
+"TSLA 7/17 1620c's bot 7/10, sold 7/13. 2.7k -&gt; 36k Roth gains",TSLA,1620,[7/17],1
+"Did my research, first day of trading, bought in for $800...apparently I’m not as fucking autistic as you cock knoblers. Fuck you QQQ 7/31 265c @1.27 OTM, I thought you were my safe bet, fucking doosh-canoe.",QQQ,265,[7/31],1
+"$KODK Jan 15th, 2021 $12.5 Calls",KODK,$12.5,"[Jan 15th, 2021]",1
+GDP only dropped 9.5% but the 32.9% annual rate drop gets the headline because big number and scary. (SPY $330 8/14 C),SPY,$330,[8/14],1
+INTC $50c 8/21 Bought on July 24 after they announced they couldn’t get the 7nm and all the money went to AMD. Decided to buy 2 at $2.44 each. I’m average down to $1.61 but it’s valued at $.48 so far. Should I buy more ? And is intel going to pass 50$+?,INTC,$50,[8/21],1
+3300% on $CHWY sold 8 contracts already holding last 2 for the ride 10 52.5c 8/17 avg at .61 for $5000 gain,$CHWY,52.5,[8/17],1
+Bought MRNA 70.5 puts EXP 8/21 today.,MRNA,70.5,[8/21],1
+TEVA 12.5p (8/14) - Keep or sell?,TEVA,12.5,[8/14],1
+Me sticking to my SLV call (8/21 31.5),SLV,31.5,[8/21],1
+"PRPL Gang Dead, 22.5C 8/21 25C 9/18 30C 1/15",PRPL,22.5,[8/21],1
+LYG has been averaging around $1.45 since April 2nd.. Waiting for this take off called for a LONG CALL: 01/15/2021 $2 Call! $5-$10,LYG,$2,[01/15/2021],1
+$460 into 4.2k $TSLA 900% gain. Currently holding 1900c 8/28 and riding the week out on papa elons back,TSLA,1900,[8/28],1
+"PRPL 8/21 30c up 12,400% today! We moving baby. Now only down 98.81% total!",PRPL,30,"[8/21]",1
+$RST 9/18 $30.00 C - All in. Played with all of my expenses cash for the month. God Save Me.,$RST,$30.00,[9/18],1
+Puts on $DKNG - 09/18 30p @ $0.40,$DKNG,30,[30p],1
+"I sold my TSLA 8/28 2000C for $1.1k profit, today it’s worth 25k.",TSLA,$2000,"[8/28]",1
+From 3k last Friday to 32k this Friday trading BAC 25.5c and TSLA 2200c both 8/28 exp.,BAC,25.5,"[8/28]",1
+Boomer UNCHAINED YOLO - JD 10/16/2020 110.00 C,JD,110.00,[10/16/2020],1
+SPY 413.75 by Feb 2021?,SPY,413.75,[Feb 2021],1
+From 217 with no positions to 6000+. At 217 I bought a RCL call then only played spy until I bought a ZM 9/4 380 call for 3.42 yesterday.,ZM,380,[9/4],1
+SPWH is tickling my balls for their calls. Holding 17.5c through earnings call tomorrow 💰,SPWH,17.5,[tomorrow],1
+What’s everyone drinking? APPL 9/4 122/130/132.50c,APPL,122,[9/4],1
+My 11k act is at 2.9k. Chased TSLA 407c 9/4 at close fml.,TSLA,407,[9/4],1
+$500 -&gt; $12k in 3 days. $CCL 9/11 18.5C YOLO,$CCL,18.5,[9/11],1
+That big spike down is when I got into options. Now I’m holding 33 contracts of 2.5c in SMLP that will expire worthless on Sept 18 bc some stocktwits bot told me it would go up a month ago. Autist or retard?,SMLP,2.5,"[Sept 18]",1
+What’s the goal here? GPRO 2.5p 1/15,GPRO,2.5,[1/15],1
+4.3K in SPY CALLS 331c expiring Friday,SPY,331,[Friday],1
+"One last look at my chart before Elon finishes the rest off today (520c 9/25 , VALE 11.5c 10/2)",VALE,11.5,[10/2],1
