@@ -35,12 +35,18 @@ def save_to_excel(comment, stock, price, date, label):
     df = pd.DataFrame([[comment, stock, price, date, label]], columns=["Comment", "Stock", "Price", "Date", "Label"])
     df.to_csv(file, mode='a', header=not pd.io.common.file_exists(file), index=False)
 
-def main():
-    data = []
+def grab_junk_comments(data):
+    with open(file_path, 'r',  encoding="utf-8") as f:
+        for line in f:
+            comment = json.loads(line)
+            data.append(comment['title'], "", "", "", 0)
+            df = pd.DataFrame(data)
+            df.to_csv('prepped_stocks.csv', mode='a', index=False, header=False)
+
+def grab_good_comments(data):
     count = 0
     limit = 2000
     batch_size = 500
-
     with open(file_path, "r", encoding="utf-8") as f:
         for line in f:
             if count >= limit:
@@ -58,6 +64,9 @@ def main():
                     df = pd.DataFrame(data, columns=["Comment", "Stock", "Price", "Date", "Label"])
                     df.to_csv(f"prepped_stocks_{count}.csv", index=False)
                     data = []
+                    
+def filter_improper_stock_dates():
+    return
 
 def count_positives():
     with open('prepped_stocks.csv', "r", encoding="utf-8") as f:
@@ -69,5 +78,8 @@ def count_positives():
         print(count)
 
 
-        
+def main():
+    data = []
+    grab_junk_comments(data)
+ 
                  
