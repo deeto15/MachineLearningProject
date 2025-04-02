@@ -5,12 +5,16 @@ import re
 import spacy
 from stock_cap_processor import filter_stocks
 import pandas as pd
+import time
 file_path = Path.home() / "Downloads" / "wallstreetbets_submissions.txt"
 
 def extract_dates(comment):
+    timer = time.time()
     nlp = spacy.load('en_core_web_sm')
     doc = nlp(comment)
     date = [ent for ent in doc.ents if ent.label_ == "DATE"]
+    endtimer = time.time()
+    print("time for date extractor: ", timer-endtimer)
     if date:
         return date
     else:
