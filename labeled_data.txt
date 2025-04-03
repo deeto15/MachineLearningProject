@@ -55,7 +55,7 @@ Trade O
 : O
 RSH B-TICKER
 Oct B-DATE
-1.00 I-DATE
+1.00 B-PRICE
 Puts O
 @ O
 .30 O
@@ -144,23 +144,6 @@ Traded O
 @ O
 ~1.70 O
 
-RL B-TICKER
-150 B-PRICE
-Jan B-DATE
-for O
-7.20 O
-, O
-HAL O
-July O
-42.50 O
-for O
-3.50 O
-, O
-and O
-BABA O
-stock O
-. O
-
 Bought O
 some O
 HLF B-TICKER
@@ -211,7 +194,7 @@ at O
 
 $ B-TICKER
 RAD I-TICKER
-8.50C O
+8.50C B-PRICE
 , O
 weekly B-DATE
 . O
@@ -233,8 +216,8 @@ a O
 pop O
 that O
 expire O
-this B-DATE
-Friday I-DATE
+this O
+Friday B-DATE
 . O
 
 Somebody O
@@ -242,7 +225,7 @@ bought O
 6600/6600 O
 June B-DATE
 15 I-DATE
-167.5/160 O
+167.5/160 B-PRICE
 put O
 spread O
 on O
@@ -256,7 +239,7 @@ deep O
 into O
 BAX B-TICKER
 January B-DATE
-70/72.5 O
+70/72.5 B-PRICE
 call O
 spread O
 for O
@@ -272,7 +255,7 @@ Open O
 $ B-TICKER
 SPX I-TICKER
 6/12 B-DATE
-2130/2135 O
+2130/2135 B-PRICE
 Call O
 Spread O
 for O
@@ -293,7 +276,7 @@ at O
 least O
 the O
 November B-DATE
-70/72.5 O
+70/72.5 B-PRICE
 spread O
 . O
 
@@ -332,30 +315,9 @@ me O
 ? O
 ! O
 
-$ O
-OMER B-TICKER
-DD O
-— O
-NASDAQ O
-— O
-$ B-PRICE
-11.65 I-PRICE
-( O
-4 B-DATE
-month I-DATE
-hold O
-, O
-50 O
-% O
--100 O
-% O
-, O
-high O
-risk O
-) O
-
-$ O
-BDSI B-TICKER
+* O
+$ B-TICKER
+BDSI I-TICKER
 DD O
 -- O
 NASDAQ O
@@ -371,32 +333,7 @@ Play O
 % O
 ) O
 
-$ O
-NBG B-TICKER
-Thought O
-'s O
-, O
-Play O
-and O
-DD O
--- O
-NASDAQ O
--- O
-$ B-PRICE
-0.87 I-PRICE
--- O
-2 B-DATE
-- I-DATE
-20 I-DATE
-Day I-DATE
-Play O
-| O
-20 O
-% O
-- O
-70 O
-% O
-
+* O
 $ O
 RLYP B-TICKER
 DD O
@@ -415,6 +352,7 @@ Months I-DATE
 % O
 ) O
 
+* O
 TLOG B-TICKER
 DD O
 : O
@@ -436,6 +374,7 @@ Years I-DATE
 % O
 Returns O
 
+* O
 TLOG B-TICKER
 DD O
 : O
@@ -457,6 +396,7 @@ Days I-DATE
 % O
 Returns O
 
+* O
 $ B-TICKER
 CBLI I-TICKER
 DD O
@@ -472,7 +412,7 @@ play O
 ) O
 
 SPY B-TICKER
-207/206 O
+207/206 B-PRICE
 straddle O
 for O
 upcoming O
@@ -483,8 +423,8 @@ any O
 takers O
 ? O
 
-$ O
-WMT B-TICKER
+$ B-TICKER
+WMT I-TICKER
 Feb B-DATE
 19 I-DATE
 2016 I-DATE
@@ -542,9 +482,9 @@ $ B-PRICE
 yesterday B-DATE
 
 Entered O
-$ O
-AMZN B-TICKER
-500/492.5 O
+$ B-TICKER
+AMZN I-TICKER
+500/492.5 B-PRICE
 P O
 weekly B-DATE
 spread O

@@ -38,7 +38,7 @@ def tokenize_and_align_labels(example):
     tokenized_inputs = tokenizer(
         example["tokens"],
         truncation=True,
-        padding="max_length",   # ← this is key
+        padding="max_length",
         max_length=128,
         is_split_into_words=True
     )
@@ -51,7 +51,12 @@ def tokenize_and_align_labels(example):
         elif word_idx != prev_word_idx:
             labels.append(example["ner_tags"][word_idx])
         else:
-            labels.append(-100)
+            tag_id = example["ner_tags"][word_idx]
+            tag = id2label[tag_id]
+            if tag.startswith("B-"):
+                labels.append(label2id[tag.replace("B-", "I-")])
+            else:
+                labels.append(tag_id)
         prev_word_idx = word_idx
     tokenized_inputs["labels"] = labels
     return tokenized_inputs
