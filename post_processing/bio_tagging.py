@@ -1,16 +1,19 @@
-import string
 import pandas as pd
 import openai as OpenAI
-import csv
 import nltk
 nltk.download('punkt_tab')
 from nltk.tokenize import word_tokenize
 
-print(nltk.data.path)
-
+file1 = pd.read_csv("pre_processing/prepped_stocks.csv")
+file2 = pd.read_csv("post_processing/ner_results.csv", usecols=range(5))
+combined_files = pd.concat([file1, file2], ignore_index=True)
+combined_files = combined_files[combined_files["Label"].astype(str).str.strip() == '1']
+nan_rows = combined_files[combined_files['Price'].isna()]
+print(nan_rows)
 def label_comment(comment, ticker, price, date):
     price = price.strip(" $")
     ticker = ticker.strip(" $")
+    date = date.strip("[]")
     tokens = word_tokenize(comment)
     labels = ['O'] * len(tokens)
 
@@ -32,21 +35,17 @@ def label_comment(comment, ticker, price, date):
     tag_entity(date, 'DATE')
     return list(zip(tokens, labels))
 
-with open('pre_processing\prepped_stocks.csv', newline='', encoding='utf-8') as csvfile:
-    reader = csv.DictReader(csvfile)
-    with open('labeled_data.txt', 'w', encoding='utf-8') as out:
-        for row in reader:
-            if row.get('label', row.get('Label', '0')) != '1':
-                continue
-            comment = row['Comment']
-            ticker = row['Stock']
-            price = row['Price']
-            date = row['Date'].strip('[]').strip()
-            labeled = label_comment(comment, ticker, price, date)
-            for token, tag in labeled:
-                out.write(f'{token} {tag}\n')
-            out.write('\n')
+with open('labeled_data.txt', 'w', encoding='utf-8') as out:
+    for _, row in combined_files.iterrows():
+        if row['Label'] != 1:
+            continue
+        comment = row['Comment']
+        ticker = row['Stock']
+        price = row['Price']
+        date = row['Date'].strip('[]').strip()
+        labeled = label_comment(comment, ticker, price, date)
+        for token, tag in labeled:
+            out.write(f'{token} {tag}\n')
+        out.write('\n')
 
-def generate_synthetic_data(openai_key):
-    return
     
