@@ -1,6 +1,10 @@
 from transformers import AutoTokenizer, AutoModelForTokenClassification, TokenClassificationPipeline
 import torch, json
-
+#Bugs until the model is done (ideally)
+#TODO Remove hardcoded filepath
+#TODO add post processing to only take one a peice from each batch, and fitler out duplicates
+#TODO ask Sam to optimize
+#TODO add logistic regression layer
 model_path = "./ner-output"
 file_path = r"C:\Users\Kendall Eberly\Downloads\wallstreetbets_comments\wallstreetbets_comments.txt"
 
