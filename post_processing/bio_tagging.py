@@ -9,6 +9,8 @@ from nltk.tokenize import word_tokenize
 print(nltk.data.path)
 
 def label_comment(comment, ticker, price, date):
+    price = price.strip(" $")
+    ticker = ticker.strip(" $")
     tokens = word_tokenize(comment)
     labels = ['O'] * len(tokens)
 
