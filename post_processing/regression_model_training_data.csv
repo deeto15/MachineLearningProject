@@ -67,7 +67,7 @@ Fuck $FB. I'm yoloing $TWTR. $36 calls Jul 31st all day,TWTR,36,Jul 31st,1,0.963
 [AskWSB] $120 AAPL Jan '16 Calls,AAPL,120,Jan '16,1,0.9877,0.9928,0.9852
 Loaded up on 10 AAPL Dec'18 $130 calls,AAPL,130,Dec'18,1,0.9937,0.9935,0.985
 "NFLX: An unusually large open interest of the Sept 18 PUTS at $95 Strike, 22,000, and $78 with 29,000",NFLX,95,Sept 18,1,0.9212,0.9621,0.9643
-PYPL Sept. $50 Call Volume,PYPL,50,Sept.,1,0.9905,0.9822,0.9303
+PYPL Sept. $50 Call Volume,PYPL,50,Sept.,0,0.9905,0.9822,0.9303
 Bought some FB $94 Sep 11 calls and SBUX $57.50 Oct 16 calls...anyone else in for some quick YOLO profit?,FB,94,Sep 11,1,0.9898,0.9887,0.9686
 Loading up on NBK Jan 17 $1.00 calls,NBK,1.00,Jan 17,1,0.9898,0.968,0.9912
 [YOLO] All in IBN JAN-16 $9.00 CALLS,IBN,9.00,JAN-16,1,0.9425,0.9906,0.9398
@@ -85,7 +85,7 @@ $APDN $5 Nov 20 Calls,APDN,5,Nov 20,1,0.9956,0.9943,0.9797
 $3000 in April $30 $SHOP calls.,SHOP,30,April,1,0.9856,0.9918,0.9664
 Profit off the gun lobby! $SWHC $20 January calls.,SWHC,20,January,1,0.9887,0.9894,0.9349
 $WMT Feb 19 2016 57.50 PUT,WMT,57.50,Feb 19 2016,1,0.9953,0.991,0.9805
-YOLO $CMG tomorrow at $420,CMG,420,tomorrow,1,0.9786,0.8228,0.9308
+YOLO $CMG tomorrow at $420,CMG,420,tomorrow,0,0.9786,0.8228,0.9308
 Long $USO Jan-17 $20 calls,USO,20,Jan-17,1,0.994,0.9939,0.9829
 SPY TRADE Feb 12 2016 187.50 o 188 calls Idea,SPY,187.50,Feb 12 2016,1,0.9885,0.9867,0.9688
 USO $8 1/22 Puts,USO,8,1/22,1,0.9928,0.9854,0.995
@@ -845,6 +845,515 @@ Someone convince me buying $35 IQ 4/18 calls was a good idea,IQ,35,4/18,1,0.9848
 +1 AMD put $25 exp. 3/29- daytrade and profitability question,AMD,25,3/29,1,0.9864,0.9941,0.9894
 $288 2/27 SPY calls,SPY,288,2/27,1,0.9923,0.9885,0.9955
 "Thanks to Tim $AAPL July 2019 calls $185 $195 and $200, respectively",AAPL,185,July 2019,1,0.9942,0.9788,0.9567
-Noob question: how is it possible/profitable to purchase a put that is above the current strike price? Example: 04/05 $190 APPL puts are $3.55ea but the current stri price is 188.48? 04/05 $190 calls are $2.19. I don’t understand the difference I guess.,APPL,190,04/05,1,0.9689,0.977,0.8541
-"Fuck, went into a autistic rage at the end of day and bought 11 $280 3/29 SPY Puts. 82% of my portfolio.",SPY,280,3/29,1,0.9939,0.9907,0.9942
-"Its all about the grip strength. $VFF x 100 + 2x each 4/18 12.5, 14, 15, 16 calls.",VFF,12.5,4/18,1,0.9772,0.8684,0.9937
+"HLX Yolo, easily going to hit 3.5 tomorrow",HLX,3.5,tomorrow,0,0.9916,0.9797,0.9324
+MARA Nov 20 $4 calls,MARA,4,Nov 20,1,0.9822,0.993,0.9854
+YOLO CLSK November 20th $10 calls 10k Worth,CLSK,10,November 20th,1,0.9939,0.9929,0.9699
+Any one else buy AMD puts today? Shit looks like it’s falling off a ducking cliff. Positions: $78 strike put 10/23 and $75 strike put 10/23,AMD,78,10/23,1,0.9851,0.9512,0.9566
+Holding TSLA puts 10/23 417.50 anything salvageable?,TSLA,417.50,10/23,1,0.9939,0.9811,0.9949
+HTZ call 11/20 $1.5 and 4/16/21 $1 ... so far so good. Let's see.,HTZ,1.5,11/20,1,0.9908,0.8317,0.9882
+FB Call $285 10/30 Exp,FB,285,10/30,1,0.9924,0.9914,0.9947
+$103k in GME Jan '21 $20 calls,GME,20,Jan '21,1,0.9926,0.9935,0.9877
+Me IRL waiting on these $36.50 11/6 SNAP puts to print,SNAP,36.50,11/6,1,0.8841,0.9947,0.9951
+TLRY GAIN ($6.5 call 10/23) ($0.94 strike) up despite TLRY stocks down.,TLRY,6.5,10/23,1,0.9705,0.9937,0.994
+"Yo all you bool bats and bittens. So I accidentally blew the majority of my funsies account up and I was left with like $80 roughly from a few grand. This in no way hurts me. BUT! I digest, should I hold onto this for now or sell on Monday? AMD $96 call exp 11/6. Thank youuuuu",AMD,96,11/6,1,0.9931,0.9926,0.9907
+BA $125 puts for January..! Who is with me?,BA,125,January,1,0.964,0.9873,0.9182
+"Smart money always know something... IRBT, coming Friday expiration $90",IRBT,90,Friday,1,0.9032,0.9882,0.8303
+RAD yolo play..! Anybody watching this..? 30% short interest. May run hard if volume comes. 10/30 $10.50 calls..?,RAD,10.50,10/30,1,0.9757,0.9913,0.9656
+SDC 11/27 C13.50 Price Volatility - Can someone explain massive price swing near close? Went -96% to +56% and settled in minutes. Is this just standard IV with FDs?,SDC,13.50,11/27,1,0.9841,0.9752,0.9935
+$BA Call $157.5 Exp 11/13,BA,157.5,11/13,1,0.8862,0.9951,0.9915
+GME $6 PT Nov. 15 If You’re LUCKY,GME,6,Nov. 15,0,0.9935,0.9903,0.9641
+GME Nov. 15 PT $6 if you’re LUCKY,GME,6,Nov. 15,0,0.9851,0.9931,0.9744
+GME Nov. 20 PT $6 if you’re LUCKY,GME,6,Nov. 20,0,0.9853,0.9933,0.9766
+Bought 10c AMD $90 10/30 for $.1 yesterday. Sold it for same price today. Which one of you bought it?,AMD,90,10/30,1,0.9944,0.9938,0.9866
+Bought 15x SPY $335 10/30 calls at close,SPY,335,10/30,1,0.9962,0.9937,0.994
+Opinions on $SNAP December 18th $50 Calls?,SNAP,50,December 18th,1,0.9912,0.9883,0.9761
+How $AAPL can get to $117 by 11/13,AAPL,117,11/13,0,0.9923,0.934,0.991
+NOK $4.00 4/16/21,NOK,4.00,4/16/21,1,0.9899,0.9913,0.9941
+Hi retards I have no clue what I’m doing but like pressing colorful buttons on Robinhood. I would love some advice. I own 12/18 HTZ $1.5 puts and it was delisted today. Am I fucked?,HTZ,1.5,12/18,1,0.9871,0.9777,0.9897
+DRN $8 calls with 11/20 ex how rich am i gunna be !?,DRN,8,11/20,1,0.9942,0.9918,0.9895
+60000 SPY $290 Puts 11/4,SPY,290,11/4,1,0.9957,0.9827,0.9954
+All in on AMC 3.5 11/6 puts? New to options trading. Any advice?,AMC,3.5,11/6,1,0.8239,0.9919,0.9835
+My Oct 30 $325 SPY Puts exploded on Wednesday. Yolo right? They expired worthless on Friday so..,SPY,325,Oct 30,1,0.9955,0.9926,0.9643
+Bought HTZ 12/18 $1 put. What do I do now?,HTZ,1,12/18,1,0.9926,0.99,0.9945
+What do we think of MSFT 11/13$215 puts,MSFT,215,11/13,1,0.9936,0.9918,0.9951
+"MSFT Nov06'20 217.5, 82K Gain, Done with options for this week. Shits too intense.",MSFT,217.5,Nov06'20,1,0.9929,0.9899,0.9795
+Newly diagnosed retard. Do I hold or sell? NIO call $35 05/21/21,NIO,35,05/21/21,1,0.9913,0.9953,0.9931
+I’m a newly diagnosed retard. Do I hold or sell? NIO $35 call 05/21/21,NIO,35,05/21/21,1,0.993,0.9954,0.9932
+I’m a newly diagnosed retard. Do I hold or sell my NIO $35 call for 05/21/21? Currently up 192% bought in at $5.15 and now at $15.05.,NIO,35,05/21/21,1,0.991,0.9941,0.9744
+Screenshot's from Wednesday but shoutout to my girl for hyping Biogen up to me a few weeks ago.... sold $BIIB $400 6/18/21 for a hefty profit. She also recommended Moderna back in March 🤑,BIIB,400,6/18/21,1,0.9831,0.9807,0.9728
+HEXO $0.50 12/18 calls selling at 0% IV,HEXO,0.50,12/18,1,0.9892,0.9141,0.9929
+How I got 10 shares of TSLA for $1003.25 (October 2020),TSLA,1003.25,October 2020,1,0.9906,0.8968,0.8174
+NIO hitting $50 next week.,NIO,50,next week,0,0.9902,0.9859,0.8478
+“PLTR” Who’s holding till ER? Positions: 2x 11/13 $18 C,PLTR,18,11/13,1,0.9879,0.9842,0.9939
+ICLN $26 Call 1/15/21 🔥🔥🚀🚀,ICLN,26,1/15/21,1,0.9913,0.9908,0.9894
+WWR 11/20 7.5 C,WWR,7.5,11/20,1,0.9849,0.9924,0.9937
+My modest returns. BAC $25 call jan 21/22,BAC,25,21/22,1,0.9932,0.9943,0.9847
+CCL $17 13/11 ??,CCL,17,13/11,1,0.9944,0.9894,0.9752
+They say the first one is free.. CNK $10 11/20 call,CNK,10,11/20,1,0.9928,0.9939,0.9951
+They say the first one is free.. 1 CNK 11/20 $10 call for $58,CNK,10,11/20,1,0.9899,0.9946,0.9951
+They say the first one is free. 1 CNK 11/20 $10 call spent $58.,CNK,10,11/20,1,0.9892,0.9941,0.995
+DRIP 11/20 $70 calls guy,DRIP,70,11/20,1,0.9802,0.9941,0.9955
+I was in class... from 930 to 1045 lmaooo JMIA puts 11/20 &amp; 12/18 $10,JMIA,10,11/20,0,0.9664,0.8818,0.9847
+OTM SNAP C 12/24 $1.02,SNAP,1,12/24,1,0.9074,0.9071,0.9941
+Puts on tech? Position: AAPL $80 6/21,AAPL,80,6/21,1,0.9941,0.9943,0.9959
+Why does it have to be this way? RKT 11/13 23.5 Calls,RKT,23.5,11/13,1,0.9863,0.9912,0.9944
+$LMND: Below $55 tomorrow?,LMND,55,tomorrow,0,0.9745,0.9583,0.8862
+"My little family has experienced COVID, prostate cancer surgery, and hip/knee replacement surgeries back to back through 2020. Need more $$ to keep being an American, YOLO'd next month's rent on gold miner calls, wish luck | NUGT Dec 04 '20 $74 🇺🇸🇺🇸🇺🇸",NUGT,74,Dec 04 '20,0,0.8876,0.9665,0.9664
+January 2021 - Palantir $30 or NIO $75?,NIO,30,January 2021,0,0.9642,0.985,0.8746
+NIO is printing money. Short term realized gain on the $35 call. Short term unrealized gain is 300 $4 call expiring 1/21/2022,NIO,4,1/21/2022,1,0.9823,0.9873,0.9864
+When my $3.30 MFA calls that I bought in March end today.,MFA,3.30,March,1,0.9864,0.9834,0.8337
+APHA $6 call exp 11/20,APHA,6,11/20,1,0.9945,0.9901,0.9931
+I AM BULLISH ON SRAC IN 2021 ($12.5 CALL 2/21),SRAC,12.5,2/21,1,0.9739,0.9944,0.9941
+Improved my PLTR LEAP YOLO position to ~30k $30 05/21s,PLTR,30,05/21,1,0.992,0.9753,0.9929
+I sold 11/20 $30 NIO calls back in September for $2.14 for 5k so I could buy VALE calls for TSLA battery day lmao,NIO,30,11/20,1,0.9907,0.9927,0.9903
+How fucked am I on this YOLO? -49% so far :( NIO Dec 24 '20 $50 call I bought Friday.,NIO,50,Dec 24 '20,1,0.9903,0.9917,0.978
+BMRG $10 11/20 calls priced stupid,BMRG,10,11/20,1,0.9937,0.9937,0.9939
+BMRG $10 11/20 calls priced stupid,BMRG,10,11/20,1,0.9937,0.9937,0.9939
+"7 days after posting, 4 days till expiry - still holding (+45%): WWR 11/20 7.5 C",WWR,7.5,11/20,1,0.9755,0.987,0.9938
+YOLO'd the small amount I had for Papa last Tuesday. Inclusion has us past $461 wall without RH. What's the play here? I wanna move back in the house.. TSLA $396 12/18,TSLA,396,12/18,0,0.9945,0.9345,0.993
+"Hello autists, I dumped my life savings all in TESLA $800 Call Jan 15,2020 and have been bag holding for the last few months I’m down 51% I know Im autistic but will I finally print Tomorrow??? Currently down 34k",TESLA,800,"Jan 15,2020",1,0.9858,0.9907,0.8912
+$470 11/27 TSLA YOLO,TSLA,470,11/27,1,0.9936,0.9904,0.9952
+Getting lucky tomorrow AM with a few TSLA $450 / $500 11/20 calls.,TSLA,450,11/20,1,0.9957,0.8596,0.9947
+NIO hitting $60 tomorrow,NIO,60,tomorrow,0,0.9912,0.9772,0.9462
+NIO is gonna hit $60 by tomorrow morning,NIO,60,tomorrow,0,0.9856,0.9733,0.8651
+15K PLTR Yolo. 1/20/23 $30 Calls,PLTR,30,1/20/23,1,0.9844,0.9945,0.9817
+"I have several $NIO 55 Calls for 12/31 with an average of about 48, im down bad right now, should I paper hands sell, or will they print soon enough?",NIO,55,12/31,1,0.9917,0.9085,0.9867
+APHA 11/27 $6.5 Call Options: Thoughts?,APHA,6.5,11/27,1,0.9936,0.9955,0.9952
+10k yolo CRSR 11/20 $35 call,CRSR,35,11/20,1,0.9936,0.9955,0.9958
+Would I be able to afford a car with my $PLTR $19 calls 11/20?🏎 Lambo? Honda? A toy car maybe?,PLTR,19,11/20,1,0.9953,0.9946,0.9933
+Which one of you FOMO market ordered TSLA 11/20 $525 Calls at the top?,TSLA,525,11/20,1,0.9957,0.967,0.9944
+Been averaging down on my $NIO $30 12/11 PUTS. Hopefully they print! Lol,NIO,30,12/11,1,0.9951,0.995,0.9929
+"Down 3k on 6 TSLA 12/4 $505 Calls, how fucked am I?",TSLA,505,12/4,1,0.9963,0.9634,0.9955
+12/18 $20 Naked put $PSTH YOLO,PSTH,20,12/18,1,0.992,0.9942,0.9927
+WWR 11/20 7.5 C,WWR,7.5,11/20,1,0.9849,0.9924,0.9937
+"Lots of XPEV Put action today for next week, check the 43.5 Putter",XPEV,43.5,next week,0,0.9648,0.9946,0.8719
+Jonny B Loves: BAC Dec 11 2020 27.000 call Monday,BAC,27.000,Dec 11 2020,1,0.989,0.9168,0.9646
+"I'm thinking about going deep in a RAPT call for December 18th, but the break even price is 19.60 a share (call is for 17.5). Is anyone trading RAPT?",RAPT,19.60,December 18th,0,0.8957,0.8101,0.883
+POUNDING THE TABLE ON $BABA LISTEN TO ME DEC 31 2020 $300 CALLS,BABA,300,DEC 31 2020,1,0.986,0.987,0.8512
+RIOT 11/27 3.5 P (now at 0% change) ET 12/11 $7 C ET $10/12 calls,RIOT,7,11/27,1,0.9877,0.9753,0.9669
+Lurker turned Autist. Started my first options today BEST 2.5 call 12/18 and SBE 35 call 12/18. Barely know what I’m doing but ready to lose my profits.,SBE,2.5,12/18,1,0.9457,0.9902,0.965
+I have no idea what I’m doing but I’m feeling lucky! SNDL $2 7/16/22,SNDL,2,7/16/22,1,0.9946,0.9915,0.9862
+Some nice steel gains (mainly 100 CLF $10.5 11/27),CLF,10.5,11/27,1,0.9944,0.9939,0.9938
+$DKS Dick's - buy the dip? 12/24/20 $65,DKS,65,12/24/20,1,0.994,0.9603,0.9733
+First time investor. Been browsing this subreddit a lot and decided to do a casual $1000 investment on $50 CRSR c 12/18 last friday. Am i doing it right?,CRSR,1000,12/18,0,0.9696,0.8243,0.9823
+DAL $50 Dec 11 YOLO,DAL,50,Dec 11,1,0.9906,0.9926,0.9851
+My PLTR $24 1/15 calls today! 🚀🚀🚀,PLTR,24,1/15,1,0.9954,0.9919,0.9931
+FSR call $21 exp 12/4 for you Fucking Stupid Retards,FSR,21,12/4,1,0.9907,0.9945,0.9932
+Newbie Help - When Do I Sell my Call Option - $30 PLTR Dec 11 Calls,PLTR,30,Dec 11,1,0.9909,0.948,0.9752
+IF PLTR HITS $50 BY 14/12 I’LL DRINK MY OWN URINE,PLTR,50,14/12,0,0.9716,0.9925,0.9897
+IF PLTR HITS $40 BY 12/14 I’LL EAT MY OWN SHIT,PLTR,40,12/14,0,0.9783,0.9948,0.9906
+Made $1000 from DLTR earnings yesterday - so I naturally throw $3k into $30 12/4 PLTR calls with you retards today. My potentially non-autistic thought process inside...,DLTR,30,12/4,1,0.9913,0.9809,0.9954
+PLTR will be $35 by EOD Friday Mark My Words,PLTR,35,Friday,0,0.9853,0.9788,0.8086
+What happened to the post where he said he would eat his own shit if PLTR hits $40 by 12/14?,PLTR,40,12/14,0,0.9839,0.9751,0.9885
+LUMN $10 puts 12/18?,LUMN,10,12/18,1,0.9936,0.994,0.9881
+My wife said she’ll dump her boyfriend if PLTR hits $40 tomorrow,PLTR,40,tomorrow,0,0.9887,0.9604,0.8634
+PLTR $30 call exp 12/4,PLTR,30,12/4,1,0.9954,0.9947,0.9937
+$INO will hit $15 on Friday,INO,15,Friday,0,0.989,0.9854,0.8754
+Will PLTR hit $40 by end of Friday?,PLTR,40,Friday,0,0.9909,0.9828,0.8853
+"Alright, what should I do with me $25 1/15 PLTR call??",PLTR,25,1/15,1,0.9936,0.9949,0.9929
+PLTR December 18th $40 call?,PLTR,40,December 18th,1,0.9949,0.9951,0.9786
+Exercise PLTR $14.5 12/11 call?,PLTR,14.5,12/11,1,0.9948,0.9961,0.9928
+selling my 3/19 $230 Msft call for huge loss and buying PLTR,PLTR,230,3/19,1,0.9622,0.9329,0.9946
+"If PLTR hits $50 tomorrow, I will buy everyone quaaludes",PLTR,50,tomorrow,0,0.9927,0.9627,0.8701
+"Those of you donating some of your gains, you guys are amazing. Karma will have your back in Life. PLTR $40 12/30",PLTR,40,12/30,1,0.9933,0.9952,0.9926
+I have Robinhood scheduled to buy to open 1 contract of PLTR $29.00 Call 12/4 at a maximum of $3.50 per share tomorrow morning.,PLTR,29.00,12/4,0,0.995,0.995,0.9954
+$200 for FDs tomorrow,FDs,200,tomorrow,0,0.9387,0.963,0.9391
+🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 If PLTR hits $50 by 12/10/20 I will do an ms paint biography of the history of PLTR and I will include several of the richest retards on the rocket 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀,PLTR,50,12/10/20,0,0.9166,0.9732,0.9726
+I will get a tattoo of the Palantir logo on my body if PLTR reaches $40 by 12/4,PLTR,40,12/4,0,0.9811,0.972,0.9933
+"MegaDD, $50 next week confirmed.",MegaDD,50,next week,0,0.9698,0.9898,0.8442
+Never traded options about to yolo on 12/24 $PLTR $40 calls,PLTR,40,12/24,1,0.9954,0.9953,0.9903
+12/24 PLTR $40 Call,PLTR,40,12/24,1,0.9947,0.9949,0.9933
+PLTR $45 12/11,PLTR,45,12/11,1,0.9948,0.994,0.9944
+PLTR to $40 by 12/4,PLTR,40,12/4,0,0.9861,0.9785,0.994
+Bought $30 1/15/21 PLTR at 29.90.,PLTR,30,1/15/21,1,0.9837,0.9944,0.9894
+I’LL EAT A GOLDFISH ALIVE IF PLTR REACHES $40 BY 12/4,PLT,40,12/4,0,0.8245,0.9944,0.9934
+$PIC 12/18 $20 strike my biggest yolo yet! Through hours of DD I came to the conclusion it can’t go tits up and went all in,PIC,20,12/18,1,0.9943,0.9941,0.9921
+$VALE 1/15 $15&amp;$16 Calls - unusual activity,VALE,15,1/15,1,0.9949,0.983,0.9946
+Sold PLTR on Oct-20 at 9.46,PLTR,9.46,Oct-20,1,0.9914,0.9024,0.9532
+Just gonna leave this here. NIO $40 12/18,NIO,40,12/18,1,0.9938,0.9958,0.9938
+"Threw the last $30 I had into a 11/27 $25 PLTR Call and cashed out right before the second dip. Thanks WSB, can’t wait for next week 🚀",PLTR,25,11/27,1,0.9876,0.9893,0.9863
+A month ago I was half my portfolio in the hole. 4 $UBER 1/15/21 $35 calls and 4 $UBER 6/18/21 $37 calls. Placed before the election and prop 22.,UBER,35,1/15/21,1,0.9659,0.9864,0.9634
+Want PLTR to go up $ 50 by Friday??,PLTR,50,Friday,0,0.988,0.9548,0.8425
+Let me try again. Sorry for my atist ass. PLTR $40 12/18,PLTR,40,12/18,1,0.9953,0.9956,0.9944
+Am I doing this right? $30 PLTR calls 12/4,PLTR,30,12/4,1,0.9942,0.9946,0.9957
+Last night I dreamed PLTR hit $40 on 12/2. I am the PLTR prophet. Pay your respects below...,PLTR,40,12/2,1,0.9731,0.9747,0.9937
+"WSB retard explaining his $1000 GME bull case, December 2020 (colorized)",GME,1000,December 2020,1,0.9793,0.9703,0.853
+"WSB retard explaining his $1000 GME bull case, December 2020 (colorized)",GME,1000,December 2020,1,0.9793,0.9703,0.853
+"WSB retard explaining his $1000 GME bull case, December 2020 (colorized)",GME,1000,December 2020,1,0.9793,0.9703,0.853
+If PLTR hit $40 before Jan 2021 my GF have to shave my A-Hole!!!,PLTR,40,Jan 2021,0,0.9923,0.9757,0.9202
+Xbox doesn’t get enough love - New Xbox giveaway if PLTR hits $60 by 3/31/21,PLTR,60,3/31/21,0,0.9822,0.9636,0.9872
+$AAPL Dec 4th $120 calls. Looking for the dip in the morning to buy these babies,AAPL,120,Dec 4th,1,0.9954,0.9945,0.9725
+AAPL $115 Call January 2021,AAPL,115,January 2021,1,0.994,0.9905,0.9036
+DIS will hit $160 next week,DIS,160,next week,0,0.98,0.9862,0.8313
+APHA 1/15 $6 Call,APHA,6,1/15,1,0.9933,0.9918,0.9953
+All my homies HATE Andrew Left. PLTR $40 12/4 (a week in review),PLTR,40,12/4,1,0.9942,0.9948,0.9951
+$PLTR GANG unite against Citron 🚀🚀🚀 $35 EOD 12/30 🚀🚀🚀,PLTR,35,12/30,1,0.9893,0.9937,0.9942
+"WSB Mods are removing comments for ""low quality"" and deleting posts tagged Shitpost or Meme $PLTR $35 EOD 12/30",PLTR,35,12/30,1,0.9682,0.9916,0.9927
+Should I hold my $30 12/4 PLTR calls or sell at a loss?,PLTR,30,12/4,1,0.9924,0.9948,0.9951
+They had 12/04 PLTR $28 calls for over %60 off for Cyber Monday. 🚀🚀🚀🚀,PLTR,28,12/04,1,0.9951,0.9928,0.9924
+Anybody think my $40 exp 12/11 calls for PLTR might print?,PLTR,40,12/11,1,0.9829,0.992,0.9921
+$AUPH. Buy those $25 1/2022 calls now boys. Fucking lit! JACKED. GET ON THE CUMCOPTER YOU FUCKS.,AUP,25,1/2022,1,0.8075,0.9954,0.9825
+$AUPH fair value is insane. I've been watching this stock for 5 years and it looks like a 10x bagger. Tell me I'm wrong. I'm holding Jan 2022 $25 calls until I'm proven wrong. Like a smart retard.,AUPH,25,Jan 2022,1,0.9838,0.9883,0.9267
+"$100 AMD call, expire 12/24",AMD,100,12/24,1,0.9924,0.9891,0.9931
+PLTR December 11 $30 calls here come get your hot and fresh $30 calls!,PLTR,30,December 11,1,0.9952,0.9887,0.9776
+Why you should get NKLA Dec 4 $36’s,NKLA,36,Dec 4,1,0.9932,0.9116,0.986
+Am I retarded? TSLA $580 call 11/4,TSLA,580,11/4,1,0.9958,0.9922,0.9959
+Zoom (ZM) Calls Expiring 12/4 ($480),ZM,480,12/4,1,0.8811,0.8365,0.9948
+Zoom (ZM) Calls 12/4 exp. $480 strike,ZM,480,12/4,1,0.8593,0.9765,0.9946
+"My first time trading call options. I paid $350, $260, &amp; $80 for PLTR 12/4 $40 calls. SMDH",PLTR,40,12/4,1,0.9886,0.8304,0.9949
+"Put $1k in on Friday. GOLD 12/31 $23 calls. Gonna rally another couple days, get in losers.",GOLD,23,12/31,1,0.9791,0.9943,0.9929
+Just picked up $9.5 BB calls 1/8/21 LETS GO BOYS,BB,9.5,1/8/21,1,0.9905,0.9952,0.9887
+All I’m going to say is I’ve been holding LCA for a while now in the 12/18 $20 call and the 2/19/21 $17.5 call and these are going to fly along with the stock itself. Get in now before it is too late.,LCA,20,12/18,0,0.9315,0.9938,0.955
+Me calling out to my 12/4 PLTR $33 calls,PLTR,33,12/4,1,0.9944,0.9949,0.9945
+Started last week with $11 in MRNA $126 12/04 calls -&gt; PFE $42 12/11 calls -&gt; WORK $52 12/04 calls. A nice little 27000% gain,MRNA,126,12/04,1,0.9854,0.9895,0.8034
+Now if only I wasn’t such a pussy and more of an autist I’d be fucking rich by now. I guess my wife’s new boyfriend will be carving the turkey at thanksgiving again next year. $SNE C$80 3/19/21,SNE,80,3/19/21,0,0.9926,0.9903,0.9872
+Unusual Options Activity- FCX to $29 1/15/21,FCX,29,1/15/21,1,0.9666,0.985,0.9924
+"PLTR $35 12/11, Diamond hands or cut bait &amp; run?",PLTR,35,12/11,1,0.9954,0.9954,0.9944
+PLTR $30 11/4 support group,PLTR,30,11/4,1,0.9947,0.9936,0.9955
+CVS to the moon🚀🚀🚀 $72 12/11 calls,CVS,72,12/11,1,0.8821,0.9932,0.9949
+Should I sell my FCEL $10 calls expiring Jan?,FCEL,10,Jan,1,0.9919,0.9918,0.9419
+How screwed am I? $TSLA $580 12/11,TSLA,580,12/11,1,0.996,0.9922,0.994
+Any suggestions what I should do with my PLTR calls exp 12/24 for $35 Any thoughts or insights on how I can reduce my damage?,PLTR,35,12/24,1,0.992,0.9863,0.9867
+How retarded is 3k in $DBX 1/15/21 $30 calls ?,DBX,30,1/15/21,1,0.9919,0.9932,0.9934
+$DBX 1/15/21 $30 calls,DBX,30,1/15/21,1,0.994,0.9939,0.9932
+"AMD January $120 calls were up 50%. I didn’t sell, and now they are going into red. Wtf. Market makers are so crazy!",AMD,120,January,1,0.9937,0.9932,0.9666
+I’m holding my PLTR $30 12/11 and 12/24 calls am I fucked?,PLTR,30,12/11,1,0.9956,0.9953,0.9833
+TU to $20 by 12/18 and here's why,TU,20,12/18,0,0.9838,0.9855,0.99
+AMC 12/31 1.5 P,AMC,1.5,12/31,1,0.8318,0.9546,0.9936
+$TU is going to $20 before 12/18 and here's why,TU,20,12/18,0,0.9903,0.9858,0.9867
+DD: APHA calls heavily undervalued right now. How's this shit negative 11% on a +3% gain. 01/22 C $6,APHA,6,01/22,1,0.9261,0.9669,0.9901
+So you’re telling me there’s still a chance!! PLTR calls 12/4 expiration $32 break even lets 🚀 🌚,PLTR,32,12/4,1,0.9927,0.9942,0.9951
+SPY 12/7 $362 p,SPY,362,12/7,1,0.9945,0.8676,0.9952
+Altria $MO March Call $50,MO,50,March,1,0.9914,0.9877,0.9638
+Look at how powerful that SMA (5/10/20) crossover is..! Those who got into DEC 18th $50 strike gave 10X returned. Now the question what’s the best way to to find those setups.,SMA,50,5/10/20,0,0.955,0.988,0.883
+The prophecy has been fulfilled! ZM $500 Call 12/18,ZM,500,12/18,1,0.9767,0.9868,0.9925
+Should I buy GME 12/11 $20?,GME,20,12/11,1,0.992,0.9937,0.9948
+If GME squeezes above $80 before Q2 '21 I will shave my head,GME,80,Q2 '21,0,0.9888,0.9694,0.8589
+"After consolidating around $420 for three months, TSLA will hit $694.20 by December 18th, the Friday before it's inclusion in the SP500",TSLA,420,December 18th,0,0.926,0.8857,0.8872
+Stonehanding 20x PLTR $44 12/11 calls. there's still time.,PLTR,44,12/11,1,0.9952,0.9959,0.9949
+People who sold shovels during the Gold Rush made more tendies than those looking for gold!! IDEX $3 C 4/16/21,IDEX,3,4/16/21,1,0.9843,0.9935,0.9809
+If PLTR hits $45 by 12/31: I’ll get a tattoo of WSB bro,PLTR,45,12/31,0,0.9894,0.9884,0.9908
+My first ever option buy: LMND $80 Put with 12/18 exp. Currently down 50%.,LMND,80,12/18,1,0.9859,0.9926,0.9898
+"🚀 Buy high, sell low 🚀 GME Dec 18 '20 17.00 Put (20K open interest)",GME,17.00,Dec 18 '20,1,0.9927,0.9924,0.9786
+"QQQ $305 weekly Puts. Went full autist and bought these Friday, but Im not fucking selling. I will hold till they expire worthless, dgaf anymore. DD: Last time the Qs hit all time high on $302.5 it dropped to $270 level.",QQQ,305,weekly,0,0.9955,0.994,0.8272
+"I know, it is a small account, but lesson learned. Never short $AMD. Gonna get some funds back in here soon (better job) Rest of my buying power is on $UVXY 12/11 $13 call. Fuck the markets. The top is in.",UVXY,13,12/11,0,0.9912,0.9883,0.9925
+If you were watching PLTR at market close 12/7/20 this is for you. $29 EOD,PLTR,29,12/7/20,0,0.9899,0.9932,0.9667
+20x. BB 9/11 $9 c. 🚀🚀🚀,BB,9,9/11,1,0.9942,0.9727,0.9957
+I've joined the PLTR train - was this wise? (PLTR $35 Jan 2022),PLTR,35,Jan 2022,1,0.9555,0.994,0.9457
+Bought puts on cancer 😤 CRIS $5 1/21C,CRIS,5,1/21,1,0.9916,0.9941,0.8742
+PLTR to $30 tomorrow - don’t miss out.,PLTR,30,tomorrow,0,0.9873,0.9875,0.8506
+EDIT $50 12/18 calls boys! This baby is crispr's slept on brother. It's honestly just a rocket ship in countdown. 🚀🚀🚀🚀,EDIT,50,12/18,1,0.9876,0.9934,0.9939
+PLUG $32 1/20/2023 Long Call,PLUG,32,1/20/2023,1,0.9947,0.994,0.9909
+Bought 20 calls of GME $22 expiring 12/18. Am I retarded yet?,GME,22,12/18,1,0.9935,0.9937,0.9923
+GME 12/18 $16 C,GME,16,12/18,1,0.9928,0.988,0.9948
+PLTR $33 12/31 -78.59%,PLTR,33,12/31,1,0.9951,0.9934,0.9944
+Who else has $50 Call 12/11 SNAP?,SNAP,50,12/11,1,0.8274,0.9921,0.9946
+YOLO ON TSLA CALLS 12/24 $1160,TSLA,116,12/24,1,0.9893,0.9435,0.9932
+PLTR $0 12/10 fucking watch,PLTR,0,12/10,1,0.9953,0.991,0.9811
+"Getting back into the market after losing my job back in March, nice welcome back gift!! 💪 (SNAP 1/15/21 $60 Call)",SNAP,60,1/15/21,1,0.8965,0.9927,0.9819
+"I have a new years gift for everyone! I said I'm only posting 200%ers, this is what happened since my last ban. $30,000k in 1 month all calls from wsb stocks. Pls ban again so i can post me new yatch in 10 days. New years gift TSLA $1000 Dec31, treat yourself.",TSLA,1000,Dec31,1,0.9945,0.9316,0.9318
+WTF is this a fight night style ad poised at promoting some sort of shit box brokerage? I got $100 on blue hair &amp; DKNG $52.5 12/24 C,DKNG,52.5,12/24,1,0.9664,0.9922,0.9923
+Let’s gooooo GHIV!! First time trading options I’m in on 12/18 12.5 calls!,GHIV,12.5,12/18,1,0.9108,0.9891,0.9854
+HDSN 2.00 Calls 2/19 Refrigerant Play!,HDSN,2.00,2/19,1,0.9872,0.9894,0.9947
+Redemption ark.. ended at 22k on day (LAZR P $30 12/18),LAZR,30,12/18,1,0.9856,0.993,0.9928
+HDSN 2.00 2/19 Call refrigerant opportunity,HDSN,2.00,2/19,1,0.9899,0.9833,0.9952
+"Thoughts on CSCO? I've got 4/16/21 $60 Calls. My earlier DD looked good, but wanted to see what you gents think. Am I an autist, retard, of flying blind?",CSCO,60,4/16/21,1,0.9811,0.9928,0.9897
+Not worried at all about my Dec 31 $40 PLTR calls 🧨💎🖐,PLTR,40,Dec 31,1,0.9934,0.9938,0.9578
+Why I love this sub. Looking for something to throw $150 to save my account at the EOD Friday and DBX moons 7% AH thanks u/ListerineInMyPeehole,DBX,150,Friday,0,0.8282,0.8229,0.8832
+Imagine having your life savings on a company run by a guy that tweets shit like this. TSLA $700 12/18,TSLA,700,12/18,0,0.9954,0.9898,0.9913
+Imagine throwing your life savings on a company run by a guy that posts shit like this. $TSLA $700 12/18,TSLA,700,12/18,0,0.9961,0.9882,0.9911
+YOLO $TSLA DEEP OTM CALLS $1000 JAN 8,TSLA,1000,JAN 8,1,0.9933,0.9471,0.9335
+Fisker spotted in LA $FSR 02/21 $17.5,FSR,17.5,02/21,1,0.9938,0.9874,0.9946
+$3000 TSLA weekly YOLO + Double bottom detected,TSLA,3000,weekly,1,0.993,0.9823,0.8342
+"[VLDR] There are no flying cars, but Self Driving Cars are Real. $30 by March 2021",VLDR,30,March 2021,0,0.9853,0.9924,0.9027
+"[VLDR] There are no flying cars, but Self Driving Cars are for Real. $30 by March 2021. Then we 🚀 🚀 🚀",VLDR,30,March 2021,0,0.9861,0.9931,0.8461
+Not sure what possessed me to spend my last few hundred dollars on TLRY calls earlier today .... Tlry 12/18 $9 call..... will not be eating Wendy’s for lunch tomorrow .....maybe upgrade to Applebee’s,TLRY,9,12/18,0,0.9925,0.9935,0.9866
+Not sure what possessed me to buy TLRY 12/18/2020 $9 calls earlier today but looks like I won’t be eating Wendy’s for lunch tomorrow,TLRY,9,12/18/2020,1,0.9955,0.9938,0.9772
+Somehow my post keeps getting my removed MVIS 12/18 $4 calls just skyrocketed today and missed out yesterday when they were at $.01,MVIS,4,12/18,1,0.9885,0.9928,0.9926
+$ALRP 7.5 1/21/22 up %180? Opened Robinhood again two seconds later and it’s down 7%. Robinhood glitch or did I get buttfucked in all of two seconds? Graph shows now shows no point in which it hit $2.80,ALRP,7.5,1/21/22,1,0.9943,0.9917,0.9849
+"CHWY 100c 1/15/21 @3.55, PT 115 (fibs), SL 90. Why I took CHWY here: fib bounce, short term trendline.",CHWY,3.55,1/15/21,1,0.9877,0.8503,0.9864
+My next play: DKNG $70 1/21/22 &amp; $90 1/20/23 calls,DKNG,70,1/21/22,1,0.9949,0.993,0.972
+My MT projections/data analysis. $40 calls 1/15/21. See you boys on the mfin moon.,MT,40,1/15/21,1,0.838,0.9943,0.9936
+What do you guys thinks happens to BB after earnings tomorrow? Sell my 9/18 $9.50 calls before or after? Right before is prolly as good as it gets right?,BB,9.50,9/18,0,0.977,0.9936,0.9942
+"When cryptos go up, $AMD goes up. Jun $130 calls?",AMD,130,Jun,1,0.9653,0.9848,0.9333
+KODK to $50 tomorrow. 🚀🚀🚀🚀🚀,KODK,50,tomorrow,0,0.9926,0.9729,0.8845
+12/24/20 CHWY $95 put....bought at close today ......I was salty that I sold at $68 it is now over $100 in a very short time .....how fucked am I? And why do you guys keep buying the top,CHWY,95,12/24/20,1,0.9953,0.99,0.9327
+Any thoughts on SPLK 05/21/2021 C$200?,SPLK,200,05/21/2021,1,0.995,0.9655,0.9892
+PLTR DEMO DAY - PT $80 JAN 2021,PLTR,80,JAN 2021,1,0.9771,0.9934,0.901
+LAZR Dec 2021 $30/$35 call spread for $1,LAZR,30,Dec 2021,1,0.9869,0.941,0.9321
+My PLTR c $30 12/18 expired today. Need to find my next YOLO,PLTR,30,12/18,1,0.9925,0.9932,0.9877
+My YOLO $PLTR $30 c 12/18 expired today. -$30K. need to find my next buy.,PLTR,30,12/18,1,0.9956,0.9881,0.987
+"Love Tesla &amp; Elon, only did it for the meme. TSLA Christmas Eve $420 puts.",TSLA,420,Christmas Eve,1,0.9955,0.9921,0.8208
+NKE 12/24 $155 40c,NKE,155,12/24,1,0.9864,0.9887,0.9949
+"Yes, I would like to purchase a call option for $TSLA at $470 strike price, expiring 1/8/21, even though current current price is $678. Also, I can only afford $1.00 for the premium. Robinhood: ""no problem, playboy."" -- Seriously though, wtf is this all about?",TSLA,470,1/8/21,1,0.9926,0.9054,0.9854
+BB calls ranging $9-$15 expiring Jan 15 - March 19. Am I a fucking retard or what?,BB,9,Jan 15,1,0.9896,0.8122,0.8013
+Jan 7th 2021. Mark that date. PLTR will be extremely rocky around this day but will end up with $31 floor. 13 days later is the showcase of their products. If you're not in by now get in. This puppy is going to change some people's lives. I'm not a financial advisor but 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀,PLTR,31,Jan 7th 2021,0,0.9707,0.9285,0.8493
+Where is the MT gang at no post recently😔 where my boys at 6/18/21 $30 150 calls🚀🚀🚀,MT,30,6/18/21,1,0.9283,0.9918,0.9897
+"Based on today price action, SPY hits $375 tomorrow.",SPY,375,tomorrow,0,0.9898,0.9349,0.8678
+How it started. Vs how it’s going $FUBO $55 24 calls 1/15,FUBO,55,1/15,1,0.9919,0.9914,0.9935
+1/15 $15 SURF Call,SURF,15,1/15,1,0.9832,0.9937,0.9942
+AAPL $140 CALL 1/21/22,AAPL,140,1/21/22,1,0.9939,0.9933,0.9932
+Farfetch gains all in FTCH ($65 calls 4/16/21),FTCH,65,4/16/21,1,0.9134,0.9923,0.9952
+1/15 $27 call $ICLN,ICLN,27,1/15,1,0.8878,0.9915,0.9946
+Me holding my 1 call for 4/16 GME $12,GME,12,4/16,1,0.9933,0.9911,0.9938
+"Bought $12/24 $134 AAPL fd’s at the top, went from 10k to 600. Gg",AAPL,134,12/24,0,0.9933,0.9919,0.9893
+~$2M traded in PLTR Jan 2022 $30 Call today,PLTR,30,Jan 2022,1,0.9908,0.993,0.9633
+"CLDR getting schwifty as hell, next stop 17.50 by Jan 15!!! 🚀🚀🚀",CLDR,17.50,Jan 15,0,0.9901,0.9937,0.9354
+ALL IN BAYBEE! CLVR $15k in $20 5/21 calls 🚀🚀🚀🚀,CLVR,20,5/21,1,0.9926,0.9911,0.9951
+How braindead are 12/31 $26 GME calls? I'm just about dumb enough to do it at this point.,GME,26,12/31,1,0.9874,0.9936,0.9938
+PLTR $29 1/15,PLTR,29,1/15,1,0.995,0.9904,0.9938
+Just when I was starting to get the hang of things... one of you retards said to buy GILD calls. Only down from here! 1/15 $2.10,GILD,2.10,1/15,0,0.8882,0.9412,0.993
+Going to the moon $72.5 1/15 CVS calls 🚀,CVS,72.5,1/15,0,0.9907,0.9958,0.9944
+7.5$ Call ABEV July 16th 2021,ABEV,7.5,July 16th 2021,1,0.9911,0.9867,0.9602
+"I bought 2,000 shares of PLTR at $32 on Nov 24th",PLTR,32,Nov 24th,1,0.989,0.9742,0.904
+"Can someone explain? I'm holding 10 ARKK $125 Jan calls, tried selling 5 this morning to take profits and I get an error from my bank. When checking the option chain the $125 call is not even there anymore. Am I stuck with these 10 contracts?",ARKK,125,Jan,1,0.9931,0.9859,0.9219
+"PLTR BUY THE DIP 12/31 25.5, 26, 26.5, 28c",PLTR,25.5,12/31,1,0.9809,0.9741,0.9903
+$SQ $242.5 Feb 5 - 10K CALL lets go to the moon,SQ,242.5,Feb,0,0.9944,0.9934,0.8616
+PLTR $19 Call 2/19/21. Should I just cut my losses? The supposed 🚀 never came.,PLTR,19,2/19/21,1,0.996,0.9941,0.9811
+What my inner awtist is telling me while I hold these PLTR 12/31/2020 $28 calls,PLTR,28,12/31/2020,1,0.9936,0.9943,0.9925
+"If $GME hits $40 by February 1st, my roommate will tattoo this on me.",GME,40,February 1st,0,0.9929,0.9647,0.9322
+Rip my small account KMX 3.50 12/31,KMX,3.50,12/31,1,0.9826,0.993,0.9931
+"RIP my small account and fuck CarMax, how tf can a stock go down after getting a good earnings report KMX 93.5 12/31",KMX,93.5,12/31,1,0.897,0.989,0.9924
+PLTR $19 call 2/19/21. How do I save myself from this mess? Was left behind by the 🚀🚀🚀 to the moon.,PLTR,19,2/19/21,0,0.9962,0.9951,0.9815
+"I went heavy into $20 SLV call options with a Jan 21, 2022 expiry, this year, and I’m looking forward to another big year. I just wanted to post this as a record if it goes big.",SLV,20,"Jan 21, 2022",0,0.9892,0.9902,0.8713
+1/8 NIO $50 CALLS WHO’S IN?!🚀🚀🚀,NIO,50,1/8,1,0.9927,0.9926,0.9915
+"Bought pltr March 16 $38 calls at its peak, then it went downhill from there. FML",FML,38,March 16,1,0.867,0.9937,0.9852
+GRWG 3x 40.5$ CALL BUY 2/12/21 EXP. BREAKEVEN@ 45$ CAN I GET A 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀,GRWG,40.5,2/12/21,1,0.9906,0.9465,0.9896
+$17 1/08 $RIOT CALLs at closing on 12/31. How will this look Monday w BTC going 🚀. Thoughts?,RIOT,17,1/08,1,0.8404,0.9874,0.9825
+Am I in trouble with TRIT $12.50 strike calls for August 2021?,TRIT,12.50,August 2021,1,0.9929,0.9958,0.9149
+NIO $50 Call 01/15 bought at 2x its current value. Thoughts?,NIO,50,01/15,1,0.9942,0.9925,0.9943
+PFE 1/8 $35 Now selling for pennies,PFE,35,1/8,1,0.9916,0.9926,0.9949
+BB YOLO update 375 $10 9/17,BB,10,9/17,1,0.9919,0.9923,0.9935
+Anyone understand why this $30 call for GME on Jan 22 is so over bought?,GME,30,Jan 22,1,0.9817,0.9946,0.9499
+"$XPEV Feb 21 $54 Yolo bet, 3rd time doing this. Doubled the last two times",XPEV,54,Feb 21,1,0.9713,0.9935,0.985
+SWI Jan $15 PUTS FROZEN???,SWI,15,Jan,1,0.979,0.9243,0.9865
+WFC to $45 by June 2021!,WFC,45,June 2021,0,0.9697,0.9642,0.8563
+GME to the moooon 🚀 🚀 19.5 Call 1/8,GME,19.5,1/8,1,0.9722,0.9925,0.9927
+WFC $45 by June 2021! Part 2,WFC,45,June 2021,0,0.9929,0.9924,0.8585
+IPOE just hit a circuit breaker going up. The 1/15 $15 and $17 calls have been selling. It may be worth tracking.,IPOE,15,1/15,1,0.9744,0.9266,0.9934
+Had to sell my DDD 12$ 1/15 calls because of you bastards. Would’ve been too much gain otherwise.,DDD,12,1/15,1,0.9882,0.8002,0.8565
+Put my stimulus into $IPOE 1/15 $15 calls,IPOE,15,1/15,1,0.9916,0.9869,0.9951
+Can someone explain this to me? $AAPL Call Sweep Bearish $130 01/08/2020,AAPL,130,01/08/2020,1,0.9945,0.9649,0.9902
+2021 edition... SPY 3/19 $400,SPY,400,3/19,1,0.9953,0.992,0.9939
+"In Musk we trust, TSLA $850 1/13",TSLA,850,1/13,1,0.9953,0.9906,0.9936
+"Never did any option trading before, saw a random post on here and thought fuck it why not, NIO 1/15 $55 call, I know it’s not much but I wasn’t expecting anything",NIO,55,1/15,1,0.9917,0.9944,0.9942
+All right who’s the guy with the TSLA 3/19 $1 call,TSLA,1,3/19,1,0.9955,0.9913,0.9949
+"JAGX $7 Monday morning, confirmed merger (NOT PRICED IN)",JAGX,7,Monday,1,0.9684,0.9904,0.8331
+How did I get assigned? My covered call strike price was 26.5 PLTR 1/8,PLTR,26.5,1/8,1,0.993,0.9917,0.9925
+BIDU earnings play on rumor $300 calls 2/26,BIDU,300,2/26,1,0.9845,0.9918,0.994
+"Finally exercised my NIO call after 6 months of diamond hands. Bought 8.00 1/15/20 for 2.50 this summer and rode this MF to the top. No time value left, and wanted to hold the shares long term. Question is, do I trim some or hold them all?",NIO,8.00,1/15/20,1,0.9887,0.9894,0.9907
+AMD CES 2021 - AMD will break ATH $100 1/12?,ATH,100,1/12,0,0.9793,0.9924,0.993
+January 27 $840 TSLA Calls 🚀 🚀 🚀🚀 🚀 🚀 🚀 🚀🚀🚀 🚀 🚀🚀 🚀 🚀🚀 🚀 🚀🚀 🚀 🚀🚀 🚀 🚀🚀 🚀 🚀🚀 🚀 🚀🚀 🚀 🚀,TSLA,840,January 27,1,0.9959,0.9349,0.9656
+"YOLO'd everything into NIO 1/15/21 $70 calls, how stupid am I?",NIO,70,1/15/21,1,0.9904,0.9941,0.9937
+"My pick, an actual value stock on here for once. ADES - Unknown stock still at market bottom since 4/20, expect $15 within 1-3 months once they decide it's safe to resume dividends. Some estimates like the one below are even more generous. More info and proof in comments.",ADES,15,4/20,1,0.839,0.9555,0.993
+"VALE $19 Call 2/19 .. 4 Mil Sweeper Two Days @1.07 , Your welcome Cucks",VALE,19,2/,1,0.9942,0.994,0.9466
+Bull Case for $SQ - $380 by 3/19,SQ,380,3/19,0,0.9904,0.8931,0.9931
+Bought 100 12.5 1/15 calls about two weeks ago after I saw one of you retards post about MTRX on here just for fun. It jumped over 50% today after hours. Now it’s at 32%. Getting out first thing tomorrow morning. I’m regretting not yoloing everything on it but gains are gains.,MTRX,12.5,1/15,1,0.9828,0.9936,0.9836
+I sold 1/15 $23 GME covered calls 🤡 what should I do,GME,23,1/15,1,0.9914,0.9835,0.9942
+1/22 TWTR $52 First time yolo am I doing it right?,TWTR,52,1/22,1,0.9938,0.9914,0.9942
+Should I sell GME 1/22/21 $20.5 call????,GME,20.5,1/22/21,1,0.9938,0.9962,0.9917
+GME finally came through for me! ($30 1/15 Call),GME,30,1/15,1,0.9648,0.9945,0.994
+"GME to $50 tomorrow, let's goooo!!",GME,50,tomorrow,0,0.9878,0.9477,0.8281
+Anyone looking at $MARA? Got $36 calls for 1/15.,MARA,36,1/15,1,0.9875,0.9926,0.9924
+STON to the moon $5 before April 2021,STON,5,April 2021,0,0.8137,0.9938,0.9097
+Bought a $30 $ELY call for 2/19,ELY,30,2/19,1,0.9915,0.9915,0.9932
+MMs will try to keep GME under $40 through 1/15,GME,40,1/15,0,0.9774,0.9382,0.987
+"Which one of you bought my GME 1/15/21 $40 for $6? I need to thank you with gold, reveal yourself.",GME,40,1/15/21,1,0.992,0.9896,0.9929
+Is buying call for 1/22 $15 BB smart or is it big 🚀!?,BB,15,1/22,0,0.9891,0.9921,0.9942
+Hello I am a retard. Today I accidentally sold $BB $9 March calls and blackberry mooned almost immediately after. Screenshots order fill time and where the stock is after hours and the price at the moment I sold this morning.,BB,9,March,1,0.9945,0.9793,0.9298
+So basically WSB August’s &gt; Wall Street itself. Anyways GME $55 EOD FRIDAY 🚀🚀🚀,GME,55,August,0,0.9874,0.9927,0.9367
+I will stick a blackberry up my ass if BB goes to $13 tomorrow,BB,13,tomorrow,0,0.9683,0.9665,0.81
+It’s a sign. GME $70 by EOD Friday.,GME,70,Friday,0,0.9925,0.9898,0.9319
+Someone Traded $6.8M SPY $370 Calls Expiring Jan 15 !,SPY,370,Jan 15,1,0.9955,0.9915,0.9707
+"NVRFRGT an absolute legend. This brought me here &amp; seeing as GME and JimmyCoco recently is annoying but probably brought bunch of ya, I see it as fitting... Did you change the world today¿ How about a brokerage platform? 2 years later. [SPY 4/18 $376]",SPY,376,4/18,1,0.9866,0.8189,0.9923
+BB $8 2/05,BB,8,2/05,1,0.995,0.9774,0.9943
+ZM $620 1/22 EXP CALLS🚀🚀🚀,ZM,620,1/22,1,0.974,0.9871,0.9954
+POWW July 16 2021 12.5 call,POWW,12.5,July 16 2021,1,0.9929,0.9934,0.9741
+VFF $14 Call Febuary,VFF,14,Febuary,1,0.9949,0.9882,0.9643
+ZOM @ $40 by next week,ZOM,40,next week,0,0.9422,0.98,0.8891
+$AAL $17 1/22 RUN IT 🚀,AAL,17,1/22,1,0.9937,0.9856,0.9949
+$BB $15 call for 1/22,BB,15,1/22,1,0.9952,0.9919,0.9926
+How to turn $8000 into $100k+ with PLTR 🚀 Requires 💎 🙌 If PLTR hits $150 by 1/20/23 then these $8 contracts will be worth $100 each,PLTR,8,1/20/23,0,0.9096,0.9772,0.9752
+💰 How to turn $8000 into $100k+ with PLTR 🚀 🚀 Requires 💎 🙌 If PLTR hits $150 by 1/20/23 then these $8 contracts will be worth $100 each,PLTR,8,1/20/23,0,0.8782,0.9697,0.9625
+💰 How to turn $8000 into $100k+ with PLTR 🚀 🚀 Requires 💎 🙌 If PLTR hits $150 by 1/20/23 then these $8 contracts will be worth $100 each,PLTR,8,1/20/23,0,0.8782,0.9697,0.9625
+💰 How to turn $8000 into $100k+ with PLTR 🚀 🚀 Requires 💎 🙌 If PLTR hits $150 by 1/20/23 then these $8 contracts will be worth $100 each,PLTR,8,1/20/23,0,0.8782,0.9697,0.9625
+If BB hits $11.50 by 1/22 I will eat whatever the top comment on this post tells me to eat.,BB,11.50,1/22,0,0.9884,0.9916,0.9937
+$GME - this guy was SELLING January 15th $20 naked calls the day before The Great Squeeze on Wednesday. F’s in the chat boys,GME,20,January 15th,1,0.9783,0.9929,0.9685
+"$ATVI consolidating before earnings. I have $88 1/29 calls, thoughts?",ATVI,88,1/29,1,0.994,0.9919,0.9946
+"Using my CFA Level III textbook and Dr. Parik Patel's methodologies, I can confidently project a $140 price target for BlackBerry Ltd (BB) with a date of 9/30/21",CFA,140,9/30/21,1,0.8765,0.9416,0.9546
+Idk wtf I’m doing but you retards made me $2800 last week 🚀🚀🚀🚀 $BB 1/22 $10.5,BB,10.5,1/22,1,0.995,0.9771,0.9934
+GME $10 puts for 1/29 are $1. Lets all buy them up and sell tf outta the stock!!!!!,GME,10,1/29,1,0.994,0.9936,0.9836
+"Probably the best percentage return Ive gotten on an option. LAC 5/21 12.50 C This shit aint done yet, just mad I didnt pick up more",LAC,12.50,5/21,1,0.9839,0.994,0.9954
+My first option trade. 100% gains on BB 2/19 $11 call held for 1 business day. Am I doing this right?,BB,11,2/19,1,0.9932,0.9919,0.995
+Alright retards I don’t post often but I wanted to be nice. APXT is gonna be the next explosive stock. Many whales are getting ready to pile a shit ton of money into it. Get in now while you can or miss out. February 19 $17.5 calls.,APXT,17.5,February 19,0,0.9786,0.996,0.9794
+BB to $20 by Friday then it pushes on to $30 easily!! 🚀🚀🚀,BB,20,Friday,0,0.985,0.9257,0.8252
+If GME hits $75 by 2/19 I’ll get this tattooed across my heart,GME,75,2/19,0,0.9886,0.9865,0.9943
+$BETZ $29 calls 4/16 $544-&gt; $2520,BETZ,29,4/16,1,0.9922,0.989,0.9946
+450 Calls BB 2/19 at 13.5,BB,13.5,2/19,1,0.9939,0.9129,0.9951
+$AMZN Feb 19th $3140 Yolo. 90% diversified,AMZN,3140,Feb 19th,1,0.9936,0.9459,0.9651
+If $TSLA closes below $775 1/22/21 I'll get Elon tattooed on my ass.,TSLA,775,1/22/21,0,0.995,0.8795,0.9937
+BABA 50x 237.5 1/22 C... holding like a true autist,BABA,237.5,1/22,1,0.9939,0.9644,0.9922
+New Autist reporting. First time trading options. BB 2/19 $20 Call,BB,20,2/19,1,0.9933,0.9911,0.9956
+Update. $AMZN Feb 19th $3140 YOLO. Up another 10k,AMZN,3140,Feb 19th,1,0.9931,0.9371,0.95
+My life saving on $APPL 1/22 $139 calls .,APPL,139,1/22,1,0.9941,0.9935,0.9952
+Cheap ass stock with massive upside DVN $25 strike July calls is the move bros!!!,DVN,25,July,1,0.9939,0.9939,0.9659
+$ADMP squeezing AH &amp; I just bought Feb. $2.5 calls yesterday 🚀,ADMP,2.5,Feb.,1,0.9784,0.9886,0.9303
+CRSR Yolo - 220 $40 2/19 Calls,CRSR,40,2/19,1,0.993,0.9956,0.9952
+"I mistakenly bought some MSFT $230 Jan 22nd calls a few days ago meaning to buy 29th calls. If only I held them until this morning, where I sold my other calls.. (missed out on ~$900).",MSFT,230,Jan 22nd,1,0.9952,0.9897,0.9685
+"Thank you WSB, thank you GME. Bought 6 $55 4/16 C on Jan 14.",GM,55,4/16,1,0.8333,0.9934,0.9946
+u/plomii was dying a few days ago with $60 GME calls expiring 1/22. GME is up over 69% today (1/22) and currently over 69 🚀🚀🚀,GME,60,1/22,1,0.978,0.9369,0.9432
+GME $55 1/21. Down 93% last night. Thank you retards.,GME,55,1/21,1,0.9947,0.9945,0.9945
+Am I autistic enough for you retards? $30 $GME Put @ April 16,GME,30,April 16,1,0.9919,0.9946,0.9791
+"Not GME gain, but a small gain. Apple $155 9/17 Call.",GME,155,9/17,1,0.9456,0.9932,0.9949
+$130K GME gain today (sold my 115 $60 1/22 calls this AM... woops),GME,60,1/22,1,0.9837,0.992,0.9947
+GME $80 to $6K on 1/22 $60 C,GME,60,1/22,0,0.995,0.9377,0.9935
+(HUGE) will be huge in 2021! Went with 7/16 $5 calls. Phase 2 Trial of FSD201 for the Treatment of Hospitalized Patients with COVID-19. I believe that the test results will be positive because Palmitoylethanolamide (PEA) has shown very positive results in past study’s. Market-cap only 40 million,F,5,7/16,0,0.8032,0.9901,0.9919
+(HUGE) Will be huge in 2021! Went with 7/16 $5 calls. Phase 2 Trial of FSD201 for the treatment of hospitalized patients with COVID-19. I’m betting that the test results will be positive because Palmitoylethanolamide (PEA) has shown very positive results in past studies. marketcap only 40 million,F,5,7/16,0,0.8149,0.9902,0.9915
+(HUGE) Will be huge in 2021! Went with 7/16 $5 calls. Phase 2 Trial of FSD201 for the treatment of hospitalized patients with COVID-19. I’m betting that the test results will be positive because Palmitoylethanolamide (PEA) has shown very positive results in past studies. marketcap only 40 million,F,5,7/16,0,0.8149,0.9902,0.9915
+"Sincerely, thank you GME gang for getting me out of my hole. 293.97 shares of GME at $38 (and 1 GE $14.5 1/29)",GME,14.5,1/29,1,0.9526,0.9365,0.9809
+Bought $60 GME call expiring 1/29 right before second halt expecting 🚀. Tell me how you think it’ll play out on Monday and how much of an idiot I am from 69 to 420,GME,60,1/29,1,0.9929,0.992,0.9915
+it ain’t much but it’s honest work 🤷🏼‍♂️ current positions: 120 FB $300 3/19 calls,FB,300,3/19,1,0.9911,0.9913,0.9948
+(HUGE) Will be huge in 2021! Went with 7/16 $5 calls. Phase 2 Trial of FSD201 for the treatment of hospitalized patients with COVID-19. I’m betting that the test results will be positive because Palmitoylethanolamide (PEA) has shown very positive results in past studies. marketcap only 40 million,F,5,7/16,0,0.8149,0.9902,0.9915
+(HUGE) Will be huge in 2021! Went with 7/16 $5 calls. Phase 2 Trial of FSD201 for the treatment of hospitalized patients with COVID-19. I’m betting that the test results will be positive because Palmitoylethanolamide (PEA) has shown very positive results in past studies. marketcap only 40 million,F,5,7/16,0,0.8149,0.9902,0.9915
+(HUGE) Will be huge in 2021! Went with 7/16 $5 calls. Phase 2 Trial of FSD201 for the treatment of hospitalized patients with COVID-19. I’m betting that the test results will be positive because Palmitoylethanolamide (PEA) has shown very positive results in past studies. marketcap only 40 million,F,5,7/16,0,0.8149,0.9902,0.9915
+Any1 else got their eye on the 5G company $GSAT? $2 calls for Dec. 17th are selling for dirt cheap. They just announced a partnership with NOKIA and Tideworks Technology. I’m about to YOLO this shit on Monday and buy 100 contracts if enough people gas me up on this stock.,GSAT,2,Dec. 17th,1,0.9457,0.9852,0.8625
+$F Call $19 09/17,F,19,09/17,1,0.8268,0.9706,0.9916
+Berkshire (BRK/B) 🚀🚀🚀 Jan ‘22 $300 strike calls. Stock trading 1.19x book value about to see a monster multiple re-rating. IV percentile is 4%.... buying vol for pennies on the dollar with 0.50 Vega will squeeze this contract to Mars🚀🚀🚀,BRK,300,Jan ‘22,0,0.9402,0.9923,0.9702
+Berkshire (BRK/B) 🚀🚀🚀 Jan ‘22 $300 strike calls. Stock trading 1.19x book value about to see a monster multiple re-rating. IV percentile is 4%.... buying vol for pennies on the dollar with 0.50 Vega will squeeze this contract to Mars🚀🚀🚀,BRK,300,Jan ‘22,0,0.9402,0.9923,0.9702
+Another 5k on the way. Hairy ass 🚀 tatoo if BB hits $20 before end of trading Feb 19th!!!,BB,20,Feb 19th,0,0.9846,0.9757,0.8269
+My weak no balls self has a BB contract for $13 1/29. Do I hold longer or sell the beginning of the week? Don’t understand the Theata decay,BB,13,1/29,0,0.9908,0.9947,0.9905
+Buying $60 strike price GME calls expiring on Jan 29 - can someone confirm my understanding?,GME,60,Jan 29,1,0.9904,0.9917,0.9338
+What to do with 1/29 GME $52 call,GME,52,1/29,1,0.9937,0.9928,0.9934
+What to do with 1/29 GME $52 call,GME,52,1/29,1,0.9937,0.9928,0.9934
+"All in with AUPH. 1000 shares and 5 Feb 19 $13 strikes. I think it is still halted, because they are still discussing a buyout. Otherwise, it would be unhalted, in my eyes. Hope I am right, and good luck to all of you",AUPH,13,Feb 19,0,0.9631,0.9876,0.8816
+"$NOK closed at $4.20 on Friday, and has 420 tweets in the last hour. 🚀🚀🚀 confirmed",NOK,4.20,Friday,0,0.9892,0.9368,0.8691
+Buying 1/29 OTM calls at $115 or 30 more shares,OTM,115,1/29,1,0.9152,0.9271,0.9932
+$RIOT to $40 by Feb 10,RIOT,40,Feb 10,0,0.9715,0.934,0.9639
+Do you think a market order is needed tomorrow or would my fixed order of $61.5 be sufficient? $GME,GME,61.5,tomorrow,0,0.9838,0.9323,0.8124
+I HAVE NO IDEA WHAT IM DOING. GME 20.50 call 2/5 at $1.60,GME,20.50,2/5,1,0.9035,0.9853,0.9932
+If GME hits $115 or more on 1/29,GME,115,1/29,0,0.9837,0.9641,0.9902
+BB $25 Call for 2/5 progress,BB,25,2/5,1,0.9947,0.9907,0.9925
+"GME $200 USD January 25 ,2021",GME,200,"January 25 ,2021",1,0.9943,0.9534,0.8915
+NOK 1/29 $7 LETS GO PUSSIES WE DONT STOP,NOK,7,1/29,1,0.9797,0.9908,0.9934
+NOK $7 calls 1/29,NOK,7,1/29,1,0.991,0.9855,0.9933
+Chamath's $IPOF is being heavily shorted through the 2/21 $20 calls!!!,IPOF,20,2/21,1,0.8732,0.9943,0.9946
+Can we expect BB to come back to $20 before 1/29,BB,20,1/29,0,0.9748,0.9848,0.9882
+BAC $32 calls EXP 01/29/2021,BAC,32,01/29/2021,1,0.9903,0.994,0.9811
+Bb $25 call 1/29 the new GME play 🚀🚀🚀🚀🚀💵💵💵💵💵💵,GME,25,1/29,1,0.971,0.9934,0.9933
+If BB hits $40 by Feb 5th I’m getting a Blackberry &amp; 🚀 tattoo on my arm...,BB,40,Feb 5th,0,0.9873,0.9703,0.834
+GME will crash to $15 tomorrow,GME,15,tomorrow,0,0.984,0.9473,0.8828
+SUNW 🚀🚀🚀🚀 🚀 $40 call 2/19,SUNW,40,2/19,1,0.9833,0.995,0.9946
+"started with $77k last week! current positions: 141 FB $305 3/19 calls, 15 GME but looking to add much more soon 🚀",FB,305,3/19,1,0.9832,0.9933,0.9954
+"adding way more GME soon 🚀 positions: 141 FB $305 3/19 calls, 15 GME shares for now",FB,305,3/19,1,0.9861,0.9931,0.9956
+"GME $1000 DIAMOND HAND Update [JAN 25, 2021]",GME,1000,"JAN 25, 2021",1,0.992,0.9861,0.8852
+BB to the moon $50 tomorrow 🚀🚀🚀,BB,50,tomorrow,0,0.9641,0.9913,0.8996
+Cruise lines are next value rally ($2k on $30 NCLH 6/18/21 calls),NCLH,30,6/18/21,1,0.9901,0.978,0.9929
+"If GME hits $1000 by Friday, GME🚀 Tattoo or Ban for all Autists that Sign",GME,1000,Friday,0,0.9878,0.8842,0.8466
+$5 AMC call exp 3/19,AMC,5,3/19,1,0.8534,0.9925,0.9931
+AITX - here today... $10 tomorrow,AITX,10,tomorrow,0,0.9699,0.9896,0.8324
+Pump up the IVR Jam!!!!!! - Long $7 Jan 2022 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀,IVR,7,Jan 2022,1,0.972,0.9551,0.9499
+I bought $1 3/19 GME Puts at the top be because why not and.... Still dont know happened,GME,1,3/19,1,0.9882,0.9911,0.9937
+"SMCI, earnings beat, 2/4, $40 monthly calls didn’t have any buyers last week. Breakout chart, is this the next BB? IoT, server, digital currency mining... Yolo 25k 🚀🤲💎 I fix electronics for a living",SMCI,40,2/4,0,0.9141,0.9849,0.9863
+Let's get #FNMA #FMCC to $4 January 26th,FNMA,4,January 26th,0,0.9636,0.9568,0.9626
+"🚀10k, $40 call 2/19, $40 call 3/19 on SMCI 💎volume 350k 🤑. There is a wide bid /ask spread. Stock is at $35 .Dumb asses, I’m still Gang Gang for the other tendies! 🚀 Game Stop=Short squeeze / This is the main BoSs in this game! Low volume options are how the boomers🌈🐻 really steal money.",SMCI,40,2/19,0,0.9832,0.8924,0.9841
+Everyone go pump up NIO for me. I got a $75 call option expiring 1/29 and it ain’t looking too good,NIO,75,1/29,1,0.9836,0.9874,0.993
+"I'm a new retard to the site, I've been lurking a while. I need advice on how best to sell my BB options. I have 5c of $15 1/29/2021@ $1.58. Can I buy some calls for myself, and sell the rest, and how would I do this on Robinhood?",BB,15,1/29/2021,1,0.9408,0.8948,0.9726
+"TSLA $1000 1/29 call, GME 2/5 $26 put (yes), BB $25 call, NOKIA BABY LETS RIP",TSLA,26,1/29,1,0.9951,0.9866,0.9874
+NOKIA (NOK) TO $100 BY 2/5 YAY,BY,100,2/5,0,0.8752,0.9864,0.9942
+"Check came in on Friday for $470, you think its safe to go all in on $BB right now?",BB,470,Friday,0,0.9833,0.8546,0.8053
+Chamath Palihapitiya bought Feb $115 calls on $GME this morning.,GME,115,Feb,1,0.9453,0.9847,0.9286
+Chamath bought $115 GME calls for Feb!!!,GME,115,Feb,1,0.9896,0.9874,0.8423
+Chamath Palihapitiya joins GME GANG!! $115 Feb Calls!,GME,115,Feb,1,0.8598,0.9792,0.9288
+started with $77k last week 🚀 positions: 147 FB $305 3/19 calls,FB,305,3/19,1,0.9823,0.9905,0.9954
+BB $25 call for 1/29,BB,25,1/29,1,0.9953,0.9911,0.9906
+Everyone go pump up NIO for me. I got a $75 call option expiring 1/29 and it ain’t looking too good,NIO,75,1/29,1,0.9836,0.9874,0.993
+Option calls on PLTR $38 2/5,PLTR,38,2/5,1,0.9946,0.9934,0.9939
+Bought $20 call options on $BB expiring on Friday. Am I doing this right? 🌈🌈🌈,BB,20,Friday,1,0.9915,0.9931,0.8277
+Bought $1500 worth of $20 01/29 Calls on $BB. Am I doing this right? 🌈🌈🌈,BB,20,01/29,1,0.9744,0.9924,0.9918
+Let’s take out Melvin Capital. $SKT 2/19 $18 calls. 50% short interest.,SKT,18,2/19,1,0.9914,0.9925,0.9953
+"Joined up, 1k into BB @ 17.71 today",BB,17.71,today,1,0.9807,0.9743,0.8621
+Holding $35 GME 3/19 - risk of IV crush?,GME,35,3/19,1,0.9923,0.9887,0.9955
+Bought ~1M GME at $147 in preparation for Friday.,GME,147,Friday,0,0.9282,0.85,0.8781
+My first ever option is 2 contracts for $7 call on 2/19 of $PSEC - this shit is contagious,PSEC,7,2/19,1,0.9813,0.9942,0.9932
+"GME $1000 💎🙌 Update [Jan 26, 2021]",GME,1000,"Jan 26, 2021",1,0.9939,0.984,0.8692
+"GME $1000 💎🙌 Update [Jan 26, 2021]",GME,1000,"Jan 26, 2021",1,0.9939,0.984,0.8692
+Should I exercise my GME $70 1/29 calls or hold?,GME,70,1/29,1,0.9931,0.9947,0.9942
+Converted gay bear seeking gainz. Last 1k put all in on $AMC $10 1/22/22 calls. 💎✋,AMC,10,1/22/22,1,0.9677,0.994,0.9089
+Converted gay bear 🌈🐻seeking redemption w/ gainz in bull market. My last $1k is in AMC $10 1/21/22 CALLS 💎🙌,AMC,10,1/21/22,1,0.9532,0.9878,0.9729
+"If GME hits $450 tomorrow, I will donate $500 to my local food shelter and post proof.",GME,450,tomorrow,0,0.9809,0.894,0.8748
+IF GME HITS $350 tomorrow I will get Power to the players tattooed on me!,GME,350,tomorrow,0,0.9801,0.9913,0.8357
+I know non-GME posts are pretty much dead on arrival right now but I'm popping underdog AMC. 200 contracts $9 call 1/29. 250 shares at 4.98 cost.,GME,9,1/29,1,0.9799,0.9933,0.9243
+CNBC panelist buys GME put spreads - $50 strikes for April,GME,50,April,1,0.981,0.9751,0.839
+got $4000 GME or BB tomorrow,BB,4000,tomorrow,0,0.8135,0.8762,0.8997
+Why I bot $32k in YOLO calls in $COTY for February 19th $7 strike. I own 5% of the Open Interest. 🚀🚀🚀🚀🚀🚀🚀,COTY,7,February 19th,1,0.915,0.9894,0.9722
+Video footage of me and the boys in the club on the moon after GME hits $420.69 tomorrow,GME,420.69,tomorrow,0,0.9737,0.8861,0.8706
+New GME squeeze SIRI call 7.5$ 2/29 is priced wrong got x 2 for .10 x1 for .05 share price is 6.50,GME,7.5,2/29,1,0.9804,0.9894,0.9536
+Tomorrow we strike again...Bets on GEVO for the Biden campaign. Shorts on UAL $37 strike 2/5 after missed earnings. Up with Biden Down with bum ass airlines,UAL,37,2/5,1,0.9721,0.9946,0.9864
+Am I retarded for putting a $24 BB 1/29,BB,24,1/29,1,0.9926,0.9874,0.9925
+SIRI - Feb. 6.5 calls have OI over 43k,SIRI,6.5,Feb.,1,0.9732,0.9805,0.8639
+BB $24 call 2/12 thoughts?,BB,24,2/12,1,0.9952,0.991,0.9944
+GME 01/29 $320 calls will be offered tomorrow.... need to make this call ITM at close on Friday.. keep buying GME 🚀 🚀 🚀,GME,320,01/29,0,0.9867,0.9928,0.9935
+Should I Yolo my life saving into AMC $9 calls that expire Friday? (this is happening live on the Frankfurt Exchange),AMC,9,Friday,1,0.9488,0.9883,0.8825
+Just put $15 into GME. Expecting my lambs by next week.,GME,15,next week,0,0.9835,0.9798,0.8301
+From the guy who predicted BNGO - I bring you ACST! Throwing in 50k closing position Friday @ $2 🚀🚀🚀 YOLO,BNGO,2,Friday,0,0.9335,0.9262,0.9413
+"Realistically, could NOK hit $7 by June?",NOK,7,June,0,0.9854,0.9753,0.8584
+BB makes it to $25 by Friday it’s Tyson slaughter house for the shorts 🚀🚀🚀🚀,BB,25,Friday,0,0.9829,0.9824,0.8336
+DDD- 2/5 $50 Call 🚀,DDD,50,2/5,1,0.9891,0.9931,0.9949
+DDD $50 Call 2/5 🚀 lessss go,DDD,50,2/5,1,0.9916,0.9919,0.9954
+once my 171 $310 FB 3/19 calls print i’m tits in GME! unless it goes to a reasonable price today but worry less second round troops are coming!,FB,310,3/19,1,0.9793,0.9843,0.995
+Is GME done? I just dropped $50 is the Hype over or are we going to Friday?,GME,50,Friday,0,0.9826,0.9622,0.853
+BNGO $13 Call 2/19 🚀,BNGO,13,2/19,1,0.9955,0.9894,0.9951
+Let’s get BB going!!!! Price target for next week $100,BB,100,next week,0,0.9701,0.9767,0.9005
+AMC gains 💪 w/ $10 C 1/22/22 TY WSB!!!,T,10,1/22/22,1,0.8643,0.9505,0.938
+"BB Gains, Holding above $25 before Friday",BB,25,Friday,0,0.9773,0.9631,0.8163
+NOK $6 CALLS 3/19 LETS DO THIS!!,NOK,6,3/19,1,0.9866,0.9885,0.9935
+wallstreetbets did it again. NOKIA Doesn’t stop growing! 🚀🚀🚀🚀🚀🚀🚀 $850 tomorrow,NOKIA,850,tomorrow,0,0.814,0.9737,0.8259
+"The GME Thread, Part 2.1, for January 27, 2021",GME,2,"January 27, 2021",1,0.9883,0.8819,0.8717
+NOK is going up to 12.85 by Friday!!!,NOK,12.85,Friday,0,0.9787,0.9138,0.8425
+$SABR $25 call 1/20/23,SABR,25,1/20/23,1,0.9952,0.9937,0.9924
+SOS Q 20 21’ $7.50 calls thoughts? Trading $2.37 solid short open interest? Anyone? Beuller?,SOS,7.50,Q 20 21’,1,0.9891,0.992,0.8096
+GAINS 34 $10 calls 1/22. Do i hold?,GAINS,10,1/22,1,0.8927,0.9933,0.9937
+$NOK 1/29 $8 C 0.01c?,NOK,8,1/29,1,0.9932,0.9914,0.9942
+"SPY $375 Put - 2/5 - Chamath Palihapitiya said that other firms/funds follow Melvin so if Melvin has to liquidate, then so might other funds - ipso facto Spy tanks",SPY,375,2/5,0,0.9958,0.9913,0.9919
+SNDL 2/19 $5 Calls,SNDL,5,2/19,1,0.9951,0.9936,0.9954
+Feb 19th $20 puts GME (Also why does the title have to have at least 102 characters in it?????????????????????????),GME,20,Feb 19th,1,0.9561,0.9932,0.9077
+$ZM 500 Calls jan 29 let’s get this bad boy moving! it’s cost me money and i don’t know how else i’m going to get my portfolio back up but i believe in you guys,ZM,500,jan 29,1,0.9524,0.8299,0.906
+Converted gay bear 🌈🐻seeking redemption w/ gainz in bull market. My last 1k is in AMC $10 1/21/22 CALLS 💎🙌,AMC,10,1/21/22,1,0.9571,0.9905,0.9522
+Let’s go on a #CCL (Carnival) ride! Jul 16 21 $40 for 1000 shrs. Who’s with me?! Boats and Gains Float that margin,CCL,40,Jul 16 21,1,0.9783,0.992,0.9793
+Hoping for a piano GME long and short of it: if you can't beat em join em. I heard about you guys. So I bought $2500 worth of 22.50 put options. Half expired 1/22 and half expire 1/29.,GME,22.50,1/22,1,0.9827,0.9841,0.953
+"AMC 2/5 $16 Calls....I have never day traded in my life, so make it worth it guys!!!! Fuck 'em. Fuck 'em all!!!!",AMC,16,2/5,1,0.8149,0.9925,0.9947
+"$NOK YOLO: $7 calls, $8 calls, and 1700 shares purchased. Holding until 2/5 and if it’s down I’m purchasing $ROPE",NOK,7,2/5,1,0.9911,0.9888,0.9891
+GME 2.0——-&gt;&gt;&gt;&gt;NOK to the moon 🚀 🚀 🚀 🚀 🚀 🚀 🚀 🚀 🚀 🚀 🚀 🚀 I’m start wishing my birthday gift of 02/11/2020,GME,2.0,02/11/2020,0,0.9899,0.8309,0.9792
+$NOK To the FKING Moon🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🌙2000@5.5 50@call $5 January 2022 I don't know why unable to upload pictures 😕!,NOK,5.5,January 2022,0,0.9747,0.9782,0.9148
+"Can anyone explain how buying a call below the share price works? If the share price of GME is $343 and there is an option to buy a $320 1/29 call for $9,800, do you automatically make money on it?",GME,320,1/29,0,0.9578,0.8042,0.9889
+"$BB GOT JAM 29 $30 CALLS WIT MY LIF SAVINS, DONT FKIN FAIL ME. I DO NOT WANT TO WAIT TABLS ANYMOR. ILL NEED TO START USING MY OLD $BB PHONE AGAIN",BB,30,JAM 29,1,0.952,0.9935,0.8945
+Anyones NOK stocks pending ? Going to $15 tomorrow and I want in 🚀🚀 whats this 102 character malarkey?!,NOK,15,tomorrow,0,0.9892,0.9812,0.86
+Panic sold 100 call options on PLTR 1/29 $40 strike for $10k loss this morning at opening! Missed out on massive gains.,PLTR,40,1/29,1,0.9941,0.9939,0.9935
+"🥇The $100 Commitment Club🥇 for the month of Febuary GME!🗓📈 If we all commit to $100 per week on top of our current position then we can demand that the shorties suck each other off on live television🌬📺 Not that I'm super gay! Speaking of which, the SEC can eat my giant flaccid retard dick 🌭",GME,100,Febuary,0,0.9388,0.9814,0.8594
+"🥇The $100 Commitment Club🥇 for the month of Febuary GME!🗓📈 If we all commit to $100 per week on top of our current position then we can demand that the shorties suck each other off on live television🌬📺 Not that I'm super gay! Speaking of which, the SEC can eat my giant flaccid retard dick 🌭",GME,100,Febuary,0,0.9388,0.9814,0.8594
+"~BETTER YOLO TRADE~ Long GME 01/21/2021 $0.50 Puts I think everyone can agree that GME is not fundamentally worth $350/sh right now... Now that we've beaten up the shorts, time to turn around and make $$$ on the way down. Buy em while they're cheap!!",GME,0.50,01/21/2021,1,0.9328,0.9731,0.9897
+Watched a video to learn how to trade options and started listening to WSB autist. I jumped in on AMC $4.5 call 1/21/2022. This happened 🚀 🚀 🚀,AMC,4.5,1/21/2022,0,0.8636,0.9942,0.9857
+Can someone help me understand why a $95 Feb19 call on EDIT would be up 400% for the day when the stock was at like $60 and only up 2%?,EDIT,95,Feb19,1,0.9318,0.9906,0.9574
+If NOK Goes Above $10 tomorrow - I will use a Nokia Phone for a Year,NOK,10,tomorrow,0,0.9887,0.9842,0.8663
+Why I YOLO’d on $COTY lotto calls for Feb 19th $7 strike!,COTY,7,Feb 19th,1,0.9823,0.9918,0.9384
+I made jan 29 call for $10 on NOK am I king retard?🚀🚀🚀🚀,NOK,10,jan 29,1,0.9614,0.923,0.8567
+BB and NAKD to $69 by Friday,NAK,69,Friday,0,0.8508,0.9288,0.8611
+Double Fisting $BB — Aiming for new all time high — Gamma Squeeze Friday — PT $140 🚀,BB,140,Friday,1,0.9884,0.8846,0.9514
+NOKIA to $20 tomorrow,NOKIA,20,tomorrow,0,0.9787,0.9865,0.8989
+We need NOK above $7 to force the gamma squeeze Friday.,NOK,7,Friday,0,0.9607,0.9642,0.9275
+Why I YOLO’d $32k on $COTY call options with $7 strike for February 19th. Earnings play!,COTY,7,February 19th,1,0.9889,0.9839,0.8833
+"Someone bought 12,261 calls of FUBO $90 strike for 2/19, intended to kill Kerrisdale and Lightshed",FUBO,90,2/19,1,0.9916,0.9943,0.9939
+Why I YOLO’d $32k on $COTY call options expiring Feb 19th with $7 strike. 🚀🧨🚀🧨,COTY,7,Feb 19th,1,0.9847,0.888,0.8844
+24.5 CALL UUP @0.04 1/29,UUP,24.5,1/29,1,0.8318,0.9907,0.9905
+Robinhood says my GME 2/5 $320 call is untradable...thoughts?,GME,320,2/5,1,0.9908,0.9932,0.9952
+"$46,000 in tendies on 2 GME $35 4/16 calls I bought when it was at $13/shr. 14,000% gains. Thank you, WSB! Also, bought my kids some retarded fuckin Amiibos from GameStop. Fuck off, Melvin!",GME,35,4/16,1,0.9913,0.9945,0.9945
+"When GME hits $500 tomorrow, should I get a tattoo of a tombstone with Melvin Capital on it, or literally 💎🙌?",GME,500,tomorrow,0,0.9864,0.8823,0.8386
+Putting $250 in GME tomorrow but have no idea how to work robinhood pls help,GME,250,tomorrow,0,0.9839,0.9134,0.8193
+"Silver Gang, where you at? SLV March 19- $30 🚀🚀🚀🚀🚀🚀+ actual bars",SLV,30,March 19,1,0.9925,0.9147,0.9791
+Anyone YOLOing GME $570 calls for Friday?,GME,570,Friday,1,0.993,0.9888,0.903
+I'm YOLOing $500 tomorrow for the WSB mods who keep this sub together. Most upvoted comment determines where it goes.,W,500,tomorrow,0,0.8758,0.9694,0.857
+PFE $35 call 2/15,PFE,35,2/15,1,0.9933,0.9945,0.9948
+Praying to St. Homobonus for GME to hit $500 EOD tomorrow,GME,500,tomorrow,0,0.9253,0.8242,0.8217
+WSB Leading the Charge Against Hedge Funds as GME Hits $500 Thursday,GME,500,Thursday,1,0.9697,0.9729,0.9205
+I sold 5 $24 GME Calls on 1/14 for a profit of about $7000 on a $1500 investment. I thought I won. Those calls would be worth $134000 right now. AMA,GME,24,1/14,1,0.9915,0.9906,0.9855
+GME SHORT INTEREST IS 122% AND DAYS TO COVER IS 2.1 NOT 6 AS OF 1/27 CLOSE. CHECK DATA RELEASE DATES WHEN POSTING.,GM,2.1,1/27,0,0.8715,0.9146,0.9778
