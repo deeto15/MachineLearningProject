@@ -5,21 +5,16 @@ import torch.nn.functional
 from transformers import AutoModelForTokenClassification, AutoTokenizer
 import torch
 
+file_path = Path.home() / "Downloads" / "wallstreetbets_submissions" / "wallstreetbets_submissions"
 output_csv = Path("regression_model_training_data.csv")
-#header = ["Comment", "Stock", "Price", "Date", "Label", "StockScore", "PriceScore", "DateScore"]
-#if not output_csv.exists():
-   # with open(output_csv, "w", newline='', encoding='utf-8') as f:
-        #csv.writer(f).writerow(header)
-# Load model and tokenizer
 model_path = "./ner-output"
+
 model = AutoModelForTokenClassification.from_pretrained(model_path)
 tokenizer = AutoTokenizer.from_pretrained(model_path)
 id2label = model.config.id2label
 subset = {"TICKER", "PRICE", "DATE"}
 model.eval()
-file_path = Path.home() / "Downloads" / "wallstreetbets_submissions" / "wallstreetbets_submissions"
-i = 0
-# Helper to glue tokens while preserving original spacing
+
 def glue_tokens(text, pieces, offsets):
     if not pieces:
         return ""
@@ -78,11 +73,6 @@ def extractor(text, offsets, tokens, predictions, scores):
                 best_entities[label] = (label, value, score)
 
     if all(t in best_entities and best_entities[t][2] > 0.80 for t in subset):
-        print(f"\nCOMMENT: {text}")
-        print(f" TICKER: {best_entities['TICKER'][1]} — {best_entities['TICKER'][2]:.4f}")
-        print(f" PRICE : {best_entities['PRICE'][1]} — {best_entities['PRICE'][2]:.4f}")
-        print(f" DATE  : {best_entities['DATE'][1]} — {best_entities['DATE'][2]:.4f}")
-
         return {
             "Comment": text,
             "Stock": best_entities["TICKER"][1],
@@ -92,9 +82,7 @@ def extractor(text, offsets, tokens, predictions, scores):
             "PriceScore": round(best_entities["PRICE"][2].item(), 4),
             "DateScore": round(best_entities["DATE"][2].item(), 4)
         }
-
     return None
-   
 
 def tokens(text):
     encoding = tokenizer(text, return_offsets_mapping=True, return_tensors="pt", truncation=True)

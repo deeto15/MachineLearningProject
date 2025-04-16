@@ -3,7 +3,6 @@ import json
 from pathlib import Path
 import re
 import spacy
-from stock_cap_processor import filter_stocks
 import pandas as pd
 import time
 file_path = Path.home() / "Downloads" / "wallstreetbets_submissions.txt"
@@ -81,6 +80,14 @@ def count_positives():
                 count += 1
         print(count)
 
+def filter_stocks():
+    df = pd.read_csv("pre_processing/stocks.csv")
+    df['Symbol'] = df['Symbol'].astype(str)
+    df.loc[df['Symbol'].str.len() <= 2, 'Symbol'] = '$' + df.loc[df['Symbol'].str.len() <= 2, 'Symbol']
+    combined = pd.concat([df['Symbol']], ignore_index=True)
+    combined = combined.sort_values(key=lambda x: x.str.len(), ascending=False)
+    return combined.values
+    
 def main():
     data = []
     grab_junk_comments(data)

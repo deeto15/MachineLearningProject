@@ -1,15 +1,16 @@
+from pathlib import Path
 import pandas as pd
-import openai as OpenAI
 import nltk
-nltk.download('punkt_tab')
 from nltk.tokenize import word_tokenize
+nltk.download('punkt_tab')
 
+output_path = Path(__file__).resolve().parent / "post_processing" / "labeled_data.txt"
 file1 = pd.read_csv("pre_processing/prepped_stocks.csv")
-file2 = pd.read_csv("post_processing/ner_results.csv", usecols=range(5))
+file2 = pd.read_csv("post_processing/regression_model_training_data.csv", usecols=range(5))
+
 combined_files = pd.concat([file1, file2], ignore_index=True)
 combined_files = combined_files[combined_files["Label"].astype(str).str.strip() == '1']
-nan_rows = combined_files[combined_files['Price'].isna()]
-print(nan_rows)
+
 def label_comment(comment, ticker, price, date):
     price = price.strip(" $")
     ticker = ticker.strip(" $")
