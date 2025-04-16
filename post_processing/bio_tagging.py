@@ -1,16 +1,11 @@
+#This file takes the training data and tokenizes it so that the model can train on it
 from pathlib import Path
 import pandas as pd
 import nltk
 from nltk.tokenize import word_tokenize
 nltk.download('punkt_tab')
 
-output_path = Path(__file__).resolve().parent / "post_processing" / "labeled_data.txt"
-file1 = pd.read_csv("pre_processing/prepped_stocks.csv")
-file2 = pd.read_csv("post_processing/regression_model_training_data.csv", usecols=range(5))
-
-combined_files = pd.concat([file1, file2], ignore_index=True)
-combined_files = combined_files[combined_files["Label"].astype(str).str.strip() == '1']
-
+#Cleans and standarizes data, and then splits it into tokens using the nltk tokenizer
 def label_comment(comment, ticker, price, date):
     price = price.strip(" $")
     ticker = ticker.strip(" $")
@@ -31,22 +26,24 @@ def label_comment(comment, ticker, price, date):
                 for j in range(1, len(entity_tokens)):
                     labels[i+j] = f'I-{tag}'
                 break
+
     tag_entity(ticker, 'TICKER')
     tag_entity(price, 'PRICE')
     tag_entity(date, 'DATE')
-    return list(zip(tokens, labels))
+    return tokens, labels
 
-with open('labeled_data.txt', 'w', encoding='utf-8') as out:
+#Takes the tokenized data and returns it as an array
+def generate_labeled_data():
+    file1 = pd.read_csv("pre_processing/prepped_stocks.csv")
+    file2 = pd.read_csv("post_processing/regression_model_training_data.csv", usecols=range(5))
+    combined_files = pd.concat([file1, file2], ignore_index=True)
+    combined_files = combined_files[combined_files["Label"].astype(str).str.strip() == '1']
+    examples = []
+
     for _, row in combined_files.iterrows():
-        if row['Label'] != 1:
-            continue
-        comment = row['Comment']
-        ticker = row['Stock']
-        price = row['Price']
-        date = row['Date'].strip('[]').strip()
-        labeled = label_comment(comment, ticker, price, date)
-        for token, tag in labeled:
-            out.write(f'{token} {tag}\n')
-        out.write('\n')
+        tokens, labels = label_comment(row['Comment'], row['Stock'], row['Price'], row['Date'])
+        examples.append({"tokens": tokens, "ner_tags": labels})
+    
+    return examples
 
     

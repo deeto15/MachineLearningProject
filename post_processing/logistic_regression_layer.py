@@ -1,8 +1,9 @@
+#Adds the final logistic regression layer and actually feeds data into it
 import csv
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
-from training_data import tokens
+from post_processing.predictions import tokens
 import json
 from pathlib import Path
 from sklearn.compose import ColumnTransformer
@@ -13,6 +14,7 @@ WSBComments = Path.home() / "Downloads" / "wallstreetbets_comments" / "wallstree
 file_path = Path.home() / "Downloads" / "wallstreetbets_submissions" / "wallstreetbets_submissions"
 file_exists = output_csv.exists()
 
+#Defines a basic logistic regression pipeline
 def load_model():
     df = pd.read_csv("post_processing/regression_model_training_data.csv")
     df.drop(columns=['Stock', 'Price', 'Date', 'StockScore', 'PriceScore', 'DateScore'], inplace=True, errors='ignore')
@@ -30,6 +32,7 @@ def load_model():
     pipeline.fit(X, y)
     return pipeline
 
+#Grabs the probability of the models prediction
 def predict_intent(pipeline, example_dict):
     example = pd.DataFrame([example_dict])
     proba = pipeline.predict_proba(example)[0]
@@ -37,17 +40,16 @@ def predict_intent(pipeline, example_dict):
     confidence = proba[1] if prediction == 1 else proba[0]
     return prediction, confidence
 
+#Call this method if you want to generate training data by appending it to the 'output_csv' file
 def generate_data():
     pipeline = load_model()
     with open(file_path, 'r', encoding='utf-8') as f, open(output_csv, 'a', newline='', encoding='utf-8') as out:
         writer = csv.writer(out)
         if not file_exists:
             writer.writerow(['Comment', 'Stock', 'Price', 'Date', 'Label', 'StockScore', 'PriceScore', 'DateScore'])
-
         for i, row in enumerate(f):
             if i < 500_000:
                 continue
-
             line = json.loads(row)
             result = tokens(line['title'])
             if result:
@@ -64,6 +66,7 @@ def generate_data():
                     result.get('DateScore', ''),
                 ])
 
+#Call this method if you just want to watch the model work
 def preview_data():
     pipeline = load_model()
     with open(WSBComments, 'r', encoding='utf-8') as f:
