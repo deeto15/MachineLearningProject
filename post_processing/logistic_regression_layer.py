@@ -2,7 +2,7 @@ import csv
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
-from refined_training_data import tokens
+from post_processing.training_data import tokens
 import json
 from pathlib import Path
 from sklearn.compose import ColumnTransformer
@@ -25,6 +25,7 @@ def load_model():
     ])
 
     pipeline.fit(X, y)
+
     return pipeline
 
 def predict_intent(pipeline, example_dict):
@@ -42,7 +43,7 @@ file_exists = output_file.exists()
 with open(file_path, 'r', encoding='utf-8') as f, open(output_file, 'a', newline='', encoding='utf-8') as out:
     writer = csv.writer(out)
     if not file_exists:
-        writer.writerow(['Comment', 'Stock', 'Price', 'Date', 'Label', 'StockScore', 'PriceScore', 'DateScore', 'RegressionScore'])
+        writer.writerow(['Comment', 'Stock', 'Price', 'Date', 'Label', 'StockScore', 'PriceScore', 'DateScore'])
 
     for i, row in enumerate(f):
         if i < 500_000:
