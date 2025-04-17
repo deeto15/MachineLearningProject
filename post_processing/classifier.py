@@ -1,6 +1,6 @@
 #This is the actual model training on the now tokenized data
 from datasets import Dataset, DatasetDict
-from post_processing.bio_tagging import generate_labeled_data
+from bio_tagging import generate_labeled_data
 from transformers import AutoModelForTokenClassification, TrainingArguments, Trainer, DataCollatorForTokenClassification, AutoTokenizer
 
 label_list = ['O', 'B-TICKER', 'I-TICKER', 'B-PRICE', 'I-PRICE', 'B-DATE', 'I-DATE']
@@ -9,6 +9,7 @@ id2label = {i: label for label, i in label2id.items()}
 
 #Get tokenized data from the biotagger
 data = generate_labeled_data()
+print(f"Loaded {len(data)} training samples")
 for d in data:
     d["ner_tags"] = [label2id[l] for l in d["ner_tags"]]
 
@@ -49,6 +50,8 @@ def tokenize_and_align_labels(example):
     return tokenized_inputs
 
 ds = ds.map(tokenize_and_align_labels, batched=False)
+ds = ds.remove_columns(["tokens", "ner_tags"])
+
 model = AutoModelForTokenClassification.from_pretrained(
     "bert-base-cased",
     num_labels=len(label_list),
@@ -63,8 +66,10 @@ training_args = TrainingArguments(
     num_train_epochs=3,
     weight_decay=0.01,
     logging_dir="./logs",
+    remove_unused_columns=False,
 )
 data_collator = DataCollatorForTokenClassification(tokenizer)
+
 trainer = Trainer(
     model=model,
     args=training_args,

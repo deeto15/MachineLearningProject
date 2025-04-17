@@ -3,7 +3,7 @@ import csv
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
-from post_processing.predictions import tokens
+from predictions import tokens
 import json
 from pathlib import Path
 from sklearn.compose import ColumnTransformer

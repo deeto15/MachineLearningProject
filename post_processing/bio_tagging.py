@@ -37,7 +37,7 @@ def generate_labeled_data():
     file1 = pd.read_csv("pre_processing/prepped_stocks.csv")
     file2 = pd.read_csv("post_processing/regression_model_training_data.csv", usecols=range(5))
     combined_files = pd.concat([file1, file2], ignore_index=True)
-    combined_files = combined_files[combined_files["Label"].astype(str).str.strip() == '1']
+    combined_files = combined_files[combined_files["Label"].astype(float) == 1.0]
     examples = []
 
     for _, row in combined_files.iterrows():
