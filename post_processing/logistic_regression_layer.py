@@ -1,38 +1,44 @@
-#Adds the final logistic regression layer and actually feeds data into it
 import csv
 import pandas as pd
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.linear_model import LogisticRegression
-from predictions import tokens
 import json
 from pathlib import Path
-from sklearn.compose import ColumnTransformer
+from sentence_transformers import SentenceTransformer
+from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
+from sklearn.base import BaseEstimator, TransformerMixin
+from predictions import tokens
 
 output_csv = Path("regression_model_training_data.csv")
 WSBComments = Path.home() / "Downloads" / "wallstreetbets_comments" / "wallstreetbets_comments"
 file_path = Path.home() / "Downloads" / "wallstreetbets_submissions" / "wallstreetbets_submissions"
 file_exists = output_csv.exists()
 
-#Defines a basic logistic regression pipeline
+# Custom transformer that wraps the sentence transformer
+class SentenceEmbeddingTransformer(BaseEstimator, TransformerMixin):
+    def __init__(self, model_name='all-MiniLM-L6-v2'):
+        self.model_name = model_name
+        self.model = SentenceTransformer(model_name)
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X):
+        return self.model.encode(X['Comment'].tolist(), convert_to_numpy=True)
+
+# Defines a logistic regression pipeline using sentence embeddings
 def load_model():
     df = pd.read_csv("post_processing/regression_model_training_data.csv")
     df.drop(columns=['Stock', 'Price', 'Date', 'StockScore', 'PriceScore', 'DateScore'], inplace=True, errors='ignore')
     X = df[['Comment']]
     y = df['Label'].astype(int)
-    text_vectorizer = TfidfVectorizer(max_features=300)
-    preprocessor = ColumnTransformer(transformers=[
-        ('text', text_vectorizer, 'Comment')
-    ])
 
     pipeline = Pipeline(steps=[
-        ('features', preprocessor),
+        ('embed', SentenceEmbeddingTransformer()),
         ('clf', LogisticRegression(max_iter=1000, class_weight='balanced'))
     ])
     pipeline.fit(X, y)
     return pipeline
 
-#Grabs the probability of the models prediction
 def predict_intent(pipeline, example_dict):
     example = pd.DataFrame([example_dict])
     proba = pipeline.predict_proba(example)[0]
@@ -40,7 +46,6 @@ def predict_intent(pipeline, example_dict):
     confidence = proba[1] if prediction == 1 else proba[0]
     return prediction, confidence
 
-#Call this method if you want to generate training data by appending it to the 'output_csv' file
 def generate_data():
     pipeline = load_model()
     with open(file_path, 'r', encoding='utf-8') as f, open(output_csv, 'a', newline='', encoding='utf-8') as out:
@@ -66,7 +71,6 @@ def generate_data():
                     result.get('DateScore', ''),
                 ])
 
-#Call this method if you just want to watch the model work
 def preview_data():
     pipeline = load_model()
     with open(WSBComments, 'r', encoding='utf-8') as f:
@@ -80,5 +84,5 @@ def preview_data():
                 print(f"→ Price: {result.get('Price', '')} (Score: {result.get('PriceScore', '')})")
                 print(f"→ Date : {result.get('Date', '')} (Score: {result.get('DateScore', '')})")
                 print(f"Prediction: {decision} (Model Confidence: {confidence:.4f})")
-        
+
 preview_data()
