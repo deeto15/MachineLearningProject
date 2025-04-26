@@ -15,7 +15,7 @@ for d in data:
 
 ds = Dataset.from_list(data)
 ds = DatasetDict({"train": ds})
-tokenizer = AutoTokenizer.from_pretrained("bert-base-cased")
+tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
 
 #Tokenize the input tokens while preserving word boundaries
 def tokenize_and_align_labels(example):
@@ -53,13 +53,13 @@ ds = ds.map(tokenize_and_align_labels, batched=False)
 ds = ds.remove_columns(["tokens", "ner_tags"])
 
 model = AutoModelForTokenClassification.from_pretrained(
-    "bert-base-cased",
+    "bert-base-uncased",
     num_labels=len(label_list),
     id2label=id2label,
     label2id=label2id
 )
 training_args = TrainingArguments(
-    output_dir="./training_models/ner-output-V2",
+    output_dir="./training_models/ner-output-V3",
     evaluation_strategy="no",
     learning_rate=2e-5,
     per_device_train_batch_size=8,
@@ -78,6 +78,6 @@ trainer = Trainer(
 )
 
 trainer.train()
-model.save_pretrained('./training_models/ner-output-V2')
-tokenizer.save_pretrained('./training_models/ner-output-V2')
+model.save_pretrained('./training_models/ner-output-V3')
+tokenizer.save_pretrained('./training_models/ner-output-V3')
 

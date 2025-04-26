@@ -1,4 +1,5 @@
 import csv
+import random
 import pandas as pd
 import json
 from pathlib import Path
@@ -39,52 +40,48 @@ def generate_data():
                     result.get('DateScore', ''),
                 ])
 
-def preview_data():
+def preview_data_random_sample(sample_size=25000):
     pipeline = load_model()
+    selected_rows = []
     with open(WSBComments, 'r', encoding='utf-8') as f:
-        for row in f:
-            line = json.loads(row)
-            result = tokens(line['body'])
-            if result:
-                decision, confidence = predict_intent(pipeline, result)
-                print(f"\nComment: {result.get('Comment', '')}")
-                print(f"→ Stock: {result.get('Stock', '')} (Score: {result.get('StockScore', '')})")
-                print(f"→ Price: {result.get('Price', '')} (Score: {result.get('PriceScore', '')})")
-                print(f"→ Date : {result.get('Date', '')} (Score: {result.get('DateScore', '')})")
-                print(f"Prediction: {decision} (Model Confidence: {confidence:.4f})")
+        for idx, row in enumerate(f):
+            if idx < sample_size:
+                selected_rows.append(row)
+            else:
+                r = random.randint(0, idx)
+                if r < sample_size:
+                    selected_rows[r] = row
+    for row in selected_rows:
+        line = json.loads(row)
+        result = tokens(line['body'])
+        if result:
+            decision, confidence = predict_intent(pipeline, result)
+            print(f"\nComment: {result.get('Comment', '')}")
+            print(f"→ Stock: {result.get('Stock', '')} (Score: {result.get('StockScore', '')})")
+            print(f"→ Price: {result.get('Price', '')} (Score: {result.get('PriceScore', '')})")
+            print(f"→ Date : {result.get('Date', '')} (Score: {result.get('DateScore', '')})")
+            print(f"Prediction: {decision} (Model Confidence: {confidence:.4f})")
 
 def evaluate_and_show_misses():
-    df = pd.read_csv("pre_processing/prepped_stocks.csv")
+    df = pd.read_csv("NER_Classifier/regression_model_training_data.csv")
     df.drop(columns=['Stock', 'Price', 'Date', 'StockScore', 'PriceScore', 'DateScore'], inplace=True, errors='ignore')
     X = df[['Comment']]
-    bad_rows = df[df['Label'].isna()]
-    if not bad_rows.empty:
-        print("\nRows with missing Label:")
-        print(bad_rows)
-    
     y_true = df['Label'].astype(int)
     pipeline = load_model()
     y_pred = [pipeline.predict(row['Comment'])[0] for _, row in X.iterrows()]
     y_proba = [pipeline.predict(row['Comment'])[1] for _, row in X.iterrows()]
-
     df['Predicted'] = y_pred
     df['Confidence'] = y_proba
-
     print("\nClassification Report:")
     print(classification_report(y_true, y_pred, digits=4))
     print("Confusion Matrix:")
     print(confusion_matrix(y_true, y_pred))
     print(f"Accuracy: {accuracy_score(y_true, y_pred):.4f}")
-
     false_positives = df[(df['Label'] == 0) & (df['Predicted'] == 1)]
     false_negatives = df[(df['Label'] == 1) & (df['Predicted'] == 0)]
-
     print("\nFalse Positives (junk predicted as good):")
     print(false_positives[['Comment', 'Confidence']].sort_values(by='Confidence', ascending=False).head(100))
-    false_positives[['Comment']].to_csv("false_positives.csv", index=False)
-
     print("\nFalse Negatives (good missed as junk):")
     print(false_negatives[['Comment', 'Confidence']].sort_values(by='Confidence', ascending=False).head(100))
-    false_negatives[['Comment']].to_csv("false_negatives.csv", index=False)
 
-preview_data()
+preview_data_random_sample(sample_size=25000)
