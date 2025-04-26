@@ -1,13 +1,9 @@
 #This generates predictions from the now trained model on new data
-from pathlib import Path
 import torch.nn.functional
 from transformers import AutoModelForTokenClassification, AutoTokenizer
 import torch
 
-file_path = Path.home() / "Downloads" / "wallstreetbets_submissions" / "wallstreetbets_submissions"
-output_csv = Path("regression_model_training_data.csv")
-model_path = "./ner-output"
-
+model_path = "./training_models/ner-output-V2"
 model = AutoModelForTokenClassification.from_pretrained(model_path)
 tokenizer = AutoTokenizer.from_pretrained(model_path)
 id2label = model.config.id2label

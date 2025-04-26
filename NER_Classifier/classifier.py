@@ -1,7 +1,7 @@
 #This is the actual model training on the now tokenized data
 from datasets import Dataset, DatasetDict
-from bio_tagging import generate_labeled_data
 from transformers import AutoModelForTokenClassification, TrainingArguments, Trainer, DataCollatorForTokenClassification, AutoTokenizer
+from bio_tagging import generate_labeled_data
 
 label_list = ['O', 'B-TICKER', 'I-TICKER', 'B-PRICE', 'I-PRICE', 'B-DATE', 'I-DATE']
 label2id = {label: i for i, label in enumerate(label_list)}
@@ -59,13 +59,12 @@ model = AutoModelForTokenClassification.from_pretrained(
     label2id=label2id
 )
 training_args = TrainingArguments(
-    output_dir="./ner-output",
+    output_dir="./training_models/ner-output-V2",
     evaluation_strategy="no",
     learning_rate=2e-5,
     per_device_train_batch_size=8,
     num_train_epochs=3,
     weight_decay=0.01,
-    logging_dir="./logs",
     remove_unused_columns=False,
 )
 data_collator = DataCollatorForTokenClassification(tokenizer)
@@ -79,6 +78,6 @@ trainer = Trainer(
 )
 
 trainer.train()
-model.save_pretrained('./ner-output')
-tokenizer.save_pretrained('./ner-output')
+model.save_pretrained('./training_models/ner-output-V2')
+tokenizer.save_pretrained('./training_models/ner-output-V2')
 

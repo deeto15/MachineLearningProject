@@ -1,3 +1,4 @@
+#old heuristic I used to get my initial training data. Not used anymore, just here so you can see what I used for the very first iteration
 import csv
 import json
 from pathlib import Path
@@ -38,7 +39,7 @@ def extract_stocks(comment):
 
 #excel method to store results       
 def save_to_excel(comment, stock, price, date, label):
-    file = "prepped_stocks.csv"
+    file = "regression_model_training_data.csv"
     df = pd.DataFrame([[comment, stock, price, date, label]], columns=["Comment", "Stock", "Price", "Date", "Label"])
     df.to_csv(file, mode='a', header=not pd.io.common.file_exists(file), index=False)
     
@@ -53,7 +54,7 @@ def grab_junk_comments(data):
             comment = json.loads(line)
             data.append([comment['title'], "", "", "", 0])
             df = pd.DataFrame(data)
-            df.to_csv('prepped_stocks.csv', mode='a', index=False, header=False)
+            df.to_csv('regression_model_training_data.csv', mode='a', index=False, header=False)
             count += 1
             print(count)
 
@@ -75,11 +76,11 @@ def grab_good_comments(data):
                 print(count)
                 print(comment['title'], stock, price, date)
         df = pd.DataFrame(data, columns=["Comment", "Stock", "Price", "Date", "Label"])
-        df.to_csv(f"prepped_stocks.csv", index=False)
+        df.to_csv(f"regression_model_training_data.csv", index=False)
 
 #count the number of good comments I currently had
 def count_positives():
-    with open('prepped_stocks.csv', "r", encoding="utf-8") as f:
+    with open('regression_model_training_data.csv', "r", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         count = 0
         for row in reader:
@@ -89,7 +90,7 @@ def count_positives():
 
 #method to filter the stocks for the information I needed, and append a $ to any stock less than 2 symbols otherwise it'd constantly be matching garbage
 def filter_stocks():
-    df = pd.read_csv("pre_processing/stocks.csv")
+    df = pd.read_csv("stock_market/stocks.csv")
     df['Symbol'] = df['Symbol'].astype(str)
     df.loc[df['Symbol'].str.len() <= 2, 'Symbol'] = '$' + df.loc[df['Symbol'].str.len() <= 2, 'Symbol']
     combined = pd.concat([df['Symbol']], ignore_index=True)

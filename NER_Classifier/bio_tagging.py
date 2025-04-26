@@ -42,13 +42,14 @@ def label_comment(comment, ticker, price, date):
 
 #Takes the tokenized data and returns it as an array
 def generate_labeled_data():
-    file1 = pd.read_csv("pre_processing/prepped_stocks.csv")
-    file2 = pd.read_csv("post_processing/regression_model_training_data.csv", usecols=range(5))
-    combined_files = pd.concat([file1, file2], ignore_index=True)
-    combined_files = combined_files[combined_files["Label"].astype(float) == 1.0]
+    #file1 = pd.read_csv("pre_processing/prepped_stocks.csv")
+    file2 = pd.read_csv("NER_Classifier/regression_model_training_data.csv", usecols=range(5))
+    #combined_files = pd.concat([file1, file2], ignore_index=True)
+    file2 = file2[file2["Label"].astype(float) == 1.0]
+    #combined_files = combined_files[combined_files["Label"].astype(float) == 1.0]
     examples = []
 
-    for _, row in combined_files.iterrows():
+    for _, row in file2.iterrows():
         tokens, labels = label_comment(row['Comment'], row['Stock'], row['Price'], row['Date'])
         examples.append({"tokens": tokens, "ner_tags": labels})
     
