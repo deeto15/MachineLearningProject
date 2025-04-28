@@ -1,6 +1,11 @@
-from transformers import BertTokenizer, BertForSequenceClassification, Trainer, TrainingArguments
-from datasets import Dataset
 import pandas as pd
+from datasets import Dataset
+from transformers import (
+    BertForSequenceClassification,
+    BertTokenizer,
+    Trainer,
+    TrainingArguments,
+)
 
 df = pd.read_csv("NER_Classifier/regression_model_training_data.csv")
 df = df[["Comment", "Label"]].dropna()
@@ -10,8 +15,12 @@ dataset = Dataset.from_pandas(df)
 
 tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
 
+
 def tokenize(batch):
-    return tokenizer(batch["Comment"], truncation=True, padding="max_length", max_length=256)
+    return tokenizer(
+        batch["Comment"], truncation=True, padding="max_length", max_length=256
+    )
+
 
 dataset = dataset.map(tokenize, batched=True)
 dataset = dataset.train_test_split(test_size=0.1)

@@ -1,13 +1,19 @@
-#This is the actual model training on the now tokenized data
-from datasets import Dataset, DatasetDict
-from transformers import AutoModelForTokenClassification, TrainingArguments, Trainer, DataCollatorForTokenClassification, AutoTokenizer
+# This is the actual model training on the now tokenized data
 from bio_tagging import generate_labeled_data
+from datasets import Dataset, DatasetDict
+from transformers import (
+    AutoModelForTokenClassification,
+    AutoTokenizer,
+    DataCollatorForTokenClassification,
+    Trainer,
+    TrainingArguments,
+)
 
-label_list = ['O', 'B-TICKER', 'I-TICKER', 'B-PRICE', 'I-PRICE', 'B-DATE', 'I-DATE']
+label_list = ["O", "B-TICKER", "I-TICKER", "B-PRICE", "I-PRICE", "B-DATE", "I-DATE"]
 label2id = {label: i for i, label in enumerate(label_list)}
 id2label = {i: label for label, i in label2id.items()}
 
-#Get tokenized data from the biotagger
+# Get tokenized data from the biotagger
 data = generate_labeled_data()
 print(f"Loaded {len(data)} training samples")
 for d in data:
@@ -17,26 +23,27 @@ ds = Dataset.from_list(data)
 ds = DatasetDict({"train": ds})
 tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
 
-#Tokenize the input tokens while preserving word boundaries
+
+# Tokenize the input tokens while preserving word boundaries
 def tokenize_and_align_labels(example):
     tokenized_inputs = tokenizer(
         example["tokens"],
         truncation=True,
         padding="max_length",
         max_length=128,
-        is_split_into_words=True
+        is_split_into_words=True,
     )
     labels = []
     word_ids = tokenized_inputs.word_ids()
     prev_word_idx = None
     for word_idx in word_ids:
-        #Special tokens like [CLS] etc
+        # Special tokens like [CLS] etc
         if word_idx is None:
             labels.append(-100)
-        #Start of a new word, use its original label
+        # Start of a new word, use its original label
         elif word_idx != prev_word_idx:
             labels.append(example["ner_tags"][word_idx])
-        #Continuation of the same word, switch to I tag if not the first token in a word
+        # Continuation of the same word, switch to I tag if not the first token in a word
         else:
             tag_id = example["ner_tags"][word_idx]
             tag = id2label[tag_id]
@@ -45,9 +52,10 @@ def tokenize_and_align_labels(example):
             else:
                 labels.append(tag_id)
         prev_word_idx = word_idx
-        
+
     tokenized_inputs["labels"] = labels
     return tokenized_inputs
+
 
 ds = ds.map(tokenize_and_align_labels, batched=False)
 ds = ds.remove_columns(["tokens", "ner_tags"])
@@ -56,7 +64,7 @@ model = AutoModelForTokenClassification.from_pretrained(
     "bert-base-uncased",
     num_labels=len(label_list),
     id2label=id2label,
-    label2id=label2id
+    label2id=label2id,
 )
 training_args = TrainingArguments(
     output_dir="./training_models/ner-output-V3",
@@ -74,10 +82,9 @@ trainer = Trainer(
     args=training_args,
     train_dataset=ds["train"],
     tokenizer=tokenizer,
-    data_collator=data_collator
+    data_collator=data_collator,
 )
 
 trainer.train()
-model.save_pretrained('./training_models/ner-output-V3')
-tokenizer.save_pretrained('./training_models/ner-output-V3')
-
+model.save_pretrained("./training_models/ner-output-V3")
+tokenizer.save_pretrained("./training_models/ner-output-V3")

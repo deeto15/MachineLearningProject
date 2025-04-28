@@ -43,6 +43,7 @@ def initialize_db(db_path="/app/data/reddit_data.db"):
     conn.commit()
     conn.close()
 
+
 # Load seen IDs from the database
 def load_seen_ids(db_path="/app/data/reddit_data.db"):
     conn = sqlite3.connect(db_path)
@@ -52,38 +53,46 @@ def load_seen_ids(db_path="/app/data/reddit_data.db"):
     conn.close()
     return seen_ids
 
+
 # Save seen IDs to the database
 def save_seen_ids(new_ids, db_path="/app/data/reddit_data.db"):
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     cursor.executemany(
         "INSERT OR IGNORE INTO seen_posts (postID) VALUES (?)",
-        ((post_id,) for post_id in new_ids)
+        ((post_id,) for post_id in new_ids),
     )
     conn.commit()
     conn.close()
+
 
 # Save posts to the database
 def save_posts_to_db(posts_dict, db_path="/app/data/reddit_data.db"):
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
-    cursor.executemany("""
+    cursor.executemany(
+        """
         INSERT OR IGNORE INTO posts (postID, title, body, score, upvote_ratio, total_comments, created_on, url, original_content)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-    """, [
-        (posts_dict["ID"][i],
-         posts_dict["Title"][i],
-         posts_dict["Post Text"][i],
-         posts_dict["Score"][i],
-         posts_dict["Upvote Ratio"][i],
-         posts_dict["Total Comments"][i],
-         posts_dict["Created On"][i],
-         posts_dict["Post URL"][i],
-         posts_dict["Original Content"][i])
-        for i in range(len(posts_dict["ID"]))
-    ])
+    """,
+        [
+            (
+                posts_dict["ID"][i],
+                posts_dict["Title"][i],
+                posts_dict["Post Text"][i],
+                posts_dict["Score"][i],
+                posts_dict["Upvote Ratio"][i],
+                posts_dict["Total Comments"][i],
+                posts_dict["Created On"][i],
+                posts_dict["Post URL"][i],
+                posts_dict["Original Content"][i],
+            )
+            for i in range(len(posts_dict["ID"]))
+        ],
+    )
     conn.commit()
     conn.close()
+
 
 # Get all post IDs from the posts table
 def get_post_ids_from_db(db_path="/app/data/reddit_data.db"):
@@ -94,16 +103,21 @@ def get_post_ids_from_db(db_path="/app/data/reddit_data.db"):
     conn.close()
     return post_ids
 
+
 # Save comments to the database
 def write_batch_to_db(batch_comments, db_path="/app/data/reddit_data.db"):
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
-    cursor.executemany("""
+    cursor.executemany(
+        """
         INSERT OR IGNORE INTO comments (commentID, body, time, postID)
         VALUES (:commentID, :body, :time, :postID)
-    """, batch_comments)
+    """,
+        batch_comments,
+    )
     conn.commit()
     conn.close()
+
 
 # Handle Reddit rate limits
 def handle_rate_limit(reddit_client):
@@ -116,6 +130,7 @@ def handle_rate_limit(reddit_client):
             print(f"Rate limit reached. Sleeping for {sleep_time:.2f} seconds.")
             time.sleep(sleep_time)
 
+
 # Scrape posts and save to the database
 async def post_scraper(reddit_client, subreddit_name="wallstreetbets"):
     initialize_db()
@@ -125,9 +140,15 @@ async def post_scraper(reddit_client, subreddit_name="wallstreetbets"):
     posts = subreddit.top(time_filter="all", limit=None)
 
     posts_dict = {
-        "Title": [], "Post Text": [], "ID": [], "Score": [],
-        "Upvote Ratio": [], "Total Comments": [], "Created On": [],
-        "Post URL": [], "Original Content": []
+        "Title": [],
+        "Post Text": [],
+        "ID": [],
+        "Score": [],
+        "Upvote Ratio": [],
+        "Total Comments": [],
+        "Created On": [],
+        "Post URL": [],
+        "Original Content": [],
     }
     new_ids = set()
 
@@ -148,13 +169,14 @@ async def post_scraper(reddit_client, subreddit_name="wallstreetbets"):
     save_posts_to_db(posts_dict)
     save_seen_ids(new_ids)
 
+
 # Fetch and process comments for each post
 async def fetch_all_comments(reddit_client, db_path="/app/data/reddit_data.db"):
-    #initialize_db()
+    # initialize_db()
     post_ids = get_post_ids_from_db()
     print(len(post_ids))
     for post_id in post_ids:
-        #handle_rate_limit(reddit_client)
+        # handle_rate_limit(reddit_client)
         try:
             print(f"Fetching comments for post ID: {post_id}")
             submission = reddit_client.submission(id=post_id)
@@ -169,23 +191,31 @@ async def fetch_all_comments(reddit_client, db_path="/app/data/reddit_data.db"):
                 comment_queue = comment_queue[300:]
 
                 for comment in current_batch:
-                    if isinstance(comment, praw.models.Submission):  # Check if it's the post itself
-                        batch_comments.append({
-                            "commentID": comment.id,
-                            "body": comment.selftext,
-                            "time": int(comment.created_utc),
-                            "postID": comment.id,  # Post is its own parent
-                        })
+                    if isinstance(
+                        comment, praw.models.Submission
+                    ):  # Check if it's the post itself
+                        batch_comments.append(
+                            {
+                                "commentID": comment.id,
+                                "body": comment.selftext,
+                                "time": int(comment.created_utc),
+                                "postID": comment.id,  # Post is its own parent
+                            }
+                        )
                     elif isinstance(comment, praw.models.Comment):
-                        batch_comments.append({
-                            "commentID": comment.id,
-                            "body": comment.body,
-                            "time": int(comment.created_utc),
-                            "postID": post_id
-                        })
+                        batch_comments.append(
+                            {
+                                "commentID": comment.id,
+                                "body": comment.body,
+                                "time": int(comment.created_utc),
+                                "postID": post_id,
+                            }
+                        )
                         comment_queue.extend(comment.replies)
 
-                print(f"Processed {len(batch_comments)} comments for post ID: {post_id}.")
+                print(
+                    f"Processed {len(batch_comments)} comments for post ID: {post_id}."
+                )
                 write_batch_to_db(batch_comments, db_path)
                 batch_comments = []
 

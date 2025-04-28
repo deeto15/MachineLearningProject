@@ -1,5 +1,6 @@
-import yfinance as yf
 from datetime import datetime, timedelta
+
+import yfinance as yf
 
 # set the ticker symbol
 ticker = "AAPL"
@@ -12,25 +13,27 @@ start_date = datetime.strptime(start_date, "%Y-%m-%d")
 end_date = start_date + timedelta(days=30)
 
 # get data for ticker over 30 day period, excluding non trading days, only closing price
-data = yf.download(ticker, start=start_date, end=end_date, progress=False, auto_adjust=True)
+data = yf.download(
+    ticker, start=start_date, end=end_date, progress=False, auto_adjust=True
+)
 
 # print only the date (as index) and the 'Close' column
-print(data[['Close']].to_string())
+print(data[["Close"]].to_string())
 
 # determine price trends over 1 day, 7 day, and 30 day periods
 if not data.empty:
     close_initial = data["Close"].iloc[0].item()
-    
+
     # 1 day period
     close_1d = data["Close"].iloc[1].item()
     price_trend_1d = close_1d - close_initial
     percent_change_1d = (price_trend_1d / close_initial) * 100
-    
+
     # 1 week period
     close_1w = data["Close"].iloc[7].item()
     price_trend_1w = close_1w - close_initial
     percent_change_1w = (price_trend_1w / close_initial) * 100
-    
+
     # 1 month period
     close_last = data["Close"].iloc[-1].item()
     price_trend_1m = close_last - close_initial
