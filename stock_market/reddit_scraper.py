@@ -7,7 +7,7 @@ import praw
 
 
 # Initialize the database and create tables
-def initialize_db(db_path="/app/data/reddit_data.db"):
+def initialize_db(db_path="/vault/reddit_data.db"):
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     # Table for posts
