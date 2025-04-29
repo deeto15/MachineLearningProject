@@ -1,8 +1,8 @@
 import os
-
+from dotenv import load_dotenv
 from praw import Reddit
 
-
+load_dotenv()
 def get_reddit_client() -> Reddit:
     reddit_client = Reddit(
         client_id=os.getenv("REDDIT_CLIENT_ID"),
@@ -16,19 +16,15 @@ def get_reddit_client() -> Reddit:
 
 def hottest_new_comments(reddit_client, comment_limit: int):
     subreddit = reddit_client.subreddit("wallstreetbets")
-    hottest_submission_generator = subreddit.search(
-        "What Are Your Moves Tomorrow", limit=1
-    )
-    hottest_submission = next(hottest_submission_generator, None)
-    # hottest_submission = next(subreddit.hot(limit=1))
+    hottest_submission = next(subreddit.hot(limit=1))
     print(hottest_submission.title)
     hottest_submission.comment_sort = "new"
     hottest_submission.comments.replace_more(limit=None)
 
-    comments = hottest_submission.comments.list()[:comment_limit]
+    comments = hottest_submission.comments.list()[:5]
     for comment in comments:
-        print(comment)
+        print(comment["title"])
+        print(vars(comment))
+        print(dir(comment))
 
-client = get_reddit_client()
-hottest_new_comments(client, 100)
 
