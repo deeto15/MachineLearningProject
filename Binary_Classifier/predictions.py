@@ -3,7 +3,7 @@ import torch.nn.functional
 from transformers import AutoModelForTokenClassification, AutoTokenizer
 import torch
 
-model_path = "./training_models/ner-output-V2"
+model_path = "./training_models/ner-output-V3"
 model = AutoModelForTokenClassification.from_pretrained(model_path)
 tokenizer = AutoTokenizer.from_pretrained(model_path)
 id2label = model.config.id2label
