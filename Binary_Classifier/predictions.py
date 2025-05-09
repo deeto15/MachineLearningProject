@@ -2,9 +2,9 @@
 import torch
 import torch.nn.functional
 from transformers import AutoModelForTokenClassification, AutoTokenizer
-
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model_path = "./training_models/ner-output-V3"
-model = AutoModelForTokenClassification.from_pretrained(model_path)
+model = AutoModelForTokenClassification.from_pretrained(model_path).to(device)
 tokenizer = AutoTokenizer.from_pretrained(model_path)
 id2label = model.config.id2label
 subset = {"TICKER", "PRICE", "DATE"}
@@ -14,29 +14,34 @@ model.eval()
 # Takes in a comment, breaks it down into the tokenizer defined above and sends the text, its tokens and predictions to extractor
 def tokens(text):
     encoding = tokenizer(
-        text, return_offsets_mapping=True, return_tensors="pt", truncation=True
+        text,
+        return_offsets_mapping=True,
+        return_tensors="pt",
+        truncation=True,
     )
     offsets = encoding.pop("offset_mapping")[0].tolist()
     input_ids = encoding["input_ids"][0]
-    tokens = tokenizer.convert_ids_to_tokens(input_ids)
+    token_list = tokenizer.convert_ids_to_tokens(input_ids)
+    encoding = {k: v.to(device) for k, v in encoding.items()}
     with torch.no_grad():
         outputs = model(**encoding)
     logits = outputs.logits[0]
     predictions = torch.argmax(logits, dim=-1).tolist()
     probs = torch.nn.functional.softmax(logits, dim=-1)
     scores = probs[range(len(predictions)), predictions]
-    return extractor(text, offsets, tokens, predictions, scores)
+    return extractor(text, offsets, token_list, predictions, scores)
+
 
 
 # Takes the tokens and aligns them to the predicted label, so that each full piece of the word has the confidence score and not invidual tokens, otherwise you'd output things like "January" as "Jan" "ua" "ry"
-def extractor(text, offsets, tokens, predictions, scores):
+def extractor(text, offsets, token_list, predictions, scores):
     entities = []
     current_entity = []
     current_entity_offsets = []
     current_entity_scores = []
     current_label = None
     for token, pred_id, (start, end), score in zip(
-        tokens, predictions, offsets, scores
+        token_list, predictions, offsets, scores
     ):
         # O tokens are anything that isnt part of a valid prediction
         label = id2label.get(pred_id, "O")

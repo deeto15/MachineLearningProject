@@ -1,6 +1,7 @@
 # This is the actual model training on the now tokenized data
 from bio_tagging import generate_labeled_data
 from datasets import Dataset, DatasetDict
+import torch
 from transformers import (
     AutoModelForTokenClassification,
     AutoTokenizer,
@@ -60,6 +61,7 @@ def tokenize_and_align_labels(example):
 ds = ds.map(tokenize_and_align_labels, batched=False)
 ds = ds.remove_columns(["tokens", "ner_tags"])
 
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = AutoModelForTokenClassification.from_pretrained(
     "bert-base-uncased",
     num_labels=len(label_list),
@@ -73,6 +75,7 @@ training_args = TrainingArguments(
     per_device_train_batch_size=8,
     num_train_epochs=3,
     weight_decay=0.01,
+    no_cuda=False,
     remove_unused_columns=False,
 )
 data_collator = DataCollatorForTokenClassification(tokenizer)

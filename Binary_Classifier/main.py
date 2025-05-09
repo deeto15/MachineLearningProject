@@ -45,9 +45,7 @@ def generate_data():
                     "DateScore",
                 ]
             )
-        for i, row in enumerate(f):
-            if i < 500_000:
-                continue
+        for row in f:
             line = json.loads(row)
             result = tokens(line["title"])
             if result:
@@ -67,7 +65,7 @@ def generate_data():
                 )
 
 
-def preview_data_random_sample(sample_size=25000):
+def preview_data_random_sample(sample_size=2000):
     pipeline = load_model()
     selected_rows = []
     with open(WSBComments, "r", encoding="utf-8") as f:
@@ -130,5 +128,4 @@ def evaluate_and_show_misses():
         .head(100)
     )
 
-
-preview_data_random_sample(sample_size=25000)
+preview_data_random_sample()

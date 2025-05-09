@@ -1,4 +1,5 @@
 import pandas as pd
+import torch
 from datasets import Dataset
 from transformers import (
     BertForSequenceClassification,
@@ -26,15 +27,16 @@ dataset = dataset.map(tokenize, batched=True)
 dataset = dataset.train_test_split(test_size=0.1)
 dataset = dataset.remove_columns(["Comment"])
 
-model = BertForSequenceClassification.from_pretrained("bert-base-uncased", num_labels=2)
-
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+model = BertForSequenceClassification.from_pretrained("bert-base-uncased", num_labels=2).to(device)
 training_args = TrainingArguments(
-    output_dir="./training_models/classifier-bert-V2",
+    output_dir="./training_models/classifier-bert-V3",
     evaluation_strategy="epoch",
     learning_rate=2e-5,
     per_device_train_batch_size=8,
     num_train_epochs=3,
     weight_decay=0.01,
+    no_cuda=False,
 )
 
 trainer = Trainer(
@@ -46,5 +48,5 @@ trainer = Trainer(
 )
 
 trainer.train()
-model.save_pretrained("./training_models/classifier-bert-V2")
-tokenizer.save_pretrained("./training_models/classifier-bert-V2")
+model.save_pretrained("./training_models/classifier-bert-V3")
+tokenizer.save_pretrained("./training_models/classifier-bert-V3")
