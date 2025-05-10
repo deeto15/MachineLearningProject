@@ -28,7 +28,9 @@ dataset = dataset.train_test_split(test_size=0.1)
 dataset = dataset.remove_columns(["Comment"])
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-model = BertForSequenceClassification.from_pretrained("bert-base-uncased", num_labels=2).to(device)
+model = BertForSequenceClassification.from_pretrained(
+    "bert-base-uncased", num_labels=2
+).to(device)
 training_args = TrainingArguments(
     output_dir="./training_models/classifier-bert-V3",
     evaluation_strategy="epoch",

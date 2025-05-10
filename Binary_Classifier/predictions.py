@@ -2,6 +2,7 @@
 import torch
 import torch.nn.functional
 from transformers import AutoModelForTokenClassification, AutoTokenizer
+
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model_path = "./training_models/ner-output-V3"
 model = AutoModelForTokenClassification.from_pretrained(model_path).to(device)
@@ -30,7 +31,6 @@ def tokens(text):
     probs = torch.nn.functional.softmax(logits, dim=-1)
     scores = probs[range(len(predictions)), predictions]
     return extractor(text, offsets, token_list, predictions, scores)
-
 
 
 # Takes the tokens and aligns them to the predicted label, so that each full piece of the word has the confidence score and not invidual tokens, otherwise you'd output things like "January" as "Jan" "ua" "ry"

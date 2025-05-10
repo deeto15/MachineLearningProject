@@ -65,33 +65,27 @@ def generate_data():
                 )
 
 
-def preview_data_random_sample(sample_size=2000):
+def preview_data_random_sample(sample_size=10000, batch_size=32, file_path=WSBComments):
     pipeline = load_model()
-    selected_rows = []
-    with open(WSBComments, "r", encoding="utf-8") as f:
-        for idx, row in enumerate(f):
-            if idx < sample_size:
-                selected_rows.append(row)
-            else:
-                r = random.randint(0, idx)
-                if r < sample_size:
-                    selected_rows[r] = row
-    for row in selected_rows:
-        line = json.loads(row)
-        result = tokens(line["body"])
-        if result:
-            decision, confidence = predict_intent(pipeline, result)
-            print(f"\nComment: {result.get('Comment', '')}")
-            print(
-                f"→ Stock: {result.get('Stock', '')} (Score: {result.get('StockScore', '')})"
-            )
-            print(
-                f"→ Price: {result.get('Price', '')} (Score: {result.get('PriceScore', '')})"
-            )
-            print(
-                f"→ Date : {result.get('Date', '')} (Score: {result.get('DateScore', '')})"
-            )
-            print(f"Prediction: {decision} (Model Confidence: {confidence:.4f})")
+    tokenized = []
+    with open(file_path, "r", encoding="utf-8") as f:
+        for i, line in enumerate(f):
+            if i >= sample_size:
+                break
+            item = json.loads(line)
+            entry = tokens(item["body"])
+            if entry:
+                tokenized.append(entry)
+    if not tokenized:
+        return
+    comments = [e["Comment"] for e in tokenized]
+    preds, confs = pipeline.predict_batch(comments, batch_size=batch_size)
+    for e, p, c in zip(tokenized, preds, confs):
+        print(f"\nComment: {e['Comment']}")
+        print(f"→ Stock: {e['Stock']} (Score: {e['StockScore']})")
+        print(f"→ Price: {e['Price']} (Score: {e['PriceScore']})")
+        print(f"→ Date : {e['Date']} (Score: {e['DateScore']})")
+        print(f"→ Decision: {p} (Confidence: {c:.4f})")
 
 
 def evaluate_and_show_misses():
@@ -127,5 +121,6 @@ def evaluate_and_show_misses():
         .sort_values(by="Confidence", ascending=False)
         .head(100)
     )
+
 
 preview_data_random_sample()

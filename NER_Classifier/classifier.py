@@ -69,7 +69,7 @@ model = AutoModelForTokenClassification.from_pretrained(
     label2id=label2id,
 )
 training_args = TrainingArguments(
-    output_dir="./training_models/ner-output-V3",
+    output_dir="./training_models/ner-output-V4",
     evaluation_strategy="no",
     learning_rate=2e-5,
     per_device_train_batch_size=8,
@@ -89,5 +89,5 @@ trainer = Trainer(
 )
 
 trainer.train()
-model.save_pretrained("./training_models/ner-output-V3")
-tokenizer.save_pretrained("./training_models/ner-output-V3")
+model.save_pretrained("./training_models/ner-output-V4")
+tokenizer.save_pretrained("./training_models/ner-output-V4")
