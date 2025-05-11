@@ -11,6 +11,7 @@ import asyncprawcore
 from dotenv import load_dotenv
 from Binary_Classifier.BERT_loader import load_model
 from Binary_Classifier.predictions import tokens
+from scraper.past_data_scraper import run_script
 
 
 class FakeComment:
@@ -526,6 +527,7 @@ async def main():
 
 if __name__ == "__main__":
     try:
+        #asyncio.run(run_script())
         asyncio.run(main())
     except Exception as e:
         print(f"Fatal error: {e}")
