@@ -15,9 +15,15 @@ from scraper.past_data_scraper import run_script
 
 
 class FakeComment:
-    def __init__(self, id, body):
+    def __init__(self, id, author, body, created_utc, score, parent_id, is_submitter, permalink):
         self.id = id
+        self.author = author
         self.body = body
+        self.created_utc = created_utc
+        self.score = score
+        self.parent_id = parent_id
+        self.is_submitter = is_submitter
+        self.permalink = permalink
 
 
 load_dotenv()
@@ -251,7 +257,7 @@ async def batch_insert_comments(pool, submission):
 
         ner_list = []
         combined = submission.title + "\n\n" + submission.selftext
-        fake = FakeComment(f"post_{submission.id}", combined)
+        fake = FakeComment(f"post_{submission.id}", getattr(submission.author, "name", None), combined, submission.created_utc, submission.score, f"t3_{submission.id}", True, submission.permalink)
         ner = tokens(fake.body)
         if ner:
             ner_list.append((fake, ner))

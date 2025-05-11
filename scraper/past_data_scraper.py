@@ -16,10 +16,14 @@ DB_PARAMS = {
     "port": os.getenv("POSTGRES_PORT"),
 }
 POSTS_FILE = r"C:\Users\Kendall Eberly\Downloads\wallstreetbets_submissions\wallstreetbets_submissions"
-COMMENTS_FILE = r"C:\Users\Kendall Eberly\Downloads\wallstreetbets_comments\wallstreetbets_comments"
+COMMENTS_FILE = (
+    r"C:\Users\Kendall Eberly\Downloads\wallstreetbets_comments\wallstreetbets_comments"
+)
+
 
 def clean_str(s):
     return s.replace("\x00", "") if isinstance(s, str) else s
+
 
 def stream_items(path):
     with open(path, encoding="utf-8", errors="replace") as f:
@@ -27,6 +31,7 @@ def stream_items(path):
             line = line.strip()
             if line:
                 yield json.loads(line)
+
 
 async def create_tables(pool):
     async with pool.acquire() as conn:
@@ -73,33 +78,36 @@ async def create_tables(pool):
             )
         """)
 
+
 async def batch_insert_posts(pool, records):
     now = time.time()
     vals = []
     for r in records:
-        vals.append((
-            clean_str(r.get("id")),
-            clean_str(r.get("title")),
-            clean_str(r.get("selftext")),
-            clean_str(r.get("author")),
-            float(r.get("created_utc") or 0),
-            int(r.get("num_comments") or 0),
-            int(r.get("score") or 0),
-            float(r.get("upvote_ratio") or 0),
-            clean_str(r.get("url")),
-            clean_str(r.get("permalink")),
-            clean_str(r.get("subreddit")),
-            bool(r.get("over_18")),
-            bool(r.get("stickied")),
-            bool(r.get("locked")),
-            bool(r.get("is_self")),
-            bool(r.get("is_video")),
-            clean_str(r.get("domain")),
-            json.dumps(r.get("media")) if r.get("media") else None,
-            json.dumps(r.get("preview")) if r.get("preview") else None,
-            now,
-            now,
-        ))
+        vals.append(
+            (
+                clean_str(r.get("id")),
+                clean_str(r.get("title")),
+                clean_str(r.get("selftext")),
+                clean_str(r.get("author")),
+                float(r.get("created_utc") or 0),
+                int(r.get("num_comments") or 0),
+                int(r.get("score") or 0),
+                float(r.get("upvote_ratio") or 0),
+                clean_str(r.get("url")),
+                clean_str(r.get("permalink")),
+                clean_str(r.get("subreddit")),
+                bool(r.get("over_18")),
+                bool(r.get("stickied")),
+                bool(r.get("locked")),
+                bool(r.get("is_self")),
+                bool(r.get("is_video")),
+                clean_str(r.get("domain")),
+                json.dumps(r.get("media")) if r.get("media") else None,
+                json.dumps(r.get("preview")) if r.get("preview") else None,
+                now,
+                now,
+            )
+        )
     async with pool.acquire() as conn:
         for i in range(0, len(vals), 500):
             await conn.executemany(
@@ -107,7 +115,9 @@ async def batch_insert_posts(pool, records):
                 vals[i : i + 500],
             )
 
+
 pipeline = load_model()
+
 
 async def batch_insert_comments(pool, records):
     now = time.time()
@@ -127,27 +137,30 @@ async def batch_insert_comments(pool, records):
         return
     vals = []
     for r, ner in valid:
-        vals.append((
-            clean_str(r.get("id")),
-            clean_str(r.get("post_id")),
-            clean_str(r.get("author")),
-            clean_str(r.get("body")),
-            float(r.get("created_utc") or 0),
-            int(r.get("score") or 0),
-            clean_str(r.get("parent_id")),
-            bool(r.get("is_submitter")),
-            clean_str(r.get("permalink")),
-            now,
-            ner["Stock"],
-            ner["Price"],
-            ner["Date"],
-        ))
+        vals.append(
+            (
+                clean_str(r.get("id")),
+                clean_str(r.get("post_id")),
+                clean_str(r.get("author")),
+                clean_str(r.get("body")),
+                float(r.get("created_utc") or 0),
+                int(r.get("score") or 0),
+                clean_str(r.get("parent_id")),
+                bool(r.get("is_submitter")),
+                clean_str(r.get("permalink")),
+                now,
+                ner["Stock"],
+                ner["Price"],
+                ner["Date"],
+            )
+        )
     async with pool.acquire() as conn:
         for i in range(0, len(vals), 500):
             await conn.executemany(
                 "INSERT INTO comments(comment_id,post_id,author,body,created_utc,score,parent_id,is_submitter,permalink,last_updated_utc,extracted_stock,extracted_price,extracted_date) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13) ON CONFLICT(comment_id) DO UPDATE SET score=EXCLUDED.score,last_updated_utc=EXCLUDED.last_updated_utc,extracted_stock=EXCLUDED.extracted_stock,extracted_price=EXCLUDED.extracted_price,extracted_date=EXCLUDED.extracted_date",
                 vals[i : i + 500],
             )
+
 
 async def import_posts(pool):
     batch = []
@@ -159,6 +172,7 @@ async def import_posts(pool):
     if batch:
         await batch_insert_posts(pool, batch)
 
+
 async def import_comments(pool):
     batch = []
     for comment in stream_items(COMMENTS_FILE):
@@ -169,10 +183,10 @@ async def import_comments(pool):
     if batch:
         await batch_insert_comments(pool, batch)
 
+
 async def run_script():
     pool = await asyncpg.create_pool(**DB_PARAMS)
     await create_tables(pool)
     await import_posts(pool)
     await import_comments(pool)
     await pool.close()
-
