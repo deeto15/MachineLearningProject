@@ -1,3 +1,4 @@
+from collections import Counter
 import os
 import time
 import json
@@ -8,6 +9,15 @@ import asyncpraw
 import asyncpg
 import asyncprawcore
 from dotenv import load_dotenv
+from Binary_Classifier.BERT_loader import load_model
+from Binary_Classifier.predictions import tokens
+
+
+class FakeComment:
+    def __init__(self, id, body):
+        self.id = id
+        self.body = body
+
 
 load_dotenv()
 reddit_semaphore = asyncio.Semaphore(2)
@@ -223,43 +233,88 @@ async def upsert_posts_for_update(pool, submissions):
             await asyncio.sleep(random.uniform(0.5, 1.5))
 
 
+pipeline = load_model()
+
+
 async def batch_insert_comments(pool, submission):
     try:
         await submission.load()
         async with reddit_semaphore:
             await safe_replace_more(submission.comments, limit=32)
-        all_comments = submission.comments.list()
-        now = time.time()
-        records = []
-        for c in all_comments:
-            if not hasattr(c, "id") or isinstance(c, asyncpraw.models.MoreComments):
-                continue
-            records.append(
-                (
-                    c.id,
-                    submission.id,
-                    getattr(c.author, "name", None),
-                    c.body,
-                    c.created_utc,
-                    c.score,
-                    c.parent_id,
-                    c.is_submitter,
-                    c.permalink,
-                    now,
-                )
+        comments = [
+            c
+            for c in submission.comments.list()
+            if hasattr(c, "id") and not isinstance(c, asyncpraw.models.MoreComments)
+        ]
+        print(f"scraped {len(comments)} comments for post {submission.id}")
+
+        ner_list = []
+        combined = submission.title + "\n\n" + submission.selftext
+        fake = FakeComment(f"post_{submission.id}", combined)
+        ner = tokens(fake.body)
+        if ner:
+            ner_list.append((fake, ner))
+            print(ner)
+            print(
+                "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
             )
+        for c in comments:
+            ner = tokens(c.body)
+            if ner:
+                ner_list.append((c, ner))
+        print(f"{len(ner_list)} items passed NER")
+
+        if not ner_list:
+            return
+        texts = [c.body for c, _ in ner_list]
+        print(texts)
+        preds, _ = await asyncio.get_event_loop().run_in_executor(
+            None, lambda: pipeline.predict_batch(texts, batch_size=32)
+        )
+        print(f"classifier output counts: {Counter(preds)}")
+
+        valid = [(c, ner) for (c, ner), p in zip(ner_list, preds) if p == 1]
+        print(f"{len(valid)} comments passed classification")
+
+        if not valid:
+            return
+
+        now = time.time()
+        records = [
+            (
+                c.id,
+                submission.id,
+                getattr(c.author, "name", None),
+                c.body,
+                c.created_utc,
+                c.score,
+                c.parent_id,
+                c.is_submitter,
+                c.permalink,
+                now,
+                ner["Stock"],
+                ner["Price"],
+                ner["Date"],
+            )
+            for c, ner in valid
+        ]
+
         async with pool.acquire() as conn:
             for i in range(0, len(records), 500):
                 await conn.executemany(
                     """
                     INSERT INTO comments (
                         comment_id, post_id, author, body, created_utc,
-                        score, parent_id, is_submitter, permalink, last_updated_utc
+                        score, parent_id, is_submitter, permalink, last_updated_utc,
+                        extracted_stock, extracted_price, extracted_date
                     ) VALUES (
-                        $1,$2,$3,$4,$5,$6,$7,$8,$9,$10
+                        $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13
                     ) ON CONFLICT (comment_id) DO UPDATE SET
                         score = EXCLUDED.score,
-                        last_updated_utc = EXCLUDED.last_updated_utc
+                        last_updated_utc = EXCLUDED.last_updated_utc,
+                        extracted_stock = EXCLUDED.extracted_stock,
+                        extracted_price = EXCLUDED.extracted_price,
+                        extracted_date = EXCLUDED.extracted_date
                 """,
                     records[i : i + 500],
                 )
@@ -462,7 +517,7 @@ async def main():
         await reddit.user.me()
         await create_tables(pool)
         subreddit = await reddit.subreddit("wallstreetbets")
-        await update_existing_posts(pool, reddit)
+        # await update_existing_posts(pool, reddit)
         await scrape_new_posts(pool, subreddit)
     finally:
         await reddit.close()
