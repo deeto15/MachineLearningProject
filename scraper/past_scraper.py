@@ -4,7 +4,7 @@ import asyncpg
 from dotenv import load_dotenv
 from Binary_Classifier.BERT_loader import load_model
 from Binary_Classifier.predictions import tokens
-from helper_methods import create_tables, DB_PARAMS
+from helper_methods import INSERT_COMMENTS, INSERT_POSTS, create_tables, DB_PARAMS
 
 load_dotenv()
 
@@ -12,6 +12,7 @@ POSTS_FILE = r"C:\Users\Kendall Eberly\Downloads\wallstreetbets_submissions\wall
 COMMENTS_FILE = (
     r"C:\Users\Kendall Eberly\Downloads\wallstreetbets_comments\wallstreetbets_comments"
 )
+CATCH_ALL_ID = "__CATCH_ALL__"
 
 
 def clean_str(s):
@@ -24,6 +25,9 @@ def stream_items(path):
             line = line.strip()
             if line:
                 yield json.loads(line)
+
+
+pipeline = load_model()
 
 
 async def batch_insert_posts(pool, records):
@@ -52,18 +56,39 @@ async def batch_insert_posts(pool, records):
                 json.dumps(r.get("media")) if r.get("media") else None,
                 json.dumps(r.get("preview")) if r.get("preview") else None,
                 now,
-                now,
             )
         )
     async with pool.acquire() as conn:
         for i in range(0, len(vals), 500):
-            await conn.executemany(
-                "INSERT INTO posts(post_id,title,selftext,author,created_utc,num_comments,score,upvote_ratio,url,permalink,subreddit,over_18,stickied,locked,is_self,is_video,domain,media,preview,last_updated_utc,last_checked_utc) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21) ON CONFLICT(post_id) DO UPDATE SET title=EXCLUDED.title,selftext=EXCLUDED.selftext,author=EXCLUDED.author,num_comments=EXCLUDED.num_comments,score=EXCLUDED.score,upvote_ratio=EXCLUDED.upvote_ratio,url=EXCLUDED.url,permalink=EXCLUDED.permalink,subreddit=EXCLUDED.subreddit,over_18=EXCLUDED.over_18,stickied=EXCLUDED.stickied,locked=EXCLUDED.locked,is_self=EXCLUDED.is_self,is_video=EXCLUDED.is_video,domain=EXCLUDED.domain,media=EXCLUDED.media,preview=EXCLUDED.preview,last_updated_utc=EXCLUDED.last_updated_utc,last_checked_utc=EXCLUDED.last_checked_utc",
-                vals[i : i + 500],
-            )
+            await conn.executemany(INSERT_POSTS, vals[i : i + 500])
 
 
-pipeline = load_model()
+async def insert_catch_all(pool):
+    now = time.time()
+    async with pool.acquire() as conn:
+        await conn.execute(
+            INSERT_POSTS,
+            CATCH_ALL_ID,
+            "",
+            "",
+            "",
+            0.0,
+            0,
+            0,
+            0.0,
+            "",
+            "",
+            "",
+            False,
+            False,
+            False,
+            False,
+            False,
+            "",
+            None,
+            None,
+            now,
+        )
 
 
 async def batch_insert_comments(pool, records):
@@ -73,7 +98,6 @@ async def batch_insert_comments(pool, records):
         body = clean_str(r.get("body"))
         ner = tokens(body)
         if ner:
-            print(ner)
             ner_list.append((r, ner))
     if not ner_list:
         return
@@ -82,31 +106,34 @@ async def batch_insert_comments(pool, records):
     valid = [(r, ner) for (r, ner), p in zip(ner_list, preds) if p == 1]
     if not valid:
         return
-    vals = []
-    for r, ner in valid:
-        vals.append(
-            (
-                clean_str(r.get("id")),
-                clean_str(r.get("post_id")),
-                clean_str(r.get("author")),
-                clean_str(r.get("body")),
-                float(r.get("created_utc") or 0),
-                int(r.get("score") or 0),
-                clean_str(r.get("parent_id")),
-                bool(r.get("is_submitter")),
-                clean_str(r.get("permalink")),
-                now,
-                ner["Stock"],
-                ner["Price"],
-                ner["Date"],
-            )
-        )
+    batch_post_ids = [r["post_id"] for r, _ in valid]
     async with pool.acquire() as conn:
-        for i in range(0, len(vals), 500):
-            await conn.executemany(
-                "INSERT INTO comments(comment_id,post_id,author,body,created_utc,score,parent_id,is_submitter,permalink,last_updated_utc,extracted_stock,extracted_price,extracted_date) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13) ON CONFLICT(comment_id) DO UPDATE SET score=EXCLUDED.score,last_updated_utc=EXCLUDED.last_updated_utc,extracted_stock=EXCLUDED.extracted_stock,extracted_price=EXCLUDED.extracted_price,extracted_date=EXCLUDED.extracted_date",
-                vals[i : i + 500],
+        rows = await conn.fetch(
+            "SELECT post_id FROM posts WHERE post_id = ANY($1)", batch_post_ids
+        )
+        existing = {row["post_id"] for row in rows}
+        vals = []
+        for r, ner in valid:
+            pid = r.get("post_id") if r.get("post_id") in existing else CATCH_ALL_ID
+            vals.append(
+                (
+                    clean_str(r.get("id")),
+                    pid,
+                    clean_str(r.get("author")),
+                    clean_str(r.get("body")),
+                    float(r.get("created_utc") or 0),
+                    int(r.get("score") or 0),
+                    clean_str(r.get("parent_id")),
+                    bool(r.get("is_submitter")),
+                    clean_str(r.get("permalink")),
+                    now,
+                    ner["Stock"],
+                    ner["Price"],
+                    ner["Date"],
+                )
             )
+        for i in range(0, len(vals), 500):
+            await conn.executemany(INSERT_COMMENTS, vals[i : i + 500])
 
 
 async def import_posts(pool):
@@ -131,9 +158,10 @@ async def import_comments(pool):
         await batch_insert_comments(pool, batch)
 
 
-async def run_script():
+async def run_past_scraper():
     pool = await asyncpg.create_pool(**DB_PARAMS)
     await create_tables(pool)
+    await insert_catch_all(pool)
     await import_posts(pool)
     await import_comments(pool)
     await pool.close()

@@ -1,5 +1,7 @@
 class FakeComment:
-    def __init__(self, id, author, body, created_utc, score, parent_id, is_submitter, permalink):
+    def __init__(
+        self, id, author, body, created_utc, score, parent_id, is_submitter, permalink
+    ):
         self.id = id
         self.author = author
         self.body = body
@@ -11,11 +13,14 @@ class FakeComment:
 
 
 import os
-REDDIT_CLIENT_ID = os.getenv("REDDIT_CLIENT_ID")
-REDDIT_CLIENT_SECRET = os.getenv("REDDIT_CLIENT_SECRET")
-REDDIT_USERNAME = os.getenv("REDDIT_USERNAME")
-REDDIT_PASSWORD = os.getenv("REDDIT_PASSWORD")
-REDDIT_USER_AGENT = os.getenv("REDDIT_USER_AGENT")
+
+REDDIT_PARAMS = {
+    "client_id": os.getenv("REDDIT_CLIENT_ID"),
+    "client_secret": os.getenv("REDDIT_CLIENT_SECRET"),
+    "username": os.getenv("REDDIT_USERNAME"),
+    "password": os.getenv("REDDIT_PASSWORD"),
+    "user_agent": os.getenv("REDDIT_USER_AGENT"),
+}
 
 DB_PARAMS = {
     "user": os.getenv("POSTGRES_USER"),
@@ -70,3 +75,54 @@ async def create_tables(pool):
                 extracted_date TEXT
             )
         """)
+
+
+INSERT_COMMENTS = (
+    """
+                    INSERT INTO comments (
+                        comment_id, post_id, author, body, created_utc,
+                        score, parent_id, is_submitter, permalink, last_updated_utc,
+                        extracted_stock, extracted_price, extracted_date
+                    ) VALUES (
+                        $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13
+                    ) ON CONFLICT (comment_id) DO UPDATE SET
+                        score = EXCLUDED.score,
+                        last_updated_utc = EXCLUDED.last_updated_utc,
+                        extracted_stock = EXCLUDED.extracted_stock,
+                        extracted_price = EXCLUDED.extracted_price,
+                        extracted_date = EXCLUDED.extracted_date
+                """,
+)
+
+INSERT_POSTS = (
+    """
+                INSERT INTO posts (
+                    post_id, title, selftext, author, created_utc,
+                    num_comments, score, upvote_ratio, url, permalink,
+                    subreddit, over_18, stickied, locked,
+                    is_self, is_video, domain, media, preview,
+                    last_updated_utc
+                ) VALUES (
+                    $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,
+                    $11,$12,$13,$14,$15,$16,$17,$18,$19,$20
+                ) ON CONFLICT (post_id) DO UPDATE SET
+                    title = EXCLUDED.title,
+                    selftext = EXCLUDED.selftext,
+                    author = EXCLUDED.author,
+                    num_comments = EXCLUDED.num_comments,
+                    score = EXCLUDED.score,
+                    upvote_ratio = EXCLUDED.upvote_ratio,
+                    url = EXCLUDED.url,
+                    permalink = EXCLUDED.permalink,
+                    subreddit = EXCLUDED.subreddit,
+                    over_18 = EXCLUDED.over_18,
+                    stickied = EXCLUDED.stickied,
+                    locked = EXCLUDED.locked,
+                    is_self = EXCLUDED.is_self,
+                    is_video = EXCLUDED.is_video,
+                    domain = EXCLUDED.domain,
+                    media = EXCLUDED.media,
+                    preview = EXCLUDED.preview,
+                    last_updated_utc = EXCLUDED.last_updated_utc
+            """,
+)
