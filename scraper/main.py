@@ -11,36 +11,11 @@ import asyncprawcore
 from dotenv import load_dotenv
 from Binary_Classifier.BERT_loader import load_model
 from Binary_Classifier.predictions import tokens
-from scraper.past_data_scraper import run_script
-
-
-class FakeComment:
-    def __init__(self, id, author, body, created_utc, score, parent_id, is_submitter, permalink):
-        self.id = id
-        self.author = author
-        self.body = body
-        self.created_utc = created_utc
-        self.score = score
-        self.parent_id = parent_id
-        self.is_submitter = is_submitter
-        self.permalink = permalink
+from scraper.helper_methods import create_tables, FakeComment, DB_PARAMS, REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET, REDDIT_PASSWORD, REDDIT_USER_AGENT, REDDIT_USERNAME
 
 
 load_dotenv()
 reddit_semaphore = asyncio.Semaphore(2)
-REDDIT_CLIENT_ID = os.getenv("REDDIT_CLIENT_ID")
-REDDIT_CLIENT_SECRET = os.getenv("REDDIT_CLIENT_SECRET")
-REDDIT_USERNAME = os.getenv("REDDIT_USERNAME")
-REDDIT_PASSWORD = os.getenv("REDDIT_PASSWORD")
-REDDIT_USER_AGENT = os.getenv("REDDIT_USER_AGENT")
-DB_PARAMS = {
-    "user": os.getenv("POSTGRES_USER"),
-    "password": os.getenv("POSTGRES_PASSWORD"),
-    "database": os.getenv("POSTGRES_DB"),
-    "host": os.getenv("POSTGRES_HOST"),
-    "port": os.getenv("POSTGRES_PORT"),
-}
-
 
 def safe_json(obj, attr):
     val = getattr(obj, attr, None)
@@ -64,48 +39,6 @@ async def retry_api_call(coro, retries=5):
 async def safe_replace_more(comments, limit):
     await retry_api_call(comments.replace_more(limit=limit))
 
-
-async def create_tables(pool):
-    async with pool.acquire() as conn:
-        await conn.execute("""
-            CREATE TABLE IF NOT EXISTS posts (
-                post_id TEXT PRIMARY KEY,
-                title TEXT,
-                selftext TEXT,
-                author TEXT,
-                created_utc DOUBLE PRECISION,
-                num_comments INTEGER,
-                score INTEGER,
-                upvote_ratio DOUBLE PRECISION,
-                url TEXT,
-                permalink TEXT,
-                subreddit TEXT,
-                over_18 BOOLEAN,
-                stickied BOOLEAN,
-                locked BOOLEAN,
-                is_self BOOLEAN,
-                is_video BOOLEAN,
-                domain TEXT,
-                media JSONB,
-                preview JSONB,
-                last_updated_utc DOUBLE PRECISION,
-                last_checked_utc DOUBLE PRECISION
-            )
-        """)
-        await conn.execute("""
-            CREATE TABLE IF NOT EXISTS comments (
-                comment_id TEXT PRIMARY KEY,
-                post_id TEXT REFERENCES posts(post_id),
-                author TEXT,
-                body TEXT,
-                created_utc DOUBLE PRECISION,
-                score INTEGER,
-                parent_id TEXT,
-                is_submitter BOOLEAN,
-                permalink TEXT,
-                last_updated_utc DOUBLE PRECISION
-            )
-        """)
 
 
 async def batch_insert_posts(pool, submissions):
@@ -261,10 +194,6 @@ async def batch_insert_comments(pool, submission):
         ner = tokens(fake.body)
         if ner:
             ner_list.append((fake, ner))
-            print(ner)
-            print(
-                "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-            )
         for c in comments:
             ner = tokens(c.body)
             if ner:
@@ -282,6 +211,7 @@ async def batch_insert_comments(pool, submission):
 
         valid = [(c, ner) for (c, ner), p in zip(ner_list, preds) if p == 1]
         print(f"{len(valid)} comments passed classification")
+        print(valid)
 
         if not valid:
             return
