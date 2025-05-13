@@ -1,3 +1,6 @@
+import os
+from dotenv import load_dotenv
+
 class FakeComment:
     def __init__(
         self, id, author, body, created_utc, score, parent_id, is_submitter, permalink
@@ -12,8 +15,7 @@ class FakeComment:
         self.permalink = permalink
 
 
-import os
-
+load_dotenv()
 REDDIT_PARAMS = {
     "client_id": os.getenv("REDDIT_CLIENT_ID"),
     "client_secret": os.getenv("REDDIT_CLIENT_SECRET"),
@@ -54,7 +56,6 @@ async def create_tables(pool):
                 domain TEXT,
                 media JSONB,
                 preview JSONB,
-                last_updated_utc DOUBLE PRECISION,
                 last_checked_utc DOUBLE PRECISION
             )
         """)
@@ -69,7 +70,6 @@ async def create_tables(pool):
                 parent_id TEXT,
                 is_submitter BOOLEAN,
                 permalink TEXT,
-                last_updated_utc DOUBLE PRECISION,
                 extracted_stock TEXT,
                 extracted_price TEXT,
                 extracted_date TEXT
@@ -81,17 +81,16 @@ INSERT_COMMENTS = (
     """
                     INSERT INTO comments (
                         comment_id, post_id, author, body, created_utc,
-                        score, parent_id, is_submitter, permalink, last_updated_utc,
+                        score, parent_id, is_submitter, permalink,
                         extracted_stock, extracted_price, extracted_date
                     ) VALUES (
                         $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13
                     ) ON CONFLICT (comment_id) DO UPDATE SET
                         score = EXCLUDED.score,
-                        last_updated_utc = EXCLUDED.last_updated_utc,
                         extracted_stock = EXCLUDED.extracted_stock,
                         extracted_price = EXCLUDED.extracted_price,
                         extracted_date = EXCLUDED.extracted_date
-                """,
+                """
 )
 
 INSERT_POSTS = (
@@ -101,7 +100,7 @@ INSERT_POSTS = (
                     num_comments, score, upvote_ratio, url, permalink,
                     subreddit, over_18, stickied, locked,
                     is_self, is_video, domain, media, preview,
-                    last_updated_utc
+                    last_checked_utc
                 ) VALUES (
                     $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,
                     $11,$12,$13,$14,$15,$16,$17,$18,$19,$20
@@ -123,6 +122,22 @@ INSERT_POSTS = (
                     domain = EXCLUDED.domain,
                     media = EXCLUDED.media,
                     preview = EXCLUDED.preview,
-                    last_updated_utc = EXCLUDED.last_updated_utc
-            """,
+                    last_checked_utc = EXCLUDED.last_checked_utc
+            """
+)
+
+
+INSERT_NEW_POSTS = (
+    """
+    INSERT INTO posts (
+        post_id, title, selftext, author, created_utc,
+        num_comments, score, upvote_ratio, url, permalink,
+        subreddit, over_18, stickied, locked,
+        is_self, is_video, domain, media, preview,
+        last_checked_utc
+    ) VALUES (
+        $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,
+        $11,$12,$13,$14,$15,$16,$17,$18,$19,$20
+    ) ON CONFLICT (post_id) DO NOTHING
+    """
 )

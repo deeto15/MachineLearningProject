@@ -13,6 +13,7 @@ from Binary_Classifier.BERT_loader import load_model
 from Binary_Classifier.predictions import tokens
 from scraper.helper_methods import (
     INSERT_COMMENTS,
+    INSERT_NEW_POSTS,
     INSERT_POSTS,
     create_tables,
     FakeComment,
@@ -48,6 +49,37 @@ async def safe_replace_more(comments, limit):
     await retry_api_call(comments.replace_more(limit=limit))
 
 
+async def upsert_new_posts(pool, submissions):
+    records = [
+        (
+            s.id,
+            s.title,
+            s.selftext,
+            getattr(s.author, "name", None),
+            s.created_utc,
+            s.num_comments,
+            s.score,
+            s.upvote_ratio,
+            s.url,
+            s.permalink,
+            str(s.subreddit),
+            s.over_18,
+            s.stickied,
+            s.locked,
+            s.is_self,
+            s.is_video,
+            s.domain,
+            safe_json(s, "media"),
+            safe_json(s, "preview"),
+            s.created_utc
+        )
+        for s in submissions
+    ]
+    async with pool.acquire() as conn:
+        for i in range(0, len(records), 500):
+            await conn.executemany(INSERT_NEW_POSTS, records[i:i+500])
+            await asyncio.sleep(random.uniform(0.5,1.5))
+
 async def upsert_posts_for_update(pool, submissions):
     now = time.time()
     records = [
@@ -71,18 +103,14 @@ async def upsert_posts_for_update(pool, submissions):
             s.domain,
             safe_json(s, "media"),
             safe_json(s, "preview"),
-            now,
+            now
         )
         for s in submissions
     ]
     async with pool.acquire() as conn:
         for i in range(0, len(records), 500):
-            await conn.executemany(
-                INSERT_POSTS,
-                records[i : i + 500],
-            )
-            await asyncio.sleep(random.uniform(0.5, 1.5))
-
+            await conn.executemany(INSERT_POSTS, records[i:i+500])
+            await asyncio.sleep(random.uniform(0.5,1.5))
 
 pipeline = load_model()
 
