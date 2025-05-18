@@ -71,18 +71,14 @@ async def upsert_posts_for_update(pool, submissions):
             s.domain,
             safe_json(s, "media"),
             safe_json(s, "preview"),
-            now,
+            now
         )
         for s in submissions
     ]
     async with pool.acquire() as conn:
         for i in range(0, len(records), 500):
-            await conn.executemany(
-                INSERT_POSTS,
-                records[i : i + 500],
-            )
-            await asyncio.sleep(random.uniform(0.5, 1.5))
-
+            await conn.executemany(INSERT_POSTS, records[i:i+500])
+            await asyncio.sleep(random.uniform(0.5,1.5))
 
 pipeline = load_model()
 
@@ -91,7 +87,7 @@ async def batch_insert_comments(pool, submission):
     try:
         await submission.load()
         async with reddit_semaphore:
-            await safe_replace_more(submission.comments, limit=None)
+            await safe_replace_more(submission.comments, limit=256)
         comments = [
             c
             for c in submission.comments.list()
@@ -103,7 +99,7 @@ async def batch_insert_comments(pool, submission):
         combined = submission.title + "\n\n" + submission.selftext
         fake = FakeComment(
             submission.id,
-            getattr(submission.author, "name", None),
+            submission.author,
             combined,
             submission.created_utc,
             submission.score,
@@ -136,7 +132,6 @@ async def batch_insert_comments(pool, submission):
         if not valid:
             return
 
-        now = time.time()
         records = [
             (
                 c.id,
@@ -148,7 +143,6 @@ async def batch_insert_comments(pool, submission):
                 c.parent_id,
                 c.is_submitter,
                 c.permalink,
-                now,
                 ner["Stock"],
                 ner["Price"],
                 ner["Date"],
@@ -213,26 +207,23 @@ async def update_existing_posts(pool, reddit):
         fullnames = [f"t3_{pid}" for pid in batch_ids]
 
         try:
-            # 3) fetch & upsert metadata only
             submissions = await retry_api_call(fetch_submissions(reddit, fullnames))
             if not submissions:
                 continue
-            await upsert_posts_for_update(pool, submissions)
 
-            # 4) per-post: insert comments, then mark checked
+            # Instead of upserting all posts at once, do it per post:
             for s in submissions:
+                await upsert_posts_for_update(pool, [s])  # upsert one post
                 total_expected += s.num_comments or 0
 
                 await batch_insert_comments(pool, s)
 
                 async with pool.acquire() as conn:
-                    # mark this post as fully checked
                     await conn.execute(
                         "UPDATE posts SET last_checked_utc = $1 WHERE post_id = $2",
                         time.time(),
                         s.id,
                     )
-                    # count inserted comments
                     count = await conn.fetchval(
                         "SELECT COUNT(*) FROM comments WHERE post_id = $1", s.id
                     )
@@ -245,6 +236,7 @@ async def update_existing_posts(pool, reddit):
             delay = 2 ** (batch_index // 100 + 1)
             print(f"Rate limited in batch {batch_index // 100 + 1}, sleeping {delay}s")
             await asyncio.sleep(delay)
+
         except Exception as e:
             print(
                 f"❌ Error in batch {batch_index // 100 + 1}: {type(e).__name__}: {e}"
@@ -259,7 +251,7 @@ async def update_existing_posts(pool, reddit):
 
 async def scrape_new_posts(pool, subreddit):
     print("Starting scrape_new_posts")
-
+    MAX_AGE = 30 * 86400
     # 1) pull down listings
     seen, ids, posts = set(), [], []
     for listing in ["new", "rising", "top", "hot"]:
@@ -298,7 +290,7 @@ async def scrape_new_posts(pool, subreddit):
 
         # your three time‐based rules
         if (
-            not rec
+            not rec and age <= MAX_AGE
             or (age <= 86400 and since >= 900)
             or (age <= 604800 and since >= 7200)
             or (age <= 2592000 and since >= 43200)
@@ -355,8 +347,8 @@ async def run_live_scraper():
         await reddit.user.me()
         await create_tables(pool)
         subreddit = await reddit.subreddit("wallstreetbets")
-        await update_existing_posts(pool, reddit)
         await scrape_new_posts(pool, subreddit)
+        await update_existing_posts(pool, reddit)
     finally:
         await reddit.close()
         await pool.close()
