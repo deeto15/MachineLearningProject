@@ -169,7 +169,6 @@ async def fetch_submissions(reddit, fullnames):
 async def update_existing_posts(pool, reddit):
     print("Starting update_existing_posts")
 
-    # 1) fetch IDs that need checking
     async with pool.acquire() as conn:
         now = time.time()
         rows = await conn.fetch(
@@ -180,20 +179,19 @@ async def update_existing_posts(pool, reddit):
                AND (
                      last_checked_utc IS NULL
                   OR (
-                       (created_utc > $2 AND $3 - last_checked_utc >= $4)
-                    OR (created_utc > $5 AND $3 - last_checked_utc >= $6)
-                    OR (created_utc > $7 AND $3 - last_checked_utc >= $8)
+                       (created_utc > $2 AND $3 - last_checked_utc >= $4)            -- <1d: every hour
+                    OR (created_utc > $5 AND created_utc <= $2 AND $3 - last_checked_utc >= $6)   -- 1d-7d: every 6h
+                    OR (created_utc > $1 AND created_utc <= $5 AND $3 - last_checked_utc >= $7)   -- 7d-30d: every 24h
                    )
                )
             """,
-            now - 2592000,  # 30d
-            now - 86400,  # 1d
-            now,
-            3600,  # hourly for <1d
-            now - 604800,  # 7d
-            43200,  # every 12h for <7d
-            now - 2592000,  # 30d
-            86400,  # every 24h for <30d
+            now - 2592000,     # $1: 30 days ago
+            now - 86400,       # $2: 1 day ago
+            now,               # $3: current time
+            3600,              # $4: every hour
+            now - 604800,      # $5: 7 days ago
+            21600,             # $6: every 6 hours
+            86400,             # $7: every 24 hours
         )
     ids = [r["post_id"] for r in rows]
     print(f"Found {len(ids)} posts to update")
@@ -251,7 +249,6 @@ async def update_existing_posts(pool, reddit):
 
 async def scrape_new_posts(pool, subreddit):
     print("Starting scrape_new_posts")
-    MAX_AGE = 30 * 86400
     # 1) pull down listings
     seen, ids, posts = set(), [], []
     for listing in ["new", "rising", "top", "hot"]:
@@ -266,48 +263,22 @@ async def scrape_new_posts(pool, subreddit):
 
     print(f"Fetched {len(posts)} unique posts from listings")
 
-    # 2) find which ones need processing
+    # 2) Only process posts not already in the DB
     async with pool.acquire() as conn:
         existing = await conn.fetch(
-            "SELECT post_id, created_utc, last_checked_utc "
-            "FROM posts WHERE post_id = ANY($1)",
+            "SELECT post_id FROM posts WHERE post_id = ANY($1)",
             ids,
         )
-    existing_map = {
-        r["post_id"]: {
-            "created_utc": r["created_utc"],
-            "last_checked_utc": r["last_checked_utc"] or 0,
-        }
-        for r in existing
-    }
+    existing_ids = {r["post_id"] for r in existing}
+    new_posts = [s for s in posts if s.id not in existing_ids]
 
-    now_ts = time.time()
-    filtered = []
-    for s in posts:
-        rec = existing_map.get(s.id)
-        age = now_ts - (rec["created_utc"] if rec else 0)
-        since = now_ts - (rec["last_checked_utc"] if rec else 0)
-
-        # your three time‐based rules
-        if (
-            not rec and age <= MAX_AGE
-            or (age <= 86400 and since >= 900)
-            or (age <= 604800 and since >= 7200)
-            or (age <= 2592000 and since >= 43200)
-        ):
-            filtered.append(s)
-
-    print(f"{len(filtered)} posts to insert or update")
-
-    # 3) upsert **only** metadata (no last_checked_utc)
-    await upsert_posts_for_update(pool, filtered)
-
-    # 4) per‐post: insert comments, then mark it checked
+    print(f"{len(new_posts)} new posts to insert")
     total_expected = 0
     total_inserted = 0
 
-    for s in filtered:
+    for s in new_posts:
         try:
+            await upsert_posts_for_update(pool, [s])
             total_expected += s.num_comments or 0
 
             # insert all comments for this one post
@@ -331,8 +302,6 @@ async def scrape_new_posts(pool, subreddit):
             print(f"✅ Scraped {count}/{s.num_comments} comments for post {s.id}")
 
         except Exception as e:
-            # on any failure we do *not* update last_checked_utc,
-            # so next run we'll retry exactly this post
             print(f"❌ Failed processing post {s.id}: {e}")
             traceback.print_exc()
 
