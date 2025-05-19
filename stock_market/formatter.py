@@ -1,8 +1,10 @@
+from itertools import product
 import re
 from datetime import datetime, timedelta, timezone
 
 from dateutil.relativedelta import FR, MO, TH, relativedelta
-
+#TODO formatter is still missing some formats
+#TODO fix the wierd date bugs 
 
 # Function to generate static mappings based on the comment's timestamp
 def get_static_mappings(base_datetime):
@@ -40,8 +42,10 @@ def get_static_mappings(base_datetime):
         "eod": base_datetime.strftime("%m/%d/%Y"),  # End of the day
         "end of day": base_datetime.strftime("%m/%d/%Y"),
         "today": base_datetime.strftime("%m/%d/%Y"),
+        "tonight": base_datetime.strftime("%m/%d/%Y"),
         "tomorrow": tomorrow.strftime("%m/%d/%Y"),
         "this week": middle_of_week.strftime("%m/%d/%Y"),
+        "weekly": end_of_week.strftime("%m/%d/%Y"),
         "eow": end_of_week.strftime("%m/%d/%Y"),  # End of the week
         "eotw": end_of_week.strftime("%m/%d/%Y"),  # End of the week
         "end of the week": end_of_week.strftime("%m/%d/%Y"),  # End of the week
@@ -98,50 +102,129 @@ def parse_relative_date(date_string, base_datetime):
     return None
 
 
-def parse_specific_date_format(date_string, base_datetime):
-    # Normalize the input to replace dashes and slashes with spaces
-    normalized_date_string = date_string.replace("-", " ").replace("/", " ")
-
-    # List of date formats to try
-    date_formats = [
-        "%m %d %y",  # MM DD YY format
-        "%m %d",  # MM DD format (year will be added)
-        "%b %d",  # Abbreviated Month Day (e.g., "Nov 12")
-        "%b%d",  # jan12
-        "%B %d",  # Full Month Day (e.g., "November 12")
-        "%d %b",  # Day Abbreviated Month (e.g., "12 Nov")
-        "%d %B",  # Day Full Month (e.g., "12 November")
-        "%b",  # month only abbreviated (nov)
-        "%B",  # month only normal (november)
-        "%Y",  # year only (2024)
+def generate_date_formats():
+    months_abbr = ['%b']
+    months_full = ['%B']
+    days = ['%d']
+    years_full = ['%Y']
+    years_short = ['%y']
+    separators = [' ', '-', '/', '']
+    formats = set()
+    for m in months_abbr + months_full:
+        for d in days:
+            for y in years_full + years_short + ['']:
+                for sep1, sep2 in product(separators, repeat=2):
+                    if y:
+                        formats.add(f'{m}{sep1}{d}{sep2}{y}')
+                        formats.add(f'{d}{sep1}{m}{sep2}{y}')
+                        formats.add(f'{y}{sep1}{m}{sep2}{d}')
+                    else:
+                        formats.add(f'{m}{sep1}{d}')
+                        formats.add(f'{d}{sep1}{m}')
+    for m in months_abbr + months_full:
+        formats.add(m)
+        # month + ' + 2-digit year (e.g. Jan '18)
+        formats.add(f"{m} '%y")
+        formats.add(f"{m}’%y")
+        formats.add(f"{m}’%y")
+        formats.add(f"{m}‘%y")
+        formats.add(f"{m}’ %y")
+        formats.add(f"{m}‘ %y")
+        formats.add(f"{m} %y")
+    for d in days:
+        formats.add(d)
+    for y in years_full + years_short:
+        formats.add(y)
+    for m in months_abbr + months_full:
+        for d in days:
+            for y in years_full + years_short:
+                formats.add(f'{m} {d} ‘{y}')
+    extra_formats = [
+    '%m %d %y', '%m %d', '%d %m', '%Y-%m-%d', '%Y/%m/%d', '%Y %m %d',
+    '%m/%Y', '%m/%y', '%m/%d/%Y', '%m/%d/%y'
     ]
+    formats.update(extra_formats)
+    return list(formats)
 
+
+def parse_specific_date_format(date_string, base_datetime):
+    if date_string.lower() == "sept" or date_string.lower().startswith("sept "):
+        date_string = "sep" + date_string[4:]
+    date_string = re.sub(r'(\d+)(st|nd|rd|th)', r'\1', date_string, flags=re.IGNORECASE)
+    date_string = date_string.replace("’", "'").replace("‘", "'")
+    date_formats = generate_date_formats()
+    # Try raw string first
     for date_format in date_formats:
         try:
             if date_format == "%Y":
-                # Handle year-only input by setting default month and day
+                specific_date = datetime.strptime(date_string, date_format)
+                specific_date = specific_date.replace(month=1, day=1)
+            elif "%y" not in date_format and "%Y" not in date_format:
+                date_str = f"{date_string} {base_datetime.year}"
+                format_str = f"{date_format} %Y"
+                specific_date = datetime.strptime(date_str, format_str)
+            else:
+                specific_date = datetime.strptime(date_string, date_format)
+            if "%y" not in date_format and "%Y" not in date_format:
+                temp_date = specific_date.replace(year=base_datetime.year)
+                if temp_date.date() < base_datetime.date():
+                    specific_date = specific_date.replace(year=base_datetime.year + 1)
+                else:
+                    specific_date = specific_date.replace(year=base_datetime.year)
+            return specific_date
+        except ValueError:
+            continue
+    # Try with normalized string
+    normalized_date_string = date_string.replace("-", " ").replace("/", " ")
+    for date_format in date_formats:
+        try:
+            if date_format == "%Y":
                 specific_date = datetime.strptime(normalized_date_string, date_format)
                 specific_date = specific_date.replace(month=1, day=1)
             elif "%y" not in date_format and "%Y" not in date_format:
-                # Formats that do not include a year; append the current year
                 date_str = f"{normalized_date_string} {base_datetime.year}"
                 format_str = f"{date_format} %Y"
                 specific_date = datetime.strptime(date_str, format_str)
             else:
-                # Formats that include a year (either two-digit or four-digit)
                 specific_date = datetime.strptime(normalized_date_string, date_format)
-
+            if "%y" not in date_format and "%Y" not in date_format:
+                temp_date = specific_date.replace(year=base_datetime.year)
+                if temp_date.date() < base_datetime.date():
+                    specific_date = specific_date.replace(year=base_datetime.year + 1)
+                else:
+                    specific_date = specific_date.replace(year=base_datetime.year)
             return specific_date
         except ValueError:
-            continue  # Try the next format
-
-    # If none of the formats matched, return None
+            continue
+    m = re.match(r'([a-zA-Z]+)\s+(\d{4})', date_string)
+    if m:
+        month_name = m.group(1)
+        year = int(m.group(2))
+        try:
+            month = datetime.strptime(month_name[:3], "%b").month
+        except:
+            try:
+                month = datetime.strptime(month_name, "%B").month
+            except:
+                return None
+        d = datetime(year, month, 1)
+        d = d + relativedelta(weekday=FR(3))
+        return d
+    m2 = re.match(r'(\d{1,2})/(\d{4})', date_string)
+    if m2:
+        month = int(m2.group(1))
+        year = int(m2.group(2))
+        d = datetime(year, month, 1)
+        d = d + relativedelta(weekday=FR(3))
+        return d
     return None
 
 
 def date_formatter(comment_timestamp, keyword):
     # Convert Unix timestamp to datetime object in UTC
     comment_utc_datetime = datetime.fromtimestamp(comment_timestamp, tz=timezone.utc)
+    formatted_date = comment_utc_datetime.strftime("%m/%d/%Y %I:%M:%S %p")
+    print(formatted_date)
     keyword = keyword.lower()
     list_of_keywords, list_of_weekdays = get_static_mappings(comment_utc_datetime)
 
@@ -166,28 +249,3 @@ def date_formatter(comment_timestamp, keyword):
         print(f"keyword not found: {keyword}")
     return ""
 
-
-def price_formatter(price):
-    cleaned_string = price.replace("$", "").replace("+", "").replace(",", "")
-    if cleaned_string != "":
-        if "to" in cleaned_string:  # Check if it's a range
-            try:
-                # Split the range into two numbers
-                start, end = cleaned_string.split("to")
-                start = float(start.strip())
-                end = float(end.strip())
-                average = (start + end) / 2
-                # Format both numbers to two decimal places
-                return f"{average:.2f}"
-            except ValueError:
-                print(f"Invalid number format: '{cleaned_string}'")
-
-        else:
-            try:
-                # Convert to float and format to two decimal places
-                number = float(cleaned_string)
-                return f"{number:.2f}"
-            except ValueError:
-                # Handle the case where conversion fails
-                print(f"Invalid number format: '{cleaned_string}'")
-    return ""
