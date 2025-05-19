@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 
+
 class FakeComment:
     def __init__(
         self, id, author, body, created_utc, score, parent_id, is_submitter, permalink
@@ -16,6 +17,7 @@ class FakeComment:
 
     def __repr__(self):
         return f"FakeComment(id='{self.id}', body='{self.body[:30]}...')"
+
 
 load_dotenv()
 REDDIT_PARAMS = {
@@ -79,8 +81,7 @@ async def create_tables(pool):
         """)
 
 
-INSERT_COMMENTS = (
-    """
+INSERT_COMMENTS = """
                     INSERT INTO comments (
                         comment_id, post_id, author, body, created_utc,
                         score, parent_id, is_submitter, permalink,
@@ -93,10 +94,8 @@ INSERT_COMMENTS = (
                         extracted_price = EXCLUDED.extracted_price,
                         extracted_date = EXCLUDED.extracted_date
                 """
-)
 
-INSERT_POSTS = (
-    """
+INSERT_POSTS = """
                 INSERT INTO posts (
                     post_id, title, selftext, author, created_utc,
                     num_comments, score, upvote_ratio, url, permalink,
@@ -126,11 +125,9 @@ INSERT_POSTS = (
                     preview = EXCLUDED.preview,
                     last_checked_utc = EXCLUDED.last_checked_utc
             """
-)
 
 
-INSERT_NEW_POSTS = (
-    """
+INSERT_NEW_POSTS = """
     INSERT INTO posts (
         post_id, title, selftext, author, created_utc,
         num_comments, score, upvote_ratio, url, permalink,
@@ -142,4 +139,3 @@ INSERT_NEW_POSTS = (
         $11,$12,$13,$14,$15,$16,$17,$18,$19,$20
     ) ON CONFLICT (post_id) DO NOTHING
     """
-)

@@ -2,7 +2,8 @@ import re
 from datetime import datetime, timedelta, timezone
 
 from dateutil.relativedelta import FR, MO, TH, relativedelta
-#TODO formatter is still missing some formats, mainly sanitization of strings (feb. or 20th. where periods are used) or just missed %%% formats that I haven't seen yet
+# TODO formatter is still missing some formats, mainly sanitization of strings (feb. or 20th. where periods are used) or just missed %%% formats that I haven't seen yet
+
 
 # Function to generate static mappings based on the comment's timestamp
 def get_static_mappings(base_datetime):
@@ -101,28 +102,44 @@ def parse_relative_date(date_string, base_datetime):
 
 def parse_specific_date_format(date_string, base_datetime):
     normalized_date_string = date_string.replace("-", " ").replace("/", " ")
-    normalized_date_string = re.sub(r'(\d+)(st|nd|rd|th)\b', r'\1', normalized_date_string)
+    normalized_date_string = re.sub(
+        r"(\d+)(st|nd|rd|th)\b", r"\1", normalized_date_string
+    )
 
     # Check for month-only inputs (e.g. "aug" or "august")
     months = {
-        'january': 1, 'jan': 1,
-        'february': 2, 'feb': 2,
-        'march': 3, 'mar': 3,
-        'april': 4, 'apr': 4,
-        'may': 5,
-        'june': 6, 'jun': 6,
-        'july': 7, 'jul': 7,
-        'august': 8, 'aug': 8,
-        'september': 9, 'sep': 9, 'sept': 9,
-        'october': 10, 'oct': 10,
-        'november': 11, 'nov': 11,
-        'december': 12, 'dec': 12
+        "january": 1,
+        "jan": 1,
+        "february": 2,
+        "feb": 2,
+        "march": 3,
+        "mar": 3,
+        "april": 4,
+        "apr": 4,
+        "may": 5,
+        "june": 6,
+        "jun": 6,
+        "july": 7,
+        "jul": 7,
+        "august": 8,
+        "aug": 8,
+        "september": 9,
+        "sep": 9,
+        "sept": 9,
+        "october": 10,
+        "oct": 10,
+        "november": 11,
+        "nov": 11,
+        "december": 12,
+        "dec": 12,
     }
     s = normalized_date_string.strip().lower()
     if s in months:
         year = base_datetime.year
         # if the month has already passed this year, roll to next year
-        if months[s] < base_datetime.month or (months[s] == base_datetime.month and base_datetime.day > 21):
+        if months[s] < base_datetime.month or (
+            months[s] == base_datetime.month and base_datetime.day > 21
+        ):
             year += 1
         dt = datetime(year, months[s], 1)
         third_friday = dt + relativedelta(weekday=FR(3))
@@ -185,7 +202,6 @@ def parse_specific_date_format(date_string, base_datetime):
     return None
 
 
-
 def date_formatter(comment_timestamp, keyword):
     # Convert Unix timestamp to datetime object in UTC
     comment_utc_datetime = datetime.fromtimestamp(comment_timestamp, tz=timezone.utc)
@@ -214,5 +230,6 @@ def date_formatter(comment_timestamp, keyword):
     if keyword != "":
         print(f"keyword not found: {keyword}")
     return ""
+
 
 print(date_formatter(1747690278, "aug 18th"))

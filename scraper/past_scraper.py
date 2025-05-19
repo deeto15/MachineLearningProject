@@ -4,7 +4,13 @@ import asyncpg
 from dotenv import load_dotenv
 from Binary_Classifier.BERT_loader import load_model
 from Binary_Classifier.predictions import tokens
-from scraper.helper_methods import INSERT_COMMENTS, INSERT_NEW_POSTS, create_tables, DB_PARAMS
+from scraper.helper_methods import (
+    INSERT_COMMENTS,
+    INSERT_NEW_POSTS,
+    create_tables,
+    DB_PARAMS,
+)
+
 load_dotenv()
 
 POSTS_FILE = r"C:\Users\Kendall Eberly\Downloads\wallstreetbets_submissions\wallstreetbets_submissions"
@@ -144,7 +150,6 @@ async def batch_insert_comments(pool, records):
             await conn.executemany(INSERT_COMMENTS, vals[i : i + 500])
 
 
-
 async def import_posts(pool):
     batch = []
     print("Importing posts...")
@@ -178,7 +183,3 @@ async def run_past_scraper():
     await import_posts(pool)
     await import_comments(pool)
     await pool.close()
-
-#TODO add posts to fakecomment when processing comments
-#TODO find a way to keep going if you stop the program mid run, maybe check last id and scan forward until then?
-#TODO retrain model with items missing from stockname

@@ -20,8 +20,8 @@ from scraper.helper_methods import (
     REDDIT_PARAMS,
 )
 
-#TODO when updating a post, how do i avoid putting bertcomments in? if it scrapes itll pick up any new comments thoeretically, but if it updates, itll pick up the same comments again. maybe add a check to see if the comment is already in the db? or just do a batch insert of all comments for that post and then update the last checked time? but then how do i know if its new or not? maybe add a column to the comments table for last checked time and only insert if its older than that? or just do a batch insert of all comments for that post and then update the last checked time? but then how do i know if its new or not? maybe add a column to the comments table for last checked time and only insert if its older than that? or just do a batch insert of all comments for that post and then update the last checked time? but then how do i know if its new or not? maybe add a column to the comments table for last checked time and only insert if its older than that? or just do a batch insert of all comments for that post and then update the last checked time? but then how do i know if its new or not? maybe add a column to the comments table for last checked time and only insert if its older than that? or just do a batch insert of all comments for that post and then update the last checked time? but then how do i know if its new or not? maybe add a column to the comments table for last checked time and only insert if its older than that? or just do a batch insert of all comments for that post and then update the last checked time? but then how do i know if its new or not? maybe add a column to the comments table for last checked time and only insert if its older than that? or just do a batch insert of all comments for that post and then update the last checked time? but then how do i know if its new or not? maybe add a column to the comments table for last checked time and only insert if its older than that?
-#maybe just check all comment ids and only insert newww ones, or maybe postgres automatically rejects duplicatyes
+# TODO when updating a post, how do i avoid putting bertcomments in? if it scrapes itll pick up any new comments thoeretically, but if it updates, itll pick up the same comments again. maybe add a check to see if the comment is already in the db? or just do a batch insert of all comments for that post and then update the last checked time? but then how do i know if its new or not? maybe add a column to the comments table for last checked time and only insert if its older than that? or just do a batch insert of all comments for that post and then update the last checked time? but then how do i know if its new or not? maybe add a column to the comments table for last checked time and only insert if its older than that? or just do a batch insert of all comments for that post and then update the last checked time? but then how do i know if its new or not? maybe add a column to the comments table for last checked time and only insert if its older than that? or just do a batch insert of all comments for that post and then update the last checked time? but then how do i know if its new or not? maybe add a column to the comments table for last checked time and only insert if its older than that? or just do a batch insert of all comments for that post and then update the last checked time? but then how do i know if its new or not? maybe add a column to the comments table for last checked time and only insert if its older than that? or just do a batch insert of all comments for that post and then update the last checked time? but then how do i know if its new or not? maybe add a column to the comments table for last checked time and only insert if its older than that? or just do a batch insert of all comments for that post and then update the last checked time? but then how do i know if its new or not? maybe add a column to the comments table for last checked time and only insert if its older than that?
+# maybe just check all comment ids and only insert newww ones, or maybe postgres automatically rejects duplicatyes
 load_dotenv()
 reddit_semaphore = asyncio.Semaphore(2)
 
@@ -72,14 +72,15 @@ async def upsert_posts_for_update(pool, submissions):
             s.domain,
             safe_json(s, "media"),
             safe_json(s, "preview"),
-            now
+            now,
         )
         for s in submissions
     ]
     async with pool.acquire() as conn:
         for i in range(0, len(records), 500):
-            await conn.executemany(INSERT_POSTS, records[i:i+500])
-            await asyncio.sleep(random.uniform(0.5,1.5))
+            await conn.executemany(INSERT_POSTS, records[i : i + 500])
+            await asyncio.sleep(random.uniform(0.5, 1.5))
+
 
 pipeline = load_model()
 
@@ -186,13 +187,13 @@ async def update_existing_posts(pool, reddit):
                    )
                )
             """,
-            now - 2592000,     # $1: 30 days ago
-            now - 86400,       # $2: 1 day ago
-            now,               # $3: current time
-            3600,              # $4: every hour
-            now - 604800,      # $5: 7 days ago
-            21600,             # $6: every 6 hours
-            86400,             # $7: every 24 hours
+            now - 2592000,  # $1: 30 days ago
+            now - 86400,  # $2: 1 day ago
+            now,  # $3: current time
+            3600,  # $4: every hour
+            now - 604800,  # $5: 7 days ago
+            21600,  # $6: every 6 hours
+            86400,  # $7: every 24 hours
         )
     ids = [r["post_id"] for r in rows]
     print(f"Found {len(ids)} posts to update")
