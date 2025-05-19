@@ -179,5 +179,6 @@ async def run_past_scraper():
     await import_comments(pool)
     await pool.close()
 
-#add posts to fakecomment when processing comments
-#find a way to keep going if you stop the program mid run, maybe check last id and scan forward until then?
+#TODO add posts to fakecomment when processing comments
+#TODO find a way to keep going if you stop the program mid run, maybe check last id and scan forward until then?
+#TODO retrain model with items missing from stockname
