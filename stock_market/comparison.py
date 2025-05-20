@@ -22,7 +22,7 @@ async def fetch_and_format_dates():
         host=DB_PARAMS["host"],
         port=DB_PARAMS["port"],
     )
-    rows = await conn.fetch("SELECT extracted_date, extracted_stock, extracted_price, created_utc, body FROM comments")
+    rows = await conn.fetch("SELECT extracted_date, extracted_stock, extracted_price, created_utc, body FROM test_comments")
     results = []
     for row in rows:
         extracted_date = row["extracted_date"]
@@ -33,20 +33,20 @@ async def fetch_and_format_dates():
         original_date = datetime.fromtimestamp(created_utc, tz=timezone.utc)
         original_date = original_date.strftime("%Y-%m-%d")
         formatted_date = date_formatter(created_utc, extracted_date)
-        print(f"{body}\n, Original Date: {original_date}, Extracted Date: {formatted_date}, Stock: {extracted_stock}, Price: {extracted_price}")
+        print(f"Original Date: {original_date}, Extracted Date: {formatted_date}, Time: {extracted_date}, Stock: {extracted_stock}, Price: {extracted_price}")
         
         results.append((extracted_date, created_utc, formatted_date))
-        try:
-            data = client.get_dataframe(
-                extracted_stock,
-                startDate=original_date,
-                endDate=formatted_date,
-                frequency='daily'
-            )
-        except Exception as e:
-            print(f"Error fetching data for {extracted_stock}: {e}")
-            continue
-        print(data["close"])
+        # try:
+        #     data = client.get_dataframe(
+        #         extracted_stock,
+        #         startDate=original_date,
+        #         endDate=formatted_date,
+        #         frequency='daily'
+        #     )
+        # except Exception as e:
+        #     print(f"Error fetching data for {extracted_stock}: {e}")
+        #     continue
+        #print(data["close"])
         
     await conn.close()
     return results

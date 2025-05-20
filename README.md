@@ -6,8 +6,8 @@ To train it, youll need to run the classifier file in NER_classifier to train th
 
 order of bug fixes
 1. retrain model with negatives, it's main area of missing them is comments that it gets trigger happy on what a stock name is
-    1a. missing sanitizations in formatter.py, anything that isn't good can be fed in as bad data for classifier
-    1b. scrape all stock names that are invalid from the stock harvester and feed in as bad data
+    1a. scrape all stock names that are invalid from the stock harvester and feed in as bad data, maybe need to figure out api limits so i can mass scrape
+    
 2. rework past_scraper.py
     2a. append posts to comments as fake comments
     2b. do i even need to store posts for old posts? I don't really think so since i never rescan them again. maybe drop old posts from the db entirely. would mean reworking the foreign key somehow between post and comments
