@@ -205,8 +205,6 @@ def parse_specific_date_format(date_string, base_datetime):
 def date_formatter(comment_timestamp, keyword):
     # Convert Unix timestamp to datetime object in UTC
     comment_utc_datetime = datetime.fromtimestamp(comment_timestamp, tz=timezone.utc)
-    formatted_date = comment_utc_datetime.strftime("%m/%d/%Y %I:%M:%S %p")
-    print(formatted_date)
     keyword = keyword.lower()
     list_of_keywords, list_of_weekdays = get_static_mappings(comment_utc_datetime)
 
@@ -221,15 +219,12 @@ def date_formatter(comment_timestamp, keyword):
     # Handle relative date keywords
     relative_date = parse_relative_date(keyword, comment_utc_datetime)
     if relative_date:
-        return relative_date.strftime("%m/%d/%Y")
+        return relative_date.strftime("%Y-%m-%d")
 
     specific_date = parse_specific_date_format(keyword, comment_utc_datetime)
     if specific_date:
-        return specific_date.strftime("%m/%d/%Y")
+        return specific_date.strftime("%Y-%m-%d")
     # If no match, raise an error
     if keyword != "":
         print(f"keyword not found: {keyword}")
     return ""
-
-
-print(date_formatter(1747690278, "aug 18th"))

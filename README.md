@@ -1,4 +1,4 @@
-pip install numpy==1.26.4,spacy,transformers==4.47.1,datasets,seqeval,nltk,torch,pandas,sklearn,pathlib,accelerate==1.2.1
+pip install numpy==1.26.4,spacy,transformers==4.47.1,datasets,seqeval,nltk,torch,pandas,sklearn,pathlib,accelerate==1.2.1,tiingo==0.16.1,
 pip install psycopg2-binary
 
 You'll need to download the submissions file from google drive and put it directly in your downloads folder
@@ -14,5 +14,6 @@ order of bug fixes
     4c. if you stop midway through a comments file, progress is not saved
 
 optimizations
-1. retrain dual head bert model to save inference
-2. sam's kafka setup
+1. find a way to avoid tiingo api limits
+2. retrain dual head bert model to save inference
+3. sam's kafka setup
