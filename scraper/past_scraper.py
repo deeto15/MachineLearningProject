@@ -1,3 +1,4 @@
+from pathlib import Path
 import time
 import json
 import asyncpg
@@ -13,10 +14,8 @@ from scraper.helper_methods import (
 
 load_dotenv()
 
-POSTS_FILE = r"C:\Users\Kendall Eberly\Downloads\wallstreetbets_submissions\wallstreetbets_submissions"
-COMMENTS_FILE = (
-    r"C:\Users\Kendall Eberly\Downloads\wallstreetbets_comments\wallstreetbets_comments"
-)
+POSTS_FILE    = Path.home()/"Downloads"/"wallstreetbets_submissions"/"wallstreetbets_submissions"
+COMMENTS_FILE = Path.home()/"Downloads"/"wallstreetbets_comments"/"wallstreetbets_comments"
 CATCH_ALL_ID = "__CATCH_ALL__"
 
 

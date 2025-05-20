@@ -89,10 +89,7 @@ INSERT_COMMENTS = """
                     ) VALUES (
                         $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12
                     ) ON CONFLICT (comment_id) DO UPDATE SET
-                        score = EXCLUDED.score,
-                        extracted_stock = EXCLUDED.extracted_stock,
-                        extracted_price = EXCLUDED.extracted_price,
-                        extracted_date = EXCLUDED.extracted_date
+                        score = EXCLUDED.score
                 """
 
 INSERT_POSTS = """
