@@ -10,6 +10,13 @@ tokenizer = AutoTokenizer.from_pretrained(model_path)
 id2label = model.config.id2label
 subset = {"TICKER", "PRICE", "DATE"}
 model.eval()
+def debug_tokens(text):
+    enc = tokenizer(text, return_tensors="pt").to(model.device)
+    with torch.no_grad():
+        probs = model(**enc).logits.softmax(-1)[0]
+    ids = probs.argmax(-1)
+    toks = tokenizer.convert_ids_to_tokens(enc["input_ids"][0])
+    return list(zip(toks, [id2label[i.item()] for i in ids], probs.max(-1).values.cpu().tolist()))
 
 
 # Takes in a comment, breaks it down into the tokenizer defined above and sends the text, its tokens and predictions to extractor
@@ -125,3 +132,29 @@ def glue_tokens(text, pieces, offsets):
         else:
             result += " " + pieces[i]
     return result
+
+def log_prediction_debug(text):
+    encoding = tokenizer(
+        text,
+        return_offsets_mapping=True,
+        return_tensors="pt",
+        truncation=True,
+    )
+    offsets = encoding.pop("offset_mapping")[0].tolist()
+    input_ids = encoding["input_ids"][0]
+    token_list = tokenizer.convert_ids_to_tokens(input_ids)
+    encoding = {k: v.to(device) for k, v in encoding.items()}
+    with torch.no_grad():
+        outputs = model(**encoding)
+    logits = outputs.logits[0]
+    predictions = torch.argmax(logits, dim=-1).tolist()
+    probs = torch.nn.functional.softmax(logits, dim=-1)
+    scores = probs[range(len(predictions)), predictions]
+    for i, (tok, pred, score, (start, end)) in enumerate(zip(token_list, predictions, scores, offsets)):
+        label = id2label.get(pred, "O")
+        print(f"{tok:>10} | {label:>10} | {score:.4f} | {text[start:end]}")
+    result = extractor(text, offsets, token_list, predictions, scores)
+    print("EXTRACTED:", result)
+    return result
+
+print(log_prediction_debug("i ran some covered calls for a few months on DVAX about a year ago i think. the premiums sort of fizzled with no news and i moved on. it looks like the premiums are back up. selling a bunch of Nov. $2.50 puts @ .15 looks like free money."))
