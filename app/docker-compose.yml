@@ -1,0 +1,5 @@
+services:
+  scraper:
+    build: ./scraper
+    container_name: scraper
+    env_file: 'scraper/.env'
