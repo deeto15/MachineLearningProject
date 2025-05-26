@@ -4,7 +4,7 @@ import torch.nn.functional
 from transformers import AutoModelForTokenClassification, AutoTokenizer
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-model_path = "./training_models/ner-output-V5"
+model_path = "./training_models/ner-output-V4"
 model = AutoModelForTokenClassification.from_pretrained(model_path).to(device)
 tokenizer = AutoTokenizer.from_pretrained(model_path)
 id2label = model.config.id2label
@@ -157,4 +157,4 @@ def log_prediction_debug(text):
     print("EXTRACTED:", result)
     return result
 
-print(log_prediction_debug("ORRRR Tesla 7/19 calls for $420.... now thats a fucking gamble"))
+print(log_prediction_debug("U a v s 12.5c August date your welcome"))
