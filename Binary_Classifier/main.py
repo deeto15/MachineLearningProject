@@ -12,12 +12,7 @@ output_csv = Path("regression_model_training_data.csv")
 WSBComments = (
     Path.home() / "Downloads" / "wallstreetbets_comments" / "wallstreetbets_comments"
 )
-file_path = (
-    Path.home()
-    / "Downloads"
-    / "wallstreetbets_submissions"
-    / "wallstreetbets_submissions"
-)
+
 file_exists = output_csv.exists()
 
 
@@ -79,13 +74,22 @@ def preview_data_random_sample(sample_size=25000):
     df = pd.DataFrame(selected_rows)
     df.to_csv("testdata.csv")
     
-import csv
-import json
-from pathlib import Path
 
-import csv
-import json
-from pathlib import Path
+def compare_models_again():
+    positives = 0
+    file = Path("comments.csv")
+    with open(file, encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            result = tokens(row.get('Body', ''))
+            if result:
+                positives += 1
+                print(f"\nComment: {result.get('Comment', '')}")
+                print(f"→ Stock: {result.get('Stock', '')} (Score: {result.get('StockScore', '')})")
+                print(f"→ Price: {result.get('Price', '')} (Score: {result.get('PriceScore', '')})")
+                print(f"→ Date : {result.get('Date', '')} (Score: {result.get('DateScore', '')})")
+    print(positives)
+
 
 def compare_models():
     positives = 0
@@ -147,4 +151,4 @@ def evaluate_and_show_misses():
     )
 
 
-compare_models()
+compare_models_again()
