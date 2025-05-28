@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pandas as pd
 from BERT_loader import load_model
-from predictions import tokens
+from predictions import tokens_batch
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
 output_csv = Path("regression_model_training_data.csv")
@@ -77,22 +77,36 @@ def preview_data_random_sample(sample_size=25000):
 
 def compare_models_again():
     positives = 0
+    predictions = 0
+    pipeline = load_model()
     file = Path("comments.csv")
     with open(file, encoding='utf-8') as f:
         reader = csv.DictReader(f)
         for row in reader:
-            result = tokens(row.get('Body', ''))
-            if result:
-                positives += 1
-                print(f"\nComment: {result.get('Comment', '')}")
-                print(f"→ Stock: {result.get('Stock', '')} (Score: {result.get('StockScore', '')})")
-                print(f"→ Price: {result.get('Price', '')} (Score: {result.get('PriceScore', '')})")
-                print(f"→ Date : {result.get('Date', '')} (Score: {result.get('DateScore', '')})")
+            results = tokens_batch([row.get('Body', '')])
+            for result in results:
+                if result:
+                    binaries, confs = pipeline.predict_batch([result["Comment"]])
+                    if binaries[0] == 1:
+                        positives += 1
+                        print(f"\nComment is an options trade: {result.get('Comment', '')}")
+                        print(f"→ Stock: {result.get('Stock', '')} (Score: {result.get('StockScore', '')})")
+                        print(f"→ Price: {result.get('Price', '')} (Score: {result.get('PriceScore', '')})")
+                        print(f"→ Date : {result.get('Date', '')} (Score: {result.get('DateScore', '')})")
+                    if binaries[0] == 0:
+                        predictions += 1
+                        print(f"\nComment is a user prediction: {result.get('Comment', '')}")
+                        print(f"→ Stock: {result.get('Stock', '')} (Score: {result.get('StockScore', '')})")
+                        print(f"→ Price: {result.get('Price', '')} (Score: {result.get('PriceScore', '')})")
+                        print(f"→ Date : {result.get('Date', '')} (Score: {result.get('DateScore', '')})")
     print(positives)
+    print(predictions)
 
 
 def compare_models():
     positives = 0
+    predictions = 0
+    pipeline = load_model()
     file = Path("testdata.csv")
     with open(file, encoding='utf-8') as f:
         reader = csv.reader(f)
@@ -106,13 +120,23 @@ def compare_models():
             if isinstance(line, dict):
                 result = tokens(line.get('body', ''))
                 if result:
-                    positives += 1
-                    print(f"\nComment: {result.get('Comment', '')}")
-                    print(f"→ Stock: {result.get('Stock', '')} (Score: {result.get('StockScore', '')})")
-                    print(f"→ Price: {result.get('Price', '')} (Score: {result.get('PriceScore', '')})")
-                    print(f"→ Date : {result.get('Date', '')} (Score: {result.get('DateScore', '')})")
+                    binaries, confs = pipeline.predict_batch([result["Comment"]])
+                    if binaries[0] == 1:
+                        positives += 1
+                        print(f"\nComment: {result.get('Comment', '')}")
+                        print("USER OPTIONS TRADE")
+                        print(f"→ Stock: {result.get('Stock', '')} (Score: {result.get('StockScore', '')})")
+                        print(f"→ Price: {result.get('Price', '')} (Score: {result.get('PriceScore', '')})")
+                        print(f"→ Date : {result.get('Date', '')} (Score: {result.get('DateScore', '')})")
+                    if binaries[0] == 0:
+                        predictions += 1
+                        print(f"\nComment: {result.get('Comment', '')}")
+                        print("USER PREDICTION")
+                        print(f"→ Stock: {result.get('Stock', '')} (Score: {result.get('StockScore', '')})")
+                        print(f"→ Price: {result.get('Price', '')} (Score: {result.get('PriceScore', '')})")
+                        print(f"→ Date : {result.get('Date', '')} (Score: {result.get('DateScore', '')})")
     print(positives)
-
+    print(predictions)
 
 
 

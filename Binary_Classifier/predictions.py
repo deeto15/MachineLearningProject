@@ -19,25 +19,38 @@ def debug_tokens(text):
     return list(zip(toks, [id2label[i.item()] for i in ids], probs.max(-1).values.cpu().tolist()))
 
 
-# Takes in a comment, breaks it down into the tokenizer defined above and sends the text, its tokens and predictions to extractor
-def tokens(text):
-    encoding = tokenizer(
-        text,
+# Takes in comments, breaks it down into the tokenizer defined above and sends the text, its tokens and predictions to extractor
+def tokens_batch(texts):
+    encodings = tokenizer(
+        texts,
         return_offsets_mapping=True,
         return_tensors="pt",
         truncation=True,
+        padding=True,
     )
-    offsets = encoding.pop("offset_mapping")[0].tolist()
-    input_ids = encoding["input_ids"][0]
-    token_list = tokenizer.convert_ids_to_tokens(input_ids)
-    encoding = {k: v.to(device) for k, v in encoding.items()}
+    offsets = encodings.pop("offset_mapping").tolist()
+    input_ids = encodings["input_ids"]
+    token_lists = [tokenizer.convert_ids_to_tokens(seq) for seq in input_ids]
+    encodings = {k: v.to(device) for k, v in encodings.items()}
     with torch.no_grad():
-        outputs = model(**encoding)
-    logits = outputs.logits[0]
-    predictions = torch.argmax(logits, dim=-1).tolist()
-    probs = torch.nn.functional.softmax(logits, dim=-1)
-    scores = probs[range(len(predictions)), predictions]
-    return extractor(text, offsets, token_list, predictions, scores)
+        outputs = model(**encodings)
+    logits = outputs.logits
+    results = []
+    for i in range(len(texts)):
+        logit = logits[i]
+        prediction = torch.argmax(logit, dim=-1).tolist()
+        probs = torch.nn.functional.softmax(logit, dim=-1)
+        scores = probs[range(len(prediction)), prediction]
+        result = extractor(
+            texts[i],
+            offsets[i],
+            token_lists[i],
+            prediction,
+            scores,
+        )
+        results.append(result)
+    return results
+
 
 
 # Takes the tokens and aligns them to the predicted label, so that each full piece of the word has the confidence score and not invidual tokens, otherwise you'd output things like "January" as "Jan" "ua" "ry"
@@ -157,4 +170,4 @@ def log_prediction_debug(text):
     print("EXTRACTED:", result)
     return result
 
-print(log_prediction_debug("U a v s 12.5c August date your welcome"))
+print(tokens_batch(["NVDA 12/22 $125", "I'm betting on UNH 25$ calls for Jan 2023"]))
