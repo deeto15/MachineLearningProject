@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 	"scraper/monitor"
+	"strconv"
 	"time"
 
 	"github.com/go-redis/redis"
@@ -12,12 +13,15 @@ import (
 )
 
 func main() {
+	// load env variables
 	godotenv.Load()
 	id := os.Getenv("REDDIT_CLIENT_ID")
 	secret := os.Getenv("REDDIT_CLIENT_SECRET")
 	username := os.Getenv("REDDIT_USERNAME")
 	password := os.Getenv("REDDIT_PASSWORD")
+	subreddit := os.Getenv("SUBREDDIT")
 
+	// connect and setup redis
 	redisAddr := os.Getenv("REDIS_ADDR")
 	rdb := redis.NewClient(&redis.Options{
 		Addr:     redisAddr,
@@ -30,35 +34,40 @@ func main() {
 	}
 	log.Println(pong)
 
+	// setup redit client
 	credentials := reddit.Credentials{ID: id, Secret: secret, Username: username, Password: password}
 	client, err := reddit.NewClient(credentials)
-
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	// 2 weeks
-	postLifetime := 14 * 24 * time.Hour
+	// load monitoring parameters and setup monitor options
+	pollFrequencySeconds, _ := strconv.Atoi(os.Getenv("POLL_FREQUENCY_SECONDS"))
+	postCutoffMinutes, _ := strconv.Atoi(os.Getenv("POST_CUTOFF_MINUTES"))
+	postDeletionBufferMinutes, _ := strconv.Atoi(os.Getenv("POST_DELETION_BUFFER_MINUTES"))
+	postDeletionFrequencySeconds, _ := strconv.Atoi(os.Getenv("POST_DELETION_FREQUENCY_SECONDS"))
+	maxPostsPerPoll, _ := strconv.Atoi(os.Getenv("MAX_POSTS_PER_POLL"))
 
-	subreddit := os.Getenv("SUBREDDIT")
+	opts := &monitor.SubredditMonitorOpts{
+		PollFrequency:         time.Duration(pollFrequencySeconds) * time.Second,
+		PostCutoff:            time.Duration(postCutoffMinutes) * time.Minute,
+		PostDeletionBuffer:    time.Duration(postDeletionBufferMinutes) * time.Minute,
+		PostDeletionFrequency: time.Duration(postDeletionFrequencySeconds) * time.Second,
+		MaxPostsPerPoll:       maxPostsPerPoll,
+	}
 
-	// check for new comments on every post every 30 seconds
-	go monitor.MonitorNewComments(
+	// dummy logger here for now, will be a real comment source later
+	logger := monitor.NewMonitorLogger()
+	go logger.Start()
+
+	// create and start monitor
+	subredditMonitor := monitor.NewSubredditMonitor(
 		subreddit,
-		30*time.Second,
-		time.Duration(postLifetime),
+		logger,
 		rdb,
 		client,
+		opts,
 	)
 
-	// check for new posts that come in 3 at a time every 30 seconds
-	go monitor.MonitorNewPosts(
-		subreddit,
-		3,
-		30*time.Second,
-		rdb,
-		client,
-	)
-	select {}
-
+	subredditMonitor.Start()
 }

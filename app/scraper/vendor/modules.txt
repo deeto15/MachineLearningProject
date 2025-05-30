@@ -33,6 +33,9 @@ golang.org/x/net/context/ctxhttp
 ## explicit; go 1.11
 golang.org/x/oauth2
 golang.org/x/oauth2/internal
+# golang.org/x/time v0.11.0
+## explicit; go 1.23.0
+golang.org/x/time/rate
 # google.golang.org/appengine v1.4.0
 ## explicit
 google.golang.org/appengine/internal

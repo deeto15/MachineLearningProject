@@ -12,6 +12,7 @@ import (
 // redis operations
 
 // inserts a list of posts to redis sorted set with their Unix timestamp as a score
+// returns true if the post was new
 func InsertRedisPost(subreddit string, post *reddit.Post, rdb *redis.Client) bool {
 
 	key := fmt.Sprintf("seen:%s:posts", subreddit)
@@ -32,6 +33,7 @@ func InsertRedisPost(subreddit string, post *reddit.Post, rdb *redis.Client) boo
 }
 
 // inserts new comments much like posts - could maybe refactor later for DRY
+// returns true if the comment was new
 func InsertRedisComment(subreddit string, comment *reddit.Comment, rdb *redis.Client) bool {
 
 	key := fmt.Sprintf("seen:%s:comments", subreddit)
