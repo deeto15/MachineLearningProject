@@ -94,6 +94,7 @@ func (s *SubredditMonitor) deleteOldPostsAndComments() {
 	ticker := time.NewTicker(s.opts.PostDeletionFrequency)
 
 	for range ticker.C {
+		log.Println("Checking for old posts")
 		postsKey := fmt.Sprintf("seen:%s:posts", s.subreddit)
 		commentsKey := fmt.Sprintf("seen:%s:comments", s.subreddit)
 
@@ -105,14 +106,18 @@ func (s *SubredditMonitor) deleteOldPostsAndComments() {
 			log.Printf("Error removing old posts: %v\n", err)
 		}
 
-		log.Printf("Removed %d posts\n", removedPosts)
+		if removedPosts != 0 {
+			log.Printf("Removed %d posts\n", removedPosts)
+		}
 
 		removedComments, err := s.rdb.ZRemRangeByScore(commentsKey, "-inf", formatted).Result()
 		if err != nil {
 			log.Printf("Error removing old commnets: %v\n", err)
 		}
 
-		log.Printf("Removed %d comments\n", removedComments)
+		if removedComments != 0 {
+			log.Printf("Removed %d comments\n", removedComments)
+		}
 	}
 }
 
