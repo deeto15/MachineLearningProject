@@ -79,7 +79,7 @@ func (s *SubredditMonitor) monitorNewComments() {
 				comments := s.getAllPostComments(id)
 				for _, comment := range comments {
 					isNew := store.InsertRedisComment(s.subreddit, comment, s.rdb)
-					if isNew {
+					if isNew && comment.PostTitle == "" {
 						channel := s.commentsSource.CommentChannel()
 						channel <- comment
 					}

@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 	"scraper/monitor"
+	"scraper/store"
 	"strconv"
 	"time"
 
@@ -13,7 +14,10 @@ import (
 )
 
 func main() {
-	// load env variables
+	// wait for rabbitmq
+	time.Sleep(5 * time.Second)
+
+	// load reddit variables
 	godotenv.Load()
 	id := os.Getenv("REDDIT_CLIENT_ID")
 	secret := os.Getenv("REDDIT_CLIENT_SECRET")
@@ -34,7 +38,7 @@ func main() {
 	}
 	log.Println(pong)
 
-	// setup redit client
+	// setup reddit client
 	credentials := reddit.Credentials{ID: id, Secret: secret, Username: username, Password: password}
 	client, err := reddit.NewClient(credentials)
 	if err != nil {
@@ -56,14 +60,19 @@ func main() {
 		MaxPostsPerPoll:       maxPostsPerPoll,
 	}
 
-	// dummy logger here for now, will be a real comment source later
-	logger := monitor.NewMonitorLogger()
-	go logger.Start()
+	// load and start rabbit
+	rabbitUser := os.Getenv("RABBITMQ_USER")
+	rabbitPass := os.Getenv("RABBITMQ_PASSWORD")
+	rabbitAddr := os.Getenv("RABBITMQ_ADDR")
+	rabbitQueueName := os.Getenv("RABBITMQ_COMMENTS_QUEUE_NAME")
+
+	rabbit := store.NewRabbitMQStore(rabbitUser, rabbitPass, rabbitAddr, rabbitQueueName)
+	go rabbit.Start()
 
 	// create and start monitor
 	subredditMonitor := monitor.NewSubredditMonitor(
 		subreddit,
-		logger,
+		rabbit,
 		rdb,
 		client,
 		opts,
