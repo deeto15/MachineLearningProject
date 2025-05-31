@@ -1,4 +1,5 @@
 # This generates predictions from the now trained model on new data
+import json
 import torch
 import torch.nn.functional
 from transformers import AutoModelForTokenClassification, AutoTokenizer
@@ -122,7 +123,7 @@ def extractor(text, offsets, token_list, predictions, scores):
                 best_entities[label] = (label, value, score)
     # Returns full tokens that are above the 80% confidence level
     if all(t in best_entities and best_entities[t][2] > 0.80 for t in subset):
-        binary_result = tokens_batch({
+        return {
             "Comment": text,
             "Stock": best_entities["TICKER"][1],
             "Price": best_entities["PRICE"][1],
@@ -130,8 +131,7 @@ def extractor(text, offsets, token_list, predictions, scores):
             "StockScore": round(best_entities["TICKER"][2].item(), 4),
             "PriceScore": round(best_entities["PRICE"][2].item(), 4),
             "DateScore": round(best_entities["DATE"][2].item(), 4),
-        })
-        return binary_result
+        }
     return None
 
 
@@ -174,24 +174,26 @@ def log_prediction_debug(text):
     return result
 
 version, pipeline = load_model()
-def predict_comments(comments):
+def predict_comments(json_lines):
+    comments = [json.loads(line) for line in json_lines]
     bodies = [comment["body"] for comment in comments]
     entities_list = tokens_batch(bodies)
     dicts = []
     for comment, best_entities in zip(comments, entities_list):
-        if all(t in best_entities and best_entities[t][2] > 0.80 for t in subset):
-            d = dict(comment)
-            d["Stock"] = best_entities["TICKER"][1]
-            d["Price"] = best_entities["PRICE"][1]
-            d["Date"] = best_entities["DATE"][1]
-            d["Formatted Date"] = date_formatter(comment["created_utc"], d["Date"])
-            d["StockScore"] = round(best_entities["TICKER"][2].item(), 4)
-            d["PriceScore"] = round(best_entities["PRICE"][2].item(), 4)
-            d["DateScore"] = round(best_entities["DATE"][2].item(), 4)
-            d["NER Version"] = model_path[-2:]
-            dicts.append(d)
+        if not comment or not best_entities:
+            continue
+        comment["Stock"] = best_entities['Stock']
+        comment["Price"] = best_entities['Price']
+        comment["Date"] = best_entities['Date']
+        comment["Formatted Date"] = date_formatter(comment["created_unix"], comment['Date'])
+        comment["StockScore"] = best_entities['StockScore']
+        comment["PriceScore"] = best_entities['PriceScore']
+        comment["DateScore"] = best_entities['DateScore']
+        comment["NER Version"] = model_path[-2:]
+        dicts.append(comment)
     if dicts:
-        preds, confs = pipeline.predict_batch(dicts)
+        good_comments = [comment["body"] for comment in dicts]
+        preds, confs = pipeline.predict_batch(good_comments)
         for d, p, c in zip(dicts, preds, confs):
             d["Prediction"] = p
             d["Confidence"] = c
@@ -200,4 +202,11 @@ def predict_comments(comments):
     return []
 
 
-print(predict_comments(["NVDA 12/22 $125", "I'm betting on UNH 25$ calls for Jan 2023", "TSLA is going to the moon! Going for 12/22 $125 calls!", "I think STX will be at 200 by next week"]))
+real_data = [
+    '{"id": "1l06pzf", "body": "I\'m betting on UNH 25$ calls for Jan 2023", "author_id": "t2_v9e77smks", "author_name": "Piyush4758", "is_post": true, "source": "r/wallstreetbets", "created_unix": 1748723247}',
+    '{"id": "1l06pzf", "body": "TSLA is going to the moon! Going for 12/22 $125 calls!", "author_id": "t2_v9e77smks", "author_name": "Piyush4758", "is_post": true, "source": "r/wallstreetbets", "created_unix": 1748723247}'
+]
+
+dict = predict_comments(real_data)
+for comment in dict:
+    print(comment, "\n")
