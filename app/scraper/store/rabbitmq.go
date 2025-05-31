@@ -64,6 +64,7 @@ type SendableComment struct {
 	CreatedUnix int64  `json:"created_unix"`
 }
 
+// send a sendable comment to the appropriate rabbit channel and queue, could be either a post or comment
 func sendComment(rabbitChannel *amqp.Channel, rabbitQueue *amqp.Queue, comment *SendableComment) {
 	postBytes, err := json.Marshal(comment)
 	if err != nil {
