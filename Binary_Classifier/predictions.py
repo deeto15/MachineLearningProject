@@ -2,6 +2,8 @@
 import torch
 import torch.nn.functional
 from transformers import AutoModelForTokenClassification, AutoTokenizer
+from stock_market.formatter import date_formatter
+from Binary_Classifier.BERT_loader import load_model
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model_path = "./training_models/ner-output-V4"
@@ -120,7 +122,7 @@ def extractor(text, offsets, token_list, predictions, scores):
                 best_entities[label] = (label, value, score)
     # Returns full tokens that are above the 80% confidence level
     if all(t in best_entities and best_entities[t][2] > 0.80 for t in subset):
-        return {
+        binary_result = tokens_batch({
             "Comment": text,
             "Stock": best_entities["TICKER"][1],
             "Price": best_entities["PRICE"][1],
@@ -128,7 +130,8 @@ def extractor(text, offsets, token_list, predictions, scores):
             "StockScore": round(best_entities["TICKER"][2].item(), 4),
             "PriceScore": round(best_entities["PRICE"][2].item(), 4),
             "DateScore": round(best_entities["DATE"][2].item(), 4),
-        }
+        })
+        return binary_result
     return None
 
 
@@ -170,4 +173,31 @@ def log_prediction_debug(text):
     print("EXTRACTED:", result)
     return result
 
-print(tokens_batch(["NVDA 12/22 $125", "I'm betting on UNH 25$ calls for Jan 2023"]))
+version, pipeline = load_model()
+def predict_comments(comments):
+    bodies = [comment["body"] for comment in comments]
+    entities_list = tokens_batch(bodies)
+    dicts = []
+    for comment, best_entities in zip(comments, entities_list):
+        if all(t in best_entities and best_entities[t][2] > 0.80 for t in subset):
+            d = dict(comment)
+            d["Stock"] = best_entities["TICKER"][1]
+            d["Price"] = best_entities["PRICE"][1]
+            d["Date"] = best_entities["DATE"][1]
+            d["Formatted Date"] = date_formatter(comment["created_utc"], d["Date"])
+            d["StockScore"] = round(best_entities["TICKER"][2].item(), 4)
+            d["PriceScore"] = round(best_entities["PRICE"][2].item(), 4)
+            d["DateScore"] = round(best_entities["DATE"][2].item(), 4)
+            d["NER Version"] = model_path[-2:]
+            dicts.append(d)
+    if dicts:
+        preds, confs = pipeline.predict_batch(dicts)
+        for d, p, c in zip(dicts, preds, confs):
+            d["Prediction"] = p
+            d["Confidence"] = c
+            d["Binary_Model"] = version[-2:]
+        return dicts
+    return []
+
+
+print(predict_comments(["NVDA 12/22 $125", "I'm betting on UNH 25$ calls for Jan 2023", "TSLA is going to the moon! Going for 12/22 $125 calls!", "I think STX will be at 200 by next week"]))

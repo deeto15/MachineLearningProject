@@ -39,4 +39,4 @@ class BertIntentClassifier:
 
 
 def load_model(model_path="./training_models/classifier-bert-V3"):
-    return BertIntentClassifier(model_path)
+    return model_path, BertIntentClassifier(model_path)
