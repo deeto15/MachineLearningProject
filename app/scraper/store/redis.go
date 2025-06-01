@@ -46,7 +46,7 @@ func InsertRedisComment(subreddit string, comment *reddit.Comment, rdb *redis.Cl
 	}
 
 	if added > 0 {
-		log.Printf("Added new comment to Redis: %s\n", comment.Body)
+		log.Printf("Added new comment to Redis: %s with post iD %s\n", comment.Body, comment.PostID)
 
 		return true
 	}

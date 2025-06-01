@@ -19,50 +19,26 @@ func (s *SubredditMonitor) monitorNewPosts() {
 		Limit: s.opts.MaxPostsPerPoll,
 	}
 
-	go func() {
-		for range ticker.C {
-			s.limiter.Wait(context.Background())
+	for range ticker.C {
+		s.limiter.Wait(context.Background())
 
-			posts, _, err := s.redditClient.Subreddit.NewPosts(context.Background(), s.subreddit, opts)
-			if err != nil {
-				log.Printf("Error fetching posts from r/%s: %v\n", s.subreddit, err.Error())
-			}
-
-			for _, post := range posts {
-				isNew := store.InsertRedisPost(s.subreddit, post, s.rdb)
-				if isNew {
-					channel := s.commentsSource.PostChannel()
-					channel <- post
-				}
-			}
+		posts, _, err := s.redditClient.Subreddit.NewPosts(context.Background(), s.subreddit, opts)
+		if err != nil {
+			log.Printf("Error fetching posts from r/%s: %v\n", s.subreddit, err.Error())
 		}
-	}()
+
+		for _, post := range posts {
+			s.checkAndStorePost(post)
+		}
+	}
 }
 
-// gets a flattened list of all post's comments instead of the tree structure
-func (s *SubredditMonitor) getAllPostComments(postId string) []*reddit.Comment {
-	s.limiter.Wait(context.Background())
-
-	post, _, err := s.redditClient.Post.Get(context.Background(), postId)
-	if err != nil {
-		log.Printf("Error fetching comments for postID %s\n", postId)
-		return nil
+func (s *SubredditMonitor) checkAndStorePost(post *reddit.Post) {
+	isNew := store.InsertRedisPost(s.subreddit, post, s.rdb)
+	if isNew {
+		channel := s.commentsSource.PostChannel()
+		channel <- post
 	}
-
-	var result []*reddit.Comment
-
-	var helper func(comments []*reddit.Comment)
-	helper = func(comments []*reddit.Comment) {
-		for _, c := range comments {
-			result = append(result, c)
-			if len(c.Replies.Comments) > 0 {
-				helper(c.Replies.Comments)
-			}
-		}
-	}
-
-	helper(post.Comments)
-	return result
 }
 
 func (s *SubredditMonitor) monitorNewComments() {
@@ -70,23 +46,14 @@ func (s *SubredditMonitor) monitorNewComments() {
 
 	log.Printf("Starting comment monitor for r/%s at %s frequency\n", s.subreddit, s.opts.PollFrequency.String())
 
-	go func() {
-		for range ticker.C {
-			postIds := store.GetRecentRedisPosts(s.subreddit, s.opts.PostCutoff, s.rdb)
-			log.Printf("Getting comments for %d new posts from Redis\n", len(postIds))
+	for range ticker.C {
+		postIds := store.GetRecentRedisPosts(s.subreddit, s.opts.PostCutoff, s.rdb)
+		log.Printf("Getting comments for %d new posts from Redis\n", len(postIds))
 
-			for _, id := range postIds {
-				comments := s.getAllPostComments(id)
-				for _, comment := range comments {
-					isNew := store.InsertRedisComment(s.subreddit, comment, s.rdb)
-					if isNew && comment.PostTitle == "" {
-						channel := s.commentsSource.CommentChannel()
-						channel <- comment
-					}
-				}
-			}
+		for _, id := range postIds {
+			s.GetAllComments(id)
 		}
-	}()
+	}
 }
 
 // deletes the old comments and posts
