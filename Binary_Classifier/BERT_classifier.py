@@ -29,7 +29,7 @@ dataset = dataset.remove_columns(["Comment"])
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = BertForSequenceClassification.from_pretrained(
-    "bert-base-uncased", num_labels=2
+    "bert-base-uncased", num_labels=3
 ).to(device)
 training_args = TrainingArguments(
     output_dir="./training_models/classifier-bert-V3",
