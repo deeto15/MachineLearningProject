@@ -1,8 +1,9 @@
+import calendar
 import re
 from datetime import datetime, timedelta, timezone
 
 from dateutil.relativedelta import FR, MO, TH, relativedelta
-
+#TODO if the format %b %d occurs in the past, its year gets set to the current year instead of the next year. %b works, its only %b %d. %m %d doesnt matter since that format is most likely someone actually talking about a past trade, but %b %d is highly likely to indicate a future trade so needs fixed somehow, just that one format really
 
 # Function to generate static mappings based on the comment's timestamp
 def get_static_mappings(base_datetime):
@@ -29,47 +30,49 @@ def get_static_mappings(base_datetime):
 
     holidays["black friday"] = holidays["thanksgiving"] + timedelta(days=1)
     holidays["christmas eve"] = holidays["christmas"] + timedelta(days=-1)
-
+    proper_format ="%Y-%m-%d"
     list_of_keywords = {
-        "eoy": base_datetime.strftime("12/31/%Y"),  # End of the year
-        "end of year": base_datetime.strftime("12/31/%Y"),
+        "eoy": base_datetime.strftime("%Y-12-31"),  # End of the year
+        "end of year": base_datetime.strftime("%Y-12-31"),
         "eom": (base_datetime + relativedelta(day=31)).strftime(
             "%m/%d/%Y"
         ),  # End of the month
-        "end of month": (base_datetime + relativedelta(day=31)).strftime("%m/%d/%Y"),
-        "eod": base_datetime.strftime("%m/%d/%Y"),  # End of the day
-        "end of day": base_datetime.strftime("%m/%d/%Y"),
-        "today": base_datetime.strftime("%m/%d/%Y"),
-        "tomorrow": tomorrow.strftime("%m/%d/%Y"),
-        "this week": middle_of_week.strftime("%m/%d/%Y"),
-        "eow": end_of_week.strftime("%m/%d/%Y"),  # End of the week
-        "eotw": end_of_week.strftime("%m/%d/%Y"),  # End of the week
-        "end of the week": end_of_week.strftime("%m/%d/%Y"),  # End of the week
-        "eotw next week": next_week_end.strftime("%m/%d/%Y"),  # End of the week
-        "end of week": end_of_week.strftime("%m/%d/%Y"),
-        "next week": next_week_start.strftime("%m/%d/%Y"),
-        "spring": base_datetime.strftime("03/20/%Y"),  # Start of spring
-        "summer": base_datetime.strftime("06/21/%Y"),  # Start of summer
-        "fall": base_datetime.strftime("09/23/%Y"),  # Start of fall
-        "winter": base_datetime.strftime("12/21/%Y"),
-        "new year's day": holidays["new year's day"].strftime("%m/%d/%Y"),
-        "new year's": holidays["new year's day"].strftime("%m/%d/%Y"),
-        "new year": holidays["new year's day"].strftime("%m/%d/%Y"),
-        "next year": holidays["new year's day"].strftime("%m/%d/%Y"),
-        "new years": holidays["new year's day"].strftime("%m/%d/%Y"),
-        "independence day": holidays["independence day"].strftime("%m/%d/%Y"),
-        "christmas": holidays["christmas"].strftime("%m/%d/%Y"),
-        "thanksgiving": holidays["thanksgiving"].strftime("%m/%d/%Y"),
-        "memorial day": holidays["memorial day"].strftime("%m/%d/%Y"),
-        "labor day": holidays["labor day"].strftime("%m/%d/%Y"),
-        "black friday": holidays["black friday"].strftime("%m/%d/%Y"),
-        "christmas eve": holidays["christmas eve"].strftime("%m/%d/%Y"),
+        "end of month": (base_datetime + relativedelta(day=31)).strftime(proper_format),
+        "eod": base_datetime.strftime(proper_format),  # End of the day
+        "end of day": base_datetime.strftime(proper_format),
+        "today": base_datetime.strftime(proper_format),
+        "tonight": base_datetime.strftime(proper_format),
+        "tomorrow": tomorrow.strftime(proper_format),
+        "this week": middle_of_week.strftime(proper_format),
+        "weekly": end_of_week.strftime(proper_format),
+        "eow": end_of_week.strftime(proper_format),  # End of the week
+        "eotw": end_of_week.strftime(proper_format),  # End of the week
+        "end of the week": end_of_week.strftime(proper_format),  # End of the week
+        "eotw next week": next_week_end.strftime(proper_format),  # End of the week
+        "end of week": end_of_week.strftime(proper_format),
+        "next week": next_week_start.strftime(proper_format),
+        "spring": base_datetime.strftime("%Y-03-20"),  # Start of spring
+        "summer": base_datetime.strftime("%Y-06-21"),  # Start of summer
+        "fall": base_datetime.strftime("%Y-09-23"),  # Start of fall
+        "winter": base_datetime.strftime("%Y-12-21"),
+        "new year's day": holidays["new year's day"].strftime(proper_format),
+        "new year's": holidays["new year's day"].strftime(proper_format),
+        "new year": holidays["new year's day"].strftime(proper_format),
+        "next year": holidays["new year's day"].strftime(proper_format),
+        "new years": holidays["new year's day"].strftime(proper_format),
+        "independence day": holidays["independence day"].strftime(proper_format),
+        "christmas": holidays["christmas"].strftime(proper_format),
+        "thanksgiving": holidays["thanksgiving"].strftime(proper_format),
+        "memorial day": holidays["memorial day"].strftime(proper_format),
+        "labor day": holidays["labor day"].strftime(proper_format),
+        "black friday": holidays["black friday"].strftime(proper_format),
+        "christmas eve": holidays["christmas eve"].strftime(proper_format),
     }
     # monday-sunday
     list_of_weekdays = {
         (base_datetime + timedelta(days=i)).strftime("%A").lower(): (
             base_datetime + timedelta(days=i)
-        ).strftime("%m/%d/%Y")
+        ).strftime(proper_format)
         for i in range(7)
     }
 
@@ -78,20 +81,20 @@ def get_static_mappings(base_datetime):
 
 # Function to handle relative date keywords like "3d", "2w", "1m", etc.
 def parse_relative_date(date_string, base_datetime):
-    pattern = r"(\d+)\s*(hours?|days?|weeks?|months?|years?|d|w|m|y)"
+    pattern = r"(\d+)\s*(hours?|days?|weeks?|months?|years?)"
     match = re.match(pattern, date_string, re.IGNORECASE)
     if match:
         value = int(match.group(1))
         unit = match.group(2).lower()
-        if unit in ["h", "hour", "hours"]:  # Weeks
+        if unit in ["hour", "hours"]:  # Weeks
             return base_datetime
-        elif unit in ["d", "day", "days"]:  # Days
+        elif unit in ["day", "days"]:  # Days
             return base_datetime + timedelta(days=value)
-        elif unit in ["w", "week", "weeks"]:  # Weeks
+        elif unit in ["week", "weeks"]:  # Weeks
             return base_datetime + timedelta(weeks=value)
-        elif unit in ["m", "month", "months"]:  # Months
+        elif unit in ["month", "months"]:  # Months
             return base_datetime + relativedelta(months=value)
-        elif unit in ["y", "year", "years"]:  # Years
+        elif unit in ["year", "years"]:  # Years
             return base_datetime + relativedelta(years=value)
         else:
             raise ValueError(f"Unsupported time unit: {unit}")
@@ -99,43 +102,162 @@ def parse_relative_date(date_string, base_datetime):
 
 
 def parse_specific_date_format(date_string, base_datetime):
-    # Normalize the input to replace dashes and slashes with spaces
-    normalized_date_string = date_string.replace("-", " ").replace("/", " ")
+    # ——— normalize separators & strip ordinals ———
+    normalized_date_string = date_string.replace("/", " ").replace("-", " ")
+    normalized_date_string = re.sub(r"[‘’`]", "'", normalized_date_string)
+    normalized_date_string = re.sub(r"[,\.\"]", " ", normalized_date_string)
+    normalized_date_string = re.sub(r"(\d+)(st|nd|rd|th)\b", r"\1", normalized_date_string)
+    normalized_date_string = re.sub(r"\s+", " ", normalized_date_string).strip().lower()
 
-    # List of date formats to try
+    # ——— month lookup ———
+    months = {
+        "january": 1, "jan": 1,
+        "february": 2, "feb": 2,
+        "march": 3, "mar": 3,
+        "april": 4, "apr": 4,
+        "may": 5,
+        "june": 6, "jun": 6,
+        "july": 7, "jul": 7,
+        "august": 8, "aug": 8,
+        "september": 9, "sep": 9, "sept": 9,
+        "october": 10, "oct": 10,
+        "november": 11, "nov": 11,
+        "december": 12, "dec": 12,
+    }
+
+    m_mdyy = re.fullmatch(r"([a-z]+)\s+(\d{1,2})\s*'(\d{2})", normalized_date_string)
+    if m_mdyy:
+        mon_abbr, day, yy = m_mdyy.groups()
+        year = 2000 + int(yy)
+        month = months.get(mon_abbr)
+        if month:
+            return datetime(year, month, int(day))
+
+    m_year = re.fullmatch(r"([a-z]+)\s*'(\d{2})", normalized_date_string)
+    if m_year:
+        mon_abbr, yy = m_year.groups()
+        year = 2000 + int(yy)
+        month = months.get(mon_abbr)
+        if month:
+            first_of_month = datetime(year, month, 1)
+            return first_of_month + relativedelta(weekday=FR(3))
+        
+    s = normalized_date_string.strip().lower()
+    m = re.match(r"^(\d{1,2})/(\d{1,2})/(\d{2,4})$", date_string)
+    if m:
+        mo_str, da_str, yr_str = m.groups()
+        yr = int(yr_str)
+        if yr < 100:
+            yr += 2000
+
+        mo = int(mo_str)
+        da = int(da_str)
+
+        # if we somehow got an invalid month, assume the user meant day/month/year and swap
+        if mo < 1 or mo > 12:
+            mo, da = da, mo
+
+        # clamp into valid ranges
+        mo = max(1, min(mo, 12))
+        last_day = calendar.monthrange(yr, mo)[1]
+        da = max(1, min(da, last_day))
+
+        return datetime(yr, mo, da)
+
+    s=normalized_date_string.lower()
+    s=re.sub(r"\bsept\b","sep",s)
+    m=re.match(r"^([a-z]+)\s*(\d{1,2})(?:st|nd|rd|th)?(?:'(\d{2}))?$",s)
+    if m:
+        mon, day, yy = m.groups()
+        month = months.get(mon)
+        if month:
+            year = base_datetime.year if yy is None else 2000 + int(yy)
+            day_int = int(day)
+            last_day = calendar.monthrange(year, month)[1]
+            day_int = min(day_int, last_day)
+            return datetime(year, month, day_int)
+
+    if s in months:
+        year = base_datetime.year
+        # if the month has already passed this year, roll to next year
+        if months[s] < base_datetime.month or (
+            months[s] == base_datetime.month and base_datetime.day > 21
+        ):
+            year += 1
+        dt = datetime(year, months[s], 1)
+        third_friday = dt + relativedelta(weekday=FR(3))
+        return third_friday
+
     date_formats = [
-        "%m %d %y",  # MM DD YY format
-        "%m %d",  # MM DD format (year will be added)
-        "%b %d",  # Abbreviated Month Day (e.g., "Nov 12")
-        "%b%d",  # jan12
-        "%B %d",  # Full Month Day (e.g., "November 12")
-        "%d %b",  # Day Abbreviated Month (e.g., "12 Nov")
-        "%d %B",  # Day Full Month (e.g., "12 November")
-        "%b",  # month only abbreviated (nov)
-        "%B",  # month only normal (november)
-        "%Y",  # year only (2024)
+        "%m %d %y",
+        "%m %d",
+        "%m %Y",
+        "%m %y",
+        "%b %d",
+        "%b %d",
+        "%B %d",
+        "%d %b",
+        "%d %B",
+        "%d %m",
+        "%m %Y %d",
+        "%b %Y %d",
+        "%d-%m-%Y",
+        "%d/%m/%Y",
+        "%b %d %Y",
+        "%b %d %y",
+        "%B %d %Y",
+        "%B %d %y",
+        "%B %d '%y",
+        "%Y-%m-%d",
+        "%m-%d-%Y",
+        "%Y/%m/%d",
+        "%Y %m %d",
+        "%m/%d/%Y",
+        "%B %Y",
+        "%b %Y",
+        "%b",
+        "%B",
+        "%Y",
+        "%m%d%Y",
+        "%b%d%Y",
+        "%b%Y",
+        "%b%d %y",
+        "%b%d %Y",
+        "%d%b%y",
+        "%d %b %y",
+        "%d %b %Y",
+        "%b'%y",
+        "%B'%y",
+        "%b '%y",
     ]
 
     for date_format in date_formats:
         try:
             if date_format == "%Y":
-                # Handle year-only input by setting default month and day
                 specific_date = datetime.strptime(normalized_date_string, date_format)
                 specific_date = specific_date.replace(month=1, day=1)
+            elif date_format in ("%b", "%B"):
+                date_str = f"{normalized_date_string} {base_datetime.year}"
+                format_str = f"{date_format} %Y"
+                dt = datetime.strptime(date_str, format_str)
+                dt = dt.replace(day=1)
+                third_friday = dt + relativedelta(weekday=FR(3))
+                return third_friday
+            elif date_format in ("%b %Y", "%B %Y", "%m %y", "%m %Y"):
+                dt = datetime.strptime(normalized_date_string, date_format)
+                dt = dt.replace(day=1)
+                third_friday = dt + relativedelta(weekday=FR(3))
+                return third_friday
             elif "%y" not in date_format and "%Y" not in date_format:
-                # Formats that do not include a year; append the current year
                 date_str = f"{normalized_date_string} {base_datetime.year}"
                 format_str = f"{date_format} %Y"
                 specific_date = datetime.strptime(date_str, format_str)
             else:
-                # Formats that include a year (either two-digit or four-digit)
                 specific_date = datetime.strptime(normalized_date_string, date_format)
-
             return specific_date
         except ValueError:
-            continue  # Try the next format
+            continue
 
-    # If none of the formats matched, return None
     return None
 
 
@@ -156,38 +278,12 @@ def date_formatter(comment_timestamp, keyword):
     # Handle relative date keywords
     relative_date = parse_relative_date(keyword, comment_utc_datetime)
     if relative_date:
-        return relative_date.strftime("%m/%d/%Y")
+        return relative_date.strftime("%Y-%m-%d")
 
     specific_date = parse_specific_date_format(keyword, comment_utc_datetime)
     if specific_date:
-        return specific_date.strftime("%m/%d/%Y")
+        return specific_date.strftime("%Y-%m-%d")
     # If no match, raise an error
     if keyword != "":
         print(f"keyword not found: {keyword}")
-    return ""
-
-
-def price_formatter(price):
-    cleaned_string = price.replace("$", "").replace("+", "").replace(",", "")
-    if cleaned_string != "":
-        if "to" in cleaned_string:  # Check if it's a range
-            try:
-                # Split the range into two numbers
-                start, end = cleaned_string.split("to")
-                start = float(start.strip())
-                end = float(end.strip())
-                average = (start + end) / 2
-                # Format both numbers to two decimal places
-                return f"{average:.2f}"
-            except ValueError:
-                print(f"Invalid number format: '{cleaned_string}'")
-
-        else:
-            try:
-                # Convert to float and format to two decimal places
-                number = float(cleaned_string)
-                return f"{number:.2f}"
-            except ValueError:
-                # Handle the case where conversion fails
-                print(f"Invalid number format: '{cleaned_string}'")
     return ""

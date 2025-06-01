@@ -1,8 +1,9 @@
 # This file takes the training data and tokenizes it so that the model can train on it
+import ssl
 import nltk
 import pandas as pd
 from nltk.tokenize import word_tokenize
-
+ssl._create_default_https_context = ssl._create_unverified_context
 nltk.download("punkt_tab")
 
 # comment like "I'm not expecting NVDA to hit 12.5 tomorrow"
@@ -17,9 +18,9 @@ nltk.download("punkt_tab")
 
 # Cleans and standarizes data, and then splits it into tokens using the nltk tokenizer
 def label_comment(comment, ticker, price, date):
-    price = price.strip(" $")
-    ticker = ticker.strip(" $")
-    date = date.strip("[]")
+    price = str(price).strip(" $")
+    ticker = str(ticker).strip(" $")
+    date = str(date).strip("[]")
     tokens = word_tokenize(comment)
     labels = ["O"] * len(tokens)
 
@@ -47,19 +48,14 @@ def label_comment(comment, ticker, price, date):
 
 # Takes the tokenized data and returns it as an array
 def generate_labeled_data():
-    # file1 = pd.read_csv("pre_processing/prepped_stocks.csv")
     file2 = pd.read_csv(
         "NER_Classifier/regression_model_training_data.csv", usecols=range(5)
     )
-    # combined_files = pd.concat([file1, file2], ignore_index=True)
-    file2 = file2[file2["Label"].astype(float) == 1.0]
-    # combined_files = combined_files[combined_files["Label"].astype(float) == 1.0]
+    file2 = file2[file2["Label"].astype(float).isin([0.0, 1.0])]
     examples = []
-
     for _, row in file2.iterrows():
         tokens, labels = label_comment(
             row["Comment"], row["Stock"], row["Price"], row["Date"]
         )
         examples.append({"tokens": tokens, "ner_tags": labels})
-
     return examples

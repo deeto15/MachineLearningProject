@@ -5,7 +5,7 @@ from transformers import BertTokenizer, BertForSequenceClassification
 
 
 class BertIntentClassifier:
-    def __init__(self, model_path="./training_models/classifier-bert-V2"):
+    def __init__(self, model_path="./training_models/classifier-bert-V3"):
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.tokenizer = BertTokenizer.from_pretrained(model_path)
         self.model = (
@@ -38,5 +38,5 @@ class BertIntentClassifier:
         return preds, confs
 
 
-def load_model(model_path="./training_models/classifier-bert-V2"):
-    return BertIntentClassifier(model_path)
+def load_model(model_path="./training_models/classifier-bert-V3"):
+    return model_path, BertIntentClassifier(model_path)

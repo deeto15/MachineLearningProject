@@ -21,7 +21,8 @@ from scraper.helper_methods import (
     REDDIT_PARAMS,
 )
 
-
+# TODO when updating a post, how do i avoid putting bertcomments in? if it scrapes itll pick up any new comments thoeretically, but if it updates, itll pick up the same comments again. maybe add a check to see if the comment is already in the db? or just do a batch insert of all comments for that post and then update the last checked time? but then how do i know if its new or not? maybe add a column to the comments table for last checked time and only insert if its older than that? or just do a batch insert of all comments for that post and then update the last checked time? but then how do i know if its new or not? maybe add a column to the comments table for last checked time and only insert if its older than that? or just do a batch insert of all comments for that post and then update the last checked time? but then how do i know if its new or not? maybe add a column to the comments table for last checked time and only insert if its older than that? or just do a batch insert of all comments for that post and then update the last checked time? but then how do i know if its new or not? maybe add a column to the comments table for last checked time and only insert if its older than that? or just do a batch insert of all comments for that post and then update the last checked time? but then how do i know if its new or not? maybe add a column to the comments table for last checked time and only insert if its older than that? or just do a batch insert of all comments for that post and then update the last checked time? but then how do i know if its new or not? maybe add a column to the comments table for last checked time and only insert if its older than that? or just do a batch insert of all comments for that post and then update the last checked time? but then how do i know if its new or not? maybe add a column to the comments table for last checked time and only insert if its older than that?
+# maybe just check all comment ids and only insert newww ones, or maybe postgres automatically rejects duplicatyes
 load_dotenv()
 reddit_semaphore = asyncio.Semaphore(2)
 
@@ -109,8 +110,7 @@ async def upsert_posts_for_update(pool, submissions):
     ]
     async with pool.acquire() as conn:
         for i in range(0, len(records), 500):
-            await conn.executemany(INSERT_POSTS, records[i:i+500])
-            await asyncio.sleep(random.uniform(0.5,1.5))
+
 
 pipeline = load_model()
 
@@ -119,7 +119,7 @@ async def batch_insert_comments(pool, submission):
     try:
         await submission.load()
         async with reddit_semaphore:
-            await safe_replace_more(submission.comments, limit=None)
+            await safe_replace_more(submission.comments, limit=256)
         comments = [
             c
             for c in submission.comments.list()
@@ -131,7 +131,7 @@ async def batch_insert_comments(pool, submission):
         combined = submission.title + "\n\n" + submission.selftext
         fake = FakeComment(
             submission.id,
-            getattr(submission.author, "name", None),
+            submission.author,
             combined,
             submission.created_utc,
             submission.score,
@@ -164,7 +164,6 @@ async def batch_insert_comments(pool, submission):
         if not valid:
             return
 
-        now = time.time()
         records = [
             (
                 c.id,
@@ -176,7 +175,6 @@ async def batch_insert_comments(pool, submission):
                 c.parent_id,
                 c.is_submitter,
                 c.permalink,
-                now,
                 ner["Stock"],
                 ner["Price"],
                 ner["Date"],
@@ -203,7 +201,6 @@ async def fetch_submissions(reddit, fullnames):
 async def update_existing_posts(pool, reddit):
     print("Starting update_existing_posts")
 
-    # 1) fetch IDs that need checking
     async with pool.acquire() as conn:
         now = time.time()
         rows = await conn.fetch(
@@ -214,20 +211,19 @@ async def update_existing_posts(pool, reddit):
                AND (
                      last_checked_utc IS NULL
                   OR (
-                       (created_utc > $2 AND $3 - last_checked_utc >= $4)
-                    OR (created_utc > $5 AND $3 - last_checked_utc >= $6)
-                    OR (created_utc > $7 AND $3 - last_checked_utc >= $8)
+                       (created_utc > $2 AND $3 - last_checked_utc >= $4)            -- <1d: every hour
+                    OR (created_utc > $5 AND created_utc <= $2 AND $3 - last_checked_utc >= $6)   -- 1d-7d: every 6h
+                    OR (created_utc > $1 AND created_utc <= $5 AND $3 - last_checked_utc >= $7)   -- 7d-30d: every 24h
                    )
                )
             """,
-            now - 2592000,  # 30d
-            now - 86400,  # 1d
-            now,
-            3600,  # hourly for <1d
-            now - 604800,  # 7d
-            43200,  # every 12h for <7d
-            now - 2592000,  # 30d
-            86400,  # every 24h for <30d
+            now - 2592000,  # $1: 30 days ago
+            now - 86400,  # $2: 1 day ago
+            now,  # $3: current time
+            3600,  # $4: every hour
+            now - 604800,  # $5: 7 days ago
+            21600,  # $6: every 6 hours
+            86400,  # $7: every 24 hours
         )
     ids = [r["post_id"] for r in rows]
     print(f"Found {len(ids)} posts to update")
@@ -241,26 +237,23 @@ async def update_existing_posts(pool, reddit):
         fullnames = [f"t3_{pid}" for pid in batch_ids]
 
         try:
-            # 3) fetch & upsert metadata only
             submissions = await retry_api_call(fetch_submissions(reddit, fullnames))
             if not submissions:
                 continue
-            await upsert_posts_for_update(pool, submissions)
 
-            # 4) per-post: insert comments, then mark checked
+            # Instead of upserting all posts at once, do it per post:
             for s in submissions:
+                await upsert_posts_for_update(pool, [s])  # upsert one post
                 total_expected += s.num_comments or 0
 
                 await batch_insert_comments(pool, s)
 
                 async with pool.acquire() as conn:
-                    # mark this post as fully checked
                     await conn.execute(
                         "UPDATE posts SET last_checked_utc = $1 WHERE post_id = $2",
                         time.time(),
                         s.id,
                     )
-                    # count inserted comments
                     count = await conn.fetchval(
                         "SELECT COUNT(*) FROM comments WHERE post_id = $1", s.id
                     )
@@ -273,6 +266,7 @@ async def update_existing_posts(pool, reddit):
             delay = 2 ** (batch_index // 100 + 1)
             print(f"Rate limited in batch {batch_index // 100 + 1}, sleeping {delay}s")
             await asyncio.sleep(delay)
+
         except Exception as e:
             print(
                 f"❌ Error in batch {batch_index // 100 + 1}: {type(e).__name__}: {e}"
@@ -287,7 +281,6 @@ async def update_existing_posts(pool, reddit):
 
 async def scrape_new_posts(pool, subreddit):
     print("Starting scrape_new_posts")
-
     # 1) pull down listings
     seen, ids, posts = set(), [], []
     for listing in ["new", "rising", "top", "hot"]:
@@ -302,48 +295,22 @@ async def scrape_new_posts(pool, subreddit):
 
     print(f"Fetched {len(posts)} unique posts from listings")
 
-    # 2) find which ones need processing
+    # 2) Only process posts not already in the DB
     async with pool.acquire() as conn:
         existing = await conn.fetch(
-            "SELECT post_id, created_utc, last_checked_utc "
-            "FROM posts WHERE post_id = ANY($1)",
+            "SELECT post_id FROM posts WHERE post_id = ANY($1)",
             ids,
         )
-    existing_map = {
-        r["post_id"]: {
-            "created_utc": r["created_utc"],
-            "last_checked_utc": r["last_checked_utc"] or 0,
-        }
-        for r in existing
-    }
+    existing_ids = {r["post_id"] for r in existing}
+    new_posts = [s for s in posts if s.id not in existing_ids]
 
-    now_ts = time.time()
-    filtered = []
-    for s in posts:
-        rec = existing_map.get(s.id)
-        age = now_ts - (rec["created_utc"] if rec else 0)
-        since = now_ts - (rec["last_checked_utc"] if rec else 0)
-
-        # your three time‐based rules
-        if (
-            not rec
-            or (age <= 86400 and since >= 900)
-            or (age <= 604800 and since >= 7200)
-            or (age <= 2592000 and since >= 43200)
-        ):
-            filtered.append(s)
-
-    print(f"{len(filtered)} posts to insert or update")
-
-    # 3) upsert **only** metadata (no last_checked_utc)
-    await upsert_posts_for_update(pool, filtered)
-
-    # 4) per‐post: insert comments, then mark it checked
+    print(f"{len(new_posts)} new posts to insert")
     total_expected = 0
     total_inserted = 0
 
-    for s in filtered:
+    for s in new_posts:
         try:
+            await upsert_posts_for_update(pool, [s])
             total_expected += s.num_comments or 0
 
             # insert all comments for this one post
@@ -367,8 +334,6 @@ async def scrape_new_posts(pool, subreddit):
             print(f"✅ Scraped {count}/{s.num_comments} comments for post {s.id}")
 
         except Exception as e:
-            # on any failure we do *not* update last_checked_utc,
-            # so next run we'll retry exactly this post
             print(f"❌ Failed processing post {s.id}: {e}")
             traceback.print_exc()
 
@@ -383,8 +348,8 @@ async def run_live_scraper():
         await reddit.user.me()
         await create_tables(pool)
         subreddit = await reddit.subreddit("wallstreetbets")
-        await update_existing_posts(pool, reddit)
         await scrape_new_posts(pool, subreddit)
+        await update_existing_posts(pool, reddit)
     finally:
         await reddit.close()
         await pool.close()

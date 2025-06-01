@@ -1,36 +1,59 @@
 # This generates predictions from the now trained model on new data
+import json
 import torch
 import torch.nn.functional
 from transformers import AutoModelForTokenClassification, AutoTokenizer
+from stock_market.formatter import date_formatter
+from Binary_Classifier.BERT_loader import load_model
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-model_path = "./training_models/ner-output-V3"
+model_path = "./training_models/ner-output-V4"
 model = AutoModelForTokenClassification.from_pretrained(model_path).to(device)
 tokenizer = AutoTokenizer.from_pretrained(model_path)
 id2label = model.config.id2label
 subset = {"TICKER", "PRICE", "DATE"}
 model.eval()
+def debug_tokens(text):
+    enc = tokenizer(text, return_tensors="pt").to(model.device)
+    with torch.no_grad():
+        probs = model(**enc).logits.softmax(-1)[0]
+    ids = probs.argmax(-1)
+    toks = tokenizer.convert_ids_to_tokens(enc["input_ids"][0])
+    return list(zip(toks, [id2label[i.item()] for i in ids], probs.max(-1).values.cpu().tolist()))
 
 
-# Takes in a comment, breaks it down into the tokenizer defined above and sends the text, its tokens and predictions to extractor
-def tokens(text):
-    encoding = tokenizer(
-        text,
+# Takes in comments, breaks it down into the tokenizer defined above and sends the text, its tokens and predictions to extractor
+def tokens_batch(texts):
+    encodings = tokenizer(
+        texts,
         return_offsets_mapping=True,
         return_tensors="pt",
         truncation=True,
+        padding=True,
     )
-    offsets = encoding.pop("offset_mapping")[0].tolist()
-    input_ids = encoding["input_ids"][0]
-    token_list = tokenizer.convert_ids_to_tokens(input_ids)
-    encoding = {k: v.to(device) for k, v in encoding.items()}
+    offsets = encodings.pop("offset_mapping").tolist()
+    input_ids = encodings["input_ids"]
+    token_lists = [tokenizer.convert_ids_to_tokens(seq) for seq in input_ids]
+    encodings = {k: v.to(device) for k, v in encodings.items()}
     with torch.no_grad():
-        outputs = model(**encoding)
-    logits = outputs.logits[0]
-    predictions = torch.argmax(logits, dim=-1).tolist()
-    probs = torch.nn.functional.softmax(logits, dim=-1)
-    scores = probs[range(len(predictions)), predictions]
-    return extractor(text, offsets, token_list, predictions, scores)
+        outputs = model(**encodings)
+    logits = outputs.logits
+    results = []
+    for i in range(len(texts)):
+        logit = logits[i]
+        prediction = torch.argmax(logit, dim=-1).tolist()
+        probs = torch.nn.functional.softmax(logit, dim=-1)
+        scores = probs[range(len(prediction)), prediction]
+        result = extractor(
+            texts[i],
+            offsets[i],
+            token_lists[i],
+            prediction,
+            scores,
+        )
+        results.append(result)
+    return results
+
 
 
 # Takes the tokens and aligns them to the predicted label, so that each full piece of the word has the confidence score and not invidual tokens, otherwise you'd output things like "January" as "Jan" "ua" "ry"
@@ -125,3 +148,65 @@ def glue_tokens(text, pieces, offsets):
         else:
             result += " " + pieces[i]
     return result
+
+def log_prediction_debug(text):
+    encoding = tokenizer(
+        text,
+        return_offsets_mapping=True,
+        return_tensors="pt",
+        truncation=True,
+    )
+    offsets = encoding.pop("offset_mapping")[0].tolist()
+    input_ids = encoding["input_ids"][0]
+    token_list = tokenizer.convert_ids_to_tokens(input_ids)
+    encoding = {k: v.to(device) for k, v in encoding.items()}
+    with torch.no_grad():
+        outputs = model(**encoding)
+    logits = outputs.logits[0]
+    predictions = torch.argmax(logits, dim=-1).tolist()
+    probs = torch.nn.functional.softmax(logits, dim=-1)
+    scores = probs[range(len(predictions)), predictions]
+    for i, (tok, pred, score, (start, end)) in enumerate(zip(token_list, predictions, scores, offsets)):
+        label = id2label.get(pred, "O")
+        print(f"{tok:>10} | {label:>10} | {score:.4f} | {text[start:end]}")
+    result = extractor(text, offsets, token_list, predictions, scores)
+    print("EXTRACTED:", result)
+    return result
+
+version, pipeline = load_model()
+def predict_comments(json_lines):
+    comments = [json.loads(line) for line in json_lines]
+    bodies = [comment["body"] for comment in comments]
+    entities_list = tokens_batch(bodies)
+    dicts = []
+    for comment, best_entities in zip(comments, entities_list):
+        if not comment or not best_entities:
+            continue
+        comment["Stock"] = best_entities['Stock']
+        comment["Price"] = best_entities['Price']
+        comment["Date"] = best_entities['Date']
+        comment["Formatted Date"] = date_formatter(comment["created_unix"], comment['Date'])
+        comment["StockScore"] = best_entities['StockScore']
+        comment["PriceScore"] = best_entities['PriceScore']
+        comment["DateScore"] = best_entities['DateScore']
+        comment["NER Version"] = model_path[-2:]
+        dicts.append(comment)
+    if dicts:
+        good_comments = [comment["body"] for comment in dicts]
+        preds, confs = pipeline.predict_batch(good_comments)
+        for d, p, c in zip(dicts, preds, confs):
+            d["Prediction"] = p
+            d["Confidence"] = c
+            d["Binary_Model"] = version[-2:]
+        return dicts
+    return []
+
+
+real_data = [
+    '{"id": "1l06pzf", "body": "I\'m betting on UNH 25$ calls for Jan 2023", "author_id": "t2_v9e77smks", "author_name": "Piyush4758", "is_post": true, "source": "r/wallstreetbets", "created_unix": 1748723247}',
+    '{"id": "1l06pzf", "body": "TSLA is going to the moon! Going for 12/22 $125 calls!", "author_id": "t2_v9e77smks", "author_name": "Piyush4758", "is_post": true, "source": "r/wallstreetbets", "created_unix": 1748723247}'
+]
+
+dict = predict_comments(real_data)
+for comment in dict:
+    print(comment, "\n")

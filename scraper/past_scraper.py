@@ -1,17 +1,16 @@
+from pathlib import Path
 import time
 import json
 import asyncpg
 from dotenv import load_dotenv
 from Binary_Classifier.BERT_loader import load_model
 from Binary_Classifier.predictions import tokens
-from scraper.helper_methods import INSERT_COMMENTS, INSERT_POSTS, create_tables, DB_PARAMS
+
 
 load_dotenv()
 
-POSTS_FILE = r"C:\Users\Kendall Eberly\Downloads\wallstreetbets_submissions\wallstreetbets_submissions"
-COMMENTS_FILE = (
-    r"C:\Users\Kendall Eberly\Downloads\wallstreetbets_comments\wallstreetbets_comments"
-)
+POSTS_FILE    = Path.home()/"Downloads"/"wallstreetbets_submissions"/"wallstreetbets_submissions"
+COMMENTS_FILE = Path.home()/"Downloads"/"wallstreetbets_comments"/"wallstreetbets_comments"
 CATCH_ALL_ID = "__CATCH_ALL__"
 
 
@@ -60,14 +59,14 @@ async def batch_insert_posts(pool, records):
         )
     async with pool.acquire() as conn:
         for i in range(0, len(vals), 500):
-            await conn.executemany(INSERT_POSTS, vals[i : i + 500])
+            await conn.executemany(INSERT_NEW_POSTS, vals[i : i + 500])
 
 
 async def insert_catch_all(pool):
     now = time.time()
     async with pool.acquire() as conn:
         await conn.execute(
-            INSERT_POSTS,
+            INSERT_NEW_POSTS,
             CATCH_ALL_ID,
             "",
             "",
@@ -92,7 +91,6 @@ async def insert_catch_all(pool):
 
 
 async def batch_insert_comments(pool, records):
-    now = time.time()
     ner_list = []
     for r in records:
         body = clean_str(r.get("body"))
@@ -106,7 +104,16 @@ async def batch_insert_comments(pool, records):
     valid = [(r, ner) for (r, ner), p in zip(ner_list, preds) if p == 1]
     if not valid:
         return
-    batch_post_ids = [r["post_id"] for r, _ in valid]
+
+    def get_post_id_from_comment(r):
+        link_id = r.get("link_id")
+        if link_id and link_id.startswith("t3_"):
+            return link_id[3:]
+        if r.get("post_id"):
+            return r.get("post_id")
+        return None
+
+    batch_post_ids = [get_post_id_from_comment(r) for r, _ in valid]
     async with pool.acquire() as conn:
         rows = await conn.fetch(
             "SELECT post_id FROM posts WHERE post_id = ANY($1)", batch_post_ids
@@ -114,7 +121,9 @@ async def batch_insert_comments(pool, records):
         existing = {row["post_id"] for row in rows}
         vals = []
         for r, ner in valid:
-            pid = r.get("post_id") if r.get("post_id") in existing else CATCH_ALL_ID
+            pid = get_post_id_from_comment(r)
+            if pid not in existing:
+                pid = CATCH_ALL_ID
             vals.append(
                 (
                     clean_str(r.get("id")),
@@ -126,7 +135,6 @@ async def batch_insert_comments(pool, records):
                     clean_str(r.get("parent_id")),
                     bool(r.get("is_submitter")),
                     clean_str(r.get("permalink")),
-                    now,
                     ner["Stock"],
                     ner["Price"],
                     ner["Date"],
@@ -138,6 +146,7 @@ async def batch_insert_comments(pool, records):
 
 async def import_posts(pool):
     batch = []
+    print("Importing posts...")
     for post in stream_items(POSTS_FILE):
         batch.append(post)
         if len(batch) >= 500:
@@ -145,9 +154,11 @@ async def import_posts(pool):
             batch.clear()
     if batch:
         await batch_insert_posts(pool, batch)
+    print("Importing posts done.")
 
 
 async def import_comments(pool):
+    print("Importing comments...")
     batch = []
     for comment in stream_items(COMMENTS_FILE):
         batch.append(comment)
@@ -156,6 +167,7 @@ async def import_comments(pool):
             batch.clear()
     if batch:
         await batch_insert_comments(pool, batch)
+    print("Importing comments done.")
 
 
 async def run_past_scraper():
