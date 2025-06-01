@@ -5,12 +5,7 @@ import asyncpg
 from dotenv import load_dotenv
 from Binary_Classifier.BERT_loader import load_model
 from Binary_Classifier.predictions import tokens
-from scraper.helper_methods import (
-    INSERT_COMMENTS,
-    INSERT_NEW_POSTS,
-    create_tables,
-    DB_PARAMS,
-)
+
 
 load_dotenv()
 

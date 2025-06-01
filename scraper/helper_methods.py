@@ -89,8 +89,7 @@ INSERT_COMMENTS = """
                     ) VALUES (
                         $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12
                     ) ON CONFLICT (comment_id) DO UPDATE SET
-                        score = EXCLUDED.score
-                """
+
 
 INSERT_POSTS = """
                 INSERT INTO posts (
@@ -123,8 +122,6 @@ INSERT_POSTS = """
                     last_checked_utc = EXCLUDED.last_checked_utc
             """
 
-
-INSERT_NEW_POSTS = """
     INSERT INTO posts (
         post_id, title, selftext, author, created_utc,
         num_comments, score, upvote_ratio, url, permalink,
