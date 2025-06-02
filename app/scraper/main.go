@@ -15,7 +15,7 @@ import (
 
 func main() {
 	// wait for rabbitmq
-	time.Sleep(5 * time.Second)
+	time.Sleep(8 * time.Second)
 
 	// load reddit variables
 	godotenv.Load()

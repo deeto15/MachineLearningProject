@@ -21,11 +21,33 @@ services:
   scraper:
     build: ./scraper
     container_name: scraper
-    env_file: 'scraper/.env'
+    env_file: 'scraper/testing.env'
     depends_on:
       - redis
       - rabbitmq
-  
+   
+  postgres:
+    image: postgres:17
+    container_name: postgres_dev
+    environment:
+      POSTGRES_USER: devuser
+      POSTGRES_PASSWORD: devpassword
+      POSTRES_DB: testdb
+
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+ 
+  comment-processor:
+    build: ./comment-processor
+    env_file: 'comment-processor/.env'
+    depends_on:
+      - rabbitmq
+      - postgres
+    
+
 volumes:
   redis_data:
   rabbitmq_data:
+  pgdata:

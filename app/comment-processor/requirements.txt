@@ -1,0 +1,4 @@
+python-dateutil
+transformers
+psycopg[binary]
+pika
