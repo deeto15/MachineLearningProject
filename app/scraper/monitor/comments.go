@@ -135,10 +135,15 @@ func (s *SubredditMonitor) MoreRequest(recentRequest *http.Request, fullID strin
 
 // recursively uses morechildren reddit api when necessary
 func (s *SubredditMonitor) GetAllComments(postID string) {
+	log.Printf("Checking post %s for new comments\n", postID)
+
 	s.limiter.Wait(context.Background())
 	post, postResp, err := s.redditClient.Post.Get(context.Background(), postID)
+
+	// skip the post for now if there is an error ex. 500 internal error
 	if err != nil {
 		log.Println("Error getting post: ", err)
+		return
 	}
 	surfaceLevelComments := getReplies(post.Comments)
 
@@ -148,6 +153,7 @@ func (s *SubredditMonitor) GetAllComments(postID string) {
 
 	// start recursion if the post has more to load
 	if post.HasMore() {
+		log.Printf("Encountered long post with ID %s needing More request\n", post.Post.ID)
 		s.MoreRequest(postResp.Request, post.Post.FullID, post.More.Children)
 	}
 }

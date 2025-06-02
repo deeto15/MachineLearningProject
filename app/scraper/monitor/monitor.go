@@ -21,12 +21,15 @@ func (s *SubredditMonitor) monitorNewPosts() {
 
 	for range ticker.C {
 		s.limiter.Wait(context.Background())
-
 		posts, _, err := s.redditClient.Subreddit.NewPosts(context.Background(), s.subreddit, opts)
+
+		// skip and try again
 		if err != nil {
 			log.Printf("Error fetching posts from r/%s: %v\n", s.subreddit, err.Error())
+			continue
 		}
 
+		log.Printf("Attempting to store %d recently scraped posts in Redis\n", len(posts))
 		for _, post := range posts {
 			s.checkAndStorePost(post)
 		}
@@ -48,7 +51,6 @@ func (s *SubredditMonitor) monitorNewComments() {
 
 	for range ticker.C {
 		postIds := store.GetRecentRedisPosts(s.subreddit, s.opts.PostCutoff, s.rdb)
-		log.Printf("Getting comments for %d new posts from Redis\n", len(postIds))
 
 		for _, id := range postIds {
 			s.GetAllComments(id)
