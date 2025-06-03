@@ -126,7 +126,7 @@ func (s *SubredditMonitor) MoreRequest(recentRequest *http.Request, fullID strin
 	// check for posts that have more to load
 	allComments := getReplies(comments)
 	for _, comment := range allComments {
-
+		s.checkAndStoreComment(comment)
 		if comment.HasMore() {
 			s.MoreRequest(recentRequest, comment.FullID, comment.Replies.More.Children)
 		}
