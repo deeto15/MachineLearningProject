@@ -64,7 +64,6 @@ func (s *SubredditMonitor) MoreRequest(recentRequest *http.Request, fullID strin
 	data := url.Values{}
 	data.Set("link_id", fullID)
 	data.Set("api_type", "json")
-	data.Set("sort", "new")
 	data.Set("children", strings.Join(childrenIDs, ","))
 
 	// sets headers, gets token by supplying the most recent request sent from the go-reddit client
@@ -88,6 +87,7 @@ func (s *SubredditMonitor) MoreRequest(recentRequest *http.Request, fullID strin
 	bodyBytes, _ := io.ReadAll(resp.Body)
 	var jsonResponse ResponseJSON
 	json.Unmarshal(bodyBytes, &jsonResponse)
+	resp.Body.Close()
 
 	// separate More entries and actual Comments
 	var mores []*reddit.More
@@ -145,10 +145,14 @@ func (s *SubredditMonitor) GetAllComments(postID string) {
 		log.Println("Error getting post: ", err)
 		return
 	}
-	surfaceLevelComments := getReplies(post.Comments)
 
+	// get and check surface level comments for replies
+	surfaceLevelComments := getReplies(post.Comments)
 	for _, comment := range surfaceLevelComments {
 		s.checkAndStoreComment(comment)
+		if comment.HasMore() {
+			s.MoreRequest(postResp.Request, comment.FullID, comment.Replies.More.Children)
+		}
 	}
 
 	// start recursion if the post has more to load
