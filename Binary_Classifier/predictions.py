@@ -7,7 +7,7 @@ from stock_market.formatter import date_formatter
 from Binary_Classifier.BERT_loader import load_model
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-model_path = "./training_models/ner-output-V4"
+model_path = "./training_models/ner-output-V5"
 model = AutoModelForTokenClassification.from_pretrained(model_path).to(device)
 tokenizer = AutoTokenizer.from_pretrained(model_path)
 id2label = model.config.id2label
@@ -207,6 +207,7 @@ real_data = [
     '{"id": "1l06pzf", "body": "TSLA is going to the moon! Going for 12/22 $125 calls!", "author_id": "t2_v9e77smks", "author_name": "Piyush4758", "is_post": true, "source": "r/wallstreetbets", "created_unix": 1748723247}'
 ]
 
-dict = predict_comments(real_data)
-for comment in dict:
-    print(comment, "\n")
+print(log_prediction_debug("How to play AMD $15 call for Oct 15"))
+# dict = predict_comments(real_data)
+# for comment in dict:
+#     print(comment, "\n")

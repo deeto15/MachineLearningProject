@@ -10,7 +10,7 @@ from transformers import (
     TrainingArguments,
 )
 
-label_list = ["O", "B-TICKER", "I-TICKER", "B-PRICE", "I-PRICE", "B-DATE", "I-DATE"]
+label_list = ["O", "B-TICKER", "I-TICKER", "B-STRIKE", "I-STRIKE", "B-EXPIRY", "I-EXPIRY", "B-OPTIONTYPE", "I-OPTIONTYPE", "B-QUANTITY", "I-QUANTITY", "B-PREMIUM", "I-PREMIUM"]
 label2id = {label: i for i, label in enumerate(label_list)}
 id2label = {i: label for label, i in label2id.items()}
 
@@ -69,7 +69,7 @@ model = AutoModelForTokenClassification.from_pretrained(
     label2id=label2id,
 )
 training_args = TrainingArguments(
-    output_dir="./training_models/ner-output-V4",
+    output_dir="./training_models/ner-output-V5",
     evaluation_strategy="no",
     learning_rate=2e-5,
     per_device_train_batch_size=8,
@@ -89,5 +89,5 @@ trainer = Trainer(
 )
 
 trainer.train()
-model.save_pretrained("./training_models/ner-output-V4")
-tokenizer.save_pretrained("./training_models/ner-output-V4")
+model.save_pretrained("./training_models/ner-output-V5")
+tokenizer.save_pretrained("./training_models/ner-output-V5")

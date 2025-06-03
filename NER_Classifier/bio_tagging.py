@@ -17,45 +17,53 @@ nltk.download("punkt_tab")
 
 
 # Cleans and standarizes data, and then splits it into tokens using the nltk tokenizer
-def label_comment(comment, ticker, price, date):
+def label_comment(comment, ticker, price, date, optiontype, quantity, premium):
     price = str(price).strip(" $")
     ticker = str(ticker).strip(" $")
     date = str(date).strip("[]")
     tokens = word_tokenize(comment)
     labels = ["O"] * len(tokens)
-
     def clean_token(token):
         return token.strip(".,!?$:/\\")
-
     def tag_entity(entity, tag):
         entity_tokens = word_tokenize(entity)
+        if not entity_tokens:
+            return
         for i in range(len(tokens) - len(entity_tokens) + 1):
-            token_span_clean = [
-                clean_token(t) for t in tokens[i : i + len(entity_tokens)]
-            ]
+            token_span_clean = [clean_token(t) for t in tokens[i : i + len(entity_tokens)]]
             entity_tokens_clean = [clean_token(t) for t in entity_tokens]
             if token_span_clean == entity_tokens_clean:
                 labels[i] = f"B-{tag}"
                 for j in range(1, len(entity_tokens)):
                     labels[i + j] = f"I-{tag}"
                 break
-
     tag_entity(ticker, "TICKER")
-    tag_entity(price, "PRICE")
-    tag_entity(date, "DATE")
+    tag_entity(price, "STRIKE")
+    tag_entity(date, "EXPIRY")
+    tag_entity(optiontype, "OPTIONTYPE")
+    tag_entity(quantity, "QUANTITY")
+    tag_entity(premium, "PREMIUM")
     return tokens, labels
+
 
 
 # Takes the tokenized data and returns it as an array
 def generate_labeled_data():
     file2 = pd.read_csv(
-        "NER_Classifier/regression_model_training_data.csv", usecols=range(5)
+        "NER_Classifier/regression_model_training_data.csv", usecols=range(8)
     )
     file2 = file2[file2["Label"].astype(float).isin([0.0, 1.0])]
     examples = []
     for _, row in file2.iterrows():
         tokens, labels = label_comment(
-            row["Comment"], row["Stock"], row["Price"], row["Date"]
-        )
+        str(row["Comment"]) if pd.notna(row["Comment"]) else "",
+        str(row["Ticker"]) if pd.notna(row["Ticker"]) else "",
+        str(row["Strike"]) if pd.notna(row["Strike"]) else "",
+        str(row["Expiry"]) if pd.notna(row["Expiry"]) else "",
+        str(row.get("OptionType", "")) if pd.notna(row.get("OptionType", "")) else "",
+        str(row.get("Quantity", "")) if pd.notna(row.get("Quantity", "")) else "",
+        str(row.get("Premium", "")) if pd.notna(row.get("Premium", "")) else "",
+)
+
         examples.append({"tokens": tokens, "ner_tags": labels})
     return examples
