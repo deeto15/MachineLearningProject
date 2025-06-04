@@ -87,13 +87,6 @@ func sendComment(rabbitChannel *amqp.Channel, rabbitQueue *amqp.Queue, comment *
 		log.Printf("Error sending %s to Rabbit\n", comment.ID)
 		return
 	}
-
-	logText := "post"
-	if !comment.IsPost {
-		logText = "comment"
-	}
-
-	log.Printf("Send %s with ID %s to rabbit queue %s\n", logText, comment.ID, rabbitQueue.Name)
 }
 
 // listen for new incoming comments/posts and send them to Rabbit

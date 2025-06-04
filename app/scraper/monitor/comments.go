@@ -58,13 +58,17 @@ type ResponseJSON struct {
 }
 
 // sends a request to the morechildren endpoint, has to be done manually because of no support from go-reddit
-func (s *SubredditMonitor) MoreRequest(recentRequest *http.Request, fullID string, childrenIDs []string) {
+func (s *SubredditMonitor) MoreRequest(recentRequest *http.Request, linkId string, childrenIDs []string, sort string) {
 
 	// parameters for getting children
 	data := url.Values{}
-	data.Set("link_id", fullID)
+	data.Set("link_id", linkId)
 	data.Set("api_type", "json")
-	data.Set("children", strings.Join(childrenIDs, ","))
+	data.Set("sort", sort)
+	data.Set("depth", "12")
+
+	children := strings.Join(childrenIDs, ",")
+	data.Set("children", children)
 
 	// sets headers, gets token by supplying the most recent request sent from the go-reddit client
 	req, err := http.NewRequest("POST", endpoint, strings.NewReader(data.Encode()))
@@ -74,13 +78,13 @@ func (s *SubredditMonitor) MoreRequest(recentRequest *http.Request, fullID strin
 	req.Header.Set("Accept", "application/json")
 
 	if err != nil {
-		log.Printf("Error forming request for More on %s: %v\n", fullID, err)
+		log.Printf("Error forming request for More on %s: %v\n", linkId, err)
 	}
 
 	s.limiter.Wait(context.Background())
 	resp, err := s.redditClient.Do(context.Background(), req, nil)
 	if err != nil {
-		log.Printf("Error sending More request for ID %s: %v\n", fullID, err)
+		log.Printf("Error sending More request for ID %s: %v, Children: %s\n", linkId, err, children)
 	}
 
 	// read and unmarshal the entire response
@@ -107,36 +111,33 @@ func (s *SubredditMonitor) MoreRequest(recentRequest *http.Request, fullID strin
 	}
 
 	// batch More Ids and make more recursive calls
-	batch := make([]string, 0)
+	batch := make([]string, 0, 100)
 	for _, more := range mores {
 		for _, commentID := range more.Children {
+			batch = append(batch, commentID)
 			if len(batch) == 100 {
-				s.MoreRequest(recentRequest, fullID, batch)
+				s.MoreRequest(recentRequest, linkId, batch, sort)
 				batch = batch[:0]
 			}
-			batch = append(batch, commentID)
 		}
 	}
 
 	// clean up the IDs that got left over (didn't fit into batches of 100)
 	if len(batch) > 0 {
-		s.MoreRequest(recentRequest, fullID, batch)
+		s.MoreRequest(recentRequest, linkId, batch, sort)
 	}
 
-	// check for posts that have more to load
 	allComments := getReplies(comments)
 	for _, comment := range allComments {
 		s.checkAndStoreComment(comment)
 		if comment.HasMore() {
-			s.MoreRequest(recentRequest, comment.FullID, comment.Replies.More.Children)
+			s.MoreRequest(recentRequest, linkId, comment.Replies.More.Children, sort)
 		}
 	}
 }
 
 // recursively uses morechildren reddit api when necessary
 func (s *SubredditMonitor) GetAllComments(postID string) {
-	log.Printf("Checking post %s for new comments\n", postID)
-
 	s.limiter.Wait(context.Background())
 	post, postResp, err := s.redditClient.Post.Get(context.Background(), postID)
 
@@ -151,14 +152,14 @@ func (s *SubredditMonitor) GetAllComments(postID string) {
 	for _, comment := range surfaceLevelComments {
 		s.checkAndStoreComment(comment)
 		if comment.HasMore() {
-			s.MoreRequest(postResp.Request, comment.FullID, comment.Replies.More.Children)
+			s.MoreRequest(postResp.Request, post.Post.FullID, comment.Replies.More.Children, "new")
 		}
 	}
 
 	// start recursion if the post has more to load
 	if post.HasMore() {
-		log.Printf("Encountered long post with ID %s needing More request\n", post.Post.ID)
-		s.MoreRequest(postResp.Request, post.Post.FullID, post.More.Children)
+		log.Printf("Encountered long post %s with %d comments, starting More requests\n", post.Post.ID, post.Post.NumberOfComments)
+		s.MoreRequest(postResp.Request, post.Post.FullID, post.More.Children, "new")
 	}
 }
 
