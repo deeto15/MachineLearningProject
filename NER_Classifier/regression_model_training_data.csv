@@ -119,7 +119,7 @@ Are people really this bullish on AMD? the OI on May 20 4.00 calls....,AMD,4.00,
 Options Virgin Bought AMD $5 Jan 2017 calls Friday GFY,AMD,5,Jan 2017,calls,,,1
 LNKD 06/17/2016 147.00 C (+76550 %),LNKD,147.00,06/17/2016,C,,,1
 Yolo AMD 7/15 puts @ 5.50,AMD,5.50,7/15,puts,,,1
-54K SPY PUTS AT $200 TRADED TODAY 06/23/2016,SPY,200,06/23/2016,PUTS,54K,,1
+##54K SPY PUTS AT $200 TRADED TODAY 06/23/2016,SPY,200,06/23/2016,PUTS,54K,,1
 YOLO: 175 contracts of Jul16 $211 SPY puts ($15k position),SPY,211,Jul16,puts,175,,1
 So...$111 QQQ Aug 5 Puts?,QQQ,111,Aug 5,Puts,,,1
 You only have under 8000 seconds to load up on 28.5 weekly calls on $EBAY,EBAY,28.5,weekly,calls,,,1
@@ -562,31 +562,31 @@ Documenting my KDP $25 9/21 Call,KDP,25,9/21,Call,,,1
 "TSLA 8/03 puts @ $310, $3.8k worth - after stalking you degenerates for a month I went full autism on my first option play. Anyone know what the expected return tomorrow might be?",TSLA,310,8/03,puts,,,1
 "TSLA 8/03 Calls @ $310, $3.8k worth - after stalking you degenerates for a month I went full autism on my first option play. Anyone know what the expected return on this might be tomorrow?",TSLA,310,8/03,Calls,,,1
 SNAP 8/24 $12 Puts YOLO + DD inside,SNAP,12,8/24,Puts,,,1
-How do we feel about $77 8/10 $ACVI Calls? About to throw guap at it.,ACVI,77,8/10,,,,1
+How do we feel about $77 8/10 $ACVI Calls? About to throw guap at it.,ACVI,77,8/10,Calls,,,1
 What do I do now :). AAPL Aug 3 202.50,AAPL,202.50,Aug 3,,,,1
 QQQ to 181.50 by tomorrow.,QQQ,181.50,tomorrow,,,,2
 QQQ to 181.50 by tomorrow,QQQ,181.50,tomorrow,,,,2
 Should I hold my $285 call SPY 8/8 or sell now?,SPY,285,8/8,call,,,1
 How I hold on to my MU $70 8/31 calls,MU,70,8/31,calls,,,1
-BRK.B $205 8/17 Call,BRK,205,8/17,Call,,,1
+BRK.B $205 8/17 Call,BRK.B,205,8/17,Call,,,1
 Curious to why $SNAP is surging up today? Bought 9/14/18 11.50 puts though,SNAP,11.50,9/14/18,puts,,,1
 $22 AMD calls expiring 1/18 a good idea?,AMD,22,1/18,calls,,,1
 18.5 8/17 AMD Puts,AMD,18.5,8/17,Puts,,,1
 "$SNAP shorts are going to get rekt in AH today, expecting a 17% jump. If you’re short, you might want to think about closing your position at open and buying 8/17 Calls w. $15 strike",SNAP,15,8/17,Calls,,,1
 $FB 9/21 $190 calls,FB,190,9/21,calls,,,1
-Buying 1 Jan. $140 call on $AVGO,AVGO,140,Jan.,call,,,1
+Buying 1 Jan. $140 call on $AVGO,AVGO,140,Jan,call,1,,1
 AMA: I sold my TSLA 8/10 $380 Call on Friday for $116. Now worth about a $1000 when market opens tomorrow. Sold my hedge..held my PUTs. FML,TSLA,380,8/10,Call,,,1
 "Can someone please explain why my 8/17 $120 TSLA put went up 11,800% today",TSLA,120,8/17,put,,,1
 SNAP 1/18 $10 Calls,SNAP,10,1/18,Calls,,,1
-"$195 8/31 FB Call. I’m new to options and I’m trying to learn, is this a shitty choice?",FB,195,8/31,,,,1
+"$195 8/31 FB Call. I’m new to options and I’m trying to learn, is this a shitty choice?",FB,195,8/31,Call,,,1
 $INTC PSA - 10/19 $55 strike at a discount ATM,INTC,55,10/19,,,,1
 $MU call at 60.5 for 9/17 WHOS IN!?,MU,60.5,9/17,call,,,1
 SQ's maximum pain for 8/17 is $80,SQ,80,8/17,,,,2
 $4 9/21 $GERN calls,GERN,4,9/21,calls,,,1
-CHK 5.5 1/17/20 call. Expecting a 3x return... thoughts?,CHK,5.5,1/17/20,,,,1
-I pussied out and sold my FB 200 21.09 calls on Friday.,FB,21.09,Friday,calls,,,1
+CHK 5.5 1/17/20 call. Expecting a 3x return... thoughts?,CHK,5.5,1/17/20,call,,,1
+I pussied out and sold my FB 200 21.09 calls on Friday.,FB,200,21.09,calls,,,1
 $HUYA $35 by Friday?,HUYA,35,Friday,,,,2
-anyone else IQ $30 C 8-17?,IQ,30,8-17,,,,1
+anyone else IQ $30 C 8-17?,IQ,30,8-17,C,,,1
 AAPL 8/31 $220 Calls,AAPL,220,8/31,Calls,,,1
 DDD $35 Put Jan 2019,DDD,35,Jan 2019,Put,,,1
 $UAA 8/17 21.00 Calls up 102% so far today. Tried to tell you,UAA,21.00,8/17,Calls,,,1
@@ -594,14 +594,14 @@ AMD $20 calls 8/17,AMD,20,8/17,calls,,,1
 $PZZA Holders 10/19 $45 Calls where u at?,PZZA,45,10/19,Calls,,,1
 FB calls $190 8/31,FB,190,8/31,calls,,,1
 Amazon $1920 puts 17/8,Amazon,1920,17/8,puts,,,1
-Any hope that $BABA will got $190 by the end of the month ? I have 8/31 calls,BABA,190,8/31,calls,,,1
+Any hope that $BABA will got $190 by the end of the month ? I have 8/31 calls,BABA,,8/31,calls,,,0
 Holding onto $AVAV 3/19 $100 calls. DD Inside:,AVAV,100,3/19,,,,1
 JD unusual options activity $7.5MM Jan 19 $31 calls,JD,31,Jan 19,calls,,,1
-BRK.B. Free money $210 c 9/21. $TEVA 'permit secured' to sell wsb affordable EpiPen,BRK,210,9/21,,,,1
-CRM $160 9/21C Go Print Money!,CRM,160,9/21,,,,1
+BRK.B. Free money $210 c 9/21. $TEVA 'permit secured' to sell wsb affordable EpiPen,BRK.B,210,9/21,c,,,1
+CRM $160 9/21C Go Print Money!,CRM,160,9/21,C,,,1
 AMZN 9/7 $1905 call,AMZN,1905,9/7,call,,,1
 Retarded - 8/17 $12.5 ZOES Puts,ZOES,12.5,8/17,Puts,,,1
-"[Serious DD] All in $AMC 9/21 $20 calls. TA, FA, and SA all EXTREMELY positive. DD Inside",AMC,20,9/21,,,,1
+"[Serious DD] All in $AMC 9/21 $20 calls. TA, FA, and SA all EXTREMELY positive. DD Inside",AMC,20,9/21,calls,,,1
 $WMT 8/24 $98-$96 puts,WMT,98,8/24,puts,,,1
 $MRO 20.5 calls for 8/24,MRO,20.5,8/24,calls,,,1
 JD $40 Jan 20 is pretty cheap,JD,40,Jan 20,,,,1
@@ -616,17 +616,17 @@ Sweating over $BABA $200 8/24 call options,BABA,200,8/24,call,,,1
 $NKE 9/21 $83.5 call,NKE,83.5,9/21,call,,,1
 "New to options, bought a MOMO $50 call exp 8/24. Momo is up 7% today, but my option is down $48 today. Can someone explain why?",MOMO,50,8/24,call,,,1
 QCOM Weekly Options - August 31 $90 strike / Insane Open Interest and Volume,QCOM,90,August 31,,,,1
-Thoughts on this CHK 5.5 1/17/20 Call?,CHK,5.5,1/17/20,,,,1
+Thoughts on this CHK 5.5 1/17/20 Call?,CHK,5.5,1/17/20,Call,,,1
 When would you fuckers sell 9/28 MSFT $108 calls ?,MSFT,108,9/28,calls,,,1
 QCOM Aug 31 $90 Weeklies,QCOM,90,Aug 31,,,,1
 How About An Update On This “It’s in Gods Hands Now”. $AKS 8/24 5.50 Calls,AKS,5.50,8/24,Calls,,,1
-8/31 AMD $25 call?,AMD,25,8/31,,,,1
+8/31 AMD $25 call?,AMD,25,8/31,call,,,1
 Jan 19 $20 Puts on AMD,AMD,20,Jan 19,Puts,,,1
 Thank you AMD $20.5 9/7 calls and Costco 9/14 222.5 call.,AMD,20.5,9/7,calls,,,1
-"Whose going to do it? Who will take $400,000 out of $MU and yolo on $AMD Aug 31st $24 calls? I'm buying Volatility up while you all are watching AMD/Nafta crap.. Remember about Volatility fellas..",AMD,24,Aug 31st,,,,1
+"Whose going to do it? Who will take $400,000 out of $MU and yolo on $AMD Aug 31st $24 calls? I'm buying Volatility up while you all are watching AMD/Nafta crap.. Remember about Volatility fellas..",AMD,24,Aug 31st,calls,,,1
 Bought AMD $21 puts 9/21. Should I wait or take losses?,AMD,21,9/21,puts,,,1
 AMD 25$ FDs and 9/21s tendies fully cooked,AMD,25,9/21,,,,1
-"Need advice, bought 2 $1910 8/31 Puts on $AMZN, got destroyed today...",AMZN,1910,8/31,Puts,,,1
+"Need advice, bought 2 $1910 8/31 Puts on $AMZN, got destroyed today...",AMZN,1910,8/31,Puts,2,,1
 AMD 9/21 $25 Puts,AMD,25,9/21,Puts,,,1
 BRKS puts $35 9/21 puts ?,BRKS,35,9/21,puts,,,1
 MOV - Sept $50 Puts,MOV,50,Sept,Puts,,,1
@@ -637,7 +637,7 @@ Baby’s first option: MSFT $114 9/14,MSFT,114,9/14,,,,1
 AMC 9/21 $20 calls are looking kind of sad,AMC,20,9/21,calls,,,1
 To the genius that recommended buying $25 8/31 $HPQ calls,HPQ,25,8/31,calls,,,1
 /r/stocks continues to amuse with $30 AMD calls for 9/24,AMD,30,9/24,calls,,,1
-"ATVI 200 contracts, 72.5 10/19 call sold",ATVI,72.5,10/19,call,,,1
+"ATVI 200 contracts, 72.5 10/19 call sold",ATVI,72.5,10/19,call,200,,1
 AMD 8/31 $26 call holders rn,AMD,26,8/31,call,,,1
 GERN 5.5 9/21 call sells?,GERN,5.5,9/21,call,,,1
 Insane volume on LULU 8/31 $120 puts,LULU,120,8/31,puts,,,1
@@ -646,95 +646,95 @@ KIRK Jan 19 $10 call,KIRK,10,Jan 19,call,,,1
 AAPL looking pretty over extended today. $225 puts locked in expiring next week,AAPL,225,next week,puts,,,1
 Guess when I bought $AAPL $295 9/7 Calls,AAPL,295,9/7,Calls,,,1
 9/14 35.5 TWTR calls,TWTR,35.5,9/14,calls,,,1
-"YOLOed $2000.00 in SPY 9/12 puts, anyone else hoping the market tanks Tuesday?",SPY,2000.00,9/12,,,,1
+"YOLOed $2000.00 in SPY 9/12 puts, anyone else hoping the market tanks Tuesday?",SPY,,9/12,puts,,,0
 $DOCU 9/21 $67.5 calls?,DOCU,67.5,9/21,,,,1
 Bought some $240 FB lotto calls expiring 11/16 for cheap. I think they will be worth alot more pre-earning after hype. FB revenue may have decelerated but instagram is #2 app on app store now. Change my mind.,FB,240,11/16,calls,,,1
 When you place those $90 9/7 MU calls,MU,90,9/7,calls,,,1
 Cash in $GME 09/14 12.5 puts before earnings?,GME,12.5,09/14,puts,,,1
 $MSFT 12/21 or 1/19 $120 calls,MSFT,120,12/21,calls,,,1
-$SNAP $11 9/21 Put. Still taking my time in the options game. Do I get greedy or take the tiny tendies now?,SNAP,11,9/21,,,,1
-I had 7 $75 SQ 9/21 Calls that I sold for $60 MU Calls,SQ,75,9/21,Calls,,,1
+$SNAP $11 9/21 Put. Still taking my time in the options game. Do I get greedy or take the tiny tendies now?,SNAP,11,9/21,Put,,,1
+I had 7 $75 SQ 9/21 Calls that I sold for $60 MU Calls,SQ,75,9/21,Calls,7,,1
 $AMD Puts... When? When it fucking goes to $80? Oct 19 $22 put lookin grim as hell..,AMD,22,Oct 19,put,,,1
 When should I sell my $TECL 9/21 $162 puts? And where do I apply to Renaissance Technologies?,TECL,162,9/21,,,,1
-"NTAP 84.5 9/28 Calls currently at 1.77, good time to buy in",NTAP,84.5,9/28,Calls,,,1
-What’s going on with $AMD? I am getting ass rape with my 9/7 $29.5 calls! 😭😤😭,AMD,29.5,9/7,,,,1
+"NTAP 84.5 9/28 Calls currently at 1.77, good time to buy in",NTAP,84.5,9/28,Calls,,1.77,1
+What’s going on with $AMD? I am getting ass rape with my 9/7 $29.5 calls! 😭😤😭,AMD,29.5,9/7,calls,,,1
 DIA $261 9/14 calls,DIA,261,9/14,calls,,,1
-Thoughts on $CRON $12.5 9/21C?,CRON,12.5,9/21,,,,1
+Thoughts on $CRON $12.5 9/21C?,CRON,12.5,9/21,C,,,1
 How autistic is an AMD $26/$30 strangle for 9/14?,AMD,26,9/14,,,,1
-"$180 BABA Calls, 11/16 expiry. #BOOMorBUST?",BABA,180,11/16,,,,1
+"$180 BABA Calls, 11/16 expiry. #BOOMorBUST?",BABA,180,11/16,Calls,,,1
 How do I calculate how much COST 9/7 $135 calls that I sold last week would be worth,COST,135,9/7,calls,,,1
 $FB $170 12/21 call,FB,170,12/21,call,,,1
 Would you YOLO MU $52.50 Calls for April 2019 85k loan,MU,52.50,April 2019,Calls,,,1
-$9 SNAP puts 9/28 x 300,SNAP,9,9/28,puts,,,1
+$9 SNAP puts 9/28 x 300,SNAP,9,9/28,puts,300,,1
 Should I buy 9/21 TMV $19 calls,TMV,19,9/21,calls,,,1
-I have AAPL $245 10/19 calls. How fucked am I?,AAPL,245,10/19,,,,1
+I have AAPL $245 10/19 calls. How fucked am I?,AAPL,245,10/19,calls,,,1
 Getting my feet wet playing the upcoming earnings YOLO MU $49 9/28,MU,49,9/28,,,,1
 First ever option: MU 9/28 Call $49. Tell me I'm an idiot,MU,49,9/28,Call,,,1
 Bought MU Call 9/28 $49,MU,49,9/28,Call,,,1
-Had my forst 3 bagger this morning on some FD Sanpchat 9/14 9.50 puts... Purchased 5 at .12 monday and the 7 more at .06 in the afternoon on tuesday. Woke up and secured funding.,FD,9.50,9/14,,,,1
+Had my forst 3 bagger this morning on some FD Sanpchat 9/14 9.50 puts... Purchased 5 at .12 monday and the 7 more at .06 in the afternoon on tuesday. Woke up and secured funding.,Sanpchat,9.50,9/14,puts,5,.12,1
 MU $40 Jan 2020s are under $10,MU,40,Jan 2020,,,,1
 $IQ 9/28 $24 Puts,IQ,24,9/28,Puts,,,1
-Option 9/28 $TLRY $102 6.50 limit order,TLRY,102,9/28,,,,1
-I paid .84 for AAPL 9/14 $240 calls last week at ATH. Come make fun of me.,AAPL,240,9/14,calls,,,1
-"CGC 10/19 $40 put, bought 15 @ 1.63",CGC,40,10/19,,,,1
+Option 9/28 $TLRY $102 6.50 limit order,TLRY,102,9/28,,,6.50,1
+I paid .84 for AAPL 9/14 $240 calls last week at ATH. Come make fun of me.,AAPL,240,9/14,calls,,.84,1
+"CGC 10/19 $40 put, bought 15 @ 1.63",CGC,40,10/19,put,15,1.63,1
 Bless tepper $MU 9/28 $49,MU,49,9/28,,,,1
-LOL I bought these this morning after selling my $34 9/14s,LOL,34,9/14,,,,1
-$30 HEAR October calls?,HEAR,30,October,,,,1
+LOL I bought these this morning after selling my $34 9/14s,,34,9/14,,,,0
+$30 HEAR October calls?,HEAR,30,October,calls,,,1
 $NKE FD 9/28 $84 earning's play call,NKE,84,9/28,call,,,1
-"AMD funeral, 6k puts pt:$27 9/28",AMD,27,9/28,puts,,,1
+##"AMD funeral, 6k puts pt:$27 9/28",AMD,27,9/28,puts,6k,,1
 "New to options trading, bought a couple AMD $32 9/21 puts",AMD,32,9/21,puts,,,1
 "HUYA Technicals, max pain $30 for 9/21",HUYA,30,9/21,,,,2
 $SQ $90/$95 Puts for Oct 19th,SQ,90,Oct 19th,Puts,,,1
-"Buying $AMZN $2,000 $9/21 calls, then buying $AAPL $230 9/21 calls, then buying $AMD $35 9/21 calls",AAPL,230,9/21,calls,,,1
+"Buying $AMZN $2,000 $9/21 calls, then buying $AAPL $230 9/21 calls, then buying $AMD $35 9/21 calls",AMZN,"2,000",9/21,calls,,,1
 MU $40 9/21 FDS?,MU,40,9/21,,,,1
 Holding 9/21 49.5 Puts for $ORCL,ORCL,49.5,9/21,Puts,,,1
-10 TSLA 267.50 naked 9/21 puts for weekend tendies,TSLA,267.50,9/21,puts,,,1
+10 TSLA 267.50 naked 9/21 puts for weekend tendies,TSLA,267.50,9/21,puts,10,,1
 Loaded up AAPL $222 Oct 26 Calls,AAPL,222,Oct 26,Calls,,,1
 When your entire portfolio is in AMD $32 9/21 calls,AMD,32,9/21,calls,,,1
 lmao maximum pain for MU 9/21 is $67.50,MU,67.50,9/21,,,,2
-$CRON 9/28 $15 calls are $1.80,CRON,15,9/28,calls,,,1
+$CRON 9/28 $15 calls are $1.80,CRON,15,9/28,calls,,1.80,1
 Micron management to meet with Evercore ISI (PT $100) on 9/24,Micron,100,9/24,,,,2
-SMH nbev 9/21 2.5,SMH,2.5,9/21,,,,1
+SMH nbev 9/21 2.5,nbev,2.5,9/21,,,,1
 Looking at my 9/28 $35 AMD calls like,AMD,35,9/28,calls,,,1
-Missed the $SBUX spike. Couldve made $244 on two $15 10/5 $59 calls but RobbinHood daytrade protection cockblocked me. Can we get an F in the chat?,SBUX,15,10/5,calls,,,1
-"My account is in a nice little triangle flag thingy, bouncing off bottom, only position I got is SNAP $6 12/21 puts, SNAP gonna die this week",SNAP,6,12/21,,,,1
-"SFM $30 Oct 19 calls, sell or hold?",SFM,30,Oct 19,,,,1
+Missed the $SBUX spike. Couldve made $244 on two $15 10/5 $59 calls but RobbinHood daytrade protection cockblocked me. Can we get an F in the chat?,SBUX,15,10/5,calls,two,,1
+"My account is in a nice little triangle flag thingy, bouncing off bottom, only position I got is SNAP $6 12/21 puts, SNAP gonna die this week",SNAP,6,12/21,puts,,,1
+"SFM $30 Oct 19 calls, sell or hold?",SFM,30,Oct 19,calls,,,1
 $SQ $90/$95 Puts for Oct 19th (UPDATE),SQ,90,Oct 19th,Puts,,,1
-"Me evaluating my next, entirely responsible, financial venture pre mar-- and it's $70 9/28 MU calls..",MU,70,9/28,,,,1
+"Me evaluating my next, entirely responsible, financial venture pre mar-- and it's $70 9/28 MU calls..",MU,70,9/28,calls,,,1
 November 2nd $50 MU calls seem almost too easy to pass up on. How got those MU tendies on deck?,MU,50,November 2nd,calls,,,1
-Accidentally sold 23 10/5 GRPN 4.00 calls. Any takers?,GRPN,4.00,10/5,,,,1
+Accidentally sold 23 10/5 GRPN 4.00 calls. Any takers?,GRPN,4.00,10/5,calls,23,,1
 "[DD] Buying $10 calls for PRTK, FDA decision 10/4",PRTK,10,10/4,calls,,,1
 "Buying $10 calls for PRTK, FDA decision 10/4",PRTK,10,10/4,calls,,,1
-Which one of you sick bastards bought the 9/28 $280 TSLA puts.,TSLA,280,9/28,,,,1
+Which one of you sick bastards bought the 9/28 $280 TSLA puts.,TSLA,280,9/28,puts,,,1
 I have a few 10/5 $8 SNAP puts so can you please tell your straight friends Snapchat makes you gay?,SNAP,8,10/5,puts,,,1
 $$NBEV If any ppl sell it means U cut urself short of Making moneyPatience friends will pay off nicely Big Players say Soon $25.00 Oct 9th,NBEV,25.00,Oct 9th,,,,2
-$SLV 13.5 jan 18 2019 calls up 37.8% today,SLV,13.5,jan 18,calls,,,1
+$SLV 13.5 jan 18 2019 calls up 37.8% today,SLV,13.5,jan 18 2019,calls,,,1
 "$6 NBEV Call 10/19 - hold, sell, or exercise?",NBEV,6,10/19,Call,,,1
 No longer an Options virgin. MSFT $118 Call @ 10/12 exp,MSFT,118,10/12,Call,,,1
 First Option I've executed. MSFT $118 call @ 10/12 exp,MSFT,118,10/12,call,,,1
 $FB 167.50 10/12 calls are looking JUICY,FB,167.50,10/12,calls,,,1
-400 GE $13 10/5 Calls,GE,13,10/5,Calls,,,1
+400 GE $13 10/5 Calls,GE,13,10/5,Calls,400,,1
 Talk me out of a full YOLO with margin on NEPT 11/16 $5 calls on open.,NEPT,5,11/16,calls,,,1
-Bought $235 @ 12/21 APPL calls. Less go!,APPL,235,12/21,,,,1
+Bought $235 @ 12/21 APPL calls. Less go!,APPL,235,12/21,calls,,,1
 What do you think about a strip strangle 2:1 on AMD at 25 and 27.5 expiring 10/12/2018,AMD,27.5,10/12/2018,,,,1
-Who else bought 10/8/18 $17 SPY puts? 🤢,SPY,17,10/8/18,,,,1
+Who else bought 10/8/18 $17 SPY puts? 🤢,SPY,17,10/8/18,puts,,,1
 YOLO $145 BABA Oct 19 Strike,BABA,145,Oct 19,,,,1
 SQQQ March $10 puts are absolute gold right now.,SQQQ,10,March,puts,,,1
-Put All My Money in JCP 11/2 $1 Puts,JCP,1,11/2,Put,,,1
-"CGC 10/26 $80 Calls. Here’s my Tendies for the day. Get in before it’s too late, you’ll thank me next week",CGC,80,10/26,,,,1
+Put All My Money in JCP 11/2 $1 Puts,JCP,1,11/2,Puts,,,1
+"CGC 10/26 $80 Calls. Here’s my Tendies for the day. Get in before it’s too late, you’ll thank me next week",CGC,80,10/26,Calls,,,1
 Nov 19 $150 BABA YOLO - Round 2,BABA,150,Nov 19,,,,1
 Me when I have CRON calls at $13.50 expiring Friday,CRON,13.50,Friday,calls,,,1
 "Mr. 401(k), my 10/19/ $50 SPY puts don't feel so good anymore",SPY,50,10/19,puts,,,1
-PTLA $30 calls - Jan 2019 @ 1.35,PTLA,30,Jan 2019,calls,,,1
-Told FB to yolo $90 Mu 7/20's while deactivating my account. don't have $ to actually short fb though,FB,90,7/20',,,,1
+PTLA $30 calls - Jan 2019 @ 1.35,PTLA,30,Jan 2019,calls,,1.35,1
+Told FB to yolo $90 Mu 7/20's while deactivating my account. don't have $ to actually short fb though,Mu,90,7/20,,,,1
 "$MU trailing twelve month return now negative. $41.31 close on October 19, 2017",MU,41.31,"October 19, 2017",,,,2
-me looking at margin call after loading up on 10/19 $30 AMD calls,AMD,30,10/19,call,,,1
+me looking at margin call after loading up on 10/19 $30 AMD calls,AMD,30,10/19,calls,,,1
 $280 TSLA calls 10/19 - papa Elon didn’t kill me but the banks certainly will,TSLA,280,10/19,calls,,,1
 Me 1 after get 100000% ROI on my YOLO all-in life savings 10000:1 leverage 10/26 $60 FD $MU Calls,MU,60,10/26,Calls,,,1
 $CRON $10 Call Exp 10/26,CRON,10,10/26,Call,,,1
 Who bought all the $14.5 SNAP calls expiring Friday and why?,SNAP,14.5,Friday,calls,,,1
 I have $SNAP $5.5 Puts 11/2. When should I sell?,SNAP,5.5,11/2,Puts,,,1
-What is the current price of $270 10/26 SPY put?,SPY,270,10/26,,,,1
+What is the current price of $270 10/26 SPY put?,SPY,270,10/26,put,,,1
 I have 1/18/19 $5 puts on SNAP. Sell before earnings tomorrow or just hold?,SNAP,5,1/18/19,puts,,,1
 LABU to $90 by Nov 2nd?,LABU,90,Nov 2nd,,,,2
 RIP CCG $45 11/2 calls,CCG,45,11/2,calls,,,1
@@ -742,22 +742,22 @@ Quick Question About $MSFT 10/26 $115 Calls,MSFT,115,10/26,Calls,,,1
 Quick Question About 10/26 $115 $MSFT Calls,MSFT,115,10/26,Calls,,,1
 11/2 $8 SNAP calls. Autism?,SNAP,8,11/2,,,,1
 I bought AMD $30 Jan 19 calls at $20 each today,AMD,30,Jan 19,calls,,,1
-"Just sold my TSLA calls and now wondering, is the move to buy a few puts with some of my profit? Looking at 11/2 $310 strike.",TSLA,310,11/2,calls,,,1
+"Just sold my TSLA calls and now wondering, is the move to buy a few puts with some of my profit? Looking at 11/2 $310 strike.",TSLA,310,11/2,puts,,,1
 "Welp, here is what is leveraging my yolo. $75k worth of SPY Nov 16 $265 Puts here I come. I’ll post the trade once the accounts funded.",SPY,265,Nov 16,Puts,,,1
 "If FB hits $150 tomorrow, I will buy the first comment a Papa Johns Pizza with extra cheese and kosher pepperoni.",FB,150,tomorrow,,,,2
 Bet: RHT $165 put 11/16,RHT,165,11/16,put,,,1
 "[SERIOUS]: IF FB hits $170 tomorrow, I will jerk off so hard tomorrow",FB,170,tomorrow,,,,2
 Me Mum bought her first $260 12/21 AAPL call,AAPL,260,12/21,call,,,1
-I had 47 AMD 22.5 11/2 Calls that I limit sold for .01 yesterday after buying for .10 ea last week AMA,AMD,22.5,11/2,Calls,,,1
-Call it coincidence but I found this elongated muskrat photo on the Internet today. Needless to say I picked up a few thousand 11/9 $420 TSLA calls immediately.,TSLA,420,11/9,Call,,,1
-Anyone else have this bad of luck today on TLRY? 15 TLRY 11/9 $119 calls bought/sold today for $1k loss on day trade.....now at $140,TLRY,119,11/9,calls,,,1
+I had 47 AMD 22.5 11/2 Calls that I limit sold for .01 yesterday after buying for .10 ea last week AMA,AMD,22.5,11/2,Calls,47,.01,1
+Call it coincidence but I found this elongated muskrat photo on the Internet today. Needless to say I picked up a few thousand 11/9 $420 TSLA calls immediately.,TSLA,420,11/9,Call,few thousand,,1
+Anyone else have this bad of luck today on TLRY? 15 TLRY 11/9 $119 calls bought/sold today for $1k loss on day trade.....now at $140,TLRY,119,11/9,calls,15,,1
 $EGHT buys jitsu open source conference software Calls for $20 next week,EGHT,20,next week,Calls,,,1
 How F’d are my ATVI calls for 11/16? $65 strike.,ATVI,65,11/16,calls,,,1
 UAL $90 11/16 PUTS,UAL,90,11/16,PUTS,,,1
 I usually only play this game after mass shootings. Now I’m playing it for my $6 11/16 $NBEV calls,NBEV,6,11/16,calls,,,1
 ATVI 57.5 Feb 15 Calls. COD biggest game of year ✔Broken numerous sales and preorder records ✔ every 9 year old across the world will be bought this for Christmas✔ Q4 earnings ✈🌚,ATVI,57.5,Feb 15,,,,1
 QQQ $164 puts 11/16 exp,QQQ,164,11/16,puts,,,1
-"Steel hands with $20 11/16 AMD puts, bought them at .20 when AMD was $21, sold them for .45 when AMD bottomed at $19.80",AMD,20,11/16,,,,1
+"Steel hands with $20 11/16 AMD puts, bought them at .20 when AMD was $21, sold them for .45 when AMD bottomed at $19.80",AMD,20,11/16,puts,,.45,1
 TWTR $41 PUT 12/21 LETS GOOOOOOO,TWTR,41,12/21,PUT,,,1
 YOLO RHT 177.50 11/30 calls,RHT,177.50,11/30,calls,,,1
 Did anyone else make a MU play for g20 this weekend? Currently straddling $37 1/18/19,MU,37,1/18/19,,,,1
@@ -769,38 +769,38 @@ Looking at charts because closed market boredom. 12/21 SQQQ $15 $16 $17 calls lo
 NVDA puts at 157.5 strike and exp. 12/14,NVDA,157.5,12/14,puts,,,1
 $14 April'19 calls on $FAZ - balls to the wall bet against financials,FAZ,14,April'19,calls,,,1
 1/18 $50 SPXL calls eating tendies tn boys,SPXL,50,1/18,calls,,,1
-Which one of you autists bought TSLA 01/18/19 $670 calls?,TSLA,670,01/18/19,,,,1
-"JPM about to hype this to clients, company is sold out till 2020... Jan '20 calls @ $85 trading for just $0.78",JPM,85,Jan '20,calls,,,1
+Which one of you autists bought TSLA 01/18/19 $670 calls?,TSLA,670,01/18/19,calls,,,1
+"JPM about to hype this to clients, company is sold out till 2020... Jan '20 calls @ $85 trading for just $0.78",JPM,85,Jan '20,calls,,0.78,1
 "$UXIN 12/21 2.5 puts, free money",UXIN,2.5,12/21,,,,1
 "GE $7 Put 12/21, Need Help.",GE,7,12/21,Put,,,1
 Equifax rebounded from their drop in '17; thoughts on JNJ $134 Call 1/4/19?,JNJ,134,1/4/19,Call,,,1
 Dec 21 SPY huge options puts $260. Read inside.,SPY,260,Dec 21,puts,,,1
 "Welp, I think my 12/21 $40 MU calls are officially dead. It’s a good thing I’m in line for RH’s “Money Management” program so I can make it all back in 10 years.",MU,40,12/21,calls,,,1
-"Took everything out except for $50 two weeks ago to see what I could turn that into with options. Thank you $18.5 12/21 AMD Ps, and thanks to the Fed for being shitty",AMD,18.5,12/21,,,,1
-"I know it’s probably just hedging, but buying 7000 $75 Puts on SPY for 3/15/19 seems just plain autistic...",SPY,75,3/15/19,Puts,,,1
-1/18 $14 Call on HBI for $0.10 looking for the rebound,HBI,14,1/18,Call,,,1
+"Took everything out except for $50 two weeks ago to see what I could turn that into with options. Thank you $18.5 12/21 AMD Ps, and thanks to the Fed for being shitty",AMD,18.5,12/21,Ps,,,1
+"I know it’s probably just hedging, but buying 7000 $75 Puts on SPY for 3/15/19 seems just plain autistic...",SPY,75,3/15/19,Puts,7000,,1
+1/18 $14 Call on HBI for $0.10 looking for the rebound,HBI,14,1/18,Call,,0.10,1
 Who is with me on shorting QQQ to $125 with January 25 puts?,QQQ,125,January 25,,,,1
 HELP! Ive got $SPY 235 Put that doesn't expire until 01/28. They are up 122%. Do I sell on Wednesday or hold?,SPY,235,01/28,Put,,,1
 Tried to cancel my limit order for $MSFT 1/11 Calls @ $104 before market open last Friday but was too slow in the execution. Cut my losses and sell or ride it out?,MSFT,104,1/11,Calls,,,1
-BAC P 22.5 12/28 - PSA: Always take profit &amp; cut losses,BAC,22.5,12/28,,,,1
+BAC P 22.5 12/28 - PSA: Always take profit &amp; cut losses,BAC,22.5,12/28,P,,,1
 Still holding my SPY 1/18 $255 Calls,SPY,255,1/18,Calls,,,1
 Did anyone buy $47.5 $GOOS calls for Jan 4?,GOOS,47.5,Jan 4,calls,,,1
 So i bought a $247 SPY call early this morning when SPY was at $246.91 with RH and I bought a $243 SPY Put with Ally Invest when spy was at $250.21. (all are 1/4/19) So the question is.... WHO WILL WIN!?,SPY,247,1/4/19,call,,,1
-Bought 15 YOLO SPY 1/4 $247 Calls about 24 hours before expiry. Averaged down and bought 5 more contracts while SPY fell. Averaged down again and bought 10 more contracts. Felt sick. Was down 1300 going into Friday. Sold an hour after open this for 9k profit.,SPY,247,1/4,Calls,,,1
+Bought 15 YOLO SPY 1/4 $247 Calls about 24 hours before expiry. Averaged down and bought 5 more contracts while SPY fell. Averaged down again and bought 10 more contracts. Felt sick. Was down 1300 going into Friday. Sold an hour after open this for 9k profit.,SPY,247,1/4,Calls,15,,1
 $LOW Feb $95 Calls,LOW,95,Feb,Calls,,,1
-20 PCG $30 strike calls for June 21st,PCG,30,June 21st,calls,,,1
+20 PCG $30 strike calls for June 21st,PCG,30,June 21st,calls,20,,1
 "When your friend goes all in spending $16,500 on $SPY $240 puts exp 1/11",SPY,240,1/11,puts,,,1
-$VALE June $15 Calls for $1.10 or better,VALE,15,June,Calls,,,1
+$VALE June $15 Calls for $1.10 or better,VALE,15,June,Calls,,1.10,1
 Down to $3 after failed $BBBY puts. Rise from the ashes challenge/yolo starting with 1/18 TEVA call,TEVA,,1/18,call,,,0
 NIO cruises past Tesla in China Q4. News outlets haven't picked up the 6K - All in $6 calls for Feb 15,NIO,6,Feb 15,calls,,,1
-58 Million Dollar AMZN Put. $1980 Strike. 1/17/2020 Expiration,AMZN,1980,1/17/2020,,,,1
+58 Million Dollar AMZN Put. $1980 Strike. 1/17/2020 Expiration,AMZN,1980,1/17/2020,Put,,,1
 "MRW Powell is about to speak, Trump just blew-up twitter, student loan bubble is bursting at the seams, and i just bought me some 1/18 $SPY $184 FDs. Never change WSB",SPY,184,1/18,,,,1
-$NKE April $77.5 Calls for $3.75 or less,NKE,77.5,April,Calls,,,1
+$NKE April $77.5 Calls for $3.75 or less,NKE,77.5,April,Calls,,3.75,1
 "Thanks to whoever paid me $9,800 in premium on the TSLA Jan 2020 $400 put I sold",TSLA,400,Jan 2020,put,,,1
 MU to $68 by Friday?,MU,68,Friday,,,,2
-"who dropped 23k worth of 0.01 jan 18, $MU 36.00 calls yesterday?",MU,36.00,jan 18,calls,,,1
-TSLA $20 2/15 puts. You heard it here first.,TSLA,20,2/15,,,,1
-"Robinhood exercised and sold my 1/25 LULU $149 Put. LULU was $151 at close on Friday, but I'll take what I can get. In unrelated news they locked down my account.",LULU,149,1/25,,,,1
+"who dropped 23k worth of 0.01 jan 18, $MU 36.00 calls yesterday?",MU,36.00,jan 18,calls,,0.01,1
+TSLA $20 2/15 puts. You heard it here first.,TSLA,20,2/15,puts,,,1
+"Robinhood exercised and sold my 1/25 LULU $149 Put. LULU was $151 at close on Friday, but I'll take what I can get. In unrelated news they locked down my account.",LULU,149,1/25,Put,,,1
 what is High Volume NFLX Feb 15 $400 strike call all about?,NFLX,400,Feb 15,call,,,1
 "Bought $21 call on AMD feb 15 expiration. Trying to calculate the value at premature price. Can someone give me an estimate of how much IV drop I should account for? Vega was 1.51373402 at close, iv as a percent was 173.71%. Can someone give me an estimate of the range it should fall to?",AMD,21,feb 15,call,,,1
 Here's what $SBUX $68 2/1 calls will do to your portfolio. (OUT with 10% Gain),SBUX,68,2/1,calls,,,1
@@ -811,116 +811,116 @@ When should I sell these JD 6/1 $24 calls,JD,24,6/1,calls,,,1
 NIO 2/15 $8 calls #FreeMoney,NIO,8,2/15,calls,,,1
 Which one of you autists bought $65 May 17 $PYX calls? Why do people blow money on such ridiculous options? Someone please explain to me how hedging sky high calls = profits.,PYX,65,May 17,calls,,,1
 $SNAP squeeze over or building base? YOLO those $8.5 puts for Friday?,SNAP,8.5,Friday,puts,,,1
-Wrote a TSLA April 19th 225 put for $420 premium. Profit secured.,TSLA,420,April 19th,put,,,1
+##Wrote a TSLA April 19th 225 put for $420 premium. Profit secured.,TSLA,420,April 19th,put,,420 premium,1
 CX 3/15 $5 calls play,CX,5,3/15,calls,,,1
-"ALB Earnings: Why am I more excited about the single $90 (3/15) call in RH, than the 100 shares in my portfolio...",ALB,90,3/15,call,,,1
-$KHC 3/15 $40 PUT. I was on my last $260 in RH yesterday.,KHC,40,3/15,,,,1
-I bought 100 3/15 10.00 MDR calls. I’m an autist.,MDR,10.00,3/15,,,,1
+"ALB Earnings: Why am I more excited about the single $90 (3/15) call in RH, than the 100 shares in my portfolio...",ALB,90,3/15,call,single,,1
+$KHC 3/15 $40 PUT. I was on my last $260 in RH yesterday.,KHC,40,3/15,PUT,,,1
+I bought 100 3/15 10.00 MDR calls. I’m an autist.,MDR,10.00,3/15,calls,100,,1
 All in NIO calls 4/18 $10,NIO,10,4/18,calls,,,1
-All-in $PCG March 1 $20 Calls.,PCG,20,March 1,,,,1
+All-in $PCG March 1 $20 Calls.,PCG,20,March 1,Calls,,,1
 Owning WTW $32 3/1 calls be like...,WTW,32,3/1,calls,,,1
-"So I was hung over monday morning and bought 10 ATVI 43.50 calls expiring 3/1, instead of stock, by mistake",ATVI,43.50,3/1,calls,,,1
-TSLA puts! Not pictured here my 7 337.5 1/3 calls...,TSLA,337.5,1/3,,,,1
-"Just a modest win for the day, CHK March 1 3.00 Calls +640% on expiration Day. Wish I had bought more than 20 contracts.",CHK,3.00,March 1,Calls,,,1
-"Low key considering SPY July 19 $390 Calls. (For leverage, I know it’s not going there)",SPY,390,July 19,,,,1
+"So I was hung over monday morning and bought 10 ATVI 43.50 calls expiring 3/1, instead of stock, by mistake",ATVI,43.50,3/1,calls,10,,1
+TSLA puts! Not pictured here my 7 337.5 1/3 calls...,TSLA,337.5,1/3,calls,7,,1
+"Just a modest win for the day, CHK March 1 3.00 Calls +640% on expiration Day. Wish I had bought more than 20 contracts.",CHK,3.00,March 1,Calls,20,,1
+"Low key considering SPY July 19 $390 Calls. (For leverage, I know it’s not going there)",SPY,390,July 19,Calls,,,1
 This one hasn’t aged well - 10.5 calls $JNUG expire 3/8 and 3/15,JNUG,10.5,3/8,calls,,,1
 $274.50 3/22 SPY Put,SPY,274.50,3/22,Put,,,1
-CVS tendies. 10 $55 calls 4/05.,CVS,55,4/05,calls,,,1
-PSA: NIO 4/17 $7 calls are $0.15,NIO,7,4/17,calls,,,1
+CVS tendies. 10 $55 calls 4/05.,CVS,55,4/05,calls,10,,1
+PSA: NIO 4/17 $7 calls are $0.15,NIO,7,4/17,calls,,0.15,1
 Someone convince me buying $35 IQ 4/18 calls was a good idea,IQ,35,4/18,calls,,,1
 "I only have one position open from now until May, and it is a 4/26 $171 put contract on SPY",SPY,171,4/26,put,,,1
-+1 AMD put $25 exp. 3/29- daytrade and profitability question,AMD,25,3/29,put,,,1
++1 AMD put $25 exp. 3/29- daytrade and profitability question,AMD,25,3/29,put,1,,1
 $288 2/27 SPY calls,SPY,288,2/27,calls,,,1
 "Thanks to Tim $AAPL July 2019 calls $185 $195 and $200, respectively",AAPL,185,July 2019,calls,,,1
 "HLX Yolo, easily going to hit 3.5 tomorrow",HLX,3.5,tomorrow,,,,2
 MARA Nov 20 $4 calls,MARA,4,Nov 20,calls,,,1
 YOLO CLSK November 20th $10 calls 10k Worth,CLSK,10,November 20th,calls,,,1
-Any one else buy AMD puts today? Shit looks like it’s falling off a ducking cliff. Positions: $78 strike put 10/23 and $75 strike put 10/23,AMD,78,10/23,puts,,,1
+Any one else buy AMD puts today? Shit looks like it’s falling off a ducking cliff. Positions: $78 strike put 10/23 and $75 strike put 10/23,AMD,78,10/23,put,,,1
 Holding TSLA puts 10/23 417.50 anything salvageable?,TSLA,417.50,10/23,puts,,,1
 HTZ call 11/20 $1.5 and 4/16/21 $1 ... so far so good. Let's see.,HTZ,1.5,11/20,call,,,1
 FB Call $285 10/30 Exp,FB,285,10/30,Call,,,1
 $103k in GME Jan '21 $20 calls,GME,20,Jan '21,calls,,,1
 Me IRL waiting on these $36.50 11/6 SNAP puts to print,SNAP,36.50,11/6,puts,,,1
-TLRY GAIN ($6.5 call 10/23) ($0.94 strike) up despite TLRY stocks down.,TLRY,6.5,10/23,call,,,1
+TLRY GAIN ($6.5 call 10/23) ($0.94 strike) up despite TLRY stocks down.,TLRY,6.5,10/23,call,,0.94,1
 "Yo all you bool bats and bittens. So I accidentally blew the majority of my funsies account up and I was left with like $80 roughly from a few grand. This in no way hurts me. BUT! I digest, should I hold onto this for now or sell on Monday? AMD $96 call exp 11/6. Thank youuuuu",AMD,96,11/6,call,,,1
 BA $125 puts for January..! Who is with me?,BA,125,January,puts,,,1
 "Smart money always know something... IRBT, coming Friday expiration $90",IRBT,90,Friday,,,,1
-RAD yolo play..! Anybody watching this..? 30% short interest. May run hard if volume comes. 10/30 $10.50 calls..?,RAD,10.50,10/30,,,,1
-SDC 11/27 C13.50 Price Volatility - Can someone explain massive price swing near close? Went -96% to +56% and settled in minutes. Is this just standard IV with FDs?,SDC,13.50,11/27,,,,1
+RAD yolo play..! Anybody watching this..? 30% short interest. May run hard if volume comes. 10/30 $10.50 calls..?,RAD,10.50,10/30,calls,,,1
+SDC 11/27 C13.50 Price Volatility - Can someone explain massive price swing near close? Went -96% to +56% and settled in minutes. Is this just standard IV with FDs?,SDC,13.50,11/27,C,,,1
 $BA Call $157.5 Exp 11/13,BA,157.5,11/13,Call,,,1
 GME $6 PT Nov. 15 If You’re LUCKY,GME,6,Nov. 15,,,,2
-Bought 10c AMD $90 10/30 for $.1 yesterday. Sold it for same price today. Which one of you bought it?,AMD,90,10/30,,,,1
-Bought 15x SPY $335 10/30 calls at close,SPY,335,10/30,calls,,,1
-Opinions on $SNAP December 18th $50 Calls?,SNAP,50,December 18th,,,,1
+Bought 10c AMD $90 10/30 for $.1 yesterday. Sold it for same price today. Which one of you bought it?,AMD,90,10/30,c,10,.1,1
+Bought 15x SPY $335 10/30 calls at close,SPY,335,10/30,calls,15,,1
+Opinions on $SNAP December 18th $50 Calls?,SNAP,50,December 18th,Calls,,,1
 How $AAPL can get to $117 by 11/13,AAPL,117,11/13,,,,2
 NOK $4.00 4/16/21,NOK,4.00,4/16/21,,,,1
 Hi retards I have no clue what I’m doing but like pressing colorful buttons on Robinhood. I would love some advice. I own 12/18 HTZ $1.5 puts and it was delisted today. Am I fucked?,HTZ,1.5,12/18,puts,,,1
 DRN $8 calls with 11/20 ex how rich am i gunna be !?,DRN,8,11/20,calls,,,1
-60000 SPY $290 Puts 11/4,SPY,290,11/4,Puts,,,1
-All in on AMC 3.5 11/6 puts? New to options trading. Any advice?,AMC,3.5,11/6,,,,1
+60000 SPY $290 Puts 11/4,SPY,290,11/4,Puts,60000,,1
+All in on AMC 3.5 11/6 puts? New to options trading. Any advice?,AMC,3.5,11/6,puts,,,1
 My Oct 30 $325 SPY Puts exploded on Wednesday. Yolo right? They expired worthless on Friday so..,SPY,325,Oct 30,Puts,,,1
-Bought HTZ 12/18 $1 put. What do I do now?,HTZ,1,12/18,,,,1
+Bought HTZ 12/18 $1 put. What do I do now?,HTZ,1,12/18,put,,,1
 What do we think of MSFT 11/13$215 puts,MSFT,215,11/13,puts,,,1
 "MSFT Nov06'20 217.5, 82K Gain, Done with options for this week. Shits too intense.",MSFT,217.5,Nov06'20,,,,1
 Newly diagnosed retard. Do I hold or sell? NIO call $35 05/21/21,NIO,35,05/21/21,call,,,1
 I’m a newly diagnosed retard. Do I hold or sell? NIO $35 call 05/21/21,NIO,35,05/21/21,call,,,1
 I’m a newly diagnosed retard. Do I hold or sell my NIO $35 call for 05/21/21? Currently up 192% bought in at $5.15 and now at $15.05.,NIO,35,05/21/21,call,,,1
-Screenshot's from Wednesday but shoutout to my girl for hyping Biogen up to me a few weeks ago.... sold $BIIB $400 6/18/21 for a hefty profit. She also recommended Moderna back in March 🤑,BIIB,400,6/18/21,,,,1
+##Screenshot's from Wednesday but shoutout to my girl for hyping Biogen up to me a few weeks ago.... sold $BIIB $400 6/18/21 for a hefty profit. She also recommended Moderna back in March 🤑,BIIB,400,6/18/21,,,,1
 HEXO $0.50 12/18 calls selling at 0% IV,HEXO,0.50,12/18,calls,,,1
 NIO hitting $50 next week.,NIO,50,next week,,,,2
-“PLTR” Who’s holding till ER? Positions: 2x 11/13 $18 C,PLTR,18,11/13,,,,1
+“PLTR” Who’s holding till ER? Positions: 2x 11/13 $18 C,PLTR,18,11/13,C,2,,1
 ICLN $26 Call 1/15/21 🔥🔥🚀🚀,ICLN,26,1/15/21,Call,,,1
-WWR 11/20 7.5 C,WWR,7.5,11/20,,,,1
+WWR 11/20 7.5 C,WWR,7.5,11/20,C,,,1
 My modest returns. BAC $25 call jan 21/22,BAC,25,jan 21,call,,,1
 CCL $17 13/11 ??,CCL,17,13/11,,,,1
 They say the first one is free.. CNK $10 11/20 call,CNK,10,11/20,call,,,1
-They say the first one is free.. 1 CNK 11/20 $10 call for $58,CNK,10,11/20,call,,,1
-They say the first one is free. 1 CNK 11/20 $10 call spent $58.,CNK,10,11/20,call,,,1
+They say the first one is free.. 1 CNK 11/20 $10 call for $58,CNK,10,11/20,call,1,,1
+They say the first one is free. 1 CNK 11/20 $10 call spent $58.,CNK,10,11/20,call,1,,1
 DRIP 11/20 $70 calls guy,DRIP,70,11/20,calls,,,1
 I was in class... from 930 to 1045 lmaooo JMIA puts 11/20 &amp; 12/18 $10,JMIA,10,11/20,puts,,,1
-OTM SNAP C 12/24 $1.02,SNAP,1.02,12/24,,,,1
+##OTM SNAP C 12/24 $1.02,SNAP,,12/24,C,,1.02,1
 Puts on tech? Position: AAPL $80 6/21,AAPL,80,6/21,Puts,,,1
 Why does it have to be this way? RKT 11/13 23.5 Calls,RKT,23.5,11/13,Calls,,,1
 $LMND: Below $55 tomorrow?,LMND,55,tomorrow,,,,2
-"My little family has experienced COVID, prostate cancer surgery, and hip/knee replacement surgeries back to back through 2020. Need more $$ to keep being an American, YOLO'd next month's rent on gold miner calls, wish luck | NUGT Dec 04 '20 $74 🇺🇸🇺🇸🇺🇸",NUGT,74,Dec 04 '20,,,,1
-January 2021 - Palantir $30 or NIO $75?,NIO,30,January 2021,,,,1
-NIO is printing money. Short term realized gain on the $35 call. Short term unrealized gain is 300 $4 call expiring 1/21/2022,NIO,4,1/21/2022,call,,,1
+"My little family has experienced COVID, prostate cancer surgery, and hip/knee replacement surgeries back to back through 2020. Need more $$ to keep being an American, YOLO'd next month's rent on gold miner calls, wish luck | NUGT Dec 04 '20 $74 🇺🇸🇺🇸🇺🇸",NUGT,74,Dec 04 '20,calls,,,1
+January 2021 - Palantir $30 or NIO $75?,Palantir,30,January 2021,,,,1
+NIO is printing money. Short term realized gain on the $35 call. Short term unrealized gain is 300 $4 call expiring 1/21/2022,NIO,4,1/21/2022,call,300,,1
 When my $3.30 MFA calls that I bought in March end today.,MFA,3.30,today,calls,,,1
 APHA $6 call exp 11/20,APHA,6,11/20,call,,,1
 I AM BULLISH ON SRAC IN 2021 ($12.5 CALL 2/21),SRAC,12.5,2/21,CALL,,,1
 Improved my PLTR LEAP YOLO position to ~30k $30 05/21s,PLTR,30,05/21,,,,1
-I sold 11/20 $30 NIO calls back in September for $2.14 for 5k so I could buy VALE calls for TSLA battery day lmao,NIO,30,11/20,calls,,,1
+I sold 11/20 $30 NIO calls back in September for $2.14 for 5k so I could buy VALE calls for TSLA battery day lmao,NIO,30,11/20,calls,,2.14,1
 How fucked am I on this YOLO? -49% so far :( NIO Dec 24 '20 $50 call I bought Friday.,NIO,50,Dec 24 '20,call,,,1
 BMRG $10 11/20 calls priced stupid,BMRG,10,11/20,calls,,,1
-"7 days after posting, 4 days till expiry - still holding (+45%): WWR 11/20 7.5 C",WWR,7.5,11/20,,,,1
+"7 days after posting, 4 days till expiry - still holding (+45%): WWR 11/20 7.5 C",WWR,7.5,11/20,C,,,1
 YOLO'd the small amount I had for Papa last Tuesday. Inclusion has us past $461 wall without RH. What's the play here? I wanna move back in the house.. TSLA $396 12/18,TSLA,396,12/18,,,,1
 $470 11/27 TSLA YOLO,TSLA,470,11/27,,,,1
-Getting lucky tomorrow AM with a few TSLA $450 / $500 11/20 calls.,TSLA,450,11/20,,,,1
+Getting lucky tomorrow AM with a few TSLA $450 / $500 11/20 calls.,TSLA,450,11/20,calls,,,1
 NIO hitting $60 tomorrow,NIO,60,tomorrow,,,,2
 NIO is gonna hit $60 by tomorrow morning,NIO,60,tomorrow,,,,2
-15K PLTR Yolo. 1/20/23 $30 Calls,PLTR,30,1/20/23,Calls,,,1
+##15K PLTR Yolo. 1/20/23 $30 Calls,PLTR,30,1/20/23,Calls,,,1
 "I have several $NIO 55 Calls for 12/31 with an average of about 48, im down bad right now, should I paper hands sell, or will they print soon enough?",NIO,55,12/31,Calls,,,1
 APHA 11/27 $6.5 Call Options: Thoughts?,APHA,6.5,11/27,Call,,,1
 10k yolo CRSR 11/20 $35 call,CRSR,35,11/20,call,,,1
 Would I be able to afford a car with my $PLTR $19 calls 11/20?🏎 Lambo? Honda? A toy car maybe?,PLTR,19,11/20,calls,,,1
 Which one of you FOMO market ordered TSLA 11/20 $525 Calls at the top?,TSLA,525,11/20,Calls,,,1
-Been averaging down on my $NIO $30 12/11 PUTS. Hopefully they print! Lol,NIO,30,12/11,,,,1
-"Down 3k on 6 TSLA 12/4 $505 Calls, how fucked am I?",TSLA,505,12/4,,,,1
+Been averaging down on my $NIO $30 12/11 PUTS. Hopefully they print! Lol,NIO,30,12/11,PUTS,,,1
+"Down 3k on 6 TSLA 12/4 $505 Calls, how fucked am I?",TSLA,505,12/4,Calls,6,,1
 12/18 $20 Naked put $PSTH YOLO,PSTH,20,12/18,put,,,1
 "Lots of XPEV Put action today for next week, check the 43.5 Putter",XPEV,43.5,next week,Put,,,1
 Jonny B Loves: BAC Dec 11 2020 27.000 call Monday,BAC,27.000,Dec 11 2020,call,,,1
 "I'm thinking about going deep in a RAPT call for December 18th, but the break even price is 19.60 a share (call is for 17.5). Is anyone trading RAPT?",RAPT,17.5,December 18th,call,,,1
 POUNDING THE TABLE ON $BABA LISTEN TO ME DEC 31 2020 $300 CALLS,BABA,300,DEC 31 2020,CALLS,,,1
-RIOT 11/27 3.5 P (now at 0% change) ET 12/11 $7 C ET $10/12 calls,RIOT,3.5,11/27,calls,,,1
+RIOT 11/27 3.5 P (now at 0% change) ET 12/11 $7 C ET $10/12 calls,RIOT,3.5,11/27,P,,,1
 Lurker turned Autist. Started my first options today BEST 2.5 call 12/18 and SBE 35 call 12/18. Barely know what I’m doing but ready to lose my profits.,BEST,2.5,12/18,call,,,1
 I have no idea what I’m doing but I’m feeling lucky! SNDL $2 7/16/22,SNDL,2,7/16/22,,,,1
-Some nice steel gains (mainly 100 CLF $10.5 11/27),CLF,10.5,11/27,,,,1
+Some nice steel gains (mainly 100 CLF $10.5 11/27),CLF,10.5,11/27,,100,,1
 $DKS Dick's - buy the dip? 12/24/20 $65,DKS,65,12/24/20,,,,1
-First time investor. Been browsing this subreddit a lot and decided to do a casual $1000 investment on $50 CRSR c 12/18 last friday. Am i doing it right?,CRSR,50,12/18,,,,1
+First time investor. Been browsing this subreddit a lot and decided to do a casual $1000 investment on $50 CRSR c 12/18 last friday. Am i doing it right?,CRSR,50,12/18,c,,,1
 DAL $50 Dec 11 YOLO,DAL,50,Dec 11,,,,1
 My PLTR $24 1/15 calls today! 🚀🚀🚀,PLTR,24,1/15,calls,,,1
 FSR call $21 exp 12/4 for you Fucking Stupid Retards,FSR,21,12/4,call,,,1
-Newbie Help - When Do I Sell my Call Option - $30 PLTR Dec 11 Calls,PLTR,30,Dec 11,Call,,,1
+Newbie Help - When Do I Sell my Call Option - $30 PLTR Dec 11 Calls,PLTR,30,Dec 11,Calls,,,1
 IF PLTR HITS $50 BY 14/12 I’LL DRINK MY OWN URINE,PLTR,50,14/12,,,,2
 IF PLTR HITS $40 BY 12/14 I’LL EAT MY OWN SHIT,PLTR,40,12/14,,,,2
 Made $1000 from DLTR earnings yesterday - so I naturally throw $3k into $30 12/4 PLTR calls with you retards today. My potentially non-autistic thought process inside...,PLTR,30,12/4,calls,,,1
@@ -931,12 +931,12 @@ My wife said she’ll dump her boyfriend if PLTR hits $40 tomorrow,PLTR,40,tomor
 PLTR $30 call exp 12/4,PLTR,30,12/4,call,,,1
 $INO will hit $15 on Friday,INO,15,Friday,,,,2
 Will PLTR hit $40 by end of Friday?,PLTR,40,Friday,,,,2
-"Alright, what should I do with me $25 1/15 PLTR call??",PLTR,25,1/15,,,,1
-PLTR December 18th $40 call?,PLTR,40,December 18th,,,,1
+"Alright, what should I do with me $25 1/15 PLTR call??",PLTR,25,1/15,call,,,1
+PLTR December 18th $40 call?,PLTR,40,December 18th,call,,,1
 Exercise PLTR $14.5 12/11 call?,PLTR,14.5,12/11,,,,1
 "If PLTR hits $50 tomorrow, I will buy everyone quaaludes",PLTR,50,tomorrow,,,,2
 "Those of you donating some of your gains, you guys are amazing. Karma will have your back in Life. PLTR $40 12/30",PLTR,40,12/30,,,,1
-I have Robinhood scheduled to buy to open 1 contract of PLTR $29.00 Call 12/4 at a maximum of $3.50 per share tomorrow morning.,PLTR,29.00,12/4,Call,,,1
+##I have Robinhood scheduled to buy to open 1 contract of PLTR $29.00 Call 12/4 at a maximum of $3.50 per share tomorrow morning.,PLTR,29.00,12/4,Call,1,3.50,1
 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 If PLTR hits $50 by 12/10/20 I will do an ms paint biography of the history of PLTR and I will include several of the richest retards on the rocket 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀,PLTR,50,12/10/20,,,,2
 I will get a tattoo of the Palantir logo on my body if PLTR reaches $40 by 12/4,PLTR,40,12/4,,,,2
 Never traded options about to yolo on 12/24 $PLTR $40 calls,PLTR,40,12/24,calls,,,1
@@ -950,7 +950,7 @@ $VALE 1/15 $15&amp;$16 Calls - unusual activity,VALE,15,1/15,Calls,,,1
 Sold PLTR on Oct-20 at 9.46,PLTR,9.46,Oct-20,,,,2
 Just gonna leave this here. NIO $40 12/18,NIO,40,12/18,,,,1
 "Threw the last $30 I had into a 11/27 $25 PLTR Call and cashed out right before the second dip. Thanks WSB, can’t wait for next week 🚀",PLTR,25,11/27,Call,,,1
-A month ago I was half my portfolio in the hole. 4 $UBER 1/15/21 $35 calls and 4 $UBER 6/18/21 $37 calls. Placed before the election and prop 22.,UBER,35,1/15/21,calls,,,1
+A month ago I was half my portfolio in the hole. 4 $UBER 1/15/21 $35 calls and 4 $UBER 6/18/21 $37 calls. Placed before the election and prop 22.,UBER,35,1/15/21,calls,4,,1
 Want PLTR to go up $ 50 by Friday??,PLTR,50,Friday,,,,2
 Let me try again. Sorry for my atist ass. PLTR $40 12/18,PLTR,40,12/18,,,,1
 Am I doing this right? $30 PLTR calls 12/4,PLTR,30,12/4,calls,,,1
@@ -969,20 +969,20 @@ They had 12/04 PLTR $28 calls for over %60 off for Cyber Monday. 🚀🚀🚀�
 Anybody think my $40 exp 12/11 calls for PLTR might print?,PLTR,40,12/11,calls,,,1
 $AUPH. Buy those $25 1/2022 calls now boys. Fucking lit! JACKED. GET ON THE CUMCOPTER YOU FUCKS.,AUPH,25,1/2022,calls,,,1
 $AUPH fair value is insane. I've been watching this stock for 5 years and it looks like a 10x bagger. Tell me I'm wrong. I'm holding Jan 2022 $25 calls until I'm proven wrong. Like a smart retard.,AUPH,25,Jan 2022,calls,,,1
-"$100 AMD call, expire 12/24",AMD,100,12/24,,,,1
+"$100 AMD call, expire 12/24",AMD,100,12/24,call,,,1
 PLTR December 11 $30 calls here come get your hot and fresh $30 calls!,PLTR,30,December 11,calls,,,1
 Why you should get NKLA Dec 4 $36’s,NKLA,36,Dec 4,,,,1
 Am I retarded? TSLA $580 call 11/4,TSLA,580,11/4,call,,,1
 Zoom (ZM) Calls Expiring 12/4 ($480),ZM,480,12/4,Calls,,,1
 Zoom (ZM) Calls 12/4 exp. $480 strike,ZM,480,12/4,Calls,,,1
-"My first time trading call options. I paid $350, $260, &amp; $80 for PLTR 12/4 $40 calls. SMDH",PLTR,40,12/4,call,,,1
-"Put $1k in on Friday. GOLD 12/31 $23 calls. Gonna rally another couple days, get in losers.",GOLD,23,12/31,Put,,,1
+"My first time trading call options. I paid $350, $260, &amp; $80 for PLTR 12/4 $40 calls. SMDH",PLTR,40,12/4,calls,,,1
+"Put $1k in on Friday. GOLD 12/31 $23 calls. Gonna rally another couple days, get in losers.",GOLD,23,12/31,calls,,,1
 Just picked up $9.5 BB calls 1/8/21 LETS GO BOYS,BB,9.5,1/8/21,calls,,,1
 All I’m going to say is I’ve been holding LCA for a while now in the 12/18 $20 call and the 2/19/21 $17.5 call and these are going to fly along with the stock itself. Get in now before it is too late.,LCA,20,12/18,call,,,1
 Me calling out to my 12/4 PLTR $33 calls,PLTR,33,12/4,calls,,,1
 Started last week with $11 in MRNA $126 12/04 calls -&gt; PFE $42 12/11 calls -&gt; WORK $52 12/04 calls. A nice little 27000% gain,MRNA,126,12/04,calls,,,1
-Now if only I wasn’t such a pussy and more of an autist I’d be fucking rich by now. I guess my wife’s new boyfriend will be carving the turkey at thanksgiving again next year. $SNE C$80 3/19/21,SNE,80,3/19/21,,,,1
-Unusual Options Activity- FCX to $29 1/15/21,FCX,29,1/15/21,,,,1
+Now if only I wasn’t such a pussy and more of an autist I’d be fucking rich by now. I guess my wife’s new boyfriend will be carving the turkey at thanksgiving again next year. $SNE C$80 3/19/21,SNE,80,3/19/21,C,,,1
+Unusual Options Activity- FCX to $29 1/15/21,FCX,29,1/15/21,,,,2
 "PLTR $35 12/11, Diamond hands or cut bait &amp; run?",PLTR,35,12/11,,,,1
 PLTR $30 11/4 support group,PLTR,30,11/4,,,,1
 CVS to the moon🚀🚀🚀 $72 12/11 calls,CVS,72,12/11,calls,,,1
@@ -994,10 +994,10 @@ $DBX 1/15/21 $30 calls,DBX,30,1/15/21,calls,,,1
 "AMD January $120 calls were up 50%. I didn’t sell, and now they are going into red. Wtf. Market makers are so crazy!",AMD,120,January,calls,,,1
 I’m holding my PLTR $30 12/11 and 12/24 calls am I fucked?,PLTR,30,12/11,calls,,,1
 TU to $20 by 12/18 and here's why,TU,20,12/18,,,,2
-AMC 12/31 1.5 P,AMC,1.5,12/31,,,,1
+AMC 12/31 1.5 P,AMC,1.5,12/31,P,,,1
 $TU is going to $20 before 12/18 and here's why,TU,20,12/18,,,,2
-DD: APHA calls heavily undervalued right now. How's this shit negative 11% on a +3% gain. 01/22 C $6,APHA,6,01/22,calls,,,1
-So you’re telling me there’s still a chance!! PLTR calls 12/4 expiration $32 break even lets 🚀 🌚,PLTR,32,12/4,calls,,,1
+DD: APHA calls heavily undervalued right now. How's this shit negative 11% on a +3% gain. 01/22 C $6,APHA,6,01/22,C,,,1
+##So you’re telling me there’s still a chance!! PLTR calls 12/4 expiration $32 break even lets 🚀 🌚,PLTR,,12/4,calls,,,0
 SPY 12/7 $362 p,SPY,362,12/7,,,,1
 Altria $MO March Call $50,MO,50,March,Call,,,1
 Look at how powerful that SMA (5/10/20) crossover is..! Those who got into DEC 18th $50 strike gave 10X returned. Now the question what’s the best way to to find those setups.,SMA,50,DEC 18th,,,,1

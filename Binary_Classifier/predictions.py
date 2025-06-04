@@ -172,7 +172,11 @@ def log_prediction_debug(text):
     result = extractor(text, offsets, token_list, predictions, scores)
     print("EXTRACTED:", result)
     return result
+#TODO if comment["Quantity"] == "" and !comment["OptionType"].contains("s"):
+#         comment["Quantity"] = 1
 
+#TODO comment["Quantity"] = all quantities summed?
+#TODO comment["Premium"] = all premiums averaged?
 version, pipeline = load_model()
 def predict_comments(json_lines):
     comments = [json.loads(line) for line in json_lines]
