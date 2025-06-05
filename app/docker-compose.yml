@@ -32,10 +32,11 @@ services:
     environment:
       POSTGRES_USER: devuser
       POSTGRES_PASSWORD: devpassword
-      POSTRES_DB: testdb
+      POSTGRES_DB: testdb
 
     volumes:
       - pgdata:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "5432:5432"
  

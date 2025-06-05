@@ -53,7 +53,7 @@ func NewRabbitMQStore(username string, password string, addr string, queueName s
 	}
 }
 
-// combines common post and comment fields since we want to treat them as the same
+// combines some common post and comment fields since we want to treat them as the same
 type SendableComment struct {
 	ID          string `json:"id"`
 	Body        string `json:"body"`
@@ -62,6 +62,8 @@ type SendableComment struct {
 	IsPost      bool   `json:"is_post"` // true if post false for comment
 	Source      string `json:"source"`  // ex. r/wallstreetbets
 	CreatedUnix int64  `json:"created_unix"`
+	ParentID    string `json:"parent_id"` // contains parent ID if the comment is a true comment and is a reply
+	PostID      string `json:"post_id"`   // Id of post for comments, null for posts since their ID will be postid
 }
 
 // send a sendable comment to the appropriate rabbit channel and queue, could be either a post or comment
@@ -96,26 +98,30 @@ func (r *RabbitMQStore) Start() {
 		select {
 		case newPost := <-r.postChan:
 			msg := &SendableComment{
-				newPost.ID,
+				newPost.FullID,
 				newPost.Title + " " + newPost.Body,
 				newPost.AuthorID,
 				newPost.Author,
 				true,
 				newPost.SubredditNamePrefixed,
 				newPost.Created.Unix(),
+				"",
+				"",
 			}
 
 			sendComment(r.rabbitChannel, r.rabbitQueue, msg)
 
 		case newComment := <-r.commentChan:
 			msg := &SendableComment{
-				newComment.ID,
+				newComment.FullID,
 				newComment.Body,
 				newComment.AuthorID,
 				newComment.Author,
 				false,
 				newComment.SubredditNamePrefixed,
 				newComment.Created.Unix(),
+				newComment.ParentID,
+				newComment.PostID,
 			}
 
 			sendComment(r.rabbitChannel, r.rabbitQueue, msg)

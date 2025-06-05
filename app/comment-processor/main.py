@@ -1,40 +1,62 @@
 import os
+import sys
 from time import sleep
 import json
 import logging
 
+import psycopg
 import pika
-
 from Binary_Classifier.predictions import predict_comments
+from db import insert_comment, insert_prediction
 
-BATCH_SIZE=32
-batch = []
-
-last_tag = None
-
+conn = None
 def process_message(ch, method, properties, body):
-    global last_tag
-
     messageJSON = json.loads(body.decode())
-    batch.append(messageJSON)
-    last_tag = method.delivery_tag
+    result = predict_comments([messageJSON])
+    try:
+        with conn.cursor() as cursor:
+            insert_comment(cursor, messageJSON)
+            if len(result) > 0:
+                prediction = {
+                    "comment_id": messageJSON['id'],  # assuming the comment has an "id"
+                    "stock": result[0].get("Stock"),
+                    "price": result[0].get("Price"),
+                    "date": result[0].get("Date"),
+                    "formatted_date": result[0].get("Formatted Date"),
+                    "stock_score": result[0].get("StockScore"),
+                    "price_score": result[0].get("PriceScore"),
+                    "date_score": result[0].get("DateScore"),
+                    "ner_version": result[0].get("NER Version"),
+                    "binary_model": result[0].get("Binary_Model"),
+                    "prediction": result[0].get("Prediction"),
+                    "confidence": result[0].get("Confidence")
+                }
 
-    # process the batch when it reaches its limit and reset it
-    if len(batch) == BATCH_SIZE:
-        results = predict_comments(batch)
-        logging.info(f"Got {len(results)} good comments from batch")
+                insert_prediction(cursor, prediction) 
 
-        for result in results:
-            logging.info(f"Good comment: {result}")
-        
-        ch.basic_ack(delivery_tag=last_tag, multiple=True)
-        batch.clear() 
+            conn.commit()
+
+        ch.basic_ack(delivery_tag=method.delivery_tag)
+
+    except Exception as e:
+        print(e) 
+        sys.exit()
+
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
 
     # wait for rabbitmq to start and scraper to setup queue
     sleep(7)
+    logging.info("Attempting Postgres connection")
+    conn = psycopg.connect(
+        dbname=os.getenv("POSTGRES_DB_NAME"),
+        user=os.getenv("POSTGRES_USER"),
+        password=os.getenv("POSTGRES_PASSWORD"),
+        host=os.getenv("POSTGRES_HOST"),
+        port=os.getenv("POSTGRES_PORT"),
+    )
+
     logging.info("Starting")
     rabbit_user = os.getenv("RABBITMQ_DEFAULT_USER")
     rabbit_password = os.getenv("RABBITMQ_DEFAULT_PASS")
