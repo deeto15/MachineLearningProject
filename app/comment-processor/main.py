@@ -1,5 +1,4 @@
 import os
-import sys
 from time import sleep
 import json
 import logging
@@ -33,14 +32,12 @@ def process_message(ch, method, properties, body):
                 }
 
                 insert_prediction(cursor, prediction) 
-
             conn.commit()
+        logging.info(f"Inserted comment {messageJSON}")
 
         ch.basic_ack(delivery_tag=method.delivery_tag)
-
     except Exception as e:
         print(e) 
-        sys.exit()
 
 
 if __name__ == "__main__":

@@ -34,12 +34,12 @@ INSERT INTO predictions (
     comment_id, stock, price, date, formatted_date,
     stock_score, price_score, date_score,
     ner_version, binary_model,
-    prediction, confidence
+    prediction, confidence, option_type, quantity, premium
 ) VALUES (
     %s, %s, %s, %s, %s,
     %s, %s, %s,
     %s, %s,
-    %s, %s
+    %s, %s, %s, %s, %s
 )
 """
 def insert_prediction(cursor, prediction):
@@ -55,5 +55,8 @@ def insert_prediction(cursor, prediction):
         prediction.get('ner_version'),
         prediction.get('binary_model'),
         prediction.get('prediction'),
-        prediction.get('confidence')
+        prediction.get('confidence'),
+        prediction.get('option_type'),
+        prediction.get('quantity'),
+        prediction.get('premium')
     ))
