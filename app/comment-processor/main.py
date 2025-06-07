@@ -38,6 +38,7 @@ def process_message(ch, method, properties, body):
         ch.basic_ack(delivery_tag=method.delivery_tag)
     except Exception as e:
         print(e) 
+        conn.rollback()
 
 
 if __name__ == "__main__":
@@ -72,6 +73,8 @@ if __name__ == "__main__":
     channel = connection.channel()
     channel.queue_declare("comments_raw", True, True, False, False)
     channel.basic_consume("comments_raw", process_message, auto_ack=False) 
+
+    channel.basic_qos(prefetch_count=1)
 
     logging.info("Listening for new messages")
     channel.start_consuming()

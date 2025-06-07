@@ -4,7 +4,7 @@ from datetime import datetime, timezone
 insert_comment_query = """
 INSERT INTO comments (id, body, author_id, author_name, is_post, source,
                         created_utc, parent_id, post_id)
-VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s) ON CONFLICT (id) DO NOTHING;
 """
 def insert_comment(cursor, comment):
     # Convert Unix timestamp integer to datetime with timezone UTC
