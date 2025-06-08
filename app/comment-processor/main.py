@@ -30,7 +30,6 @@ if __name__ == "__main__":
 
     # handles processing, insertion, and redirection of comment predictions to queue
     def process_comment(comment: Comment):
-        print(f"Received comment: {comment.body}")
         comments_provider.insert_comment(comment)
 
         model_output = predict_comments(comment.to_model_input())

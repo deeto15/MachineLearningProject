@@ -45,7 +45,7 @@ class CommentPrediction:
     stock: str
     price: float
     date: str
-    formatted_date: datetime.date 
+    formatted_date: str
 
     stock_score: float
     price_score: float
@@ -62,7 +62,6 @@ class CommentPrediction:
 
     def to_json_str(self) -> str:
         data = asdict(self)
-        data["formatted_date"] = self.formatted_date.isoformat()
         return json.dumps(data)
 
     @classmethod
