@@ -67,20 +67,12 @@ class CommentPrediction:
 
     @classmethod
     def from_model_output(cls, comment_id: str, model_output: list):
-
-        date_str = model_output[0].get("Formatted Date")
-
-        if date_str != "":
-            date_obj = datetime.strptime(date_str, "%Y-%m-%d").date()
-        else:
-            date_obj = None
-
         return cls(
             comment_id=comment_id,
             stock=model_output[0].get("Stock"),
             price=model_output[0].get("Price"),
             date=model_output[0].get("Date"),
-            formatted_date=date_obj,
+            formatted_date=model_output[0].get("Formatted Date"),
             stock_score=model_output[0].get("StockScore"),
             price_score=model_output[0].get("PriceScore"),
             date_score=model_output[0].get("DateScore"),
