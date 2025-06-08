@@ -138,6 +138,12 @@ func (s *SubredditMonitor) MoreRequest(recentRequest *http.Request, linkId strin
 
 // recursively uses morechildren reddit api when necessary
 func (s *SubredditMonitor) GetAllComments(postID string) {
+	/*
+		if postID != "1l51uz3" {
+			return
+		}
+	*/
+
 	s.limiter.Wait(context.Background())
 	post, postResp, err := s.redditClient.Post.Get(context.Background(), postID)
 

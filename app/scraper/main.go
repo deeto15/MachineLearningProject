@@ -15,7 +15,7 @@ import (
 
 func main() {
 	// wait for rabbitmq
-	time.Sleep(8 * time.Second)
+	time.Sleep(5 * time.Second)
 
 	// load reddit variables
 	godotenv.Load()
@@ -44,6 +44,13 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	/*
+		rdb.ZAdd("seen:wallstreetbets:posts", redis.Z{
+			Score:  float64(time.Now().Unix()),
+			Member: "1l51uz3",
+		})
+	*/
 
 	// load monitoring parameters and setup monitor options
 	pollFrequencySeconds, _ := strconv.Atoi(os.Getenv("POLL_FREQUENCY_SECONDS"))
