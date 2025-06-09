@@ -47,6 +47,11 @@ services:
       - rabbitmq
       - postgres
     
+  live-updater:
+    build: ./live-updater
+    env_file: 'live-updater/.env'
+    depends_on:
+      - rabbitmq
 
 volumes:
   redis_data:
