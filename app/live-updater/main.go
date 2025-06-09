@@ -1,27 +1,39 @@
 package main
 
 import (
-	"live-updater/rabbit"
-	"live-updater/types"
+	"live-updater/auth"
+	"live-updater/ws"
 	"log"
+	"net/http"
 	"os"
 	"time"
 )
 
 func main() {
-	// wait for rabbit
-	time.Sleep(7 * time.Second)
 
-	rabbitUsername := os.Getenv("RABBITMQ_USER")
-	rabbitPassword := os.Getenv("RABBITMQ_PASSWORD")
-	rabbitHost := os.Getenv("RABBITMQ_ADDR")
+	/*
+		rabbitUsername := os.Getenv("RABBITMQ_USER")
+		rabbitPassword := os.Getenv("RABBITMQ_PASSWORD")
+		rabbitHost := os.Getenv("RABBITMQ_ADDR")
 
-	client := rabbit.NewRabbitMQClient(rabbitUsername, rabbitPassword, rabbitHost)
+		client := rabbit.NewRabbitMQClient(rabbitUsername, rabbitPassword, rabbitHost)
 
-	predictions := make(chan *types.Prediction, 10)
-	go rabbit.StartConsuming(client, "comments_processed", predictions)
+		predictions := make(chan *types.Prediction, 10)
+		go rabbit.StartConsuming(client, "comments_processed", predictions)
+	*/
 
-	for pred := range predictions {
-		log.Println(pred)
+	secret := os.Getenv("JWT_SECRET")
+	http.HandleFunc("/ws", auth.AuthMiddleware(secret, ws.Handler))
+
+	// for testing
+	token, err := auth.GenerateJWT(secret, "123123123123", []string{"predictions"}, 24*time.Hour)
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.Println(token)
+
+	log.Println("Server started on port :8080")
+	if err := http.ListenAndServe(":8080", nil); err != nil {
+		log.Fatal("ListenAndServe: ", err)
 	}
 }
