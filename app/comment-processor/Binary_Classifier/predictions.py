@@ -123,18 +123,33 @@ def extractor(text, offsets, token_list, predictions, scores):
         if label in subset:
             if label not in best_entities or score > best_entities[label][2]:
                 best_entities[label] = (label, value, score)
+
     # Returns full tokens that are above the 80% confidence level
-    if all(t in best_entities and best_entities[t][2] > 0.80 for t in subset):
-        return {
-            "Comment": text,
-            "Stock": best_entities["TICKER"][1],
-            "Price": best_entities["PRICE"][1],
-            "Date": best_entities["DATE"][1],
-            "StockScore": round(best_entities["TICKER"][2].item(), 4),
-            "PriceScore": round(best_entities["PRICE"][2].item(), 4),
-            "DateScore": round(best_entities["DATE"][2].item(), 4),
-        }
-    return None
+
+    # if all(t in best_entities and best_entities[t][2] > 0.80 for t in subset):
+
+    def safe_get(d, key):
+        value = d.get(key)
+        return value[1] if value is not None and len(value) > 1 else None
+
+    stock = safe_get(best_entities, "STOCK")
+    price = safe_get(best_entities, "PRICE")
+    date = safe_get(best_entities, "DATE")
+
+    stock_score = None if stock == None else round(best_entities["STOCK"][2].item(), 4)
+    date_score = None if date == None else round(best_entities["DATE"][2].item(), 4)
+    price_score = None if price == None else round(best_entities["PRICE"][2].item(), 4)
+
+    return {
+        "Comment": text,
+        "Stock": safe_get(best_entities, "STOCK"),
+        "Price": safe_get(best_entities, "PRICE"),
+        "Date": safe_get(best_entities, "DATE"),
+
+        "StockScore": stock_score,
+        "PriceScore": price_score,
+        "DateScore": date_score
+    }
 
 
 # Helper method to glue the tokens together correctly
@@ -177,28 +192,41 @@ def log_prediction_debug(text):
 
 version, pipeline = load_model()
 def predict_comments(comments):
-    bodies = [comment["body"] for comment in comments]
+    bodies = [c["body"] for c in comments]
     entities_list = tokens_batch(bodies)
-    dicts = []
-    for comment, best_entities in zip(comments, entities_list):
-        if not comment or not best_entities:
+    valid_three_entities = []
+    batch_results = []
+    for comment, best in zip(comments, entities_list):
+        if not comment or not best:
             continue
-        comment["Stock"] = best_entities['Stock']
-        comment["Price"] = best_entities['Price']
-        comment["Date"] = best_entities['Date']
-        comment["Formatted Date"] = date_formatter(comment["created_unix"], comment['Date'])
-        comment["StockScore"] = best_entities['StockScore']
-        comment["PriceScore"] = best_entities['PriceScore']
-        comment["DateScore"] = best_entities['DateScore']
-        comment["NER Version"] = model_path[-2:]
-        dicts.append(comment)
-    if dicts:
-        good_comments = [comment["body"] for comment in dicts]
-        preds, confs = pipeline.predict_batch(good_comments)
-        for d, p, c in zip(dicts, preds, confs):
-            d["Prediction"] = p
-            d["Confidence"] = c
-            d["Binary_Model"] = version[-2:]
-        return dicts
-    return []
 
+        # directly enrich the original dict
+        comment["Stock"] = best["Stock"]
+        comment["Price"] = best["Price"]
+        comment["Date"] = best["Date"]
+        comment["StockScore"] = best["StockScore"]
+        comment["PriceScore"] = best["PriceScore"]
+        comment["DateScore"] = best["DateScore"]
+        comment["NER Version"] = model_path[-2:]
+        if comment["Date"]:
+            comment["Formatted Date"] = date_formatter(comment["created_unix"], comment["Date"])
+
+        batch_results.append(comment)
+        if (
+            comment.get("Stock") is not None
+            and comment.get("Price") is not None
+            and comment.get("Date") is not None
+            and comment["StockScore"] > 0.70
+            and comment["PriceScore"] > 0.70
+            and comment["DateScore"] > 0.70
+        ):
+            valid_three_entities.append(comment)
+
+    if valid_three_entities:
+        bodies = [c["body"] for c in valid_three_entities]
+        preds, confs = pipeline.predict_batch(bodies)
+        for cmt, pred, conf in zip(valid_three_entities, preds, confs):
+            cmt["Prediction"] = pred
+            cmt["Confidence"] = conf
+            cmt["Binary_Model"] = version[-2:]
+    return batch_results

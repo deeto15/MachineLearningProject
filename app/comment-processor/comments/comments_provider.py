@@ -113,41 +113,49 @@ class CommentsProvider:
     """
 
     def insert_comment(self, comment: Comment):
-        with self.conn.cursor() as cur:
-            cur.execute(
-                self.insert_comment_query, (
-                    comment.id,
-                    comment.body,
-                    comment.author_id,
-                    comment.author_name,
-                    comment.is_post,
-                    comment.source,
-                    comment.created_utc,
-                    comment.parent_id,
-                    comment.post_id
+        try:
+            with self.conn.cursor() as cur:
+                cur.execute(
+                    self.insert_comment_query, (
+                        comment.id,
+                        comment.body,
+                        comment.author_id,
+                        comment.author_name,
+                        comment.is_post,
+                        comment.source,
+                        comment.created_utc,
+                        comment.parent_id,
+                        comment.post_id
+                    )
                 )
-            )
 
-        self.conn.commit()
+            self.conn.commit()
+        except psycopg.Error as e:
+            self.conn.rollback()
+            print("Database error: ", e)
 
     def insert_prediction(self, prediction: CommentPrediction):
-        with self.conn.cursor() as cur:
-            cur.execute(self.insert_prediction_query, (
-                prediction.comment_id,
-                prediction.stock,
-                prediction.price,
-                prediction.date,
-                prediction.formatted_date,
-                prediction.stock_score,
-                prediction.price_score,
-                prediction.date_score,
-                prediction.ner_version,
-                prediction.binary_model,
-                prediction.prediction,
-                prediction.confidence,
-                prediction.option_type,
-                prediction.quantity,
-                prediction.premium
-            ))
+        try: 
+            with self.conn.cursor() as cur:
+                cur.execute(self.insert_prediction_query, (
+                    prediction.comment_id,
+                    prediction.stock,
+                    prediction.price,
+                    prediction.date,
+                    prediction.formatted_date,
+                    prediction.stock_score,
+                    prediction.price_score,
+                    prediction.date_score,
+                    prediction.ner_version,
+                    prediction.binary_model,
+                    prediction.prediction,
+                    prediction.confidence,
+                    prediction.option_type,
+                    prediction.quantity,
+                    prediction.premium
+                ))
 
-        self.conn.commit()
+            self.conn.commit()
+        except psycopg.Error as e:
+            self.conn.rollback()
+            print("Database error: ", e)

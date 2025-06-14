@@ -38,8 +38,13 @@ if __name__ == "__main__":
 
         prediction = CommentPrediction.from_model_output(comment.id, model_output)
 
-        comments_provider.insert_prediction(prediction)
-        rabbit_client.publish("comments_processed", prediction)
+        # for testing
+        if prediction.stock != None or prediction.date != None or prediction.price != None:
+            if prediction.stock != '' or prediction.date != '' or prediction.price != '':
+                comments_provider.insert_prediction(prediction)
+
+            # redirect to processed queue
+            # rabbit_client.publish("comments_processed", prediction)
     
     # start consuming and block
     rabbit_client.start_consuming("comments_raw", process_comment, Comment)
