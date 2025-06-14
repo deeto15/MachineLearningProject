@@ -132,19 +132,19 @@ def extractor(text, offsets, token_list, predictions, scores):
         value = d.get(key)
         return value[1] if value is not None and len(value) > 1 else None
 
-    stock = safe_get(best_entities, "STOCK")
+    stock = safe_get(best_entities, "TICKER")
     price = safe_get(best_entities, "PRICE")
     date = safe_get(best_entities, "DATE")
 
-    stock_score = None if stock == None else round(best_entities["STOCK"][2].item(), 4)
+    stock_score = None if stock == None else round(best_entities["TICKER"][2].item(), 4)
     date_score = None if date == None else round(best_entities["DATE"][2].item(), 4)
     price_score = None if price == None else round(best_entities["PRICE"][2].item(), 4)
 
     return {
         "Comment": text,
-        "Stock": safe_get(best_entities, "STOCK"),
-        "Price": safe_get(best_entities, "PRICE"),
-        "Date": safe_get(best_entities, "DATE"),
+        "Stock": stock,
+        "Price": price,
+        "Date": date,
 
         "StockScore": stock_score,
         "PriceScore": price_score,

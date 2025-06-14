@@ -41,6 +41,7 @@ if __name__ == "__main__":
         # for testing
         if prediction.stock != None or prediction.date != None or prediction.price != None:
             if prediction.stock != '' or prediction.date != '' or prediction.price != '':
+                print(prediction)
                 comments_provider.insert_prediction(prediction)
 
             # redirect to processed queue
