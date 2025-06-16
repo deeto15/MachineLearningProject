@@ -1,4 +1,5 @@
 # This is the actual model training on the now tokenized data
+from sklearn.model_selection import train_test_split
 from bio_tagging import generate_labeled_data
 from datasets import Dataset, DatasetDict
 import torch
@@ -10,7 +11,7 @@ from transformers import (
     TrainingArguments,
 )
 
-label_list = ["O", "B-TICKER", "I-TICKER", "B-STRIKE", "I-STRIKE", "B-EXPIRY", "I-EXPIRY", "B-OPTIONTYPE", "I-OPTIONTYPE", "B-QUANTITY", "I-QUANTITY", "B-PREMIUM", "I-PREMIUM"]
+label_list = ["O", "B-TICKER", "I-TICKER", "B-STRIKE", "I-STRIKE", "B-EXPIRY", "I-EXPIRY", "B-OPTIONTYPE", "I-OPTIONTYPE"]
 label2id = {label: i for i, label in enumerate(label_list)}
 id2label = {i: label for label, i in label2id.items()}
 
@@ -19,6 +20,12 @@ data = generate_labeled_data()
 print(f"Loaded {len(data)} training samples")
 for d in data:
     d["ner_tags"] = [label2id[l] for l in d["ner_tags"]]
+
+train_data, val_data = train_test_split(data, test_size=0.1, random_state=42)
+# ds = DatasetDict({
+#     "train": Dataset.from_list(train_data),
+#     "validation": Dataset.from_list(val_data),
+# })
 
 ds = Dataset.from_list(data)
 ds = DatasetDict({"train": ds})
@@ -70,7 +77,7 @@ model = AutoModelForTokenClassification.from_pretrained(
 )
 training_args = TrainingArguments(
     output_dir="./training_models/ner-output-V5",
-    evaluation_strategy="no",
+    eval_strategy="no",
     learning_rate=2e-5,
     per_device_train_batch_size=8,
     num_train_epochs=3,
@@ -84,6 +91,7 @@ trainer = Trainer(
     model=model,
     args=training_args,
     train_dataset=ds["train"],
+    #eval_dataset=ds["validation"],
     tokenizer=tokenizer,
     data_collator=data_collator,
 )

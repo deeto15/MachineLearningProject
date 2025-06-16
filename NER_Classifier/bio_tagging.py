@@ -17,7 +17,7 @@ nltk.download("punkt_tab")
 
 
 # Cleans and standarizes data, and then splits it into tokens using the nltk tokenizer
-def label_comment(comment, ticker, price, date, optiontype, quantity, premium):
+def label_comment(comment, ticker, price, date, optiontype):
     price = str(price).strip(" $")
     ticker = str(ticker).strip(" $")
     date = str(date).strip("[]")
@@ -41,8 +41,8 @@ def label_comment(comment, ticker, price, date, optiontype, quantity, premium):
     tag_entity(price, "STRIKE")
     tag_entity(date, "EXPIRY")
     tag_entity(optiontype, "OPTIONTYPE")
-    tag_entity(quantity, "QUANTITY")
-    tag_entity(premium, "PREMIUM")
+    #tag_entity(quantity, "QUANTITY")
+    #tag_entity(premium, "PREMIUM")
     return tokens, labels
 
 
@@ -50,9 +50,10 @@ def label_comment(comment, ticker, price, date, optiontype, quantity, premium):
 # Takes the tokenized data and returns it as an array
 def generate_labeled_data():
     file2 = pd.read_csv(
-        "NER_Classifier/regression_model_training_data.csv", usecols=range(8)
+        "NER_Classifier/regression_model_training_data.csv", usecols=["Comment", "Ticker", "Strike", "Expiry", "OptionType", "Label"]
     )
-    file2 = file2[file2["Label"].astype(float).isin([0.0, 1.0])]
+    #file2 = file2[file2["Label"].astype(float).isin([0.0, 1.0, 2.0])]
+    
     examples = []
     for _, row in file2.iterrows():
         tokens, labels = label_comment(
@@ -61,8 +62,8 @@ def generate_labeled_data():
         str(row["Strike"]) if pd.notna(row["Strike"]) else "",
         str(row["Expiry"]) if pd.notna(row["Expiry"]) else "",
         str(row.get("OptionType", "")) if pd.notna(row.get("OptionType", "")) else "",
-        str(row.get("Quantity", "")) if pd.notna(row.get("Quantity", "")) else "",
-        str(row.get("Premium", "")) if pd.notna(row.get("Premium", "")) else "",
+        #str(row.get("Quantity", "")) if pd.notna(row.get("Quantity", "")) else "",
+        #str(row.get("Premium", "")) if pd.notna(row.get("Premium", "")) else "",
 )
 
         examples.append({"tokens": tokens, "ner_tags": labels})
