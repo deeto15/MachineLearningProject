@@ -29,12 +29,12 @@ train_data, val_data = train_test_split(data, test_size=0.1, random_state=42)
 
 ds = Dataset.from_list(data)
 ds = DatasetDict({"train": ds})
-tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
+processing_class = AutoTokenizer.from_pretrained("bert-base-uncased")
 
 
 # Tokenize the input tokens while preserving word boundaries
 def tokenize_and_align_labels(example):
-    tokenized_inputs = tokenizer(
+    tokenized_inputs = processing_class(
         example["tokens"],
         truncation=True,
         padding="max_length",
@@ -85,17 +85,17 @@ training_args = TrainingArguments(
     no_cuda=False,
     remove_unused_columns=False,
 )
-data_collator = DataCollatorForTokenClassification(tokenizer)
+data_collator = DataCollatorForTokenClassification(processing_class)
 
 trainer = Trainer(
     model=model,
     args=training_args,
     train_dataset=ds["train"],
     #eval_dataset=ds["validation"],
-    tokenizer=tokenizer,
+    processing_class=processing_class,
     data_collator=data_collator,
 )
 
 trainer.train()
 model.save_pretrained("./training_models/ner-output-V5")
-tokenizer.save_pretrained("./training_models/ner-output-V5")
+processing_class.save_pretrained("./training_models/ner-output-V5")
