@@ -14,11 +14,11 @@ df["labels"] = df["Label"].astype(int)
 df = df.drop(columns=["Label"])
 dataset = Dataset.from_pandas(df)
 
-tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
+processing_class = BertTokenizer.from_pretrained("bert-base-uncased")
 
 
 def tokenize(batch):
-    return tokenizer(
+    return processing_class(
         batch["Comment"], truncation=True, padding="max_length", max_length=256
     )
 
@@ -32,8 +32,8 @@ model = BertForSequenceClassification.from_pretrained(
     "bert-base-uncased", num_labels=3
 ).to(device)
 training_args = TrainingArguments(
-    output_dir="./training_models/classifier-bert-V3",
-    evaluation_strategy="epoch",
+    output_dir="./training_models/classifier-bert-V4",
+    eval_strategy="epoch",
     learning_rate=2e-5,
     per_device_train_batch_size=8,
     num_train_epochs=3,
@@ -46,9 +46,9 @@ trainer = Trainer(
     args=training_args,
     train_dataset=dataset["train"],
     eval_dataset=dataset["test"],
-    tokenizer=tokenizer,
+    processing_class=processing_class,
 )
 
 trainer.train()
-model.save_pretrained("./training_models/classifier-bert-V3")
-tokenizer.save_pretrained("./training_models/classifier-bert-V3")
+model.save_pretrained("./training_models/classifier-bert-V4")
+processing_class.save_pretrained("./training_models/classifier-bert-V4")

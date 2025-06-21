@@ -5,7 +5,7 @@ from transformers import BertTokenizer, BertForSequenceClassification
 
 
 class BertIntentClassifier:
-    def __init__(self, model_path="./training_models/classifier-bert-V3"):
+    def __init__(self, model_path="./training_models/classifier-bert-V4"):
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.tokenizer = BertTokenizer.from_pretrained(model_path)
         self.model = (
@@ -16,7 +16,7 @@ class BertIntentClassifier:
         self.model.eval()
         torch.backends.cudnn.benchmark = True
 
-    def predict_batch(self, texts, threshold=0.43, batch_size=32):
+    def predict_batch(self, texts, batch_size=32):
         preds, confs = [], []
         for i in range(0, len(texts), batch_size):
             batch = texts[i : i + batch_size]
@@ -31,12 +31,12 @@ class BertIntentClassifier:
             with torch.no_grad(), autocast("cuda"):
                 outputs = self.model(**inputs)
             probs = F.softmax(outputs.logits, dim=1)
-            conf_batch = probs[:, 1]
-            pred_batch = (conf_batch >= threshold).long()
+            pred_batch = torch.argmax(probs, dim=1)
+            conf_batch = probs.max(dim=1).values
             preds += pred_batch.cpu().tolist()
             confs += conf_batch.cpu().tolist()
         return preds, confs
 
 
-def load_model(model_path="./training_models/classifier-bert-V3"):
+def load_model(model_path="./training_models/classifier-bert-V4"):
     return model_path, BertIntentClassifier(model_path)
