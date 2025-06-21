@@ -172,11 +172,7 @@ def log_prediction_debug(text):
     result = extractor(text, offsets, token_list, predictions, scores)
     print("EXTRACTED:", result)
     return result
-#TODO if comment["Quantity"] == "" and !comment["OptionType"].contains("s"):
-#         comment["Quantity"] = 1
 
-#TODO comment["Quantity"] = all quantities summed?
-#TODO comment["Premium"] = all premiums averaged?
 version, pipeline = load_model()
 def predict_comments(json_lines):
     comments = [json.loads(line) for line in json_lines]
@@ -205,13 +201,4 @@ def predict_comments(json_lines):
         return dicts
     return []
 
-
-real_data = [
-    '{"id": "1l06pzf", "body": "I\'m betting on UNH 25$ calls for Jan 2023", "author_id": "t2_v9e77smks", "author_name": "Piyush4758", "is_post": true, "source": "r/wallstreetbets", "created_unix": 1748723247}',
-    '{"id": "1l06pzf", "body": "TSLA is going to the moon! Going for 12/22 $125 calls!", "author_id": "t2_v9e77smks", "author_name": "Piyush4758", "is_post": true, "source": "r/wallstreetbets", "created_unix": 1748723247}'
-]
-
-print(log_prediction_debug("How to play AMD $15 call for Oct 15"))
-# dict = predict_comments(real_data)
-# for comment in dict:
-#     print(comment, "\n")
+print(log_prediction_debug("need these 599 0dte puts to print man"))
