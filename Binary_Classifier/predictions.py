@@ -11,7 +11,6 @@ model_path = "./training_models/ner-output-V5"
 model = AutoModelForTokenClassification.from_pretrained(model_path).to(device)
 tokenizer = AutoTokenizer.from_pretrained(model_path)
 id2label = model.config.id2label
-subset = {"TICKER", "PRICE", "DATE"}
 model.eval()
 def debug_tokens(text):
     enc = tokenizer(text, return_tensors="pt").to(model.device)
@@ -148,58 +147,34 @@ def log_prediction_debug(text):
 
 version, pipeline = load_model()
 def predict_comments(json_lines):
+    label_map = {
+        "Ticker": "Stock",
+        "Strike": "Price",
+        "Expiry": "Date"
+    }
     comments = [json.loads(line) for line in json_lines]
     bodies = [comment["body"] for comment in comments]
     entities_list = tokens_batch(bodies)
     dicts = []
-    all_token_info = []
     for comment, extraction in zip(comments, entities_list):
-        comment["Entities"] = extraction["Entities"]
+        for label, value, score in extraction["Entities"]:
+            k = label.capitalize()
+            mapped = label_map.get(k, k)
+            comment[mapped] = value
+            comment[f"{mapped}Score"] = float(score)
+        if "Date" in comment and comment["Date"]:
+            comment["Formatted Date"] = date_formatter(comment["created_unix"], comment["Date"])
         dicts.append(comment)
-        # Get token-level info
-        encoding = tokenizer(
-            comment["body"],
-            return_offsets_mapping=True,
-            return_tensors="pt",
-            truncation=True,
-        )
-        offsets = encoding.pop("offset_mapping")[0].tolist()
-        input_ids = encoding["input_ids"][0]
-        token_list = tokenizer.convert_ids_to_tokens(input_ids)
-        encoding = {k: v.to(device) for k, v in encoding.items()}
-        with torch.no_grad():
-            outputs = model(**encoding)
-        logits = outputs.logits[0]
-        predictions = torch.argmax(logits, dim=-1).tolist()
-        probs = torch.nn.functional.softmax(logits, dim=-1)
-        scores = probs[range(len(predictions)), predictions]
-        per_token = []
-        for tok, pred, score, (start, end) in zip(token_list, predictions, scores, offsets):
-            label = id2label.get(pred, "O")
-            per_token.append((tok, label, float(score), comment["body"][start:end]))
-        all_token_info.append(per_token)
     good_comments = [comment["body"] for comment in dicts]
     preds, confs = pipeline.predict_batch(good_comments)
     for d, p, c in zip(dicts, preds, confs):
         d["Prediction"] = p
-        d["Confidence"] = c
+        d["Confidence"] = float(c)
         d["Binary_Model"] = version[-2:]
-    output = ""
-    for i, (item, token_info) in enumerate(zip(dicts, all_token_info)):
-        output += f"\n--- Prediction {i + 1} ---\n"
-        output += f"Text: {item['body']}\n"
-        output += f"Created: {item['created_unix']}\n"
-        output += "Entities:\n"
-        for label, value, score in item["Entities"]:
-            output += f"  {label:12} | {value:20} | {float(score):.3f}\n"
-        output += f"Prediction: {item['Prediction']}\n"
-        output += f"Confidence: {item['Confidence']:.4f}\n"
-        output += f"Binary Model: {item['Binary_Model']}\n"
-        output += "Tokens:\n"
-        for tok, label, score, text in token_info:
-            output += f"  {tok:12} | {label:10} | {score:.3f} | {text}\n"
-    return output.strip()
+    return dicts
+
+
 
 
 #print(log_prediction_debug("need these 599 0dte puts to print man"))
-print(predict_comments([json.dumps({"body": "600 spy open 🥱", "created_unix": 1234567890})]))
+print(predict_comments([json.dumps({"body": "Bro it’s puts on Monday", "created_unix": 1234567890})]))
