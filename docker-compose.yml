@@ -1,0 +1,65 @@
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 5s
+      timeout: 10s
+      retries: 10
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  scraper:
+    build: ./scraper
+    container_name: scraper
+    env_file: .env
+    environment:
+      REDIS_ADDR: redis:6379
+      RABBITMQ_ADDR: rabbitmq:5672
+      RABBITMQ_USER: ${RABBITMQ_DEFAULT_USER}
+      RABBITMQ_PASSWORD: ${RABBITMQ_DEFAULT_PASS}
+      RABBITMQ_COMMENTS_QUEUE_NAME: comments_raw
+    depends_on:
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+
+  comment-processor:
+    build: ./comment-processor
+    container_name: comment-processor
+    env_file: .env
+    environment:
+      RABBITMQ_HOST: rabbitmq
+      NER_MODEL_PATH: /models/ner-output-V5
+      BINARY_MODEL_PATH: /models/classifier-bert-V4
+    volumes:
+      - ./training_models:/models:ro
+      - ./data:/data
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+
+volumes:
+  redis_data:
+  rabbitmq_data:
