@@ -36,7 +36,28 @@ docker compose up --build
 Processed comments are stored in a SQLite database at `data/comments.db`
 (one row per comment with the extracted entities, scores, and model versions)
 and also written to the comment-processor logs
-(`docker compose logs -f comment-processor`).
+(`docker compose logs -f comment-processor`). Extracted tickers are validated
+against `training/data/stocks.csv` (non-symbols are dropped) and glued strikes
+like `450c` are split into price + option type at ingest. Services restart
+automatically with Docker Desktop (`restart: unless-stopped`), and a Windows
+scheduled task ("MLGP comments.db backup") copies the database to
+`data/backups/` daily, keeping 14 days.
+
+Browse the database in a web UI with `.\view-db.ps1` (http://localhost:8001)
+or watch it in the terminal with `.\watch-db.ps1`.
+
+## Scoring outcomes
+
+Once flagged trades expire, score them against real market data (needs
+internet; run on the host):
+
+```sh
+python analysis/score_outcomes.py
+```
+
+This fills an `outcomes` table in the same database with, per trade, whether
+the stock moved in the implied direction and whether it touched the strike
+before expiry, then prints a running scoreboard.
 
 Query the database from the host with any SQLite tool, or through the container:
 
@@ -83,3 +104,37 @@ training scripts pick up automatically:
   ticker-lookalike words used in non-trading contexts.
 
 Options: `--n <rows>` (default 3000) and `--seed <n>` for reproducibility.
+
+### Evaluation
+
+`training/data/eval_real.csv` is a hand-labeled set of 150 real scraped
+comments (labeled by Claude - spot-check it) that never enters training. It is
+the honest benchmark; the training scripts' own eval split contains synthetic
+rows and reads much higher than real-world performance:
+
+```sh
+python training/evaluate.py    # scores the live models on the real eval set
+```
+
+### Labeling flywheel
+
+To keep improving on real data: export the comments the classifier was least
+sure about, correct the model's prefilled guesses by hand, merge them into the
+training set, and retrain.
+
+```sh
+python training/export_for_labeling.py   # -> training/data/to_label.csv
+# edit to_label.csv, fixing wrong entities/labels
+python training/merge_labels.py          # appends into the training CSV
+python training/train_ner.py && python training/train_binary.py
+```
+
+## Tests
+
+```sh
+pip install pytest pandas nltk python-dateutil
+pytest tests
+```
+
+CI (`.github/workflows/ci.yml`) runs the Python tests and builds/vets the Go
+scraper on every push.

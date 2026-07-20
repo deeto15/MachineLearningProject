@@ -1,5 +1,7 @@
 # Runs the trained NER model on incoming comments and extracts trade entities
+import csv
 import os
+import re
 
 import torch
 import torch.nn.functional
@@ -10,6 +12,16 @@ from dates import date_formatter
 
 MODEL_PATH = os.getenv("NER_MODEL_PATH", "/models/ner-output-V5")
 NER_VERSION = os.path.basename(MODEL_PATH.rstrip("/"))
+
+# known ticker symbols; extracted tickers not in this set are discarded as
+# false positives (the NER model occasionally tags words like "Space" or "RAM")
+TICKER_FILE = os.getenv("TICKER_FILE", "/tickers/stocks.csv")
+ticker_universe = set()
+if os.path.exists(TICKER_FILE):
+    with open(TICKER_FILE, encoding="utf-8-sig") as f:
+        ticker_universe = {row["Symbol"].strip().upper() for row in csv.DictReader(f)}
+
+GLUED_STRIKE = re.compile(r"^\$?(\d+(?:\.\d+)?)([cp])$", re.IGNORECASE)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = AutoModelForTokenClassification.from_pretrained(MODEL_PATH).to(device)
@@ -130,6 +142,24 @@ def predict_comments(comments):
             field = LABEL_TO_FIELD[label]
             comment[field] = value
             comment[f"{field}Score"] = round(float(score), 4)
+        # drop extracted tickers that aren't real symbols
+        if comment.get("Stock"):
+            symbol = comment["Stock"].lstrip("$").upper()
+            if ticker_universe and symbol not in ticker_universe:
+                comment.pop("Stock", None)
+                comment.pop("StockScore", None)
+            else:
+                comment["Stock"] = symbol
+        # split glued strikes like "450c" into price 450 + option type
+        if comment.get("Price"):
+            glued = GLUED_STRIKE.match(comment["Price"])
+            if glued:
+                comment["Price"] = glued.group(1)
+                if not comment.get("OptionType"):
+                    comment["OptionType"] = "calls" if glued.group(2).lower() == "c" else "puts"
+                    comment["OptionTypeScore"] = comment.get("PriceScore")
+            else:
+                comment["Price"] = comment["Price"].lstrip("$")
         if comment.get("Date"):
             comment["FormattedDate"] = date_formatter(comment["created_unix"], comment["Date"])
         comment["NERModel"] = NER_VERSION

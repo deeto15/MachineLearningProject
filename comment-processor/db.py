@@ -39,10 +39,19 @@ INSERT OR REPLACE INTO comments (
 """
 
 
+INDEXES = [
+    "CREATE INDEX IF NOT EXISTS idx_comments_processed_at ON comments (processed_at)",
+    "CREATE INDEX IF NOT EXISTS idx_comments_stock ON comments (stock)",
+    "CREATE INDEX IF NOT EXISTS idx_comments_prediction ON comments (prediction)",
+]
+
+
 def connect():
     os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
     conn = sqlite3.connect(DB_PATH)
     conn.execute(SCHEMA)
+    for index in INDEXES:
+        conn.execute(index)
     conn.commit()
     return conn
 

@@ -2,6 +2,7 @@ services:
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq
+    restart: unless-stopped
     ports:
       - "5672:5672"
       - "15672:15672"
@@ -19,6 +20,7 @@ services:
   redis:
     image: redis:latest
     container_name: redis
+    restart: unless-stopped
     ports:
       - "6379:6379"
     volumes:
@@ -32,6 +34,7 @@ services:
   scraper:
     build: ./scraper
     container_name: scraper
+    restart: unless-stopped
     env_file: .env
     environment:
       REDIS_ADDR: redis:6379
@@ -48,13 +51,16 @@ services:
   comment-processor:
     build: ./comment-processor
     container_name: comment-processor
+    restart: unless-stopped
     env_file: .env
     environment:
       RABBITMQ_HOST: rabbitmq
       NER_MODEL_PATH: /models/ner-V6-deberta
       BINARY_MODEL_PATH: /models/classifier-V5-bert
+      TICKER_FILE: /tickers/stocks.csv
     volumes:
       - ./training_models:/models:ro
+      - ./training/data/stocks.csv:/tickers/stocks.csv:ro
       - ./data:/data
     depends_on:
       rabbitmq:

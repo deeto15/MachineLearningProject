@@ -14,8 +14,8 @@ PROPER_FORMAT = "%Y-%m-%d"
 
 # Generates static keyword mappings based on the comment's timestamp
 def get_static_mappings(base_datetime):
-    # Calculate the end of the week (Saturday)
-    days_until_end_of_week = (5 - base_datetime.weekday() + 7) % 7  # Saturday = 5
+    # End of week means Friday: the last trading day, when weekly options expire
+    days_until_end_of_week = (4 - base_datetime.weekday() + 7) % 7  # Friday = 4
     end_of_week = base_datetime + timedelta(days=days_until_end_of_week)
     next_week_start = base_datetime + relativedelta(weekday=MO(+1))
     next_week_end = base_datetime + relativedelta(weeks=1, weekday=FR)
@@ -43,6 +43,8 @@ def get_static_mappings(base_datetime):
         "end of month": end_of_month,
         "eod": base_datetime.strftime(PROPER_FORMAT),
         "end of day": base_datetime.strftime(PROPER_FORMAT),
+        "0dte": base_datetime.strftime(PROPER_FORMAT),
+        "0dtes": base_datetime.strftime(PROPER_FORMAT),
         "today": base_datetime.strftime(PROPER_FORMAT),
         "tonight": base_datetime.strftime(PROPER_FORMAT),
         "tomorrow": tomorrow.strftime(PROPER_FORMAT),
