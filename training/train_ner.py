@@ -1,4 +1,5 @@
 # Trains the NER (token classification) model on the BIO-tagged data
+import argparse
 from pathlib import Path
 
 import torch
@@ -13,7 +14,19 @@ from transformers import (
 
 from bio_tagging import generate_labeled_data
 
-OUTPUT_DIR = str(Path(__file__).resolve().parent.parent / "training_models" / "ner-output-V5")
+DEFAULT_OUTPUT = str(Path(__file__).resolve().parent.parent / "training_models" / "ner-output-V5")
+
+parser = argparse.ArgumentParser()
+parser.add_argument(
+    "--model",
+    default="bert-base-uncased",
+    help="base model to fine-tune, e.g. bert-base-uncased or microsoft/deberta-v3-base",
+)
+parser.add_argument("--output", default=DEFAULT_OUTPUT, help="directory to save the trained model")
+args = parser.parse_args()
+BASE_MODEL = args.model
+OUTPUT_DIR = args.output
+print(f"Fine-tuning {BASE_MODEL} -> {OUTPUT_DIR}")
 
 label_list = [
     "O",
@@ -30,8 +43,10 @@ print(f"Loaded {len(data)} training samples")
 for d in data:
     d["ner_tags"] = [label2id[label] for label in d["ner_tags"]]
 
-ds = DatasetDict({"train": Dataset.from_list(data)})
-processing_class = AutoTokenizer.from_pretrained("bert-base-uncased")
+# hold out 10% so different base models can be compared on the same data
+ds = Dataset.from_list(data).train_test_split(test_size=0.1, seed=42)
+ds = DatasetDict({"train": ds["train"], "test": ds["test"]})
+processing_class = AutoTokenizer.from_pretrained(BASE_MODEL)
 
 
 # Tokenize the input tokens while preserving word boundaries
@@ -70,31 +85,59 @@ def tokenize_and_align_labels(example):
 ds = ds.map(tokenize_and_align_labels, batched=False)
 ds = ds.remove_columns(["tokens", "ner_tags"])
 
+# dtype float32: some checkpoints (e.g. deberta-v3) are stored in fp16 and
+# transformers loads them as-is; training raw fp16 NaNs out
 model = AutoModelForTokenClassification.from_pretrained(
-    "bert-base-uncased",
+    BASE_MODEL,
     num_labels=len(label_list),
     id2label=id2label,
     label2id=label2id,
+    dtype=torch.float32,
 )
 training_args = TrainingArguments(
     output_dir=OUTPUT_DIR,
-    eval_strategy="no",
+    eval_strategy="epoch",
     learning_rate=2e-5,
     per_device_train_batch_size=8,
     num_train_epochs=3,
     weight_decay=0.01,
-    no_cuda=not torch.cuda.is_available(),
     remove_unused_columns=False,
 )
+
+
+# entity-level precision/recall/F1 on the held-out split
+def compute_metrics(eval_pred):
+    from seqeval.metrics import f1_score, precision_score, recall_score
+
+    predictions, labels = eval_pred
+    predictions = predictions.argmax(axis=-1)
+    true_labels, true_preds = [], []
+    for pred_seq, label_seq in zip(predictions, labels):
+        labels_row, preds_row = [], []
+        for p, l in zip(pred_seq, label_seq):
+            if l != -100:
+                labels_row.append(id2label[int(l)])
+                preds_row.append(id2label[int(p)])
+        true_labels.append(labels_row)
+        true_preds.append(preds_row)
+    return {
+        "precision": precision_score(true_labels, true_preds),
+        "recall": recall_score(true_labels, true_preds),
+        "f1": f1_score(true_labels, true_preds),
+    }
+
 
 trainer = Trainer(
     model=model,
     args=training_args,
     train_dataset=ds["train"],
+    eval_dataset=ds["test"],
     processing_class=processing_class,
     data_collator=DataCollatorForTokenClassification(processing_class),
+    compute_metrics=compute_metrics,
 )
 
 trainer.train()
+print("Final eval:", trainer.evaluate())
 model.save_pretrained(OUTPUT_DIR)
 processing_class.save_pretrained(OUTPUT_DIR)

@@ -109,7 +109,8 @@ def glue_tokens(text, pieces, offsets):
             result += pieces[i]
         else:
             result += " " + pieces[i]
-    return result
+    # deberta-style tokenizers include the preceding space in token offsets
+    return result.strip()
 
 
 binary_version, binary_pipeline = load_model()

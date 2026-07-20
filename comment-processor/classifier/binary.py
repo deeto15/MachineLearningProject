@@ -2,7 +2,7 @@ import os
 
 import torch
 import torch.nn.functional as F
-from transformers import BertForSequenceClassification, BertTokenizer
+from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
 MODEL_PATH = os.getenv("BINARY_MODEL_PATH", "/models/classifier-bert-V4")
 
@@ -10,8 +10,8 @@ MODEL_PATH = os.getenv("BINARY_MODEL_PATH", "/models/classifier-bert-V4")
 class BertIntentClassifier:
     def __init__(self, model_path=MODEL_PATH):
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        self.tokenizer = BertTokenizer.from_pretrained(model_path)
-        model = BertForSequenceClassification.from_pretrained(model_path).to(self.device)
+        self.tokenizer = AutoTokenizer.from_pretrained(model_path)
+        model = AutoModelForSequenceClassification.from_pretrained(model_path).to(self.device)
         # fp16 only works reliably on GPU
         if self.device.type == "cuda":
             model = model.half()

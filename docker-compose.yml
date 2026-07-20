@@ -51,8 +51,8 @@ services:
     env_file: .env
     environment:
       RABBITMQ_HOST: rabbitmq
-      NER_MODEL_PATH: /models/ner-output-V5
-      BINARY_MODEL_PATH: /models/classifier-bert-V4
+      NER_MODEL_PATH: /models/ner-V6-deberta
+      BINARY_MODEL_PATH: /models/classifier-V5-bert
     volumes:
       - ./training_models:/models:ro
       - ./data:/data

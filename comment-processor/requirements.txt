@@ -1,3 +1,5 @@
-pika
+﻿pika
+protobuf
 python-dateutil
+sentencepiece
 transformers

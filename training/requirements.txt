@@ -1,7 +1,9 @@
-accelerate
+﻿accelerate
 datasets
 nltk
 pandas
+protobuf
 scikit-learn
+sentencepiece
 torch
 transformers

@@ -18,6 +18,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
 nltk.download("punkt_tab")
 
 DATA_FILE = Path(__file__).resolve().parent / "data" / "regression_model_training_data.csv"
+SYNTHETIC_FILE = Path(__file__).resolve().parent / "data" / "synthetic_training_data.csv"
 
 
 # Cleans and standardizes data, then splits it into tokens using the nltk tokenizer
@@ -51,12 +52,16 @@ def label_comment(comment, ticker, price, date, optiontype):
     return tokens, labels
 
 
-# Reads the training CSV and returns the tokenized, tagged examples
+# Reads the training CSVs (hand-labeled + synthetic if generated) and returns
+# the tokenized, tagged examples
 def generate_labeled_data():
-    file = pd.read_csv(
-        DATA_FILE,
-        usecols=["Comment", "Ticker", "Strike", "Expiry", "OptionType", "Label"],
-    )
+    usecols = ["Comment", "Ticker", "Strike", "Expiry", "OptionType", "Label"]
+    frames = [pd.read_csv(DATA_FILE, usecols=usecols)]
+    if SYNTHETIC_FILE.exists():
+        synthetic = pd.read_csv(SYNTHETIC_FILE, usecols=usecols)
+        print(f"Including {len(synthetic)} synthetic samples from {SYNTHETIC_FILE.name}")
+        frames.append(synthetic)
+    file = pd.concat(frames, ignore_index=True)
     examples = []
     for _, row in file.iterrows():
         tokens, labels = label_comment(
