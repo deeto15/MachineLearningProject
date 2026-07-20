@@ -119,18 +119,37 @@ def main():
 
     print("\n=== NER (field-level, exact match after normalization) ===")
     total = [0, 0, 0]
+    measured = [0, 0, 0]  # excludes fields the eval set has no gold examples of
+    unmeasured = []
     for tag, (tp, fp, fn) in stats.items():
         for i, v in enumerate((tp, fp, fn)):
             total[i] += v
         p = tp / (tp + fp) if tp + fp else 0.0
         r = tp / (tp + fn) if tp + fn else 0.0
         f1 = 2 * p * r / (p + r) if p + r else 0.0
-        print(f"{tag:10s}: P {p:.3f}  R {r:.3f}  F1 {f1:.3f}   (tp {tp} / fp {fp} / fn {fn})")
-    tp, fp, fn = total
-    p = tp / (tp + fp) if tp + fp else 0.0
-    r = tp / (tp + fn) if tp + fn else 0.0
-    f1 = 2 * p * r / (p + r) if p + r else 0.0
-    print(f"{'micro avg':10s}: P {p:.3f}  R {r:.3f}  F1 {f1:.3f}")
+        # a field with no gold entities can only ever score 0 - flag it rather
+        # than let it silently drag the average down
+        if tp + fn == 0:
+            unmeasured.append(tag)
+            note = "  <- NO GOLD EXAMPLES, score meaningless"
+        else:
+            note = ""
+            for i, v in enumerate((tp, fp, fn)):
+                measured[i] += v
+        print(f"{tag:10s}: P {p:.3f}  R {r:.3f}  F1 {f1:.3f}   (tp {tp} / fp {fp} / fn {fn}){note}")
+
+    def micro(counts, label):
+        tp, fp, fn = counts
+        p = tp / (tp + fp) if tp + fp else 0.0
+        r = tp / (tp + fn) if tp + fn else 0.0
+        f1 = 2 * p * r / (p + r) if p + r else 0.0
+        print(f"{label:10s}: P {p:.3f}  R {r:.3f}  F1 {f1:.3f}")
+
+    micro(total, "micro avg")
+    if unmeasured:
+        micro(measured, "measurable")
+        print(f"note: {', '.join(unmeasured)} have no gold examples in the eval set;"
+              f" 'measurable' excludes them. Add such comments to eval_real.csv.")
 
 
 if __name__ == "__main__":

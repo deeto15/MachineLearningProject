@@ -1,5 +1,4 @@
 # Runs the trained NER model on incoming comments and extracts trade entities
-import csv
 import os
 import re
 
@@ -7,19 +6,17 @@ import torch
 import torch.nn.functional
 from transformers import AutoModelForTokenClassification, AutoTokenizer
 
+import tickers
 from classifier.binary import load_model
 from dates import date_formatter
 
 MODEL_PATH = os.getenv("NER_MODEL_PATH", "/models/ner-output-V5")
 NER_VERSION = os.path.basename(MODEL_PATH.rstrip("/"))
 
-# known ticker symbols; extracted tickers not in this set are discarded as
-# false positives (the NER model occasionally tags words like "Space" or "RAM")
-TICKER_FILE = os.getenv("TICKER_FILE", "/tickers/stocks.csv")
-ticker_universe = set()
-if os.path.exists(TICKER_FILE):
-    with open(TICKER_FILE, encoding="utf-8-sig") as f:
-        ticker_universe = {row["Symbol"].strip().upper() for row in csv.DictReader(f)}
+# known ticker symbols + company-name lookup; extracted tickers that resolve to
+# neither are discarded as false positives ("Space", "RAM"), while company
+# names resolve to their symbol ("Sandisk" -> SNDK)
+ticker_universe, ticker_names = tickers.load()
 
 GLUED_STRIKE = re.compile(r"^\$?(\d+(?:\.\d+)?)([cp])$", re.IGNORECASE)
 
@@ -142,10 +139,11 @@ def predict_comments(comments):
             field = LABEL_TO_FIELD[label]
             comment[field] = value
             comment[f"{field}Score"] = round(float(score), 4)
-        # drop extracted tickers that aren't real symbols
-        if comment.get("Stock"):
-            symbol = comment["Stock"].lstrip("$").upper()
-            if ticker_universe and symbol not in ticker_universe:
+        # resolve extracted tickers: symbols pass through, company names map to
+        # their symbol, anything else is dropped as a false positive
+        if comment.get("Stock") and ticker_universe:
+            symbol = tickers.resolve(comment["Stock"], ticker_universe, ticker_names)
+            if symbol is None:
                 comment.pop("Stock", None)
                 comment.pop("StockScore", None)
             else:

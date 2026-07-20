@@ -77,7 +77,25 @@ def compute_metrics(eval_pred):
     }
 
 
-trainer = Trainer(
+# class-weighted loss: label 2 (price targets) is rare and otherwise gets
+# absorbed into the majority class
+counts = torch.tensor(
+    [max(1, int((df["labels"] == i).sum())) for i in range(3)], dtype=torch.float
+)
+class_weights = (counts.sum() / (3 * counts))
+print(f"class counts: {counts.tolist()}  ->  loss weights: {[round(w, 3) for w in class_weights.tolist()]}")
+
+
+class WeightedTrainer(Trainer):
+    def compute_loss(self, model, inputs, return_outputs=False, **kwargs):
+        labels = inputs.pop("labels")
+        outputs = model(**inputs)
+        loss_fct = torch.nn.CrossEntropyLoss(weight=class_weights.to(outputs.logits.device))
+        loss = loss_fct(outputs.logits, labels)
+        return (loss, outputs) if return_outputs else loss
+
+
+trainer = WeightedTrainer(
     model=model,
     args=training_args,
     train_dataset=dataset["train"],

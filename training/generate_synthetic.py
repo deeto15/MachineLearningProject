@@ -39,17 +39,39 @@ COMMENTS_DB = ROOT.parent / "data" / "comments.db"
 FIELDS = ["Comment", "Ticker", "Strike", "Expiry", "OptionType", "Quantity", "Premium", "Label"]
 
 
+NAME_SUFFIXES = {"inc", "corp", "corporation", "ltd", "plc", "co", "company", "holdings",
+                 "group", "technologies", "technology", "international", "incorporated"}
+
+
+def clean_company_name(name):
+    words = [w.strip(",.") for w in name.split()]
+    words = [w for w in words if w.lower().strip(",.") not in NAME_SUFFIXES]
+    cleaned = " ".join(words[:2])
+    return cleaned if 4 <= len(cleaned) <= 20 else ""
+
+
 def load_tickers():
     with open(STOCKS_FILE, encoding="utf-8-sig") as f:
         rows = list(csv.DictReader(f))
     symbols = [r["Symbol"].strip() for r in rows if r["Symbol"].strip().isalpha()]
+    names = [clean_company_name(r["Company Name"]) for r in rows[:400]]
+    names = [n for n in names if n and " " not in n]  # single-word big names only
     # weight toward the big names people actually post about, keep a long tail
     popular, tail = symbols[:300], symbols[300:]
-    return popular, tail, set(symbols)
+    return popular, tail, set(symbols), names
 
 
-def rand_ticker(popular, tail):
+def rand_ticker(popular, tail, names):
+    # sometimes people write the company name instead of the symbol
+    if names and random.random() < 0.12:
+        return random.choice(names)
     tick = random.choice(popular) if random.random() < 0.7 else random.choice(tail)
+    # case augmentation: real comments write spy, Soxl, NVDA interchangeably
+    r = random.random()
+    if r < 0.15:
+        tick = tick.lower()
+    elif r < 0.25:
+        tick = tick.title()
     return f"${tick}" if random.random() < 0.25 else tick
 
 
@@ -164,6 +186,37 @@ TARGET_TEMPLATES = [
     "unpopular opinion: {t} craters to ${p} by {e}",
     "{t} ${p} was my call in january and im still right",
     "the algo wants {t} at ${p} by {e}",
+    # messier real-world phrasings (no $ sign, terse, banbet-style)
+    "{t} will dump to {p} then rebound",
+    "see you at {t} {p}",
+    "i need {t} to {p} tmrw so i can reload",
+    "{t} {p} or im deleting the app",
+    "!banbet {t} {p} 3d",
+    "{t} gonna rip to {p} after earnings",
+    "next stop {p} for {t}, cope",
+    "{t} breaks {p} and shorts get vaporized",
+    "we did it boys, {t} {p}",
+    "{t} to {p}, my uncle works at the exchange",
+    "{t} gonna double pump",
+    "if you are not buying {t} at these prices you hate money",
+    "{t} holders brace for impact, this thing sees {p} soon",
+    "{t} rocket ship taking off this qeek",
+]
+
+# directional market calls with no ticker at all - very common in the daily thread
+TARGET_NOTICKER = [
+    "green by open",
+    "red till market open",
+    "we are going to pump tomorrow lol",
+    "futes red then green an hour after",
+    "futes will be -2% in a few hours, screenshot it",
+    "new aths this week",
+    "gonna gap up huge at open trust",
+    "everything dumps at 2:30, always does",
+    "relief rally until tuesday then the rug",
+    "oil gonna rocket up in five minutes",
+    "this whole market pumps the second the fed blinks",
+    "eoy rally already priced in, we crab from here",
 ]
 
 TRAP_COMMENTS = [
@@ -238,8 +291,8 @@ TRADE_WORDS = re.compile(
 )
 
 
-def make_trade_row(popular, tail):
-    tick = rand_ticker(popular, tail)
+def make_trade_row(popular, tail, names):
+    tick = rand_ticker(popular, tail, names)
     strike = rand_strike()
     expiry = rand_expiry()
     kind = random.random()
@@ -267,8 +320,13 @@ def make_trade_row(popular, tail):
             "Expiry": expiry, "OptionType": otype, "Quantity": quantity, "Premium": "", "Label": 1}
 
 
-def make_target_row(popular, tail):
-    tick = rand_ticker(popular, tail)
+def make_target_row(popular, tail, names):
+    # some directional calls name no ticker at all
+    if random.random() < 0.15:
+        comment = random.choice(TARGET_NOTICKER) + random.choice(NOISE)
+        return {"Comment": comment, "Ticker": "", "Strike": "", "Expiry": "",
+                "OptionType": "", "Quantity": "", "Premium": "", "Label": 2}
+    tick = rand_ticker(popular, tail, names)
     price = rand_strike()
     expiry = rand_expiry()
     comment = random.choice(TARGET_TEMPLATES).format(t=tick, p=price, e=expiry) + random.choice(NOISE)
@@ -317,7 +375,7 @@ def main():
     args = parser.parse_args()
     random.seed(args.seed)
 
-    popular, tail, ticker_set = load_tickers()
+    popular, tail, ticker_set, names = load_tickers()
 
     n_trades = int(args.n * 0.45)
     n_targets = int(args.n * 0.20)
@@ -325,8 +383,8 @@ def main():
     real_negatives = mine_real_negatives(ticker_set, n_negatives // 2)
 
     rows, seen = [], set()
-    for maker, count in ((lambda: make_trade_row(popular, tail), n_trades),
-                         (lambda: make_target_row(popular, tail), n_targets),
+    for maker, count in ((lambda: make_trade_row(popular, tail, names), n_trades),
+                         (lambda: make_target_row(popular, tail, names), n_targets),
                          (make_trap_row, n_negatives - len(real_negatives))):
         made = 0
         while made < count:

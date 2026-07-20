@@ -55,8 +55,8 @@ services:
     env_file: .env
     environment:
       RABBITMQ_HOST: rabbitmq
-      NER_MODEL_PATH: /models/ner-V6-deberta
-      BINARY_MODEL_PATH: /models/classifier-V5-bert
+      NER_MODEL_PATH: /models/ner-V7-deberta-large
+      BINARY_MODEL_PATH: /models/classifier-V6-bert
       TICKER_FILE: /tickers/stocks.csv
     volumes:
       - ./training_models:/models:ro
